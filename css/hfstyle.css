@@ -1,0 +1,201 @@
+header {
+	width:100%; /* Establecemos que el header abarque el 100% del documento */
+	overflow:hidden; /* Eliminamos errores de float */
+	background:#252932;
+}
+
+.wrapper {
+	width:95%; /* Establecemos que el ancho sera del 90% */
+	max-width:1200px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	margin:auto; /* Centramos los elementos */
+    margin-left: 5px;
+	overflow:hidden; /* Eliminamos errores de float */
+}
+
+.wrapper2 {
+	width:80%; /* Establecemos que el ancho sera del 90% */
+	max-width:1200px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	margin:auto; /* Centramos los elementos */
+	overflow:hidden; /* Eliminamos errores de float */
+    padding-left: 100px;
+}
+
+header .logo {
+	font-size:100px;
+	line-height:100px;
+	float:left;
+}
+
+header .imagen{
+    width: 25px;
+    height: 25px;
+}
+
+header .imagen:hover{
+    filter:hue-rotate(-100deg) brightness(500%);
+}
+
+header nav {
+	padding-top: 60px;
+	float:right;
+}
+
+header nav a {
+	display:inline-block;
+	color:#fff;
+	text-decoration:none;
+	padding:15px 10px;
+	line-height:normal;
+	font-size:17px;
+	font-weight:bolder;
+	-webkit-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+	transition:all 500ms ease;
+}
+
+header nav a:hover {
+	background:#f53a3a;
+}
+
+header nav ul{
+	display: inline-block;
+	color:#fff;
+	text-decoration:none;
+	padding:0px;
+	line-height:normal;
+	font-size:18px;
+	font-weight:bolder;
+	-webkit-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+	transition:all 500ms ease;
+}
+
+header nav li{
+	display: inline-block;
+}
+header nav li a{
+	display:inline-block;
+	color:#ffffff;
+	text-decoration:none;
+	padding:10px 10px;
+	line-height:normal;
+	font-size:17px;
+	font-weight:bolder;
+	-webkit-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+	transition:all 500ms ease;
+}
+
+header nav li.dropdown ul{
+	width: 172px;
+	background-color: #000000;
+	position:absolute;
+	padding-left: 0;
+	display: none;
+}
+header nav li.dropdown:hover ul{
+	display: block;
+
+}
+
+
+.header2 {
+	position: fixed;
+	height:100px;
+}
+
+.header2 .logo {
+	line-height:100px;
+	font-size:30px;
+}
+
+.header2 nav {
+	line-height:100px;
+}
+
+@media screen and (max-width: 950px) {
+	header .logo,
+	header nav {
+		width:100%;
+		text-align:center; /*Centramos el menu y el logotipo*/
+		line-height:100px;
+	}
+
+	.header2 {
+		height:auto;
+	}
+
+	.header2 .logo,
+	.header2 nav {
+		line-height:50px;
+	}
+}
+body{
+    margin: 0px;
+	width:100%;
+
+}
+footer{
+    width:100%; /* Establecemos que el header abarque el 100% del documento */
+	overflow:hidden; /* Eliminamos errores de float */
+	background:#252932;
+    text-align: center;
+	
+}
+footer .p{
+    color: #fff;
+}
+
+footer .logo {
+	line-height:100px;
+	float:right;
+}
+
+footer .texto{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+footer .imagen{
+    width: 25px;
+    height: 25px;
+}
+
+footer .imagen:hover{
+    filter:hue-rotate(-100deg) brightness(500%);
+}
+
+p{
+	margin-top: 20px;
+}
+.salir{
+    height: 0%;
+    width: 100px;
+	border-radius: 35px;
+    text-align:center;
+	font-weight: 300;
+    font-size: 14px;
+	margin-top: 2px;
+	padding: 0%;
+}
+
+.salir:hover{
+	background-color: #ff0000;
+}
+
+.btn_sal{
+	width: 100px;
+    text-decoration:none;
+    font-weight: 300;
+    font-size: 18px;
+    color:#ffffff;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 35px;
+}
+.btn_sal:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
