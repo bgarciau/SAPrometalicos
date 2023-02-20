@@ -59,9 +59,16 @@ use function PHPSTORM_META\sql_injection_subst;
                 <label for="Sucursal">Sucursal:</label>
                 <input class="inputA" type="text" id="Sucursal" name="sucursal" placeholder="Sucursal"><br>
                 <label for="Password">Contraseña:</label>
-                <input class="inputA" type="text" id="Password" name="password" placeholder="Contraseña"><br>
+                <input class="inputA" type="password" id="Password" name="password" placeholder="Contraseña"><br>
                 <label for="TipoUsuario">Tipo usuario:</label>
-                <input class="inputA" type="text" id="TipoUsuario" name="tipoUsuario" placeholder="Tipo usuario"><br>
+                <select name="tipoUsuario" id="sel__departamento">
+                    <option value="Usuario">Usuario</option>
+                    <option value="Empleado">Empleado</option>
+                    <option value="Administrador">Administrador</option>
+                </select>
+                    
+                <br>
+                <!-- <input class="inputA" type="text" id="TipoUsuario" name="tipoUsuario" placeholder="Tipo usuario"><br> -->
                 <a><input class="btn_env" type="submit" value="CREAR USUARIO" name="crearU"></a>
                 <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
         </div>

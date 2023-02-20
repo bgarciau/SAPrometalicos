@@ -26,7 +26,7 @@
     </header>
     <div class="base">
         <div class="contenedor">
-            <table border="4px" id="tabla__general">
+            <table border="1px" id="tabla__general">
                 <tr>
                     <td colspan="6">
                         <div id="div__solicitante">
@@ -77,47 +77,53 @@
                     <td colspan="12">
                         <div id="div__tablaServicios">
                             <button class="btn_sel">servicios</button>
-                            <button class="btn_sel  ">articulos</button>
-                            <table border="3px" id="tabla__servicios">
-                                <tr>
-                                    <td>Descripcion</td>
-                                    <td>Fecha Necesaria</td>
-                                    <td>Proveedor</td>
-                                    <td>Precio Info</td>
-                                    <td>Cuenta de Mayor</td>
-                                    <td>UEN</td>
-                                    <td>lineas</td>
-                                    <td>sublineas</td>
-                                    <td>Nombre Cuenta mayor</td>
-                                    <td>proyecto</td>
-                                    <td>% Descuento</td>
-                                    <td>indicador de impuestos</td>
-                                </tr>
-                                <?php
+                            <button class="btn_sel">articulos</button>
+                            <div class="outer_wrapper">
+                            <div class="table_wrapper">
+                                <table id="tabla__servicios">
+                                    <thead>
+                                        <th>Descripcion</th>
+                                        <th>Fecha Necesaria</td>
+                                        <th>Proveedor</th>
+                                        <th>Precio Info</th>
+                                        <th>Cuenta de Mayor</th>
+                                        <th>UEN</th>
+                                        <th>lineas</th>
+                                        <th>sublineas</th>
+                                        <th>Nombre Cuenta mayor</th>
+                                        <th>proyecto</th>
+                                        <th>% Descuento</th>
+                                        <th>indicador de impuestos</th>
+                                        <th>total ml</th>
+                                    </thead>
+                                    <?php
 
-                                    $i=1;
-                                    while ($i<=9){
-                                    ?>
-                                    <tr>
-                                        <td><img class="lupa" src="../images/lupa.png" alt="lupa""></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <?php 
-                                    $i=$i+1;
-                                        }
+                                        $i=1;
+                                        while ($i<=20){
+                                        ?>
+                                        <tr>
+                                            <td><input class="inputTabla" type="" name="" value=""><img class="lupa" src="../images/lupa.png" alt="lupa""></td>
+                                            <td><input class="inputTabla" type="date" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                        </tr>
+                                        <?php 
+                                        $i=$i+1;
+                                            }
 
-                                    ?>
-                            </table>
+                                        ?>
+                                </table>
+                            </div>
+                            </div>
                         </div>
                     </td>
                 </tr>

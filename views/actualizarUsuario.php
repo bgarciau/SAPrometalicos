@@ -56,7 +56,6 @@
         ?>
         <form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
         <h2>ACTUALIZAR DATOS USUARIO</h2>
-                <label for="CodigoUsuario">Codigo usuario:</label>
                 <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $codigoUsuario?>"><br>
                 <label  for="NombreUsuario">Nombre usuario:</label>
                 <input class="inputA" type="text" name="nombreUsuario" value="<?php echo $nombreUsuario?>"><br>

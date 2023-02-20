@@ -26,17 +26,21 @@
     </header>
     <div class="base">
         <div class="contenedor">
+        <h2>USUARIOS</h2>
         <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button" value="+AGREGAR"></a>
-        <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>   
+        <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+        <div class="outer_wrapperS">
+        <div class="table_wrapperS">
+        <input class="inputBuscar" type="search" name="" value="BUSCAR">  
             <table border="4px" id="tabla__solicitudes">
-                <tr>
-                    <td>#</td>
-                    <td>Nombre usuario</td>
-                    <td>Departamento</td>
-                    <td>Sucursal</td>
-                    <td>Codigo de usuario</td>
-                    <td>OPCIONES</td>
-                </tr>
+                <thead>
+                    <th>#</th>
+                    <th>Nombre usuario</th>
+                    <th>Departamento</th>
+                    <th>Sucursal</th> 
+                    <th>Codigo de usuario</th>
+                    <th>OPCIONES</th>
+                </thead>
                 <?php
                     $i=1;
                     foreach($registros as $usuario):?>
@@ -46,8 +50,8 @@
                             <td><?php echo $usuario->FK_ID_DEPARTAMENTO?></td>
                             <td><?php echo $usuario->SUCURSAL?></td>
                             <td><?php echo $usuario->PK_CODIGO_USUARIO?></td>
-                            <td>
-                                <a href="../views/actualizarUsuario.php?codigoUsuario=<?php echo $usuario->PK_CODIGO_USUARIO?>& nombreUsuario=<?php echo $usuario->NOMBRE_USUARIO?>& departamento=<?php echo $usuario->FK_ID_DEPARTAMENTO?>& sucursal=<?php echo $usuario->SUCURSAL?>& password=<?php echo $usuario->PASSWORD?> & tipoUsuario=<?php echo $usuario->FK_TIPO_USUARIO?>"><input class="btn_update" type="button" value="update"></a>
+                            <td class="opcionesTabla">
+                                <a href="actualizarUsuario.php?codigoUsuario=<?php echo $usuario->PK_CODIGO_USUARIO?>& nombreUsuario=<?php echo $usuario->NOMBRE_USUARIO?>& departamento=<?php echo $usuario->FK_ID_DEPARTAMENTO?>& sucursal=<?php echo $usuario->SUCURSAL?>& password=<?php echo $usuario->PASSWORD?> & tipoUsuario=<?php echo $usuario->FK_TIPO_USUARIO?>"><input class="btn_update" type="button" value="update"></a>
                                 <a href="../crud/eliminar_usuario.php?codigoUsuario=<?php echo $usuario->PK_CODIGO_USUARIO?>"><input class="btn_delete" type="button" value="delete"></a>
                             </td>
                         </tr>
@@ -56,6 +60,8 @@
                     endforeach;
                 ?>    
             </table>
+            </div>
+            </div>
         </div>
     </div>
     <footer>

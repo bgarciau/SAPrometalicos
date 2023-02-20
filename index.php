@@ -21,16 +21,25 @@
                         <input type="text" placeholder="USUARIO" name="usuario">
                         <input type="password" placeholder="CONTRASEÑA" name="password">
                         <input type="submit" value="INGRESAR" name="Ingresar" class="submit">
-                        <input type="submit" value="RECUPERAR CONTRASEÑA" class="submit">
+                        <input type="button" value="RECUPERAR CONTRASEÑA" class="submit">
                     </div>
                 </form>
             </div>
         </div>
-    <footer>
-        <?php
-        require_once('php/footer.php');
-        ?>
-    </footer>
-    </footer>
+        <footer>
+            <div class="wrapper2">
+                <div class="logo">
+                    <img class="imagen" src="images/facebook.png" alt="logo_facebok">
+                    <img class="imagen" src="images/instagram.png" alt="logo_instagram">
+                    <img class="imagen" src="images/youtube.png" alt="logo_youtube" >
+                    <img class="imagen" src="images/whatsapp.png" alt="logo_whatsapp">
+                </div>
+                <div class="texto">
+                    <p style="color: white">Cra 21 N° 72-04 Zona Industrial Alta suiza Manizales, Colombia<br>
+                    2023 <br>
+                    Todos los derechos reservados</p>
+                </div>
+            </div>
+        </footer>
 </body>
 </html>
