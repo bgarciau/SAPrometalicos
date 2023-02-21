@@ -3,9 +3,16 @@
         <a href="hacerSolicitud" class="logo"><img src="../images/logo.png" alt="logo" height="90px" width="auto"></a>
         <nav>
             <?php
-                include("../php/conexion.php");
-                $user=3;
-                if($user==3){
+                include("../php/conexion.php"); 
+
+                $usuario=$_SESSION['usuario'];
+                
+                $registros=$base->query("SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                
+                foreach($registros as $usuario){
+                    $userx=$usuario->FK_TIPO_USUARIO;
+                }
+                if($userx==3){  
             ?>
                 <a href="../views/hacerSolicitud.php">HACER SOLICITUD</a>
                 <ul>

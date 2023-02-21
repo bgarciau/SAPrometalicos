@@ -28,7 +28,7 @@ use function PHPSTORM_META\sql_injection_subst;
             $departamento=$_POST["departamento"];
             $sucursal=$_POST["sucursal"];
             $password=$_POST["password"];
-            $pass_cifrado=password_hash($password,PASSWORD_DEFAULT);
+            $pass_cifrado=password_hash($password,PASSWORD_DEFAULT,array("cost"=>7));
             $tipoUsuario=$_POST["tipoUsuario"];
             
             $sql="INSERT INTO usuario (PK_CODIGO_USUARIO,NOMBRE_USUARIO,FK_ID_DEPARTAMENTO,SUCURSAL,PASSWORD,FK_TIPO_USUARIO) 
@@ -62,9 +62,9 @@ use function PHPSTORM_META\sql_injection_subst;
                 <input class="inputA" type="password" id="Password" name="password" placeholder="Contraseña"><br>
                 <label for="TipoUsuario">Tipo usuario:</label>
                 <select name="tipoUsuario" id="sel__departamento">
-                    <option value="Usuario">Usuario</option>
-                    <option value="Empleado">Empleado</option>
-                    <option value="Administrador">Administrador</option>
+                    <option value=1 >Usuario</option>
+                    <option value=2>Empleado</option>
+                    <option value=3>Administrador</option>
                 </select>
                     
                 <br>

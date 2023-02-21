@@ -24,26 +24,28 @@ h2{
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    position: relative;
+    position:relative;
+    z-index:0;
 }
 table{
     border: 1px solid black;
 }
 #tabla__general{
     text-align: center;
-    width: 1200px;
-    height: auto;
+    width: 100%;
+    height: 80%;
     background-color: rgba(230, 230, 230, 0.473);
     font-size: 14px;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    position: relative;
+    position:absolute;
+    float: left;
 }
 #div__agregarU{
     text-align: center;
     width: 98%;
-    height: auto;
+    height: 98%;
     background-color: rgba(219, 215, 215, 0.473);
     font-size: 20px;
     top: 50%;
@@ -72,31 +74,35 @@ table{
 }
 
 .table_wrapperS{
-    max-height: 600px;
-    overflow-y: scroll;
+    /* max-height: 250px; */
+    height: 97%;
+    width: 98%;
+    overflow-y:scroll;
     margin: 5px;
-    overflow-x: scroll;
+    overflow-x:scroll;       
 }
 
 .outer_wrapperS{
     border:1px solid black;
     box-shadow: 0px 0px 3px black;
     margin: 5px;
-    max-width: 98%;
+    /* max-width: 98%; */
+    height: 89%;
+    width: 98%;
 }
 
-#tabla__servicios{
+#tabla__servicios,#tabla__articulos{
     border-collapse: separate;
     border-spacing: 0px;
     min-width: max-content;
 }
 
-#tabla__servicios td{
+#tabla__servicios td,#tabla__articulos td{
     padding: 0px;
     border-color: #000000;
     border: 1px solid black;
 }
-#tabla__servicios th{
+#tabla__servicios th,#tabla__articulos th{
     position: sticky;
     top: 0px;
     background-color:#ffffff;
@@ -106,7 +112,9 @@ table{
 }
 
 .table_wrapper{
-    max-height: 250px;
+    /* max-height: 250px; */
+    height: 97%;
+    width: 100%;
     overflow-y: scroll;
     margin: 5px;
     overflow-x: scroll;
@@ -116,41 +124,38 @@ table{
     border:1px solid black;
     box-shadow: 0px 0px 3px black;
     margin: 5px;
-    max-width: fit-content;
+    /* max-width: 98%; */
+    height: 89%;
+    width: 98%;
 }
 
 
 #div__solicitante,#div__fechas{
     width: 98%;
-    height: 165px;
+    height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: left;
 }
-
 #div__fechas{
-    width: 98%;
-    height: 165px;
-    background-color: rgba(228, 228, 228, 0.795);
-    margin: 5px auto;
     text-align: right;
 }
 #div__comentarios{
     width: 98%;
-    height: 140px;
+    height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: left;
 }
 #div__enviar{
     width: 98%;
-    height: 140px;
+    height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: right;
 }
 #div__tablaServicios{
-    width: 1200px;
+    width: 130vh;
     height: 300px;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
@@ -159,8 +164,8 @@ table{
 }
 
 #div__tablaSolicitudes{
-    width: 1200px;
-    height: 680px;
+    width: 130vh;
+    height: 70vh;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: left;
@@ -208,6 +213,7 @@ input{
     margin: 0;
     border: 0px;
     width: auto;
+    max-width: max-content;
 }
 .inputBuscar{
     display: inline-block;

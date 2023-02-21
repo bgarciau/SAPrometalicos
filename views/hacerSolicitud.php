@@ -12,11 +12,11 @@
 
         if (!isset($_SESSION["usuario"])) {
 
-            header("location:../index.php");
+             header("location:../index.php");
         }
 
         include("../php/conexion.php");
-        $registros=$base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
+        $departamento=$base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
         
     ?>
     <header>
@@ -45,9 +45,12 @@
                             </select><br>
                             <label for="Departamento">Departamento:</label>
                             <select name="Departamento" id="sel__departamento">
-                                <option value="Administracion">Administracion</option>
-                                <option value="Comercial">Comercial</option>
-                                <option value="DefinirNuervo">Definir nuevo</option>
+                            <?php
+                            foreach($departamento as $departamentos):?>  
+                                <option value="<?php echo $departamentos->NOMBRE_DEPARTAMENTO?>"><?php echo $departamentos->NOMBRE_DEPARTAMENTO?></option>
+                            <?php
+                            endforeach;
+                            ?>   
                             </select><br>
                             <input type="checkbox" id="EnviarCorreo" value="EnviarCorreo" placeholder="Enviar correo electronico si se agrego pedido">
                             <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego pedido</label><br>
@@ -76,53 +79,184 @@
                 <tr>
                     <td colspan="12">
                         <div id="div__tablaServicios">
-                            <button class="btn_sel">servicios</button>
-                            <button class="btn_sel">articulos</button>
+                            <form id="menu">
+                                <button class="btn_sel" name="xtabla"  value="tservicios">servicios</button>
+                                <button class="btn_sel" name="xtabla"  value="tarticulos">articulos</button>
+                            </form>
                             <div class="outer_wrapper">
-                            <div class="table_wrapper">
-                                <table id="tabla__servicios">
-                                    <thead>
-                                        <th>Descripcion</th>
-                                        <th>Fecha Necesaria</td>
-                                        <th>Proveedor</th>
-                                        <th>Precio Info</th>
-                                        <th>Cuenta de Mayor</th>
-                                        <th>UEN</th>
-                                        <th>lineas</th>
-                                        <th>sublineas</th>
-                                        <th>Nombre Cuenta mayor</th>
-                                        <th>proyecto</th>
-                                        <th>% Descuento</th>
-                                        <th>indicador de impuestos</th>
-                                        <th>total ml</th>
-                                    </thead>
+                                <div class="table_wrapper">
                                     <?php
+                                        $xtabla="tservicios";
+                                        if(isset($_GET["xtabla"])){
+                                            $xtabla=$_GET["xtabla"]; 
+                                        }
+                                            if($xtabla=="tservicios"){ ?>
+                                                <!-- tabla servicios  -->
+                                                <table id="tabla__servicios">
+                                                    <thead>
+                                                        <th>Descripcion servicio</th>
+                                                        <th>Fecha Necesaria</td>
+                                                        <th>Proveedor</th>
+                                                        <th>Precio Info</th>
+                                                        <th>Cuenta de Mayor</th>
+                                                        <th>UEN</th>
+                                                        <th>lineas</th>
+                                                        <th>sublineas</th>
+                                                        <th>Nombre Cuenta mayor</th>
+                                                        <th>proyecto</th>
+                                                        <th>% Descuento</th>
+                                                        <th>indicador de impuestos</th>
+                                                        <th>total ml</th>
+                                                    </thead>
+                                                    <?php
 
-                                        $i=1;
-                                        while ($i<=20){
-                                        ?>
-                                        <tr>
-                                            <td><input class="inputTabla" type="" name="" value=""><img class="lupa" src="../images/lupa.png" alt="lupa""></td>
-                                            <td><input class="inputTabla" type="date" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                            <td><input class="inputTabla" type="search" name="" value=""></td>
-                                        </tr>
-                                        <?php 
-                                        $i=$i+1;
+                                                        $i=1;
+                                                        while ($i<=20){
+                                                        ?>
+                                                        <tr>
+                                                            <td><input class="inputTabla" type="search" name="" value=""><img class="lupa" src="../images/lupa.png" alt="lupa""></td>
+                                                            <td><input class="inputTabla" type="date" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                        </tr>
+                                                        <?php 
+                                                        $i=$i+1;
+                                                            }
+
+                                                        ?>
+                                                </table>
+                                                <?php
                                             }
+                                            else{ ?> 
+                                            <!-- tabla articulos -->
+                                                <table id="tabla__articulos">
+                                                    <thead>
+                                                        <th>Numero de articulo</th>
+                                                        <th>Descripcion articulo</th>
+                                                        <th>Proveedor</th>
+                                                        <th>Fecha Necesaria</th>
+                                                        <th>Canidad Necesaria</th>
+                                                        <th>Precio Info</th>
+                                                        <th>% Descuento</th>
+                                                        <th>indicador de impuestos</th>
+                                                        <th>total ml</th>
+                                                        <th>UEN</th>
+                                                        <th>lineas</th>
+                                                        <th>sublineas</th>
+                                                        <th>Grupo Products</th>
+                                                        <th>Unidad de medida</th>
+                                                        <th>Pais</th>
+                                                        <th>Concepto entrada</th>
+                                                        <th>Concepto salida</th>
+                                                        <th>Crea diferido</th>
+                                                        <th>digito verificacion mandante</th>
+                                                        <th>tipo documento mandante</th>
+                                                        <th>tipo ingreso mandato</th>
+                                                        <th>dato maestro dife</th>
+                                                        <th>doc entry activo fijo</th>
+                                                        <th>identificador contrato de mandato</th>
+                                                        <th>fecha contrato</th>
+                                                        <th>nit mandante 1</th>
+                                                        <th>nit mandante 2</th>
+                                                        <th>matricula mercantil mandante 1</th>
+                                                        <th>matricula mercantil mandante 2</th>
+                                                        <th>primer nombre representante legal</th>
+                                                        <th>segundo nombre representante legal</th>
+                                                        <th>apellidos representante legal</th>
+                                                        <th>razon descuento</th>
+                                                        <th>imprimir</th>
+                                                        <th>descripcion</th>
+                                                        <th>valor</th>
+                                                        <th>tipo precio referencia</th>
+                                                        <th>base instalada</th>
+                                                        <th>vigencia desde</th>
+                                                        <th>vigencia hasta</th>
+                                                        <th>numero cuentas diferido</th>
+                                                        <th>codigo articulo</th>
+                                                        <th>cantidad</th>
+                                                        <th>unidad medida</th>
+                                                        <th>empleado</th>
+                                                        <th>fecha modificacion</th>
+                                                        <th>unidades producidas</th>
+                                                        <th>fecha entrega</th>
+                                                        <th>socio negocio</th>
+                                                    </thead>
+                                                    <?php
 
-                                        ?>
-                                </table>
-                            </div>
+                                                        $i=1;
+                                                        while ($i<=20){
+                                                        ?>
+                                                        <tr>
+                                                            <td><input class="inputTabla" type="search" name="" value=""><img class="lupa" src="../images/lupa.png" alt="lupa""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="date" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                            <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                        </tr>
+                                                        <?php 
+                                                        $i=$i+1;
+                                                            }
+
+                                                        ?>
+                                                </table>
+                                               <?php
+                                            }
+                                        
+                                        ?> 
+                                </div>
                             </div>
                         </div>
                     </td>

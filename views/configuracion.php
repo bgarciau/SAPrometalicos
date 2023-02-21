@@ -48,7 +48,7 @@
                 <input class="inputc" type="checkbox" name="fechaNec" checked>
                 <input class="inputA" type="text" name="fechaNec" placeholder="Fecha necesaria"><br>
                 <a><input class="btn_env" type="submit" value="+AGREGAR" name="addParametro"></a><br>
-                <a><input class="btn_env" type="accept=" value="CONFIRMAR" name="confirmar"></a><br>
+                <a><input class="btn_env" type="button" value="CONFIRMAR" name="confirmar"></a><br>
                 <br><br>
                 <h3>CAMBIAR FOOTER</h3>
                 <footer>
@@ -59,8 +59,8 @@ Cra 21 N° 72-04 Zona Industrial Alta suiza Manizales, Colombia
 Todos los derechos reservados</textarea>
                 </div>
                 </footer>
-                <a><input class="btn_env" type="accept=" value="CONFIRMAR" name="confirmar"></a><br>
-                <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                <a><input class="btn_env" type="button" value="CONFIRMAR" name="confirmar"></a><br>
+                <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
 
         </div>
     </div> 
