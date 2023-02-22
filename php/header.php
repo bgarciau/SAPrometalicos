@@ -9,8 +9,8 @@
                 
                 $registros=$base->query("SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                 
-                foreach($registros as $usuario){
-                    $userx=$usuario->FK_TIPO_USUARIO;
+                foreach($registros as $Tusuario){
+                    $userx=$Tusuario->FK_TIPO_USUARIO;
                 }
                 if($userx==3){  
             ?>

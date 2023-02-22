@@ -64,7 +64,7 @@
                             <input type="text" id="Nsoliciud" name="Nsolicitud" placeholder="Nsolicitud"><br>
                             <label for="Estado">Estado:</label>
                             <input type="text" id="Estado" name="Estado" placeholder="Estado"><br>
-                            <label for="FechaContabilizacion">Fecha conabilizacion:</label>
+                            <label for="FechaContabilizacion">Fecha contabilizacion:</label>
                             <input type="text" id="FechaContabilizacion" name="FechaContabilizacion" placeholder="Fecha Contabilizasion"><br>
                             <label for="ValidoHasta">Valido hasta:</label>
                             <input type="text" id="ValidoHasta" name="ValidoHasta" placeholder="Valido hasta"><br>

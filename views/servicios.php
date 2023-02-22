@@ -16,9 +16,19 @@
 
         header("location:../index.php");
     }
-
     include("../php/conexion.php");
-    $registros = $base->query("SELECT * FROM servicio")->fetchAll(PDO::FETCH_OBJ);
+
+    $usuario=$_SESSION['usuario'];
+                
+    $registros=$base->query("SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+    foreach($registros as $Tusuario){
+        $userx=$Tusuario->FK_TIPO_USUARIO;
+    }
+    if($userx!=3){
+        header("location:hacerSolicitud.php");    
+    }
+
+    $serv = $base->query("SELECT * FROM servicios")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
     <header>
@@ -43,12 +53,12 @@
                             </thead>
                             <?php
                             $i = 1;
-                            foreach ($registros as $servicio):?>
+                            foreach ($serv as $servicio):?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $servicio->descripcion_servicio ?></td>
+                                    <td><?php echo $servicio->descripcion_servicio?></td>
                                     <td class="opcionesTabla">
-                                        <a href="actualizarServicio.php?idServicio=<?php echo $servicio->id_servicio ?>& descripcionServicio=<?php echo $servicio->descripcion_servicio ?> "><input class="btn_update" type="button" value="update"></a>
+                                        <a href="actualizarServicio.php?idServicio=<?php echo $servicio->id_servicio ?>& descripcionServicio=<?php echo $servicio->descripcion_servicio?> "><input class="btn_update" type="button" value="update"></a>
                                         <a href="../crud/eliminar_servicio.php?idServicio=<?php echo $servicio->id_servicio ?>"><input class="btn_delete" type="button" value="delete"></a>
                                     </td>
                                 </tr>

@@ -41,10 +41,10 @@
                             <th>Nombre solicitante</th>
                             <th>Sucursal</th>
                             <th>Departamento</th>
-                            <th>Descripcion</th>
-                            <th>Fecha necesaria</th>
-                            <th>Proveedor</th>
-                            <th>Precio info</th>
+                            <th>Corre electronico</th>
+                            <th>Cantidad de articulos</th>
+                            <th>Cantidad de sevicios</th>
+                            <th>Comentarios</th>
                             <th>OPCIONES</th>
                         </thead>
                         <?php

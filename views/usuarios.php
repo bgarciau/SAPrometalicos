@@ -16,7 +16,18 @@
         }
 
         include("../php/conexion.php");
-        $registros=$base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
+
+        $usuario=$_SESSION['usuario'];
+                
+        $registros=$base->query("SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+        foreach($registros as $Tusuario){
+            $userx=$Tusuario->FK_TIPO_USUARIO;
+        }
+        if($userx!=3){
+            header("location:hacerSolicitud.php");    
+        }
+        
+        $usuar=$base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
     <header>
@@ -44,7 +55,7 @@
                             </thead>
                             <?php
                                 $i=1;
-                                foreach($registros as $usuario):?>
+                                foreach($usuar as $usuario):?>
                                     <tr>
                                         <td><?php echo $i?></td>
                                         <td><?php echo $usuario->NOMBRE_USUARIO?></td>
