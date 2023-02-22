@@ -41,6 +41,7 @@ use function PHPSTORM_META\sql_injection_subst;
         ?>
     </header>
     <div class="base">   
+        <div class="contenedor">   
         <div id="div__agregarU">
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
         <h2>AGREGAR SERVICIO</h2>
@@ -50,6 +51,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 <!-- <input class="inputA" type="text" id="TipoUsuario" name="tipoUsuario" placeholder="Tipo usuario"><br> -->
                 <a><input class="btn_env" type="submit" value="CREAR SERVICIO" name="crearS"></a>
                 <a href="servicios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+        </div>
         </div>
     </div> 
     </form>

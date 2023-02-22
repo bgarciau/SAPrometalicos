@@ -19,22 +19,23 @@ h2{
 
  
 .contenedor{
-    width: 99%;
+    width: 100%;
     height: 100%;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     position:relative;
     z-index:0;
+    background-color: #e7d0a483;
 }
 table{
     border: 1px solid black;
 }
 #tabla__general{
     text-align: center;
-    width: 100%;
+    width: 99%;
     height: 80%;
-    background-color: rgba(230, 230, 230, 0.473);
+    background-color: #e7d0a4bb;
     font-size: 14px;
     top: 50%;
     left: 50%;
@@ -45,7 +46,7 @@ table{
 #div__agregarU{
     text-align: center;
     width: 98%;
-    height: 98%;
+    height: 45%;
     background-color: rgba(219, 215, 215, 0.473);
     font-size: 20px;
     top: 50%;
@@ -53,10 +54,42 @@ table{
     transform: translateX(-50%) translateY(-50%);
     position: relative;
 }
+#div__config{
+    text-align: center;
+    width: 98%;
+    height: 45%;
+    background-color: rgba(219, 215, 215, 0.473);
+    font-size: 20px;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+#div__volver{
+    text-align: right;
+    margin-right: 7px;
+    width: 45%;
+    padding-right: 5%;
+    float: right;
+    background-color: #e7d0a4bb;
+}
+#div__agregar{
+    text-align: left;
+    float: left;
+    margin-left: 5px;
+    width: 49%;
+    background-color:#e7d0a4bb;
+}
+#tabla__usuarios{
+    border-collapse: separate;
+    border-spacing: 0px;
+    min-width: 99%;
+}
+
 #tabla__solicitudes{
     border-collapse: separate;
     border-spacing: 0px;
-    min-width: 98%;
+    min-width: max-content;
 }
 
 #tabla__solicitudes td{
@@ -68,27 +101,28 @@ table{
     position: sticky;
     top: 0px;
     background-color:#faf6f6;
-    border: 2px solid rgb(255, 0, 0);
+    border: 4px solid rgb(255, 0, 0);
     color: rgb(7, 7, 7);
     text-align: center;
 }
 
 .table_wrapperS{
     /* max-height: 250px; */
-    height: 97%;
-    width: 98%;
+    height: 90%;
+    width: 99%;
     overflow-y:scroll;
     margin: 5px;
-    overflow-x:scroll;       
+    /* overflow-x:scroll;        */
 }
 
 .outer_wrapperS{
-    border:1px solid black;
-    box-shadow: 0px 0px 3px black;
+    /* border:1px solid black; */
+    box-shadow: 0px 0px 5px black;
     margin: 5px;
     /* max-width: 98%; */
-    height: 89%;
-    width: 98%;
+    height:100%;
+    width: 99%;
+    background-color: rgba(228, 228, 228, 0.795);
 }
 
 #tabla__servicios,#tabla__articulos{
@@ -106,7 +140,7 @@ table{
     position: sticky;
     top: 0px;
     background-color:#ffffff;
-    border: 2px solid rgb(255, 0, 0);
+    border: 4px solid rgb(255, 0, 0);
     color: rgb(0, 0, 0);
     text-align: center;
 }
@@ -114,19 +148,18 @@ table{
 .table_wrapper{
     /* max-height: 250px; */
     height: 97%;
-    width: 100%;
+    width: 99,5%;
     overflow-y: scroll;
     margin: 5px;
     overflow-x: scroll;
 }
 
 .outer_wrapper{
-    border:1px solid black;
     box-shadow: 0px 0px 3px black;
-    margin: 5px;
+    margin: 2px;
     /* max-width: 98%; */
     height: 89%;
-    width: 98%;
+    width: 99%;
 }
 
 
@@ -152,10 +185,10 @@ table{
     height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
-    text-align: right;
+    text-align: center;
 }
 #div__tablaServicios{
-    width: 130vh;
+    width: 135vh;
     height: 300px;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
@@ -164,9 +197,9 @@ table{
 }
 
 #div__tablaSolicitudes{
-    width: 130vh;
+    width: 135vh;
     height: 70vh;
-    background-color: rgba(228, 228, 228, 0.795);
+    background-color: #e7d0a4bb;
     margin: 5px auto;
     text-align: left;
 
@@ -313,9 +346,8 @@ select#sel__solicitante{
 }
 
 .btn_vol{
-    width: 150px;
+    width: 120px;
     text-decoration:none;
-    font-weight: 200;
     font-size: 18px;
     color:#ffffff;
     background-color:#000000;
@@ -323,7 +355,7 @@ select#sel__solicitante{
     border-width: 2px;
     border-style: solid;
     border-radius: 35px;
-    margin-left: 850px;
+    position: relative;
     margin-top: 20px;
 }
 .btn_vol:hover{
@@ -414,3 +446,13 @@ select#sel__solicitante{
     text-align: center;
 }
 
+#modal::backdrop{
+    background-color: rgb(0, 0, 0,.55);
+}
+
+#modal{
+    max-width: 50ch;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}

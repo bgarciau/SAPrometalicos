@@ -40,12 +40,16 @@
         <div class="contenedor">
             <h2>SERVICIOS</h2>
             <div id="div__tablaSolicitudes">
-                <a class="agregarServicio" href="agregarServicio.php"><input class="btn_add" type="button" value="+AGREGAR"></a>
-                <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                <div id="div__agregar">
+                    <a class="agregarServicio" href="agregarServicio.php"><input class="btn_add" type="button" value="+AGREGAR"></a>
+                </div>
+                <div id="div__volver">
+                    <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                </div>
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">
                         <input class="inputBuscar" type="search" name="" value="BUSCAR">
-                        <table border="4px" id="tabla__solicitudes">
+                        <table border="4px" id="tabla__usuarios">
                             <thead>
                                 <th>#</th>
                                 <th>Descripcion</th>

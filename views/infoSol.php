@@ -22,7 +22,7 @@
     </header>
     <div class="base">
         <div class="contenedor">
-        informes
+        info solicitud
         </div>
     </div>
     <footer>

@@ -30,7 +30,9 @@
         <div class="contenedor">
             <h2>MIS SOLICITUDES</h2>
             <div id="div__tablaSolicitudes">
+                <div id="div__volver">
                 <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                </div>
                 <div class="outer_wrapperS">
                 <div class="table_wrapperS">
                 <input class="inputBuscar" type="search" name="" value="BUSCAR">
@@ -44,6 +46,7 @@
                             <th>Corre electronico</th>
                             <th>Cantidad de articulos</th>
                             <th>Cantidad de sevicios</th>
+                            <th>propietario</th>
                             <th>Comentarios</th>
                             <th>OPCIONES</th>
                         </thead>
@@ -62,8 +65,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td class="opcionesTabla">
-                                    <a><input class="btn_info" type="button" value="info"></a>
+                                    <a href="infoSol.php"><input class="btn_info" type="button" value="info"></a>
                                     <a><input class="btn_aceptar" type="button" value="aceptar"></a>
                                     <a><input class="btn_delete" type="button" value="rechazar"></a>
                                 </td>

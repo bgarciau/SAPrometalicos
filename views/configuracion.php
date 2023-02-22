@@ -32,7 +32,8 @@
         ?>
     </header>
     <div class="base">   
-        <div id="div__agregarU">
+        <div class="contenedor">
+        <div id="div__config">
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
         <h2>CONFIGURACION</h2>
         <H3>CAMBIAR DATOS</H3>
@@ -73,6 +74,7 @@ Todos los derechos reservados</textarea>
                 <a><input class="btn_env" type="button" value="CONFIRMAR" name="confirmar"></a><br>
                 <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
 
+        </div>
         </div>
     </div> 
     <footer>

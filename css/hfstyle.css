@@ -6,7 +6,7 @@ header {
 
 .wrapper {
 	width:95%; /* Establecemos que el ancho sera del 90% */
-	max-width:1200px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	max-width:100%; /* Aqui le decimos que el ancho máximo sera de 1000px */
 	margin:auto; /* Centramos los elementos */
     margin-left: 5px;
 	overflow:hidden; /* Eliminamos errores de float */
@@ -14,7 +14,7 @@ header {
 
 .wrapper2 {
 	width:80%; /* Establecemos que el ancho sera del 90% */
-	max-width:1200px; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	max-width:100%; /* Aqui le decimos que el ancho máximo sera de 1000px */
 	margin:auto; /* Centramos los elementos */
 	overflow:hidden; /* Eliminamos errores de float */
     padding-left: 100px;

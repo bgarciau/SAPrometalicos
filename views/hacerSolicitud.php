@@ -64,14 +64,14 @@
                             <input type="text" id="Nsoliciud" name="Nsolicitud" placeholder="Nsolicitud"><br>
                             <label for="Estado">Estado:</label>
                             <input type="text" id="Estado" name="Estado" placeholder="Estado"><br>
-                            <label for="FechaContabilizacion">Fecha contabilizacion:</label>
+                            <!-- <label for="FechaContabilizacion">Fecha contabilizacion:</label>
                             <input type="text" id="FechaContabilizacion" name="FechaContabilizacion" placeholder="Fecha Contabilizasion"><br>
                             <label for="ValidoHasta">Valido hasta:</label>
                             <input type="text" id="ValidoHasta" name="ValidoHasta" placeholder="Valido hasta"><br>
                             <label for="FechaContabilizacion">Fecha documento:</label>
                             <input type="text" id="FechaContabilizacion" name="FechaContabilizacion" placeholder="Fecha Contabilizasion"><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
-                            <input type="text" id="FechaContabilizacion" name="FechaContabilizacion" placeholder="Fecha Contabilizasion"><br>
+                            <input type="text" id="FechaContabilizacion" name="FechaContabilizacion" placeholder="Fecha Contabilizasion"><br> -->
                             <button class="btn_doc">Documento de referencia</button>
                         </div>
                     </td>
@@ -272,14 +272,14 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
-                            <label for="TotalAntesDescuento">Total antes del descuento:</label>
+                            <!-- <label for="TotalAntesDescuento">Total antes del descuento:</label>
                             <input type="text" id="TotalAntesDescuento" name="TotalAntesDescuento" placeholder="Total"><br>
                             <label for="GastosAdicionales">Gastos adicionales:</label>
                             <input type="text" id="GastosAdicionales" name="GastosAdicionales" placeholder="Gastos Adicionales"><br>
                             <label for="Impuesto">Impuesto:</label>
                             <input type="text" id="Impuesto" name="Impuesto" placeholder="Impuesto"><br>
                             <label for="TotalPagoVencido">Total pago vencido:</label>
-                            <input type="text" id="TotalPagoVencido" name="TotalPagoVencido" placeholder="Total pago vencido"><br>
+                            <input type="text" id="TotalPagoVencido" name="TotalPagoVencido" placeholder="Total pago vencido"><br> -->
                             <button class="btn_env">GUARDAR SOLICITUD</button>
                             <button class="btn_env">ENVIAR SOLICITUD</button>
                        
