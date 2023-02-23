@@ -89,7 +89,7 @@ table{
 #tabla__solicitudes{
     border-collapse: separate;
     border-spacing: 0px;
-    min-width: max-content;
+    width: 100%;
 }
 
 #tabla__solicitudes td{
@@ -213,6 +213,7 @@ textarea {
     border: 1px solid #999;
     resize: none;
     margin: 1px;
+    font-size: 14px;
   }
 
   .textareaF{
@@ -229,15 +230,18 @@ label{
     display: inline-block;
     width: 200px; 
     text-align: left;   
+    font-size: 14px;
 }
 
 #enviarCorreo{
     width: 400px;
+    font-size: 14px;
 
 }    
 input{
     margin: 1px;
     width: 250px;
+    font-size: 14px;
 }
 
 .inputTabla{
@@ -247,6 +251,7 @@ input{
     border: 0px;
     width: auto;
     max-width: max-content;
+    font-size: 14px;
 }
 .inputBuscar{
     display: inline-block;
@@ -256,13 +261,14 @@ input{
     height: 25px;
     width: 300px;
     color:#464646b7 ;
+    font-size: 14px;
 }
 
 .inputA{
     margin-top: 5px;
     display: inline-block;
     width: 250px; 
-    height: 18px;
+    height: 14px;
     text-align: left;
 }
 .inputc{
@@ -270,13 +276,14 @@ input{
     margin-left: 10px;
     display: inline-block;
     width: 250px; 
-    height: 18px;
+    height: 14px;
     text-align: left;
 }
 
 input#Solicitante {
     margin: 1px;
     width: 125px;
+    font-size: 14px;
 }
 
 input[type="checkbox" i] {
@@ -286,10 +293,12 @@ input[type="checkbox" i] {
 select{
     margin: 1px;
     width: 258px;
+    font-size: 14px;
 }
 select#sel__solicitante{
     width: 119px;
     margin: 1px;
+    font-size: 14px;
 }
 
 .btn_env{
@@ -348,7 +357,7 @@ select#sel__solicitante{
 .btn_vol{
     width: 120px;
     text-decoration:none;
-    font-size: 18px;
+    font-size: 14px;
     color:#ffffff;
     background-color:#000000;
     border-color:#f74248;
@@ -367,7 +376,7 @@ select#sel__solicitante{
     width: 150px;
     text-decoration:none;
     font-weight: 200;
-    font-size: 18px;
+    font-size: 14px;
     color:#ffffff;
     background-color:#000000;
     border-color:#f74248;

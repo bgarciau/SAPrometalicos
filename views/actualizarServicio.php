@@ -36,7 +36,7 @@
                 $idServicio=$_POST["idServicio"];
                 $descripcionServicio=$_POST["descripcionServicio"];
 
-                $sql="UPDATE servicio SET descripcion_servicio=:_descripcionServicio WHERE id_servicio=:_idServicio";
+                $sql="UPDATE arse SET des_arse=:_descripcionServicio WHERE pk_cod_arse=:_idServicio";
                 
                 $resultado=$base->prepare($sql);
 

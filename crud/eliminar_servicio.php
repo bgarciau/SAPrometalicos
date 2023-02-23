@@ -3,7 +3,7 @@
 
     $idServicio=$_GET["idServicio"];
 
-    $base->query("DELETE FROM servicio WHERE id_Servicio='$idServicio'");
+    $base->query("DELETE FROM arse WHERE pk_cod_arse='$idServicio'");
 
     header("location:../views/servicios.php");
 ?>

@@ -34,7 +34,7 @@ use function PHPSTORM_META\sql_injection_subst;
             $pass_cifrado=password_hash($password,PASSWORD_DEFAULT,array("cost"=>7));
             $tipoUsuario=$_POST["tipoUsuario"];
             
-            $sql="INSERT INTO usuario (PK_CODIGO_USUARIO,NOMBRE_USUARIO,rol_usuario,FK_ID_DEPARTAMENTO,SUCURSAL,PASSWORD,FK_TIPO_USUARIO) 
+            $sql="INSERT INTO usuario (pk_cod_usr,nom_usr,rol_usr,fk_depart,sucursal,pass_usr,fk_tipo_usr) 
             VALUES(:_codigoUsuario,:_nombreUsuario,:_rolUsuario,:_departamento,:_sucursal,:_password,:_tipoUsuario)";
 
             $resultado=$base->prepare($sql);
@@ -64,7 +64,7 @@ use function PHPSTORM_META\sql_injection_subst;
                     <select name="departamento" id="sel__departamento">
                         <?php
                             foreach($depart as $departamentos):?>  
-                                <option value="<?php echo $departamentos->NOMBRE_DEPARTAMENTO?>"><?php echo $departamentos->NOMBRE_DEPARTAMENTO?></option>
+                                <option value="<?php echo $departamentos->nom_dep?>"><?php echo $departamentos->nom_dep?></option>
                         <?php
                             endforeach;
                         ?>   

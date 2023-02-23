@@ -7,10 +7,10 @@
 
                 $usuario=$_SESSION['usuario'];
                 
-                $registros=$base->query("SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                $registros=$base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                 
                 foreach($registros as $Tusuario){
-                    $userx=$Tusuario->FK_TIPO_USUARIO;
+                    $userx=$Tusuario->fk_tipo_usr;
                 }
                 if($userx==3){  
             ?>

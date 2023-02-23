@@ -20,17 +20,18 @@ use function PHPSTORM_META\sql_injection_subst;
         }
 
         include("../php/conexion.php");
-
+        
+        $servicio="servicio";
         if(isset($_POST["crearS"])){
 
             $descripcionServicio=$_POST["descripcionServicio"];
             
-            $sql="INSERT INTO servicio (descripcion_servicio) 
-            VALUES(:_descripcionServicio)";
+            $sql="INSERT INTO arse (tipo_arse,des_arse) 
+            VALUES(:_tipoArse,:_descripcionServicio)";
 
             $resultado=$base->prepare($sql);
             
-            $resultado->execute(array(":_descripcionServicio"=>$descripcionServicio));
+            $resultado->execute(array(":_tipoArse"=>$servicio,":_descripcionServicio"=>$descripcionServicio));
             
             header("location:servicios.php");
         }

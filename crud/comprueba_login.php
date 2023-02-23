@@ -8,7 +8,7 @@
 
             $contador=0;
 
-            $sql="SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= :usuario";
+            $sql="SELECT * FROM usuario WHERE pk_cod_usr= :usuario";
             $resultado=$base->prepare($sql);
 
             // $resultado->bindValue(":usuario",$usuario);
@@ -17,7 +17,7 @@
 
                 while($registro=$resultado->fetch(PDO::FETCH_ASSOC)){
 
-                    if (password_verify($password, $registro['PASSWORD'])) {
+                    if (password_verify($password, $registro['pass_usr'])) {
                         $contador++;
                     }
                     echo $contador;

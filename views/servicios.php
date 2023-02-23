@@ -20,15 +20,15 @@
 
     $usuario=$_SESSION['usuario'];
                 
-    $registros=$base->query("SELECT * FROM usuario WHERE PK_CODIGO_USUARIO= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+    $registros=$base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
     foreach($registros as $Tusuario){
-        $userx=$Tusuario->FK_TIPO_USUARIO;
+        $userx=$Tusuario->fk_tipo_usr;
     }
     if($userx!=3){
         header("location:hacerSolicitud.php");    
     }
 
-    $serv = $base->query("SELECT * FROM servicios")->fetchAll(PDO::FETCH_OBJ);
+    $serv = $base->query("SELECT * FROM arse")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
     <header>
@@ -60,10 +60,10 @@
                             foreach ($serv as $servicio):?>
                                 <tr>
                                     <td><?php echo $i ?></td>
-                                    <td><?php echo $servicio->descripcion_servicio?></td>
+                                    <td><?php echo $servicio->des_arse?></td>
                                     <td class="opcionesTabla">
-                                        <a href="actualizarServicio.php?idServicio=<?php echo $servicio->id_servicio ?>& descripcionServicio=<?php echo $servicio->descripcion_servicio?> "><input class="btn_update" type="button" value="update"></a>
-                                        <a href="../crud/eliminar_servicio.php?idServicio=<?php echo $servicio->id_servicio ?>"><input class="btn_delete" type="button" value="delete"></a>
+                                        <a href="actualizarServicio.php?idServicio=<?php echo $servicio->pk_cod_arse ?>& descripcionServicio=<?php echo $servicio->des_arse?> "><input class="btn_update" type="button" value="update"></a>
+                                        <a href="../crud/eliminar_servicio.php?idServicio=<?php echo $servicio->pk_cod_arse ?>"><input class="btn_delete" type="button" value="delete"></a>
                                     </td>
                                 </tr>
                             <?php
