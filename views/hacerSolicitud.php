@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Hacer solicitud</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/hfstyle.css">
 </head>
 
 <body>
@@ -122,6 +121,7 @@
                                         <!-- tabla servicios  -->
                                         <table id="tabla__servicios">
                                             <thead>
+                                                <th>#</th>
                                                 <th>Descripcion servicio</th>
                                                 <th>Fecha Necesaria</th>
                                                 <th>Proveedor</th>
@@ -142,22 +142,30 @@
                                             while ($i <= 20) {
                                                 ?>
                                                 <tr>
-                                                    <td><input class="inputTabla" type="search" name="" value=""><img
-                                                            class="lupa" src="../images/lupa.png"
-                                                            alt="lupa""></td>
-                                                                                                                                            <td><input class="
-                                                            inputTabla" type="date" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
+                                                    <td><?php echo $i ?></td>
+                                                    <td><select name="cod_arse<?php echo $i ?>" id="arse">
+                                                        <option value=""></option>
+                                                        <option value="" disabled>cod |  descripcion servicio</option>
+                                                        <?php
+                                                            $servicios = $base->query("SELECT * FROM arse WHERE tipo_arse='servicio'")->fetchAll(PDO::FETCH_OBJ); foreach ($servicios as $servicioss): ?>
+                                                            <option value="<?php echo $servicioss->pk_cod_arse?>"><?php echo $servicioss->pk_cod_arse." | ".$servicioss->des_arse?></option>
+                                                            <?php
+                                                            endforeach;
+                                                            ?>
+                                                        </select>
+                                                    </td>
+                                                    <td><input class="inputTabla" type="date" name="fecha_nec<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="proveedor<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="precio_inf<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="cuentaMayor<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="uen<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="lineas<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="sublineas<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="nom_cnt_may<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="proyecto<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="por_dec<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="ind_imp<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" name="total_ml<?php echo $i ?>" value=""></td>
                                                 </tr>
                                                 <?php
                                                 $i = $i + 1;
@@ -170,6 +178,7 @@
                                         <!-- tabla articulos -->
                                         <table id="tabla__articulos">
                                             <thead>
+                                                <th>#</th>
                                                 <th>Numero de articulo</th>
                                                 <th>Descripcion articulo</th>
                                                 <th>Proveedor</th>
@@ -226,11 +235,11 @@
                                             while ($i <= 20) {
                                                 ?>
                                                 <tr>
-                                                    <td><input class="inputTabla" type="search" name="" value=""><img
-                                                            class="lupa" src="../images/lupa.png"
-                                                            alt="lupa""></td>
-                                                                                                                                            <td><input class="
-                                                            inputTabla" type="search" name="" value=""></td>
+                                                    <td><?php echo $i ?></td>
+                                                    <td><input class="inputTabla" type="search" name="cod_arse" value=""><img id="lupa"
+                                                            src="../images/lupa.png" alt="lupa">
+                                                    </td>
+                                                    <td><input class="inputTabla" type="search" name="" value=""></td>
                                                     <td><input class="inputTabla" type="search" name="" value=""></td>
                                                     <td><input class="inputTabla" type="date" name="" value=""></td>
                                                     <td><input class="inputTabla" type="search" name="" value=""></td>

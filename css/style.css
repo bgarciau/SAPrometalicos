@@ -417,11 +417,11 @@ select#sel__solicitante{
     color: #040404;
 }
 
-.lupa{
+#lupa{
     height: 16px;
     width: 16px;
 }
-.lupa:hover{
+#lupa:hover{
     filter:hue-rotate(200deg);
 }
 
@@ -455,13 +455,8 @@ select#sel__solicitante{
     text-align: center;
 }
 
-#modal::backdrop{
-    background-color: rgb(0, 0, 0,.55);
+#arse{
+    width: 250px;
+    font-size: 14px;
 }
 
-#modal{
-    max-width: 50ch;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}

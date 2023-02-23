@@ -1,4 +1,5 @@
 <footer>
+    <link rel="stylesheet" href="../css/hfstyle.css">
     <div class="wrapper2">
         <div class="logo">
             <img class="imagen" src="../images/facebook.png" alt="logo_facebok">
