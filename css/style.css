@@ -340,14 +340,16 @@ select#sel__solicitante{
 
 .btn_sel{
     margin-left: 10px;
+    text-align: center;
     text-decoration:none;
     font-weight: 300;
-    font-size: 14px;
+    font-size: 15px;
     color:#ffffff;
     background-color:#fc636b;
     border-color:#f74248;
     border-width: 2px;
     border-style: solid;
+    width: 75px;
 }
 .btn_sel:hover{
     background-color:#ffffff ;

@@ -51,7 +51,7 @@
                                     <th>N° Sol</th>
                                     <th>Estado</th>
                                     <th>Nombre solicitante</th>
-                                    <th>Sucursal</th>
+                                    <!-- <th>Sucursal</th> -->
                                     <th>Departamento</th>
                                     <th>Corre electronico</th>
                                     <th>Cantidad de sevicios</th>
@@ -60,29 +60,28 @@
                                     <th>OPCIONES</th>
                                 </thead>
                                 <?php
-
-                                $i = 1;
-                                while ($i <= 40) {
+                                    $usuario = $_SESSION['usuario'];
+                                    $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                    foreach ($misolicitud as $misolicitudes):
                                 ?>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        
+                                        <td><?php echo $misolicitudes->pk_num_sol?></td>
+                                        <td><?php echo $misolicitudes->estado_sol?></td>
+                                        <td><?php echo $misolicitudes->nom_solicitante?></td>
+                                        <td><?php echo $misolicitudes->depart_sol?></td>
+                                        <td><?php echo $misolicitudes->correo_sol?></td>
+                                        <td><?php echo $misolicitudes->cantidad?></td>
+                                        <td><?php echo $misolicitudes->propietario?></td>
+                                        <td><?php echo $misolicitudes->comentarios?></td>
                                         <td class="opcionesTabla">
-                                            <a href="infoSol.php"><input class="btn_info" type="button" value="info"></a>
+                                            <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
                                             <a><input class="btn_aceptar" type="button" value="aceptar"></a>
                                             <a><input class="btn_delete" type="button" value="rechazar"></a>
                                         </td>
                                     </tr>
                                 <?php
-                                    $i = $i + 1;
-                                }
+                                    endforeach;
                                 ?>
                             </table>
                         <?php
@@ -95,7 +94,7 @@
                                         <th>N° Sol</th>
                                         <th>Estado</th>
                                         <th>Nombre solicitante</th>
-                                        <th>Sucursal</th>
+                                        <!-- <th>Sucursal</th> -->
                                         <th>Departamento</th>
                                         <th>Corre electronico</th>
                                         <th>Cantidad de articulos</th>
@@ -104,30 +103,29 @@
                                         <th>OPCIONES</th>
                                     </thead>
                                     <?php
-
-                                    $i = 1;
-                                    while ($i <= 40) {
-                                    ?>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="opcionesTabla">
-                                                <a href="infoSol.php"><input class="btn_info" type="button" value="info"></a>
-                                                <a><input class="btn_aceptar" type="button" value="aceptar"></a>
-                                                <a><input class="btn_delete" type="button" value="rechazar"></a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                        $i = $i + 1;
-                                    }
-                                    ?>
+                                    $usuario = $_SESSION['usuario'];
+                                    $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                    foreach ($misolicitud as $misolicitudes):
+                                ?>
+                                    <tr>
+                                        
+                                        <td><?php echo $misolicitudes->pk_num_sol?></td>
+                                        <td><?php echo $misolicitudes->estado_sol?></td>
+                                        <td><?php echo $misolicitudes->nom_solicitante?></td>
+                                        <td><?php echo $misolicitudes->depart_sol?></td>
+                                        <td><?php echo $misolicitudes->correo_sol?></td>
+                                        <td><?php echo $misolicitudes->cantidad?></td>
+                                        <td><?php echo $misolicitudes->propietario?></td>
+                                        <td><?php echo $misolicitudes->comentarios?></td>
+                                        <td class="opcionesTabla">
+                                        <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
+                                            <a><input class="btn_aceptar" type="button" value="aceptar"></a>
+                                            <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    endforeach;
+                                ?>
                                 </table>
                             <?php
                         } ?>

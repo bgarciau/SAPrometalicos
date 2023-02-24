@@ -27,7 +27,7 @@
         header("location:hacerSolicitud.php");    
     }
 
-    $serv = $base->query("SELECT * FROM arse")->fetchAll(PDO::FETCH_OBJ);
+    $serv = $base->query("SELECT * FROM arse WHERE tipo_arse= 'servicio'")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
     <header>
