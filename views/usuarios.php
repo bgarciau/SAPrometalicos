@@ -77,7 +77,12 @@
                                         <?php echo $usuario->rol_usr ?>
                                     </td>
                                     <td>
-                                        <?php echo $usuario->fk_depart ?>
+                                        <?php
+                                          $depart = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usuario->fk_depart'")->fetchAll(PDO::FETCH_OBJ);
+                                          foreach ($depart as $departt){
+                                            echo $departt->nom_dep;
+                                          }
+                                           ?>
                                     </td>
                                     <td>
                                         <?php echo $usuario->sucursal ?>

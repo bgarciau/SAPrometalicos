@@ -9,4 +9,3 @@ btnAbrirModal.addEventListener("click",()=>{
 btnCerrarModal.addEventListener("click",()=>{    
     Modal.close();
 })
-

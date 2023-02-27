@@ -61,13 +61,15 @@
                 $comentarios=$_POST["comentarios"];
                 $codUsr=$_POST["codUsr"];
                 $departamento=$_POST["departamento"];
+                $sucursal=$_POST["sucursal"];
                 
-                $sql="INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
-                VALUES(:_codSol,:_estado,:_nomSol,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
+                
+                $sql="INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
+                VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
 
                 $solicitud=$base->prepare($sql);
                 
-                $solicitud->execute(array(":_codSol"=>$codSol,":_estado"=>$estado,":_nomSol"=>$nomSol,":_correoElectronico"=>$correoElectronico,":_propietario"=>$propietario,":_comentarios"=>$comentarios,":_codUsr"=>$codUsr,":_departamento"=>$departamento,":_tipo"=>$tipo,":_cantidad"=>$cantidad));
+                $solicitud->execute(array(":_codSol"=>$codSol,":_estado"=>$estado,":_nomSol"=>$nomSol,":_sucursal"=>$sucursal,":_correoElectronico"=>$correoElectronico,":_propietario"=>$propietario,":_comentarios"=>$comentarios,":_codUsr"=>$codUsr,":_departamento"=>$departamento,":_tipo"=>$tipo,":_cantidad"=>$cantidad));
                 header("location:misSolicitudes.php");
             }
     }
@@ -169,7 +171,7 @@
                                         value="articulos"></a>
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
-                                        <!-- tabla servicios  -->
+                                        <!-- tabla articulos  -->
                                         <table id="tabla__articulos">
                                             <thead>
                                                 <th>#</th>

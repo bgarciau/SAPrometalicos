@@ -62,15 +62,17 @@
                 $comentarios=$_POST["comentarios"];
                 $codUsr=$_POST["codUsr"];
                 $departamento=$_POST["departamento"];
+                $sucursal=$_POST["sucursal"];
                 
-                $sql="INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
-                VALUES(:_codSol,:_estado,:_nomSol,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
+                $sql="INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
+                VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
 
                 $solicitud=$base->prepare($sql);
                 
-                $solicitud->execute(array(":_codSol"=>$codSol,":_estado"=>$estado,":_nomSol"=>$nomSol,":_correoElectronico"=>$correoElectronico,":_propietario"=>$propietario,":_comentarios"=>$comentarios,":_codUsr"=>$codUsr,":_departamento"=>$departamento,":_tipo"=>$tipo,":_cantidad"=>$cantidad));
+                $solicitud->execute(array(":_codSol"=>$codSol,":_estado"=>$estado,":_nomSol"=>$nomSol,":_sucursal"=>$sucursal,":_correoElectronico"=>$correoElectronico,":_propietario"=>$propietario,":_comentarios"=>$comentarios,":_codUsr"=>$codUsr,":_departamento"=>$departamento,":_tipo"=>$tipo,":_cantidad"=>$cantidad));
                 header("location:misSolicitudes.php");
             }
+            
     }
 
     ?>
@@ -200,22 +202,25 @@
                                                     <td>
                                                         <?php echo $i ?>
                                                     </td>
-                                                    <td><select name="cod_arse<?php echo $i ?>" id="arse">
+                                                    <td><select name="cod_arse<?php echo $i ?>" id="cod_arse" required>
                                                             <option value=0></option>
                                                             <option value="" disabled>cod | descripcion servicio</option>
                                                             <?php
                                                             $servicios = $base->query("SELECT * FROM arse WHERE tipo_arse='servicio'")->fetchAll(PDO::FETCH_OBJ);
                                                             foreach ($servicios as $servicioss): ?>
-                                                                <option value="<?php echo $servicioss->pk_cod_arse ?>"><?php echo $servicioss->pk_cod_arse . " | " . $servicioss->des_arse ?></option>
+                                                                <option value="<?php echo $servicioss->pk_cod_arse ?>" ><?php echo $servicioss->pk_cod_arse . " | " . $servicioss->des_arse ?></option>
+                                                                
                                                                 <?php
                                                             endforeach;
                                                             ?>
+                                                            
                                                         </select>
+                            
                                                     </td>
                                                     <td><input class="inputTabla" type="date" name="fecha_Nec<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input class="inputTabla" type="search" name="proveedor<?php echo $i ?>"
-                                                            ></td>
+                                                    <td><input id="seleccion" class="inputTabla" type="search" name="proveedor<?php echo $i ?>"
+                                                            placeholder=""></td>
                                                     <td><input class="inputTabla" type="search"
                                                             name="precio_inf<?php echo $i ?>"></td>
                                                     <td><input class="inputTabla" type="search"

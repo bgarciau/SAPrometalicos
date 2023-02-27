@@ -69,15 +69,32 @@
                                         <td><?php echo $misolicitudes->pk_num_sol?></td>
                                         <td><?php echo $misolicitudes->estado_sol?></td>
                                         <td><?php echo $misolicitudes->nom_solicitante?></td>
-                                        <td><?php echo $misolicitudes->depart_sol?></td>
+                                        <?php
+                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$misolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach ($depSol as $depSols): 
+                                        ?>
+                                        <td><?php echo $depSols->nom_dep?></td>
+                                        <?php
+                                        endforeach;
+                                        ?>
                                         <td><?php echo $misolicitudes->correo_sol?></td>
                                         <td><?php echo $misolicitudes->cantidad?></td>
                                         <td><?php echo $misolicitudes->propietario?></td>
                                         <td><?php echo $misolicitudes->comentarios?></td>
                                         <td class="opcionesTabla">
                                             <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                            <a><input class="btn_aceptar" type="button" value="aceptar"></a>
-                                            <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                            <?php
+                                            $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach ($usutipo as $usutipoo): 
+                                                if($usutipoo->fk_tipo_usr==3){?>
+                                                <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                       
+                                        <?php
+                                         
+                                            }
+                                        endforeach;
+                                        ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -112,23 +129,37 @@
                                         <td><?php echo $misolicitudes->pk_num_sol?></td>
                                         <td><?php echo $misolicitudes->estado_sol?></td>
                                         <td><?php echo $misolicitudes->nom_solicitante?></td>
-                                        <td><?php echo $misolicitudes->depart_sol?></td>
+                                        <?php
+                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$misolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach ($depSol as $depSols): 
+                                        ?>
+                                        <td><?php echo $depSols->nom_dep?></td>
+                                        <?php
+                                        endforeach;
+                                        ?>
                                         <td><?php echo $misolicitudes->correo_sol?></td>
                                         <td><?php echo $misolicitudes->cantidad?></td>
                                         <td><?php echo $misolicitudes->propietario?></td>
                                         <td><?php echo $misolicitudes->comentarios?></td>
                                         <td class="opcionesTabla">
                                         <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                            <a><input class="btn_aceptar" type="button" value="aceptar"></a>
-                                            <a><input class="btn_delete" type="button" value="rechazar"></a>
-                                        </td>
-                                    </tr>
-                                <?php
+                                        <?php
+                                            $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); 
+                                            foreach ($usutipo as $usutipoo): 
+                                                if($usutipoo->fk_tipo_usr==3){?>
+                                                <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                       
+                                        <?php
+                                         
+                                            }
+                                        endforeach;
                                     endforeach;
-                                ?>
+                                }
+                                        ?>
+                                             </td>
+                                    </tr>
                                 </table>
-                            <?php
-                        } ?>
                             </div>
                         </div>
                 </div>
@@ -136,6 +167,7 @@
         </div>
         <footer>
             <?php
+                
             require_once('../php/footer.php');
             ?>
         </footer>
