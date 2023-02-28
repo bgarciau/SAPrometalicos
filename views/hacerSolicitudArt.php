@@ -30,25 +30,47 @@
             else{ 
                 $cantidad++;
                 $codSol=$_POST["numSol"];
-                $codArse=$_POST["cod_arse$j"];
-                $fechaNec=$_POST["fecha_nec$j"];
-                $proveedor=$_POST["proveedor$j"];
-                $cant_nec=$_POST["cant_nec$j"];
-                $precioInfo=$_POST["precio_inf$j"];
-                $porDesc=$_POST["por_desc$j"];
-                $indImp=$_POST["ind_imp$j"];
-                $total=$_POST["total$j"];
-                $uen=$_POST["uen$j"];
-                $linea=$_POST["linea$j"];
-                $sublinea=$_POST["sublinea$j"];
+                $codArse[$j]=$_POST["cod_arse$j"];
+                $fechaNec[$j]=$_POST["fecha_nec$j"];
+                $proveedor[$j]=$_POST["proveedor$j"];
+                $cant_nec[$j]=$_POST["cant_nec$j"];
+                $precioInfo[$j]=$_POST["precio_inf$j"];
+                $porDesc[$j]=$_POST["por_desc$j"];
+                $indImp[$j]=$_POST["ind_imp$j"];
+                $total[$j]=$_POST["total$j"];
+                $uen[$j]=$_POST["uen$j"];
+                $xlinea[$j]=$_POST["lineas$j"];
+                $sublinea[$j]=$_POST["sublinea$j"];
 
+                if($cant_nec[$j]<=0 || $indImp[$j]=="" || $uen[$j]=="" || $linea[$j]="" || $sublinea[$j]="" )  {
+                    echo '<script>alert("Error al enviar su solicitud, verifique los campos obligatorios\nLos unicos que no son obligatorios con el proveedor y el precio info");</script>';
+                    $cantidad=-50;
+                    while($j<=20){
+                        if($cod_arse==0){
+
+                        }else{
+                            $codArse[$j]=$_POST["cod_arse$j"];
+                            $fechaNec[$j]=$_POST["fecha_nec$j"];
+                            $proveedor[$j]=$_POST["proveedor$j"];
+                            $cant_nec[$j]=$_POST["cant_nec$j"];
+                            $precioInfo[$j]=$_POST["precio_inf$j"];
+                            $porDesc[$j]=$_POST["por_desc$j"];
+                            $indImp[$j]=$_POST["ind_imp$j"];
+                            $total[$j]=$_POST["total$j"];
+                            $uen[$j]=$_POST["uen$j"];
+                            $xlinea[$j]=$_POST["lineas$j"];
+                            $sublinea[$j]=$_POST["sublinea$j"];
+                        }
+                        $j++;
+                }
+            }else{
                 $sql="INSERT INTO list_arse (fk_num_sol,fk_cod_arse,fecha_nec,fk_prov,cant_nec,precio_info,por_desc,ind_imp,total_ml,uen,linea,sublinea) 
                 VALUES(:_numSol,:_codArse,:_fechaNec,:_proveedor,:_cant_nec,:_precioInfo,:_por_desc,:_ind_imp,:_total_ml,:_uen,:_linea,:_sublinea)";
 
                 $serv=$base->prepare($sql);
         
-                $serv->execute(array(":_numSol"=>$codSol,":_codArse"=>$codArse,":_fechaNec"=>$fechaNec,":_proveedor"=>$proveedor,":_cant_nec"=>$cant_nec,":_precioInfo"=>$precioInfo,":_por_desc"=>$porDesc,":_ind_imp"=>$indImp,":_total_ml"=>$total,":_uen"=>$uen,":_linea"=>$linea,":_sublinea"=>$sublinea));        
-
+                $serv->execute(array(":_numSol"=>$codSol,":_codArse"=>$codArse[$j],":_fechaNec"=>$fechaNec[$j],":_proveedor"=>$proveedor[$j],":_cant_nec"=>$cant_nec[$j],":_precioInfo"=>$precioInfo[$j],":_por_desc"=>$porDesc[$j],":_ind_imp"=>$indImp[$j],":_total_ml"=>$total[$j],":_uen"=>$uen[$j],":_linea"=>$xlinea[$j],":_sublinea"=>$sublinea[$j]));        
+                }
             }
             $j++;
         }
@@ -159,7 +181,6 @@
                                 <input type="text" name="fechaDocumento" placeholder="Fecha documento"><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
                                 <input type="text" name="fechaNecesaria" placeholder="Fecha necesaria"><br>
-                                <button class="btn_doc">Documento de referencia</button>
                             </div>
                         </td>
                     </tr>
@@ -197,7 +218,7 @@
                                                         <?php echo $i ?>
                                                     </td>
                                                     <td><select name="cod_arse<?php echo $i ?>" id="arse">
-                                                            <option value=0></option>
+                                                            <option value="<?php if(isset($codArse[$i])){ echo $codArse[$i];}else{echo 0;}?>"><?php if(isset($codArse[$i])){ if ($codArse[$i]!=0){echo $codArse[$i]." | ";}}?></option>
                                                             <option value="" disabled>cod | descripcion servicio</option>
                                                             <?php
                                                             $servicios = $base->query("SELECT * FROM arse WHERE tipo_arse='articulo'")->fetchAll(PDO::FETCH_OBJ);
@@ -210,14 +231,16 @@
                                                         </select>
                                                     </td>
                                                     <td><input class="inputTabla" type="search" name="proveedor<?php echo $i ?>" value=""></td>
-                                                    <td><input class="inputTabla" type="date" name="fecha_nec<?php echo $i ?>" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="cant_nec<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="date" value="<?php if(isset($fechaNec[$i])){ echo $fechaNec[$i];}else{echo date("Y-m-d");}?>" name="fecha_nec<?php echo $i ?>"
+                                                            ></td>
+                                                    <td><input class="inputTabla" type="number" value="<?php if(isset($cant_nec[$i])){ echo $cant_nec[$i];}else{echo 0;}?>" name="cant_nec<?php echo $i ?>" value=""></td>
                                                     <td><input class="inputTabla" type="search" name="precio_inf<?php echo $i ?>" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="por_desc<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="number" value=0 name="por_desc<?php echo $i ?>" value=""></td>
                                                     <td><input class="inputTabla" type="search" name="ind_imp<?php echo $i ?>" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="total<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="number" value=0 name="total<?php echo $i ?>"></td>
                                                     <td><input class="inputTabla" type="search" name="uen<?php echo $i ?>" value=""></td>
-                                                    <td><input class="inputTabla" type="search" name="linea<?php echo $i ?>" value=""></td>
+                                                    <td><input class="inputTabla" type="search" value="<?php if(isset($linea[$i])){ echo $linea[$i];}else{echo "";}?>" name="lineas<?php echo $i ?>"
+                                                            ></td>
                                                     <td><input class="inputTabla" type="search" name="sublinea<?php echo $i ?>" value=""></td>
                                                 </tr>
                                                 <?php

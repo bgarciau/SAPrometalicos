@@ -46,6 +46,7 @@
                         <!-- tabla servicios -->
                         <div class="table_wrapperS">
                             <input class="inputBuscar" type="search" name="" value="BUSCAR">
+                            <h4>Servicios</h4>
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
@@ -106,6 +107,7 @@
                             <!-- tabla articulos -->
                             <div class="table_wrapperS">
                                 <input class="inputBuscar" type="search" name="" value="BUSCAR">
+                                <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">
                                     <thead>
                                         <th>N° Sol</th>

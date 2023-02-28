@@ -46,6 +46,7 @@
                         <!-- tabla servicios -->
                         <div class="table_wrapperS">
                             <input class="inputBuscar" type="search" name="" value="BUSCAR">
+                            <h4>Servicios</h4>
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
@@ -61,7 +62,7 @@
                                 </thead>
                                 <?php
                                     $usuario = $_SESSION['usuario'];
-                                    $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio'")->fetchAll(PDO::FETCH_OBJ);
+                                    $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' and fk_cod_usr!= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                     foreach ($usolicitud as $usolicitudes):
                                 ?>
                                     <tr>
@@ -83,7 +84,7 @@
                                         <td><?php echo $usolicitudes->comentarios?></td>
                                         <td class="opcionesTabla">
                                             <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                            <a><input class="btn_aceptar" type="button" value="aceptar"></a>
+                                            <a><input class="btn_aceptar" type="button" value="enviar"></a>
                                             <a><input class="btn_delete" type="button" value="rechazar"></a>
                                         </td>
                                     </tr>
@@ -96,6 +97,7 @@
                             <!-- tabla articulos -->
                             <div class="table_wrapperS">
                                 <input class="inputBuscar" type="search" name="" value="BUSCAR">
+                                <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">
                                     <thead>
                                         <th>N° Sol</th>
@@ -111,7 +113,7 @@
                                     </thead>
                                     <?php
                                     $usuario = $_SESSION['usuario'];
-                                    $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo'")->fetchAll(PDO::FETCH_OBJ);
+                                    $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' and fk_cod_usr!= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                     foreach ($usolicitud as $usolicitudes):
                                 ?>
                                     <tr>
@@ -133,7 +135,7 @@
                                         <td><?php echo $usolicitudes->comentarios?></td>
                                         <td class="opcionesTabla">
                                         <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                            <a><input class="btn_aceptar" type="button" value="aceptar"></a>
+                                            <a><input class="btn_aceptar" type="button" value="enviar"></a>
                                             <a><input class="btn_delete" type="button" value="rechazar"></a>
                                         </td>
                                     </tr>

@@ -28,32 +28,55 @@
 
             }
             else{ 
-                $cantidad++;
                 $codSol=$_POST["numSol"];
-                $codArse=$_POST["cod_arse$j"];
-                $fechaNec=$_POST["fecha_Nec$j"];
-                $proveedor=$_POST["proveedor$j"];
-                $precioInfo=$_POST["precio_inf$j"];
-                $cuentaMayor=$_POST["cuentaMayor$j"];
-                $uen=$_POST["uen$j"];
-                $linea=$_POST["lineas$j"];
-                $sublinea=$_POST["sublineas$j"];
-                $proyecto=$_POST["proyecto$j"];
-                $porDesc=$_POST["por_dec$j"];
-                $indImp=$_POST["ind_imp$j"];
-                $total=$_POST["total_ml$j"];
+                $codArse[$j]=$_POST["cod_arse$j"];
+                $fechaNec[$j]=$_POST["fecha_Nec$j"];
+                $proveedor[$j]=$_POST["proveedor$j"];
+                $precioInfo[$j]=$_POST["precio_inf$j"];
+                $cuentaMayor[$j]=$_POST["cuentaMayor$j"];
+                $uen[$j]=$_POST["uen$j"];
+                $linea[$j]=$_POST["lineas$j"];
+                $sublinea[$j]=$_POST["sublineas$j"];
+                $proyecto[$j]=$_POST["proyecto$j"];
+                $porDesc[$j]=$_POST["por_dec$j"];
+                $indImp[$j]=$_POST["ind_imp$j"];
+                $total[$j]=$_POST["total_ml$j"];
+                $cantidad++;
 
-                $sql="INSERT INTO list_arse (fk_num_sol,fk_cod_arse,fecha_nec,fk_prov,precio_info,cuenta_mayor,uen,linea,sublinea,proyecto,por_desc,ind_imp,total_ml) 
-                VALUES(:_numSol,:_codArse,:_fechaNec,:_proveedor,:_precioInfo,:_cuentaMayor,:_uen,:_linea,:_sublinea,:_proyecto,:_porDesc,:_indImp,:_total)";
+                if($cuentaMayor[$j]=="" || $uen[$j]=="" || $linea[$j]=="" || $sublinea[$j]=="" || $proyecto[$j]=="" || $indImp[$j]==""){
+                    echo '<script>alert("Error al enviar su solicitud, verifique los campos obligatorios\nLos unicos que no son obligatorios con el proveedor y el precio info");</script>';
+                    $cantidad=-50;
+                    while($j<=20){
+                        if($cod_arse==0){
 
-                $serv=$base->prepare($sql);
-        
-                $serv->execute(array(":_numSol"=>$codSol,":_codArse"=>$codArse,":_fechaNec"=>$fechaNec,":_proveedor"=>$proveedor,":_precioInfo"=>$precioInfo,":_cuentaMayor"=>$cuentaMayor,":_uen"=>$uen,":_linea"=>$linea,":_sublinea"=>$sublinea,":_proyecto"=>$proyecto,":_porDesc"=>$porDesc,":_indImp"=>$indImp,":_total"=>$total));        
+                        }else{
+                        $codArse[$j]=$_POST["cod_arse$j"];
+                        $fechaNec[$j]=$_POST["fecha_Nec$j"];
+                        $proveedor[$j]=$_POST["proveedor$j"];
+                        $precioInfo[$j]=$_POST["precio_inf$j"];
+                        $cuentaMayor[$j]=$_POST["cuentaMayor$j"];
+                        $uen[$j]=$_POST["uen$j"];
+                        $linea[$j]=$_POST["lineas$j"];
+                        $sublinea[$j]=$_POST["sublineas$j"];
+                        $proyecto[$j]=$_POST["proyecto$j"];
+                        $porDesc[$j]=$_POST["por_dec$j"];
+                        $indImp[$j]=$_POST["ind_imp$j"];
+                        $total[$j]=$_POST["total_ml$j"];
+                        }
+                        $j++;
+                    }
+                }else{
+                        $sql="INSERT INTO list_arse (fk_num_sol,fk_cod_arse,fecha_nec,fk_prov,precio_info,cuenta_mayor,uen,linea,sublinea,proyecto,por_desc,ind_imp,total_ml) 
+                        VALUES(:_numSol,:_codArse,:_fechaNec,:_proveedor,:_precioInfo,:_cuentaMayor,:_uen,:_linea,:_sublinea,:_proyecto,:_porDesc,:_indImp,:_total)";
 
+                        $serv=$base->prepare($sql);
+            
+                        $serv->execute(array(":_numSol"=>$codSol,":_codArse"=>$codArse[$j],":_fechaNec"=>$fechaNec[$j],":_proveedor"=>$proveedor[$j],":_precioInfo"=>$precioInfo[$j],":_cuentaMayor"=>$cuentaMayor[$j],":_uen"=>$uen[$j],":_linea"=>$linea[$j],":_sublinea"=>$sublinea[$j],":_proyecto"=>$proyecto[$j],":_porDesc"=>$porDesc[$j],":_indImp"=>$indImp[$j],":_total"=>$total[$j]));        
+                }
             }
             $j++;
         }
-            if($cantidad>0){
+            if($cantidad>0 ){
                 $codSol=$_POST["numSol"];
                 $estado=$_POST["estado"];
                 $nomSol=$_POST["nomSol"];
@@ -72,6 +95,7 @@
                 $solicitud->execute(array(":_codSol"=>$codSol,":_estado"=>$estado,":_nomSol"=>$nomSol,":_sucursal"=>$sucursal,":_correoElectronico"=>$correoElectronico,":_propietario"=>$propietario,":_comentarios"=>$comentarios,":_codUsr"=>$codUsr,":_departamento"=>$departamento,":_tipo"=>$tipo,":_cantidad"=>$cantidad));
                 header("location:misSolicitudes.php");
             }
+            
             
     }
 
@@ -105,10 +129,10 @@
                                         <option value="Empleado">Empleado</option>
                                     </select>
                                     <input type="text" id="Solicitante" name="rolSol"
-                                        value="<?php echo $duser->rol_usr ?>"><br>
+                                        value="<?php echo $duser->rol_usr ?>" required><br>
                                     <label for="NombreSolicitante">Nombre Solicitante:</label>
                                     <input type="text" name="nomSol"
-                                        value="<?php echo $duser->nom_usr ?>"><br>
+                                        value="<?php echo $duser->nom_usr ?>" required><br>
                                     <label for="Sucursal">Sucursal:</label>
                                     <select name="sucursal">
                                         <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?></option>
@@ -154,18 +178,17 @@
                             <input type="text"name="numSol" value="<?php echo $num ?>" readonly><br>
                             <label for="Estado">Estado:</label>
                             <input type="text" name="estado" value="ABIERTO" readonly><br>
-                            <label for="FechaContabilizacion">Fecha contabilizacion:</label>
+                            <!-- <label for="FechaContabilizacion">Fecha contabilizacion:</label>
                             <input type="text" name="fechaContabilizacion"
                                 placeholder="Fecha Contabilizasion"><br>
                             <label for="ValidoHasta">Valido hasta:</label>
-                            <input type="text" name="validoHasta" placeholder="Valido hasta"><br>
+                            <input type="text" name="validoHasta" placeholder="Valido hasta"><br> -->
                             <label for="FechaContabilizacion">Fecha documento:</label>
                             <input type="text" name="fechaDocumento"
-                                placeholder="Fecha documento"><br>
+                                value="<?php echo date("d-m-y")?>"><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
                             <input type="text" name="fechaNecesaria"
                                 placeholder="Fecha necesaria"><br>
-                            <button class="btn_doc">Documento de referencia</button>
                         </div>
                     </td>
                 </tr>
@@ -202,8 +225,8 @@
                                                     <td>
                                                         <?php echo $i ?>
                                                     </td>
-                                                    <td><select name="cod_arse<?php echo $i ?>" id="cod_arse" required>
-                                                            <option value=0></option>
+                                                    <td><select name="cod_arse<?php echo $i ?>" id="cod_arse" >
+                                                            <option value="<?php if(isset($codArse[$i])){ echo $codArse[$i];}else{echo 0;}?>"><?php if(isset($codArse[$i])){ if ($codArse[$i]!=0){echo $codArse[$i]." | ";}}?></option>
                                                             <option value="" disabled>cod | descripcion servicio</option>
                                                             <?php
                                                             $servicios = $base->query("SELECT * FROM arse WHERE tipo_arse='servicio'")->fetchAll(PDO::FETCH_OBJ);
@@ -217,27 +240,27 @@
                                                         </select>
                             
                                                     </td>
-                                                    <td><input class="inputTabla" type="date" name="fecha_Nec<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="date" value="<?php if(isset($fechaNec[$i])){ echo $fechaNec[$i];}else{echo date("Y-m-d");}?>" name="fecha_Nec<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input id="seleccion" class="inputTabla" type="search" name="proveedor<?php echo $i ?>"
+                                                    <td><input id="seleccion" class="inputTabla"  type="search" name="proveedor<?php echo $i ?>"
                                                             placeholder=""></td>
-                                                    <td><input class="inputTabla" type="search"
+                                                    <td><input class="inputTabla" type="number" value=0
                                                             name="precio_inf<?php echo $i ?>"></td>
                                                     <td><input class="inputTabla" type="search"
-                                                            name="cuentaMayor<?php echo $i ?>" v></td>
-                                                    <td><input class="inputTabla" type="search" name="uen<?php echo $i ?>"
+                                                            name="cuentaMayor<?php echo $i ?>" value="<?php if(isset($cuentaMayor[$i])){ echo $cuentaMayor[$i];}else{echo "";}?>"></td>
+                                                    <td><input class="inputTabla" type="search" value="<?php if(isset($uen[$i])){ echo $uen[$i];}else{echo "";}?>" name="uen<?php echo $i ?>"
                                                 ></td>
-                                                    <td><input class="inputTabla" type="search" name="lineas<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="search" value="<?php if(isset($linea[$i])){ echo $linea[$i];}else{echo "";}?>" name="lineas<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input class="inputTabla" type="search" name="sublineas<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="search" value="<?php if(isset($sublinea[$i])){ echo $sublinea[$i];}else{echo "";}?>" name="sublineas<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input class="inputTabla" type="search" name="proyecto<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="search" value="<?php if(isset($proyecto[$i])){ echo $proyecto[$i];}else{echo "";}?>" name="proyecto<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input class="inputTabla" type="search" name="por_dec<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="number" value=0 name="por_dec<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input class="inputTabla" type="search" name="ind_imp<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="search" value="<?php if(isset($indImp[$i])){ echo $indImp[$i];}else{echo "";}?>" name="ind_imp<?php echo $i ?>"
                                                             ></td>
-                                                    <td><input class="inputTabla" type="search" name="total_ml<?php echo $i ?>"
+                                                    <td><input class="inputTabla" type="search" value="" name="total_ml<?php echo $i ?>"
                                                             ></td>
                                                 </tr>
                                                 <?php
@@ -262,7 +285,7 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
-                            <label for="TotalAntesDescuento">Total antes del descuento:</label>
+                            <!-- <label for="TotalAntesDescuento">Total antes del descuento:</label>
                             <input type="text" name="TotalAntesDescuento"
                                 placeholder="Total"><br>
                             <label for="GastosAdicionales">Gastos adicionales:</label>
@@ -272,7 +295,7 @@
                             <input type="text" name="Impuesto" placeholder="Impuesto"><br>
                             <label for="TotalPagoVencido">Total pago vencido:</label>
                             <input type="text" name="TotalPagoVencido"
-                                placeholder="Total pago vencido"><br>
+                                placeholder="Total pago vencido"><br> -->
                                 <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"></a>
                             <!-- <button class="btn_env">ENVIAR SOLICITUD</button> -->
 

@@ -46,7 +46,7 @@ use function PHPSTORM_META\sql_injection_subst;
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
         <h2>AGREGAR SERVICIO</h2>
                 <label for="descripcionServicio">Descripcion servicio:</label>
-                <input class="inputA" type="text" name="descripcionServicio" placeholder="Descripcion del servicio"><br>
+                <input class="inputA" type="text" name="descripcionServicio" placeholder="Descripcion del servicio" required><br>
                 <br>
                 <!-- <input class="inputA" type="text" id="TipoUsuario" name="tipoUsuario" placeholder="Tipo usuario"><br> -->
                 <a><input class="btn_env" type="submit" value="CREAR SERVICIO" name="crearS"></a>

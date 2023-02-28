@@ -1,7 +1,7 @@
 <header>
     <link rel="stylesheet" href="../css/hfstyle.css">
     <div class="wrapper">
-        <a href="hacerSolicitud" class="logo"><img src="../images/logo.png" alt="logo" height="90px" width="auto"></a>
+        <a class="logo"><img src="../images/logo.png" alt="logo" height="90px" width="auto"></a>
         <nav>
             <?php
                 include("../php/conexion.php"); 

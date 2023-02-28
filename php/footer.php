@@ -9,7 +9,7 @@
         </div>
         <div class="texto">
             <p style="color: white">Cra 21 N° 72-04 Zona Industrial Alta suiza Manizales, Colombia<br>
-            2023 <br>
+            20<?php echo date("y")?> <br>
             Todos los derechos reservados</p>
         </div>
     </div>
