@@ -92,7 +92,7 @@
                 $solicitud=$base->prepare($sql);
                 
                 $solicitud->execute(array(":_codSol"=>$codSol,":_estado"=>$estado,":_nomSol"=>$nomSol,":_sucursal"=>$sucursal,":_correoElectronico"=>$correoElectronico,":_propietario"=>$propietario,":_comentarios"=>$comentarios,":_codUsr"=>$codUsr,":_departamento"=>$departamento,":_tipo"=>$tipo,":_cantidad"=>$cantidad));
-                header("location:misSolicitudes.php");
+                header("location:misSolicitudes.php?xtabla=tarticulos");
             }
     }
 
