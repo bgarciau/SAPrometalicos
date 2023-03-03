@@ -17,9 +17,8 @@
 
     }
 
-    // session_destroy();
+    //session_destroy();
 
-    
     if (!isset($_SESSION['sesion']))
     {
       //Conexion a Service Layer
@@ -371,228 +370,233 @@
                                                     }
                                                         
                                                         $(document).ready(function () {
-                                                    
-                                                            $('#codigoServicio1').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto1').prop("required", true);
-                                                                $('#ind_imp1').prop("required", true);
-                                                                $('#uen1').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor1').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas1').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas1').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            
+                                                            for (i=0;i<20;i++){
+                                                            $('#codigoServicio'+i).change(function (e) {
+                                                            
+                                                            for (i=0;i<20;i++){
+                                                            if ($(this).val() == document.getElementById('codigoServicio'+i).value) {
+                                                                $('#proyecto'+i).prop("required", true);
+                                                                $('#ind_imp'+i).prop("required", true);
+                                                                $('#uen'+i).val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                                $('#cuentaMayor'+i).val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                                $('#lineas'+i).val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                                $('#sublineas'+i).val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
                                                         
 
-                                                            } 
+                                                            }
+                                                        } 
                                                             })
-                                                            $('#codigoServicio2').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto2').prop("required", true);
-                                                                $('#ind_imp2').prop("required", true);
-                                                                $('#uen2').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor2').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas2').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas2').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                        }
+                                                            // $('#codigoServicio2').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto2').prop("required", true);
+                                                            //     $('#ind_imp2').prop("required", true);
+                                                            //     $('#uen2').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor2').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas2').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas2').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio3').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto3').prop("required", true);
-                                                                $('#ind_imp3').prop("required", true);
-                                                                $('#uen3').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor3').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas3').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas3').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio3').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto3').prop("required", true);
+                                                            //     $('#ind_imp3').prop("required", true);
+                                                            //     $('#uen3').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor3').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas3').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas3').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio4').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto4').prop("required", true);
-                                                                $('#ind_imp4').prop("required", true);
-                                                                $('#uen4').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor4').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas4').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas4').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio4').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto4').prop("required", true);
+                                                            //     $('#ind_imp4').prop("required", true);
+                                                            //     $('#uen4').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor4').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas4').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas4').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio5').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto5').prop("required", true);
-                                                                $('#ind_imp5').prop("required", true);
-                                                                $('#uen5').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor5').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas5').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas5').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio5').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto5').prop("required", true);
+                                                            //     $('#ind_imp5').prop("required", true);
+                                                            //     $('#uen5').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor5').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas5').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas5').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio6').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto6').prop("required", true);
-                                                                $('#ind_imp6').prop("required", true);
-                                                                $('#uen6').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor6').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas6').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas6').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio6').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto6').prop("required", true);
+                                                            //     $('#ind_imp6').prop("required", true);
+                                                            //     $('#uen6').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor6').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas6').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas6').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio7').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto7').prop("required", true);
-                                                                $('#ind_imp7').prop("required", true);
-                                                                $('#uen7').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor7').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas7').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas7').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio7').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto7').prop("required", true);
+                                                            //     $('#ind_imp7').prop("required", true);
+                                                            //     $('#uen7').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor7').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas7').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas7').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio8').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto8').prop("required", true);
-                                                                $('#ind_imp8').prop("required", true);
-                                                                $('#uen8').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor8').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas8').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas8').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio8').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto8').prop("required", true);
+                                                            //     $('#ind_imp8').prop("required", true);
+                                                            //     $('#uen8').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor8').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas8').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas8').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio9').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto9').prop("required", true);
-                                                                $('#ind_imp9').prop("required", true);
-                                                                $('#uen9').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor9').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas9').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas9').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio9').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto9').prop("required", true);
+                                                            //     $('#ind_imp9').prop("required", true);
+                                                            //     $('#uen9').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor9').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas9').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas9').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio10').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto10').prop("required", true);
-                                                                $('#ind_imp10').prop("required", true);
-                                                                $('#uen10').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor10').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas10').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas10').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio10').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto10').prop("required", true);
+                                                            //     $('#ind_imp10').prop("required", true);
+                                                            //     $('#uen10').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor10').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas10').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas10').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio11').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto11').prop("required", true);
-                                                                $('#ind_imp11').prop("required", true);
-                                                                $('#uen11').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor11').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas11').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas11').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio11').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto11').prop("required", true);
+                                                            //     $('#ind_imp11').prop("required", true);
+                                                            //     $('#uen11').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor11').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas11').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas11').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio12').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto12').prop("required", true);
-                                                                $('#ind_imp12').prop("required", true);
-                                                                $('#uen12').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor12').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas12').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas12').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio12').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto12').prop("required", true);
+                                                            //     $('#ind_imp12').prop("required", true);
+                                                            //     $('#uen12').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor12').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas12').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas12').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio13').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto13').prop("required", true);
-                                                                $('#ind_imp13').prop("required", true);
-                                                                $('#uen13').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor13').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas13').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas13').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio13').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto13').prop("required", true);
+                                                            //     $('#ind_imp13').prop("required", true);
+                                                            //     $('#uen13').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor13').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas13').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas13').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio14').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto14').prop("required", true);
-                                                                $('#ind_imp14').prop("required", true);
-                                                                $('#uen14').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor14').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas14').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas14').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio14').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto14').prop("required", true);
+                                                            //     $('#ind_imp14').prop("required", true);
+                                                            //     $('#uen14').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor14').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas14').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas14').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio15').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto15').prop("required", true);
-                                                                $('#ind_imp15').prop("required", true);
-                                                                $('#uen15').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor15').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas15').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas15').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio15').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto15').prop("required", true);
+                                                            //     $('#ind_imp15').prop("required", true);
+                                                            //     $('#uen15').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor15').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas15').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas15').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio16').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto16').prop("required", true);
-                                                                $('#ind_imp16').prop("required", true);
-                                                                $('#uen16').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor16').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas16').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas16').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio16').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto16').prop("required", true);
+                                                            //     $('#ind_imp16').prop("required", true);
+                                                            //     $('#uen16').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor16').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas16').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas16').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio17').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto17').prop("required", true);
-                                                                $('#ind_imp17').prop("required", true);
-                                                                $('#uen17').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor17').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas17').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas17').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio17').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto17').prop("required", true);
+                                                            //     $('#ind_imp17').prop("required", true);
+                                                            //     $('#uen17').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor17').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas17').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas17').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio18').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto18').prop("required", true);
-                                                                $('#ind_imp18').prop("required", true);
-                                                                $('#uen18').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor18').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas18').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas18').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio18').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto18').prop("required", true);
+                                                            //     $('#ind_imp18').prop("required", true);
+                                                            //     $('#uen18').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor18').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas18').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas18').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio19').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto19').prop("required", true);
-                                                                $('#ind_imp19').prop("required", true);
-                                                                $('#uen19').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor19').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas19').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas19').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio19').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto19').prop("required", true);
+                                                            //     $('#ind_imp19').prop("required", true);
+                                                            //     $('#uen19').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor19').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas19').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas19').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
-                                                            $('#codigoServicio0').change(function (e) {
-                                                            if ($(this).val() !== -1) {
-                                                                $('#proyecto0').prop("required", true);
-                                                                $('#ind_imp0').prop("required", true);
-                                                                $('#uen0').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor0').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas0').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas0').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
+                                                            // } 
+                                                            // })
+                                                            // $('#codigoServicio0').change(function (e) {
+                                                            // if ($(this).val() !== -1) {
+                                                            //     $('#proyecto0').prop("required", true);
+                                                            //     $('#ind_imp0').prop("required", true);
+                                                            //     $('#uen0').val(value[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                            //     $('#cuentaMayor0').val(value[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                            //     $('#lineas0').val(value[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                            //     $('#sublineas0').val(value[$(this).val()]["U_Sublinea"]).prop("readonly", true);
 
-                                                            } 
-                                                            })
+                                                            // } 
+                                                            // })
                                                           
                                                         });
                                                 </script>
