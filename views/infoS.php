@@ -53,13 +53,13 @@
                                     <input type="text" name="nomSol"
                                         value="<?php echo $solis->nom_solicitante ?>"disabled><br>
                                     <label for="Sucursal">Sucursal:</label>
-                                    <select name="sucursal" disabled>
+                                    <select name="sucursal" id="datosFormu" disabled>
                                         <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?></option>
                                         <option value="Principal">Principal</option>
                                         <option value="DefinirNuervo">Definir nuevo</option>
                                     </select><br>
                                     <label for="Departamento">Departamento:</label>
-                                    <select name="departamento" id="sel__departamento" disabled>
+                                    <select name="departamento" id="datosFormu" disabled>
                                         <?php
                                             $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$solis->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
                                             foreach ($depSol as $depSols): 
@@ -137,7 +137,7 @@
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $i ?></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
+                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fk_prov ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>" disabled></td>
@@ -214,7 +214,7 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
-                            <label for="TotalAntesDescuento">Total antes del descuento:</label>
+                            <!-- <label for="TotalAntesDescuento">Total antes del descuento:</label>
                             <input type="text" name="TotalAntesDescuento"
                                 placeholder="Total"><br>
                             <label for="GastosAdicionales">Gastos adicionales:</label>
@@ -224,7 +224,7 @@
                             <input type="text" name="Impuesto" placeholder="Impuesto"><br>
                             <label for="TotalPagoVencido">Total pago vencido:</label>
                             <input type="text" name="TotalPagoVencido"
-                                placeholder="Total pago vencido"><br>
+                                placeholder="Total pago vencido"><br> -->
                                 <a href="misSolicitudes.php"><input class="btn_vol" type="button" value="VOLVER" ></a>
                             <!-- <button class="btn_env">ENVIAR SOLICITUD</button> -->
 

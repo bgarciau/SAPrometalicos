@@ -76,7 +76,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 <label for="NombreUsuario">Nombre usuario:</label>
                 <input class="inputA" type="text" id="NombreUsuario" name="nombreUsuario" value="<?php if(isset($_POST['nombreUsuario'])){ echo $_POST['nombreUsuario'];} ?>" required><br>
                 <label for="Departamento">Departamento:</label>
-                    <select name="departamento" id="sel__departamento" required>
+                    <select name="departamento" id="datosFormu" required>
                         <?php
                             if(isset($_POST['departamento'])){
                             $depart2=$_POST['departamento'];
@@ -103,7 +103,7 @@ use function PHPSTORM_META\sql_injection_subst;
                 <label for="Password">Confirmar Contraseña:</label>
                 <input class="inputA" type="password" id="clave2" name="password2" required><br>
                 <label for="TipoUsuario">Tipo usuario:</label>
-                <select name="tipoUsuario" id="sel__departamento" required>
+                <select name="tipoUsuario" id="datosFormu" required>
                 <?php
                             if(isset($_POST['tipoUsuario'])){
                             $tuser2=$_POST['tipoUsuario'];

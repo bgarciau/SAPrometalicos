@@ -129,14 +129,14 @@
                                         <label for="NombreSolicitante">Nombre Solicitante:</label>
                                         <input type="text" name="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
                                         <label for="Sucursal">Sucursal:</label>
-                                        <select name="sucursal">
+                                        <select name="sucursal" id="datosFormu">
                                             <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
                                             </option>
                                             <option value="Principal">Principal</option>
                                             <option value="DefinirNuervo">Definir nuevo</option>
                                         </select><br>
                                         <label for="Departamento">Departamento:</label>
-                                        <select name="departamento" id="sel__departamento">
+                                        <select name="departamento" id="datosFormu">
                                             <?php
                                             $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
                                                 <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
@@ -196,7 +196,8 @@
                                         <table id="tabla__articulos">
                                             <thead>
                                                 <th>#</th>
-                                                <th>codigo | Descripcion</th>
+                                                <th>codigo</th>
+                                                <th>Descripcion</th>
                                                 <th>Proveedor</th>
                                                 <th>Fecha Necesaria</th>
                                                 <th>Canidad Necesaria</th>
@@ -217,7 +218,7 @@
                                                     <td>
                                                         <?php echo $i ?>
                                                     </td>
-                                                    <td><select name="cod_arse<?php echo $i ?>" id="arse">
+                                                    <td><select class="selectServicio" name="cod_arse<?php echo $i ?>" id="arse">
                                                             <option value="<?php if(isset($codArse[$i])){ echo $codArse[$i];}else{echo 0;}?>"><?php if(isset($codArse[$i])){ if ($codArse[$i]!=0){echo $codArse[$i]." | ";}}?></option>
                                                             <option value="" disabled>cod | descripcion servicio</option>
                                                             <?php
@@ -230,6 +231,7 @@
                                                             ?>
                                                         </select>
                                                     </td>
+                                                    <td><input class="inputTabla" type="search" name="descripcion<?php echo $i ?>" value=""></td>
                                                     <td><input class="inputTabla" type="search" name="proveedor<?php echo $i ?>" value=""></td>
                                                     <td><input class="inputTabla" type="date" value="<?php if(isset($fechaNec[$i])){ echo $fechaNec[$i];}else{echo date("Y-m-d");}?>" name="fecha_nec<?php echo $i ?>"
                                                             ></td>

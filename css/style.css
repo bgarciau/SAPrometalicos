@@ -189,7 +189,7 @@ table{
 }
 #div__tablaServicios{
     width: 134vh;
-    height: 300px;
+    height: 380px;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: left;
@@ -251,14 +251,25 @@ input{
     border: 0px;
     width: auto;
     max-width: max-content;
-    font-size: 14px;
+    font-size: 18px;
+    height: 22px;
+}
+.inputTablaSer{
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    width: 430px;
+    max-width: max-content;
+    font-size: 18px;
+    height: 22px;
 }
 .inputBuscar{
     display: inline-block;
     text-align: left;
     margin: 0;
     border-color: #999;
-    height: 25px;
+    height: 22px;
     width: 300px;
     color:#464646b7 ;
     font-size: 14px;
@@ -290,10 +301,14 @@ input[type="checkbox" i] {
     width: 10px;
     
 }
-select{
+select#datosFormu{
     margin: 1px;
     width: 258px;
     font-size: 14px;
+}
+.selectServicio{
+    height: 22px;
+    font-size: 16px;
 }
 select#sel__solicitante{
     width: 119px;
