@@ -61,9 +61,9 @@
         //echo "else "; echo  $sesion;
     }
 
-    $curl1 = curl_init();
+    $curlServicios = curl_init();
 
-    curl_setopt_array($curl1, array(
+    curl_setopt_array($curlServicios, array(
         CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/U_BP_CODSERVICIOS',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
@@ -80,17 +80,46 @@
         CURLOPT_SSL_VERIFYPEER => false,
     )
     );
-    $response1 = curl_exec($curl1);
+    $response1 = curl_exec($curlServicios);
     //   echo $response1;
     //echo $ruta;
-    if (curl_errno($curl1)) {
-        echo 'Error en la solicitud cURL: ' . curl_error($curl);
+    if (curl_errno($curlServicios)) {
+        echo 'Error en la solicitud cURL: ' . curl_error($curlServicios);
     }
     //exit();
-    curl_close($curl1);
+    curl_close($curlServicios);
     $respuestaServicios = json_decode($response1);
     // print_r($respuestaServicios);
     
+    $curlProv = curl_init();
+
+    curl_setopt_array($curlProv, array(
+        CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,CardType&$filter=startswith(CardCode,%20\'P\')%20&$orderby=CardName&$top=10000',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Cookie: B1SESSION=' . $sesion . ''
+        ),
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false,
+    )
+    );
+    $response2 = curl_exec($curlProv);
+    //   echo $response1;
+    //echo $ruta;
+    if (curl_errno($curlProv)) {
+        echo 'Error en la solicitud cURL: ' . curl_error($curlProv);
+    }
+    //exit();
+    curl_close($curlProv);
+    $respuestaProv = json_decode($response2);
+    // print_r($respuestaProv);
     //echo "<br>";
     
     include("../php/conexion.php");

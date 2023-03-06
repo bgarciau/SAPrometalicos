@@ -260,7 +260,6 @@ input{
     margin: 0;
     border: 0px;
     width: 430px;
-    max-width: max-content;
     font-size: 18px;
     height: 22px;
 }

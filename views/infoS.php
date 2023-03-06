@@ -88,11 +88,7 @@
                             <input type="text"name="numSol" value="<?php echo $numSol ?>" disabled><br>
                             <label for="Estado">Estado:</label>
                             <input type="text" name="estado" value="<?php echo $solis->estado_sol ?>" disabled><br>
-                            <label for="FechaContabilizacion">Fecha contabilizacion:</label>
-                            <input type="text" name="fechaContabilizacion"
-                                placeholder="Fecha Contabilizasion" disabled><br>
-                            <label for="ValidoHasta">Valido hasta:</label>
-                            <input type="text" name="validoHasta" placeholder="Valido hasta" disabled><br>
+                
                             <label for="FechaContabilizacion">Fecha documento:</label>
                             <input type="text" name="fechaDocumento"
                                 placeholder="Fecha documento" disabled><br>
@@ -137,7 +133,7 @@
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $i ?></td>
-                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
+                                                    <td><input type="text" class="inputTablaSer" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fk_prov ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>" disabled></td>
