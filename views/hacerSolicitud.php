@@ -24,74 +24,6 @@
 
     // session_destroy();
     
-    if (!isset($_SESSION['sesion'])) {
-        //Conexion a Service Layer
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/Login?$top=100',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => '{"CompanyDB": "BPROMETALICOS", "Password": "HYC909", "UserName": "manager"}',
-            CURLOPT_HTTPHEADER => array('Content-Type: application/x-www-form-urlencoded'),
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false,
-        )
-        );
-        $response = curl_exec($curl);
-
-        if (curl_errno($curl)) {
-            echo 'Error en la solicitud cURL: ' . curl_error($curl);
-        }
-        //curl_close($curl);
-        // echo $response;
-        $json = json_decode($response, true);
-        //echo  $json['SessionId'];;
-        //exit;
-        $sesion = $json['SessionId'];
-        $_SESSION['sesion'] = $sesion;
-        //echo "inicio "; echo  $sesion;
-        curl_close($curl);
-    } else {
-        $sesion = $_SESSION['sesion'];
-        //echo "else "; echo  $sesion;
-    }
-
-    $curl1 = curl_init();
-
-    curl_setopt_array($curl1, array(
-        CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/U_BP_CODSERVICIOS',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json',
-            'Cookie: B1SESSION=' . $sesion . ''
-        ),
-        CURLOPT_SSL_VERIFYHOST => false,
-        CURLOPT_SSL_VERIFYPEER => false,
-    )
-    );
-    $response1 = curl_exec($curl1);
-    //   echo $response1;
-    //echo $ruta;
-    if (curl_errno($curl1)) {
-        echo 'Error en la solicitud cURL: ' . curl_error($curl);
-    }
-    //exit();
-    curl_close($curl1);
-    $respuestaServicios = json_decode($response1);
-    // print_r($respuestaServicios);
-    
-    //echo "<br>";
     
     include("../php/conexion.php");
 
@@ -329,8 +261,29 @@
                                                         echo date("Y-m-d");
                                                     } ?>"
                                                             name="fecha_Nec<?php echo $i ?>"></td>
-                                                    <td><input id="proveedor<?php echo $i ?>" class="inputTabla"
-                                                            type="search" name="proveedor<?php echo $i ?>" placeholder="">
+                                                    <td><select class="selectServicio"
+                                                            name="proveedor<?php echo $i ?>"
+                                                            id="proveedor<?php echo $i ?>">
+                                                            <option value="<?php if (isset($proveedor[$i])) {
+                                                                echo $proveedor[$i];
+                                                            } else {
+                                                                
+                                                            } ?>" selected><?php if (isset($proveedor[$i])) {
+                                                                 echo $proveedor[$i];
+                                                             } else {
+                                                                 echo "Seleccione un proveedor";
+                                                             } ?></option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaProveedor->value as $item):
+
+                                                                ?>
+                                                                <option value="<?php echo "$item->CardName" . PHP_EOL; ?>"><?php echo "$item->CardName" . PHP_EOL; ?></option>
+                                                                <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                        </select>
                                                     </td>
                                                     <td><input class="inputTabla" type="number" value=0
                                                             id="precio_inf<?php echo $i ?>"

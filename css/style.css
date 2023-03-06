@@ -259,8 +259,7 @@ input{
     text-align: left;
     margin: 0;
     border: 0px;
-    width: 430px;
-    max-width: max-content;
+    width: 400px;
     font-size: 18px;
     height: 22px;
 }
@@ -307,6 +306,7 @@ select#datosFormu{
     font-size: 14px;
 }
 .selectServicio{
+    width: 350px;
     height: 22px;
     font-size: 16px;
 }
