@@ -1,0 +1,20 @@
+#modal::backdrop{
+    background-color: rgb(0, 0, 0,.55);
+}
+
+#modal{
+    max-width: 50ch;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+#modalb::backdrop{
+    background-color: rgb(0, 0, 0,.55);
+}
+
+#modalb{
+    max-width: 50ch;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
