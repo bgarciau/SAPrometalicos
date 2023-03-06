@@ -254,6 +254,17 @@ input{
     font-size: 18px;
     height: 22px;
 }
+
+.inputTablaFecha{
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    width: 147px;
+    max-width: max-content;
+    font-size: 18px;
+    height: 22px;
+}
 .inputTablaSer{
     display: inline-block;
     text-align: left;

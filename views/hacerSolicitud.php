@@ -22,7 +22,7 @@
         header("location:../index.php");
     }
 
-    // session_destroy();
+    //session_destroy();
     
     
     include("../php/conexion.php");
@@ -188,7 +188,7 @@
                             <label for="ValidoHasta">Valido hasta:</label>
                             <input type="text" name="validoHasta" placeholder="Valido hasta"><br> -->
                                 <label for="FechaContabilizacion">Fecha documento:</label>
-                                <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>"><br>
+                                <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
                                 <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria"><br>
                             </div>
@@ -238,7 +238,7 @@
                                                             } ?>" selected><?php if (isset($codArse[$i]) and $codArse[$i] != -1) {
                                                                  print_r($respuestaServicios->value[$codArse[$i]]->Name);
                                                              } else {
-                                                                 echo "Seleccione un servicio";
+                                                                 echo "";
                                                              } ?></option>
                                                             <?php
                                                             $s = 0;
@@ -255,15 +255,15 @@
                                                             $('#codigoServicio0').select2();
                                                         </script> -->
                                                     </td>
-                                                    <td><input class="inputTabla" type="date" value="<?php if (isset($fechaNec[$i])) {
+                                                    <td><input class="inputTablaFecha" type="text" value="<?php if (isset($fechaNec[$i])) {
                                                         echo $fechaNec[$i];
-                                                    } else {
-                                                        echo date("Y-m-d");
-                                                    } ?>"
-                                                            name="fecha_Nec<?php echo $i ?>"></td>
+                                                    }
+                                                         ?>"
+                                                            id="fecha_Nec<?php echo $i ?>"
+                                                            name="fecha_Nec<?php echo $i ?>" disabled></td>
                                                     <td><select class="selectServicio"
                                                             name="proveedor<?php echo $i ?>"
-                                                            id="proveedor<?php echo $i ?>">
+                                                            id="proveedor<?php echo $i ?>" disabled>
                                                             <option value="<?php if (isset($proveedor[$i])) {
                                                                 echo $proveedor[$i];
                                                             } else {
@@ -271,7 +271,7 @@
                                                             } ?>" selected><?php if (isset($proveedor[$i])) {
                                                                  echo $proveedor[$i];
                                                              } else {
-                                                                 echo "Seleccione un proveedor";
+                                                                 echo "";
                                                              } ?></option>
                                                             <?php
                                                             $s = 0;
@@ -287,7 +287,7 @@
                                                     </td>
                                                     <td><input class="inputTabla" type="number" value=0
                                                             id="precio_inf<?php echo $i ?>"
-                                                            name="precio_inf<?php echo $i ?>"></td>
+                                                            name="precio_inf<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search"
                                                             name="cuentaMayor<?php echo $i ?>"
                                                             value="<?php if (isset($cuentaMayor[$i])) {
@@ -295,13 +295,13 @@
                                                             } else {
                                                                 echo "";
                                                             } ?>"
-                                                            id="cuentaMayor<?php echo $i ?>" readonly></td>
+                                                            id="cuentaMayor<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search" value="<?php if (isset($uen[$i])) {
                                                         echo $uen[$i];
                                                     } else {
                                                         echo "";
                                                     } ?>"
-                                                            id="uen<?php echo $i ?>" name="uen<?php echo $i ?>" readonly>
+                                                            id="uen<?php echo $i ?>" name="uen<?php echo $i ?>" disabled>
                                                     </td>
                                                     <td><input class="inputTabla" type="search" value="<?php if (isset($linea[$i])) {
                                                         echo $linea[$i];
@@ -309,34 +309,34 @@
                                                         echo "";
                                                     } ?>"
                                                             id="lineas<?php echo $i ?>" name="lineas<?php echo $i ?>"
-                                                            readonly></td>
+                                                            disabled></td>
                                                     <td><input class="inputTabla" type="search" value="<?php if (isset($sublinea[$i])) {
                                                         echo $sublinea[$i];
                                                     } else {
                                                         echo "";
                                                     } ?>"
                                                             id="sublineas<?php echo $i ?>" name="sublineas<?php echo $i ?>"
-                                                            readonly></td>
+                                                            disabled></td>
                                                     <td><input class="inputTabla" type="search" value="<?php if (isset($proyecto[$i])) {
                                                         echo $proyecto[$i];
                                                     } else {
                                                         echo "";
                                                     } ?>"
-                                                            id="proyecto<?php echo $i ?>" name="proyecto<?php echo $i ?>">
+                                                            id="proyecto<?php echo $i ?>" name="proyecto<?php echo $i ?>" disabled>
                                                     </td>
                                                     <td><input class="inputTabla" type="number" value=0
-                                                            id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>">
+                                                            id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>" disabled>
                                                     </td>
                                                     <td><input class="inputTabla" type="search" value="<?php if (isset($indImp[$i])) {
                                                         echo $indImp[$i];
                                                     } else {
                                                         echo "";
                                                     } ?>"
-                                                            id="ind_imp<?php echo $i ?>" name="ind_imp<?php echo $i ?>">
+                                                            id="ind_imp<?php echo $i ?>" name="ind_imp<?php echo $i ?>" disabled>
                                                     </td>
                                                     <td><input class="inputTabla" type="search"
                                                             id="total_ml<?php echo $i ?>" name="total_ml<?php echo $i ?>"
-                                                            onclick="ftotal()"></td>
+                                                            onclick="ftotal()" disabled readonly></td>
                                                 </tbody>
 
                                                 <?php
@@ -374,19 +374,39 @@
 
                                                             for (i = 0; i < 20; i++) {
                                                                 if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != -1) {
-                                                                    $('#proyecto' + i).prop("required", true);
-                                                                    $('#ind_imp' + i).prop("required", true);
+                                                                    $('#proyecto' + i).prop("required", true).prop("disabled", false);
+                                                                    $('#ind_imp' + i).prop("required", true).prop("disabled", false);
+                                                                    $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
+                                                                    $('#proveedor' + i).prop("disabled", false);
+                                                                    $('#precio_inf' + i).prop("disabled", false);
+                                                                    $('#cuentaMayor' + i).prop("disabled", false).prop("readonly",true);
+                                                                    $('#uen' + i).prop("disabled", false).prop("readonly",true);
+                                                                    $('#lineas' + i).prop("disabled", false).prop("readonly",true);
+                                                                    $('#sublineas' + i).prop("disabled", false).prop("readonly",true);
+                                                                    $('#por_dec' + i).prop("disabled", false);
+                                                                    $('#total_ml' + i).prop("disabled", false);
+                                                                    document.getElementById('fecha_Nec'+i).type = 'date';
                                                                     $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true);
                                                                     $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
                                                                     $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
                                                                     $('#sublineas' + i).val(valores[$(this).val()]["U_Sublinea"]).prop("readonly", true);
                                                                 }if($(this).val() == -1){
-                                                                    $('#proyecto' + i).prop("required", false);
-                                                                    $('#ind_imp' + i).prop("required", false);
-                                                                    $('#uen' + i).val("").prop("readonly",false);
-                                                                    $('#cuentaMayor' + i).val("").prop("readonly", false);
-                                                                    $('#lineas' + i).val("").prop("readonly", false);
-                                                                    $('#sublineas' + i).val("").prop("readonly", false);
+                                                                    $('#proyecto' + i).prop("disabled", true).prop("required", false);
+                                                                    $('#ind_imp' + i).prop("disabled", true).prop("required", false);
+                                                                    $('#fecha_Nec' + i).prop("disabled", true).prop("required", false);
+                                                                    $('#proveedor' + i).prop("disabled", true);
+                                                                    $('#precio_inf' + i).prop("disabled", true);
+                                                                    $('#cuentaMayor' + i).prop("disabled", true).prop("readonly",true);
+                                                                    $('#uen' + i).prop("disabled", true);
+                                                                    $('#lineas' + i).prop("disabled", true);
+                                                                    $('#sublineas' + i).prop("disabled", true);
+                                                                    $('#por_dec' + i).prop("disabled", true);
+                                                                    $('#total_ml' + i).prop("disabled", true);
+                                                                    document.getElementById('fecha_Nec'+i).type = 'text';
+                                                                    $('#uen' + i).val("");
+                                                                    $('#cuentaMayor' + i).val("");
+                                                                    $('#lineas' + i).val("");
+                                                                    $('#sublineas' + i).val("");
                                                                 }
                                                             
                                                             }

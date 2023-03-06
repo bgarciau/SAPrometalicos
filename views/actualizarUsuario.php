@@ -71,7 +71,7 @@
                     <label for="RolUsuario">Rol usuario:</label>
                     <input class="inputA" type="text" name="rolUsuario" value="<?php echo $userr->rol_usr?>"><br>
                     <label for="Departamento">Departamento:</label>
-                    <select name="departamento" id="sel__departamento">
+                    <select name="departamento" id="datosFormu">
                     <?php
                         $usrdep = $base->query("SELECT * FROM departamento WHERE pk_dep= '$userr->fk_depart'")->fetchAll(PDO::FETCH_OBJ); foreach ($usrdep as $udep): ?>
                             <option value="<?php echo $udep->pk_dep?>"><?php echo $udep->nom_dep ?></option>
@@ -88,7 +88,7 @@
                     <label for="Sucursal">Sucursal:</label>
                     <input class="inputA" type="text" name="sucursal" value="<?php echo $userr->sucursal ?>"><br>
                     <label for="TipoUsuario">Tipo usuario:</label>
-                    <select name="tipoUsuario" id="sel__departamento">
+                    <select name="tipoUsuario" id="datosFormu">
                         <?php
                         $tuser = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$userr->fk_tipo_usr'")->fetchAll(PDO::FETCH_OBJ); foreach ($tuser as $tipo): ?>
                             <option value="<?php echo $tipo->pk_t_usr ?>"><?php echo $tipo->des_usr ?></option>

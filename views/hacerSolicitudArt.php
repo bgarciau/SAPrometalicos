@@ -173,10 +173,7 @@
                                 <input type="text" name="numSol" value="<?php echo $num ?>" readonly><br>
                                 <label for="Estado">Estado:</label>
                                 <input type="text" name="estado" value="ABIERTO" readonly><br>
-                                <label for="FechaContabilizacion">Fecha contabilizacion:</label>
-                                <input type="text" name="fechaContabilizacion" placeholder="Fecha Contabilizasion"><br>
-                                <label for="ValidoHasta">Valido hasta:</label>
-                                <input type="text" name="validoHasta" placeholder="Valido hasta"><br>
+                    
                                 <label for="FechaContabilizacion">Fecha documento:</label>
                                 <input type="text" name="fechaDocumento" placeholder="Fecha documento"><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
@@ -267,14 +264,8 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <label for="TotalAntesDescuento">Total antes del descuento:</label>
-                                <input type="text" name="TotalAntesDescuento" placeholder="Total"><br>
-                                <label for="GastosAdicionales">Gastos adicionales:</label>
-                                <input type="text" name="GastosAdicionales" placeholder="Gastos Adicionales"><br>
-                                <label for="Impuesto">Impuesto:</label>
-                                <input type="text" name="Impuesto" placeholder="Impuesto"><br>
-                                <label for="TotalPagoVencido">Total pago vencido:</label>
-                                <input type="text" name="TotalPagoVencido" placeholder="Total pago vencido"><br>
+                
+           
                                 <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarA"></a>
                                 <!-- <button class="btn_env">ENVIAR SOLICITUD</button> -->
 
