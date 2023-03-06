@@ -39,7 +39,39 @@
         } else {
             $sesion = $_SESSION['sesion'];
         }
+            
+        // LLAMADO PROVEEDORES  
     
+        $curlProv = curl_init();
+    
+            curl_setopt_array($curlProv, array(
+            CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,CardType&$filter=startswith(CardCode,%20\'P\')%20&$orderby=CardName',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Cookie: B1SESSION=' . $sesion . ''
+            ),
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_SSL_VERIFYPEER => false,
+            ));
+    
+            $responseProv = curl_exec($curlProv);
+            
+            if (curl_errno($curlProv)) {
+                echo 'Error en la solicitud cURL prov: ' . curl_error($curl);
+            }
+    
+        curl_close($curlProv);
+    
+        $respuestaProveedor = json_decode($responseProv);
+        //print_r($respuestaProveedor);
+        
         // LLAMADO DE SERVICIOS
         $curlServicios = curl_init();
     
@@ -69,35 +101,5 @@
         curl_close($curlServicios);
         $respuestaServicios = json_decode($responseServ);
         // print_r($respuestaServicios);
-    
-        // LLAMADO PROVEEDORES  
-    
-        $curlProv = curl_init();
-    
-            curl_setopt_array($curlProv, array(
-            CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,CardType&$filter=startswith(CardCode,%20\'P\')%20&$orderby=CardName',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Cookie: B1SESSION=b689613a-bc23-11ed-8000-48df37da6944; ROUTEID=.node1'
-            ),
-            CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_SSL_VERIFYPEER => false,
-            ));
-    
-            $responseProv = curl_exec($curlProv);
-            
-            if (curl_errno($curlProv)) {
-                echo 'Error en la solicitud cURL prov: ' . curl_error($curl);
-            }
-    
-        curl_close($curlProv);
-    
-        $respuestaProveedor = json_decode($responseProv);
-        // print_r($respuestaProveedor);
+
     ?>
