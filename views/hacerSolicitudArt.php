@@ -247,8 +247,8 @@
                                                             ?>
                                                         </select>
                                                     </td>
-                                                    <td><select class="selectServicio" name="descripcion<?php echo $i ?>" id="descripcion<?php echo $i ?>" style="width: 400px;">
-                                                            <option value="<?php if (isset($descripcion[$i])) {
+                                                    <td><select class="selectServicio" name="descripcion<?php echo $i ?>" id="descripcion<?php echo $i ?>" style="width: 500px;">
+                                                            <option id="opcionDescripcion<?php echo $i ?>" value="<?php if (isset($descripcion[$i])) {
                                                                                 echo $descripcion[$i];
                                                                             } else {
                                                                                 echo (-1);
@@ -268,7 +268,26 @@
                                                             endforeach;
                                                             ?>
                                                         </select></td>
-                                                    <td><input class="inputTabla" type="search" name="proveedor<?php echo $i ?>" value=""></td>
+                                                    <td><select class="selectServicio" name="proveedor<?php echo $i ?>" id="proveedor<?php echo $i ?>" disabled>
+                                                            <option value="<?php if (isset($proveedor[$i])) {
+                                                                                echo $proveedor[$i];
+                                                                            } else {
+                                                                            } ?>" selected><?php if (isset($proveedor[$i])) {
+                                                                                                echo $proveedor[$i];
+                                                                                            } else {
+                                                                                                echo "";
+                                                                                            } ?></option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaProveedor->value as $item) :
+
+                                                            ?>
+                                                                <option value="<?php echo "$item->CardName" . PHP_EOL; ?>"><?php echo "$item->CardName" . PHP_EOL; ?></option>
+                                                            <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                        </select></td>
                                                     <td><input class="inputTabla" type="date" value="<?php if (isset($fechaNec[$i])) {
                                                                                                             echo $fechaNec[$i];
                                                                                                         } else {
@@ -373,25 +392,6 @@
                             // $('#por_dec' + i).prop("disabled", false);
                             // $('#total_ml' + i).prop("disabled", false);
                             // document.getElementById('fecha_Nec' + i).type = 'date';
-                            $('#descripcion' + i).val(valores[$(this).val()]["ItemName"]).prop("readonly", true);
-                            // $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                            // $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
-                            // $('#sublineas' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
-                        }
-                        else if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() != -1) {
-                            // $('#proyecto' + i).prop("required", true).prop("disabled", false);
-                            // $('#ind_imp' + i).prop("required", true).prop("disabled", false);
-                            // $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
-                            // $('#proveedor' + i).prop("disabled", false);
-                            // $('#precio_inf' + i).prop("disabled", false);
-                            // $('#cuentaMayor' + i).prop("disabled", false).prop("readonly", true);
-                            // $('#uen' + i).prop("disabled", false).prop("readonly", true);
-                            // $('#lineas' + i).prop("disabled", false).prop("readonly", true);
-                            // $('#sublineas' + i).prop("disabled", false).prop("readonly", true);
-                            // $('#por_dec' + i).prop("disabled", false);
-                            // $('#total_ml' + i).prop("disabled", false);
-                            // document.getElementById('fecha_Nec' + i).type = 'date';
-                            // $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true);
                             // $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
                             // $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
                             // $('#sublineas' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
@@ -418,6 +418,29 @@
 
                     }
                 })
+                $('#descripcion' + i).change(function(e) {
+                    for (i = 0; i < 20; i++) {
+                        if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() != -1) {
+                            // $('#proyecto' + i).prop("required", true).prop("disabled", false);
+                            // $('#ind_imp' + i).prop("required", true).prop("disabled", false);
+                            // $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
+                            // $('#proveedor' + i).prop("disabled", false);
+                            // $('#precio_inf' + i).prop("disabled", false);
+                            // $('#cuentaMayor' + i).prop("disabled", false).prop("readonly", true);
+                            // $('#uen' + i).prop("disabled", false).prop("readonly", true);
+                            // $('#lineas' + i).prop("disabled", false).prop("readonly", true);
+                            // $('#sublineas' + i).prop("disabled", false).prop("readonly", true);
+                            // $('#por_dec' + i).prop("disabled", false);
+                            // $('#total_ml' + i).prop("disabled", false);
+                            // document.getElementById('fecha_Nec' + i).type = 'date';
+                            $('#descripcion' + i).val(valores[$(this).val()]["ItemCode"]).prop("readonly", true);
+                            // $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                            // $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
+                            // $('#sublineas' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
+                  
+                        }
+                }
+            })
             }
 
         });
