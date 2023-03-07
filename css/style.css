@@ -143,6 +143,7 @@ table{
     border: 4px solid rgb(255, 0, 0);
     color: rgb(0, 0, 0);
     text-align: center;
+    z-index: 1;
 }
 
 .table_wrapper{
@@ -252,7 +253,7 @@ input{
     width: auto;
     max-width: max-content;
     font-size: 18px;
-    height: 22px;
+    height: 28px;
 }
 
 .inputTablaFecha{
@@ -263,7 +264,7 @@ input{
     width: 147px;
     max-width: max-content;
     font-size: 18px;
-    height: 22px;
+    height: 28px;
 }
 .inputTablaSer{
     display: inline-block;
@@ -272,7 +273,7 @@ input{
     border: 0px;
     width: 400px;
     font-size: 18px;
-    height: 22px;
+    height: 28px;
 }
 .inputBuscar{
     display: inline-block;

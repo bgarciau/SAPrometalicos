@@ -155,7 +155,8 @@
                                         <table id="tabla__servicios">
                                             <thead>
                                                 <th>#</th>
-                                                <th>codigo | Descripcion</th>
+                                                <th>codigo</th>
+                                                <th>Descripcion</th>
                                                 <th>Proveedor</th>
                                                 <th>Fecha Necesaria</th>
                                                 <th>Canidad Necesaria</th>
@@ -175,6 +176,7 @@
                                                 <tr>
                                                     <td><?php echo $i ?></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
+                                                    <td><input class="inputTabla" value="<?php echo $listaa->nom_arse ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fk_prov ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->cant_nec ?>" disabled></td>
