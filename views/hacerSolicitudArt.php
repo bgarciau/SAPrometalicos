@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="../css/select2/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="../css/select2/select2.min.js"></script>  
     <title>Hacer solicitud</title>
 </head>
 
@@ -202,8 +203,8 @@
                                         <table id="tabla__articulos">
                                             <thead>
                                                 <th>#</th>
-                                                <th>codigo</th>
-                                                <th>Descripcion</th>
+                                                <th>codigo Articulo</th>
+                                                <th>Descripcion Articulo</th>
                                                 <th>Proveedor</th>
                                                 <th>Fecha Necesaria</th>
                                                 <th>Canidad Necesaria</th>
@@ -224,7 +225,7 @@
                                                     <td>
                                                         <?php echo $i ?>
                                                     </td>
-                                                    <td><select class="selectArticulo" name="cod_arse<?php echo $i ?>" id="codigoArticulo<?php echo $i ?>">
+                                                    <td><select class="selectServicio" name="cod_arse<?php echo $i ?>" id="codigoArticulo<?php echo $i ?>">
                                                             <option value="<?php if (isset($codArse[$i])) {
                                                                                 echo $codArse[$i];
                                                                             } else {
@@ -246,7 +247,7 @@
                                                             ?>
                                                         </select>
                                                     </td>
-                                                    <td><select name="descripcion<?php echo $i ?>" id="descripcion<?php echo $i ?>">
+                                                    <td><select class="selectServicio" name="descripcion<?php echo $i ?>" id="descripcion<?php echo $i ?>" style="width: 400px;">
                                                             <option value="<?php if (isset($descripcion[$i])) {
                                                                                 echo $descripcion[$i];
                                                                             } else {

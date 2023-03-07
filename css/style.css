@@ -55,9 +55,8 @@ table{
     position: relative;
 }
 #div__config{
+
     text-align: center;
-    width: 98%;
-    height: 45%;
     background-color: rgba(219, 215, 215, 0.473);
     font-size: 20px;
     top: 25%;
@@ -65,10 +64,11 @@ table{
     transform: translateX(-50%) translateY(-50%);
     position: relative;
 }
+
 #div__volver{
     text-align: right;
     margin-right: 7px;
-    width: 45%;
+    width: 20%;
     padding-right: 5%;
     float: right;
     background-color: #e7d0a4bb;
@@ -77,8 +77,15 @@ table{
     text-align: left;
     float: left;
     margin-left: 5px;
-    width: 49%;
+    width: 20%;
     background-color:#e7d0a4bb;
+}
+#color_a{
+    height: 7%;
+    margin-right: 7px;
+    width: 90%;
+    padding-right: 5%;
+    background-color: #e7d0a4bb;
 }
 #tabla__usuarios{
     border-collapse: separate;
@@ -253,7 +260,7 @@ input{
     width: auto;
     max-width: max-content;
     font-size: 18px;
-    height: 28px;
+    height: 25px;
 }
 
 .inputTablaFecha{
@@ -264,7 +271,7 @@ input{
     width: 147px;
     max-width: max-content;
     font-size: 18px;
-    height: 28px;
+    height: 25px;
 }
 .inputTablaSer{
     display: inline-block;
@@ -273,7 +280,7 @@ input{
     border: 0px;
     width: 400px;
     font-size: 18px;
-    height: 28px;
+    height: 25px;
 }
 .inputBuscar{
     display: inline-block;
@@ -319,7 +326,7 @@ select#datosFormu{
 }
 .selectServicio{
     width: 350px;
-    height: 22px;
+    height: 25px;
     font-size: 16px;
 }
 select#sel__solicitante{

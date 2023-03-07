@@ -40,12 +40,14 @@
         <div class="contenedor">
             <h2>USUARIOS</h2>
             <div id="div__tablaSolicitudes">
+                <div id="color_a">
                 <div id="div__agregar">
                     <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
                             value="+AGREGAR"></a>
                 </div>
                 <div id="div__volver">
                     <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                </div>
                 </div>
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">
