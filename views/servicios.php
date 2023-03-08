@@ -64,37 +64,37 @@
                                         <?php echo $i ?>
                                     </td>
                                     <td>
-                                    <?php
-                                        echo "$item->Code" . PHP_EOL; 
-                                    ?>
+                                        <?php
+                                        echo "$item->Code" . PHP_EOL;
+                                        ?>
                                     </td>
                                     <td>
-                                    <?php
-                                        echo "$item->Name" . PHP_EOL; 
-                                    ?>
+                                        <?php
+                                        echo "$item->Name" . PHP_EOL;
+                                        ?>
                                     </td>
                                     <td>
-                                    <?php
-                                        echo "$item->U_CuentaCosto" . PHP_EOL; 
-                                    ?>
+                                        <?php
+                                        echo "$item->U_CuentaCosto" . PHP_EOL;
+                                        ?>
                                     </td>
                                     <td>
-                                    <?php
-                                        echo "$item->U_UEN" . PHP_EOL; 
-                                    ?>
+                                        <?php
+                                        echo "$item->U_UEN" . PHP_EOL;
+                                        ?>
                                     </td>
                                     <td>
-                                    <?php
-                                        echo "$item->U_Linea" . PHP_EOL; 
-                                    ?>
+                                        <?php
+                                        echo "$item->U_Linea" . PHP_EOL;
+                                        ?>
                                     </td>
                                     <td>
-                                    <?php
-                                        echo "$item->U_SubLinea" . PHP_EOL; 
-                                    ?>
+                                        <?php
+                                        echo "$item->U_SubLinea" . PHP_EOL;
+                                        ?>
                                     </td>
 
-                    
+
                                 </tr>
                                 <?php
                                 $i = $i + 1;

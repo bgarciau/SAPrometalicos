@@ -61,27 +61,27 @@
                                     <th>OPCIONES</th>
                                 </thead>
                                 <?php
-                                    $usuario = $_SESSION['usuario'];
-                                    $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' and fk_cod_usr!= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($usolicitud as $usolicitudes):
+                                $usuario = $_SESSION['usuario'];
+                                $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' and fk_cod_usr!= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                foreach ($usolicitud as $usolicitudes) :
                                 ?>
                                     <tr>
-                                        
-                                        <td><?php echo $usolicitudes->pk_num_sol?></td>
-                                        <td><?php echo $usolicitudes->estado_sol?></td>
-                                        <td><?php echo $usolicitudes->nom_solicitante?></td>
+
+                                        <td><?php echo $usolicitudes->pk_num_sol ?></td>
+                                        <td><?php echo $usolicitudes->estado_sol ?></td>
+                                        <td><?php echo $usolicitudes->nom_solicitante ?></td>
                                         <?php
-                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
-                                            foreach ($depSol as $depSols): 
+                                        $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
+                                        foreach ($depSol as $depSols) :
                                         ?>
-                                        <td><?php echo $depSols->nom_dep?></td>
+                                            <td><?php echo $depSols->nom_dep ?></td>
                                         <?php
                                         endforeach;
                                         ?>
-                                        <td><?php echo $usolicitudes->correo_sol?></td>
-                                        <td><?php echo $usolicitudes->cantidad?></td>
-                                        <td><?php echo $usolicitudes->propietario?></td>
-                                        <td><?php echo $usolicitudes->comentarios?></td>
+                                        <td><?php echo $usolicitudes->correo_sol ?></td>
+                                        <td><?php echo $usolicitudes->cantidad ?></td>
+                                        <td><?php echo $usolicitudes->propietario ?></td>
+                                        <td><?php echo $usolicitudes->comentarios ?></td>
                                         <td class="opcionesTabla">
                                             <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
                                             <a><input class="btn_aceptar" type="button" value="enviar"></a>
@@ -89,7 +89,7 @@
                                         </td>
                                     </tr>
                                 <?php
-                                    endforeach;
+                                endforeach;
                                 ?>
                             </table>
                         <?php
@@ -114,34 +114,34 @@
                                     <?php
                                     $usuario = $_SESSION['usuario'];
                                     $usolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' and fk_cod_usr!= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($usolicitud as $usolicitudes):
-                                ?>
-                                    <tr>
-                                        
-                                        <td><?php echo $usolicitudes->pk_num_sol?></td>
-                                        <td><?php echo $usolicitudes->estado_sol?></td>
-                                        <td><?php echo $usolicitudes->nom_solicitante?></td>
-                                        <?php
-                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
-                                            foreach ($depSol as $depSols): 
-                                        ?>
-                                        <td><?php echo $depSols->nom_dep?></td>
-                                        <?php
-                                        endforeach;
-                                        ?>
-                                        <td><?php echo $usolicitudes->correo_sol?></td>
-                                        <td><?php echo $usolicitudes->cantidad?></td>
-                                        <td><?php echo $usolicitudes->propietario?></td>
-                                        <td><?php echo $usolicitudes->comentarios?></td>
-                                        <td class="opcionesTabla">
-                                        <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                            <a><input class="btn_aceptar" type="button" value="enviar"></a>
-                                            <a><input class="btn_delete" type="button" value="rechazar"></a>
-                                        </td>
-                                    </tr>
-                                <?php
+                                    foreach ($usolicitud as $usolicitudes) :
+                                    ?>
+                                        <tr>
+
+                                            <td><?php echo $usolicitudes->pk_num_sol ?></td>
+                                            <td><?php echo $usolicitudes->estado_sol ?></td>
+                                            <td><?php echo $usolicitudes->nom_solicitante ?></td>
+                                            <?php
+                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
+                                            foreach ($depSol as $depSols) :
+                                            ?>
+                                                <td><?php echo $depSols->nom_dep ?></td>
+                                            <?php
+                                            endforeach;
+                                            ?>
+                                            <td><?php echo $usolicitudes->correo_sol ?></td>
+                                            <td><?php echo $usolicitudes->cantidad ?></td>
+                                            <td><?php echo $usolicitudes->propietario ?></td>
+                                            <td><?php echo $usolicitudes->comentarios ?></td>
+                                            <td class="opcionesTabla">
+                                                <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
+                                                <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                            </td>
+                                        </tr>
+                                    <?php
                                     endforeach;
-                                ?>
+                                    ?>
                                 </table>
                             <?php
                         } ?>

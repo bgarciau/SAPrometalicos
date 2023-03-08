@@ -41,13 +41,13 @@
             <h2>USUARIOS</h2>
             <div id="div__tablaSolicitudes">
                 <div id="color_a">
-                <div id="div__agregar">
-                    <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
-                            value="+AGREGAR"></a>
-                </div>
-                <div id="div__volver">
-                    <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
-                </div>
+                    <div id="div__agregar">
+                        <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
+                                value="+AGREGAR"></a>
+                    </div>
+                    <div id="div__volver">
+                        <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                    </div>
                 </div>
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">
@@ -80,18 +80,16 @@
                                     </td>
                                     <td>
                                         <?php
-                                          $depart = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usuario->fk_depart'")->fetchAll(PDO::FETCH_OBJ);
-                                          foreach ($depart as $departt){
+                                        $depart = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usuario->fk_depart'")->fetchAll(PDO::FETCH_OBJ); foreach ($depart as $departt) {
                                             echo $departt->nom_dep;
-                                          }
-                                           ?>
+                                        }
+                                        ?>
                                     </td>
                                     <td>
                                         <?php echo $usuario->sucursal ?>
                                     </td>
                                     <td class="opcionesTabla">
-                                        <a
-                                            href="actualizarUsuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><input
+                                        <a href="actualizarUsuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><input
                                                 class="btn_update" type="button" value="update"></a>
                                         <a
                                             href="../crud/eliminar_usuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><input

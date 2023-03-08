@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="../css/select2/select2.min.js"></script>
     <title>Hacer solicitud</title>
 </head>
@@ -22,10 +21,7 @@
 
         header("location:../index.php");
     }
-
     //session_destroy();
-
-
     include("../php/conexion.php");
     include("../php/SAP.php");
 
@@ -53,28 +49,7 @@
                 $total[$j] = $_POST["total_ml$j"];
                 $cantidad++;
 
-                if ($proyecto[$j] == "" || $indImp[$j] == "") {
-                    echo '<script>alert("Error al enviar su solicitud, verifique los campos obligatorios\nLos unicos que no son obligatorios con el proveedor y el precio info");</script>';
-                    $cantidad = -50;
-                    while ($j < 20) {
-                        if ($cod_arse == -1) {
-                        } else {
-                            $codArse[$j] = $_POST["cod_arse$j"];
-                            $fechaNec[$j] = $_POST["fecha_Nec$j"];
-                            $proveedor[$j] = $_POST["proveedor$j"];
-                            $precioInfo[$j] = $_POST["precio_inf$j"];
-                            $cuentaMayor[$j] = $_POST["cuentaMayor$j"];
-                            $uen[$j] = $_POST["uen$j"];
-                            $linea[$j] = $_POST["lineas$j"];
-                            $sublinea[$j] = $_POST["sublineas$j"];
-                            $proyecto[$j] = $_POST["proyecto$j"];
-                            $porDesc[$j] = $_POST["por_dec$j"];
-                            $indImp[$j] = $_POST["ind_imp$j"];
-                            $total[$j] = $_POST["total_ml$j"];
-                        }
-                        $j++;
-                    }
-                } else {
+                if ($cantidad > 0) {
                     $sql = "INSERT INTO list_arse (fk_num_sol,fk_cod_arse,fecha_nec,fk_prov,precio_info,cuenta_mayor,uen,linea,sublinea,proyecto,por_desc,ind_imp,total_ml) 
                         VALUES(:_numSol,:_codArse,:_fechaNec,:_proveedor,:_precioInfo,:_cuentaMayor,:_uen,:_linea,:_sublinea,:_proyecto,:_porDesc,:_indImp,:_total)";
 
@@ -238,10 +213,10 @@
                                                                             } else {
                                                                                 echo (-1);
                                                                             } ?>" selected><?php if (isset($codArse[$i]) and $codArse[$i] != -1) {
-                                                                                                print_r($respuestaServicios->value[$codArse[$i]]->Name);
-                                                                                            } else {
-                                                                                                echo "~";
-                                                                                            } ?></option>
+                                                                                print_r($respuestaServicios->value[$codArse[$i]]->Name);
+                                                                            } else {
+                                                                                echo "~";
+                                                                            } ?></option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaServicios->value as $item) :
@@ -253,9 +228,6 @@
                                                             endforeach;
                                                             ?>
                                                         </select>
-                                                        <!-- <script>
-                                                            $('#codigoServicio0').select2();
-                                                        </script> -->
                                                     </td>
                                                     <td><input class="inputTablaFecha" type="text" value="<?php if (isset($fechaNec[$i])) {
                                                                                                                 echo $fechaNec[$i];
@@ -266,10 +238,10 @@
                                                                                 echo $proveedor[$i];
                                                                             } else {
                                                                             } ?>" selected><?php if (isset($proveedor[$i])) {
-                                                                                                echo $proveedor[$i];
-                                                                                            } else {
-                                                                                                echo "~";
-                                                                                            } ?></option>
+                                                                                echo $proveedor[$i];
+                                                                            } else {
+                                                                                echo "~";
+                                                                            } ?></option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaProveedor->value as $item) :
@@ -310,10 +282,10 @@
                                                                             } else {
                                                                                 echo "";
                                                                             } ?>" selected><?php if (isset($proyecto[$i])) {
-                                                                                                echo $proyecto[$i];
-                                                                                            } else {
-                                                                                                echo "~";
-                                                                                            } ?></option>
+                                                                                echo $proyecto[$i];
+                                                                            } else {
+                                                                                echo "~";
+                                                                            } ?></option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaProyecto->value as $item) :
@@ -363,7 +335,7 @@
 
 
                                                                     for (i = 0; i < 20; i++) {
-                                                                        if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != -1) {        
+                                                                        if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != -1) {
                                                                             $('#proyecto' + i).prop("required", true).prop("disabled", false);
                                                                             $('#ind_imp' + i).prop("required", true).prop("disabled", false);
                                                                             $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
@@ -432,19 +404,7 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <!-- <label for="TotalAntesDescuento">Total antes del descuento:</label>
-                            <input type="text" name="TotalAntesDescuento"
-                                placeholder="Total"><br>
-                            <label for="GastosAdicionales">Gastos adicionales:</label>
-                            <input type="text" name="GastosAdicionales"
-                                placeholder="Gastos Adicionales"><br>
-                            <label for="Impuesto">Impuesto:</label>
-                            <input type="text" name="Impuesto" placeholder="Impuesto"><br>
-                            <label for="TotalPagoVencido">Total pago vencido:</label>
-                            <input type="text" name="TotalPagoVencido"
-                                placeholder="Total pago vencido"><br> -->
                                 <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS" onclick="ftotal()"></a>
-                                <!-- <button class="btn_env">ENVIAR SOLICITUD</button> -->
                             </div>
                         </td>
 

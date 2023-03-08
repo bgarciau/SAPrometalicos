@@ -30,7 +30,7 @@
         $resultado = $base->prepare($sql);
 
         $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_password" => $pass_cifrado));
-        
+
         $cod_usr = $codigoUsuario;
         // header("location:Usuarios.php");
     } elseif (isset($_POST["btn_actualizar"])) {
@@ -51,11 +51,10 @@
         // header("location:usuarios.php");
     } else {
         $cod_usr = $_GET["codigoUsuario"];
-
     }
 
     $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$cod_usr'")->fetchAll(PDO::FETCH_OBJ);
-    foreach ($user as $userr):?>
+    foreach ($user as $userr): ?>
         <header>
             <?php
             require_once('../php/header.php');
@@ -65,16 +64,16 @@
             <div id="div__agregarU">
                 <form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <h2>ACTUALIZAR DATOS USUARIO</h2>
-                    <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $userr->pk_cod_usr?>"><br>
+                    <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $userr->pk_cod_usr ?>"><br>
                     <label for="NombreUsuario">Nombre usuario:</label>
-                    <input class="inputA" type="text" name="nombreUsuario" value="<?php echo $userr->nom_usr?>"><br>
+                    <input class="inputA" type="text" name="nombreUsuario" value="<?php echo $userr->nom_usr ?>"><br>
                     <label for="RolUsuario">Rol usuario:</label>
-                    <input class="inputA" type="text" name="rolUsuario" value="<?php echo $userr->rol_usr?>"><br>
+                    <input class="inputA" type="text" name="rolUsuario" value="<?php echo $userr->rol_usr ?>"><br>
                     <label for="Departamento">Departamento:</label>
                     <select name="departamento" id="datosFormu">
-                    <?php
+                        <?php
                         $usrdep = $base->query("SELECT * FROM departamento WHERE pk_dep= '$userr->fk_depart'")->fetchAll(PDO::FETCH_OBJ); foreach ($usrdep as $udep): ?>
-                            <option value="<?php echo $udep->pk_dep?>"><?php echo $udep->nom_dep ?></option>
+                            <option value="<?php echo $udep->pk_dep ?>"><?php echo $udep->nom_dep ?></option>
                             <?php
                         endforeach;
                         ?>
@@ -106,7 +105,7 @@
                 <dialog id="modal">
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                         <h2>CAMBIAR CONTRASEÑA</h2>
-                        <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $cod_usr?>"><br>
+                        <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $cod_usr ?>"><br>
                         <label for="Password">Contraseña:</label>
                         <input class="inputA" type="password" name="password" value=""><br>
                         <a><input class="btn_env" type="submit" value="CAMBIAR CONTRASEÑA" name="cambiarC"></a>

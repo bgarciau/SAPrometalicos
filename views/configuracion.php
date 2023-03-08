@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
     <?php
-        session_start();
+    session_start();
 
-        if (!isset($_SESSION["usuario"])) {
+    if (!isset($_SESSION["usuario"])) {
 
-            header("location:../index.php");
-        }
-        include("../php/conexion.php");
+        header("location:../index.php");
+    }
+    include("../php/conexion.php");
 
-        $usuario=$_SESSION['usuario'];
-                
-        $registros=$base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-        foreach($registros as $Tusuario){
-            $userx=$Tusuario->fk_tipo_usr;
-        }
-        if($userx!=3){
-            header("location:hacerSolicitud.php");    
-        }
+    $usuario = $_SESSION['usuario'];
+
+    $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+    foreach ($registros as $Tusuario) {
+        $userx = $Tusuario->fk_tipo_usr;
+    }
+    if ($userx != 3) {
+        header("location:hacerSolicitud.php");
+    }
     ?>
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">   
+    <div class="base">
         <div class="contenedor">
-        <div id="div__config">
-        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-        <h2>CONFIGURACION</h2>
-        <!-- <H3>CAMBIAR DATOS</H3>
+            <div id="div__config">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <h2>CONFIGURACION</h2>
+                    <!-- <H3>CAMBIAR DATOS</H3>
                 <input class="inputc" type="checkbox" name="solicitante" checked>
                 <input class="inputA" type="text" name="solicitante" placeholder="Solicitante">
                 <input class="inputc" type="checkbox" name="numeroSol" checked>
@@ -61,25 +63,26 @@
                 <a><input class="btn_env" type="submit" value="+AGREGAR" name="addParametro"></a><br>
                 <a><input class="btn_env" type="button" value="CONFIRMAR" name="confirmar"></a><br>
                 <br><br> -->
-                <h3>CAMBIAR FOOTER</h3>
-                <footer>
-                <div class="wrapper2">
-                       <textarea class="textareaF" name="tfooter" cols="30" rows="10">
+                    <h3>CAMBIAR FOOTER</h3>
+                    <footer>
+                        <div class="wrapper2">
+                            <textarea class="textareaF" name="tfooter" cols="30" rows="10">
 Cra 21 N° 72-04 Zona Industrial Alta suiza Manizales, Colombia
 2023 
 Todos los derechos reservados</textarea>
-                </div>
-                </footer>
-                <a><input class="btn_env" type="button" value="CONFIRMAR" name="confirmar"></a><br>
-                <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                        </div>
+                    </footer>
+                    <a><input class="btn_env" type="button" value="CONFIRMAR" name="confirmar"></a><br>
+                    <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
 
+            </div>
         </div>
-        </div>
-    </div> 
+    </div>
     <footer>
-    <?php
+        <?php
         require_once('../php/footer.php');
         ?>
     </footer>
 </body>
+
 </html>

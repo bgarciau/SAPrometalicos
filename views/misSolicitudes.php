@@ -61,45 +61,45 @@
                                     <th>OPCIONES</th>
                                 </thead>
                                 <?php
-                                    $usuario = $_SESSION['usuario'];
-                                    $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($misolicitud as $misolicitudes):
+                                $usuario = $_SESSION['usuario'];
+                                $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                foreach ($misolicitud as $misolicitudes) :
                                 ?>
                                     <tr>
-                                        
-                                        <td><?php echo $misolicitudes->pk_num_sol?></td>
-                                        <td><?php echo $misolicitudes->estado_sol?></td>
-                                        <td><?php echo $misolicitudes->nom_solicitante?></td>
+
+                                        <td><?php echo $misolicitudes->pk_num_sol ?></td>
+                                        <td><?php echo $misolicitudes->estado_sol ?></td>
+                                        <td><?php echo $misolicitudes->nom_solicitante ?></td>
                                         <?php
-                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$misolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
-                                            foreach ($depSol as $depSols): 
+                                        $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$misolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
+                                        foreach ($depSol as $depSols) :
                                         ?>
-                                        <td><?php echo $depSols->nom_dep?></td>
+                                            <td><?php echo $depSols->nom_dep ?></td>
                                         <?php
                                         endforeach;
                                         ?>
-                                        <td><?php echo $misolicitudes->correo_sol?></td>
-                                        <td><?php echo $misolicitudes->cantidad?></td>
-                                        <td><?php echo $misolicitudes->propietario?></td>
-                                        <td><?php echo $misolicitudes->comentarios?></td>
+                                        <td><?php echo $misolicitudes->correo_sol ?></td>
+                                        <td><?php echo $misolicitudes->cantidad ?></td>
+                                        <td><?php echo $misolicitudes->propietario ?></td>
+                                        <td><?php echo $misolicitudes->comentarios ?></td>
                                         <td class="opcionesTabla">
                                             <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
                                             <?php
-                                            $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); 
-                                            foreach ($usutipo as $usutipoo): 
-                                                if($usutipoo->fk_tipo_usr==3){?>
-                                                <a><input class="btn_aceptar" type="button" value="enviar"></a>
-                                                <a><input class="btn_delete" type="button" value="rechazar"></a>
-                                       
-                                        <?php
-                                         
-                                            }
-                                        endforeach;
-                                        ?>
+                                            $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                            foreach ($usutipo as $usutipoo) :
+                                                if ($usutipoo->fk_tipo_usr == 3) { ?>
+                                                    <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                    <a><input class="btn_delete" type="button" value="rechazar"></a>
+
+                                            <?php
+
+                                                }
+                                            endforeach;
+                                            ?>
                                         </td>
                                     </tr>
                                 <?php
-                                    endforeach;
+                                endforeach;
                                 ?>
                             </table>
                         <?php
@@ -124,43 +124,43 @@
                                     <?php
                                     $usuario = $_SESSION['usuario'];
                                     $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($misolicitud as $misolicitudes):
-                                ?>
-                                    <tr>
-                                        
-                                        <td><?php echo $misolicitudes->pk_num_sol?></td>
-                                        <td><?php echo $misolicitudes->estado_sol?></td>
-                                        <td><?php echo $misolicitudes->nom_solicitante?></td>
+                                    foreach ($misolicitud as $misolicitudes) :
+                                    ?>
+                                        <tr>
+
+                                            <td><?php echo $misolicitudes->pk_num_sol ?></td>
+                                            <td><?php echo $misolicitudes->estado_sol ?></td>
+                                            <td><?php echo $misolicitudes->nom_solicitante ?></td>
+                                            <?php
+                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$misolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
+                                            foreach ($depSol as $depSols) :
+                                            ?>
+                                                <td><?php echo $depSols->nom_dep ?></td>
+                                            <?php
+                                            endforeach;
+                                            ?>
+                                            <td><?php echo $misolicitudes->correo_sol ?></td>
+                                            <td><?php echo $misolicitudes->cantidad ?></td>
+                                            <td><?php echo $misolicitudes->propietario ?></td>
+                                            <td><?php echo $misolicitudes->comentarios ?></td>
+                                            <td class="opcionesTabla">
+                                                <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
+                                                <?php
+                                                $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                                foreach ($usutipo as $usutipoo) :
+                                                    if ($usutipoo->fk_tipo_usr == 3) { ?>
+                                                        <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                        <a><input class="btn_delete" type="button" value="rechazar"></a>
+
                                         <?php
-                                            $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$misolicitudes->depart_sol'")->fetchAll(PDO::FETCH_OBJ); 
-                                            foreach ($depSol as $depSols): 
+
+                                                    }
+                                                endforeach;
+                                            endforeach;
+                                        }
                                         ?>
-                                        <td><?php echo $depSols->nom_dep?></td>
-                                        <?php
-                                        endforeach;
-                                        ?>
-                                        <td><?php echo $misolicitudes->correo_sol?></td>
-                                        <td><?php echo $misolicitudes->cantidad?></td>
-                                        <td><?php echo $misolicitudes->propietario?></td>
-                                        <td><?php echo $misolicitudes->comentarios?></td>
-                                        <td class="opcionesTabla">
-                                        <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                        <?php
-                                            $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); 
-                                            foreach ($usutipo as $usutipoo): 
-                                                if($usutipoo->fk_tipo_usr==3){?>
-                                                <a><input class="btn_aceptar" type="button" value="enviar"></a>
-                                                <a><input class="btn_delete" type="button" value="rechazar"></a>
-                                       
-                                        <?php
-                                         
-                                            }
-                                        endforeach;
-                                    endforeach;
-                                }
-                                        ?>
-                                             </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                 </table>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
         </div>
         <footer>
             <?php
-                
+
             require_once('../php/footer.php');
             ?>
         </footer>
