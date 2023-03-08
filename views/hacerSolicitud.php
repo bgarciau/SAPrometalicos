@@ -240,7 +240,7 @@
                                                                             } ?>" selected><?php if (isset($codArse[$i]) and $codArse[$i] != -1) {
                                                                                                 print_r($respuestaServicios->value[$codArse[$i]]->Name);
                                                                                             } else {
-                                                                                                echo "";
+                                                                                                echo "~";
                                                                                             } ?></option>
                                                             <?php
                                                             $s = 0;
@@ -268,7 +268,7 @@
                                                                             } ?>" selected><?php if (isset($proveedor[$i])) {
                                                                                                 echo $proveedor[$i];
                                                                                             } else {
-                                                                                                echo "";
+                                                                                                echo "~";
                                                                                             } ?></option>
                                                             <?php
                                                             $s = 0;
@@ -312,7 +312,7 @@
                                                                             } ?>" selected><?php if (isset($proyecto[$i])) {
                                                                                                 echo $proyecto[$i];
                                                                                             } else {
-                                                                                                echo "";
+                                                                                                echo "~";
                                                                                             } ?></option>
                                                             <?php
                                                             $s = 0;

@@ -139,7 +139,7 @@
                                                     <td><input class="inputTabla" value="<?php echo $listaa->uen ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->linea ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->sublinea ?>" disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->proyecto ?>" disabled></td>
+                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->proyecto ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->por_desc ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->ind_imp ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->total_ml ?>" disabled></td>
