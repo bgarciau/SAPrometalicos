@@ -164,9 +164,9 @@
                                 <input type="text" name="estado" value="ABIERTO" readonly><br>
 
                                 <label for="FechaContabilizacion">Fecha documento:</label>
-                                <input type="text" name="fechaDocumento" placeholder="Fecha documento"><br>
+                                <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
-                                <input type="text" name="fechaNecesaria" placeholder="Fecha necesaria"><br>
+                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria"><br>
                             </div>
                         </td>
                     </tr>

@@ -32,6 +32,7 @@ table{
     border: 1px solid black;
 }
 #tabla__general{
+    border-spacing: 0px;
     text-align: center;
     width: 99%;
     height: 80%;
@@ -196,8 +197,8 @@ table{
     text-align: center;
 }
 #div__tablaServicios{
-    width: 145vh;
-    height: 380px;
+    width: 96vw;
+    height: 40vh;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: left;
@@ -356,7 +357,6 @@ select#sel__solicitante{
     border-color:#f74248;
     border-width: 2px;
     border-style: solid;
-    border-radius: 35px;
     text-align: center;
 }
 .btn_env:hover{
@@ -375,7 +375,6 @@ select#sel__solicitante{
     border-color:#f74248;
     border-width: 2px;
     border-style: solid;
-    border-radius: 35px;
 }
 .btn_doc:hover{
     background-color:#ffffff ;
@@ -409,7 +408,6 @@ select#sel__solicitante{
     border-color:#f74248;
     border-width: 2px;
     border-style: solid;
-    border-radius: 35px;
     position: relative;
     margin-top: 20px;
 }
