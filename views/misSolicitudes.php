@@ -20,12 +20,12 @@
     // $registros = $base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <h2>MIS SOLICITUDES</h2>
             <div id="div__tablaSolicitudes">
@@ -166,13 +166,13 @@
                         </div>
                 </div>
             </div>
-        </div>
-        <footer>
+            <footer>
             <?php
 
             require_once('../php/footer.php');
             ?>
         </footer>
+        </div>
 </body>
 
 </html>

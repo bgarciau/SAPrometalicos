@@ -19,12 +19,12 @@
     include("../php/conexion.php");
 
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div id="div__agregarU">
             <?php
 
@@ -55,12 +55,12 @@
                 <a href="servicios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
             </form>
         </div>
-    </div>
-    <footer>
+        <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+    </div>
 </body>
 
 </html>

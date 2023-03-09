@@ -55,12 +55,12 @@
         }
     }
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <div id="div__agregarU">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
@@ -137,6 +137,11 @@
                     <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
             </div>
         </div>
+        <footer>
+        <?php
+        require_once('../php/footer.php');
+        ?>
+    </footer>
     </div>
     </form>
     <script>
@@ -153,11 +158,6 @@
             }
         }
     </script>
-    <footer>
-        <?php
-        require_once('../php/footer.php');
-        ?>
-    </footer>
 </body>
 
 </html>

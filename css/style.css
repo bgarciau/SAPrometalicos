@@ -14,17 +14,17 @@ h2{
 
 .base {
     width: 100%;
-    height: 80vh;
+    height: 100vh;
 }
 
  
 .contenedor{
     width: 100%;
-    height: 100%;
-    top: 50%;
+    height: 80%;
+    /* top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    position:relative;
+    position:relative; */
     z-index:0;
     background-color: #e7d0a483;
 }
@@ -35,7 +35,7 @@ table{
     border-spacing: 0px;
     text-align: center;
     width: 99%;
-    height: 80%;
+    height: 70%;
     background-color: #e7d0a4bb;
     font-size: 14px;
     top: 50%;

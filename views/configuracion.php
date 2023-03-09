@@ -27,12 +27,12 @@
         header("location:hacerSolicitud.php");
     }
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <div id="div__config">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -77,12 +77,12 @@ Todos los derechos reservados</textarea>
 
             </div>
         </div>
-    </div>
-    <footer>
+        <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+    </div>
 </body>
 
 </html>

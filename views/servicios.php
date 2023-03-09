@@ -31,12 +31,12 @@
     $serv = $base->query("SELECT * FROM arse WHERE tipo_arse= 'servicio'")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <h2>SERVICIOS</h2>
             <div id="div__tablaSolicitudes">
@@ -105,12 +105,12 @@
                 </div>
             </div>
         </div>
-    </div>
-    <footer>
+        <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+    </div>
 </body>
 
 </html>

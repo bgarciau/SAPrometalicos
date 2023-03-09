@@ -82,12 +82,12 @@
     }
 
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <table border="5px" id="tabla__general">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -412,12 +412,12 @@
                 </form>
             </table>
         </div>
-    </div>
-    <footer>
+        <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+    </div>
 </body>
 
 </html>

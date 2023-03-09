@@ -83,12 +83,12 @@
     }
 
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <table border="1px" id="tabla__general">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -304,12 +304,12 @@
                 </form>
             </table>
         </div>
-    </div>
-    <footer>
+        <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+    </div>
     <script>
         for (i = 0; i < 20; i++) {
             $('#codigoArticulo' + i).select2();

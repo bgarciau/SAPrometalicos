@@ -1,5 +1,4 @@
-<header>
-    <link rel="stylesheet" href="../css/hfstyle.css">
+  <link rel="stylesheet" href="../css/hfstyle.css">
     <div class="wrapper">
         <a class="logo"><img src="../images/logo.png" alt="logo" height="90px" width="auto"></a>
         <nav>
@@ -42,4 +41,3 @@
             ?>
         </nav>
     </div>
-</header>

@@ -55,12 +55,13 @@
 
     $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$cod_usr'")->fetchAll(PDO::FETCH_OBJ);
     foreach ($user as $userr): ?>
+        <div class="base">
         <header>
             <?php
             require_once('../php/header.php');
             ?>
         </header>
-        <div class="base">
+        <div class="contenedor">
             <div id="div__agregarU">
                 <form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <h2>ACTUALIZAR DATOS USUARIO</h2>
@@ -116,14 +117,15 @@
                 <script src="../js/java.js"></script>
             </div>
         </div>
-        <?php
-    endforeach;
-    ?>
-    <footer>
+            <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+        </div>
+        <?php
+    endforeach;
+    ?>
 </body>
 
 </html>

@@ -20,12 +20,12 @@
 
     $numSol = $_GET["numSol"];
     ?>
+    <div class="base">
     <header>
         <?php
         require_once('../php/header.php');
         ?>
     </header>
-    <div class="base">
         <div class="contenedor">
             <table border="1px" id="tabla__general">
                 <tr>
@@ -226,12 +226,12 @@
                             endforeach;
         ?>
         </div>
-    </div>
-    <footer>
+        <footer>
         <?php
         require_once('../php/footer.php');
         ?>
     </footer>
+    </div>
 </body>
 
 </html>

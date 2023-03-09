@@ -2,6 +2,7 @@ header {
 	width:100%; /* Establecemos que el header abarque el 100% del documento */
 	overflow:hidden; /* Eliminamos errores de float */
 	background:#000000;
+	height: 10%;
 }
 
 .wrapper {
@@ -36,7 +37,7 @@ header .imagen:hover{
 }
 
 header nav {
-	padding-top: 40px;
+	padding-top: 42px;
 	float:right;
 }
 
@@ -141,6 +142,7 @@ footer{
 	overflow:hidden; /* Eliminamos errores de float */
 	background:#000000;
     text-align: center;
+	height: 10%;
 	
 }
 footer .p{
