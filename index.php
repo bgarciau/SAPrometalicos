@@ -10,12 +10,13 @@
 </head>
 
 <body>
+<div class="base">
     <header>
-        <div class="wrapper">
-            <a href="views/hacerSolicitud" class="logo"><img src="images/logo.png" alt="logo" height="90px"
-                    width="auto"></a>
-        </div>
+    <div class="wrapper">
+        <a><img src="images/logo.png" alt="logo" height="100%" width="auto"></a>
+    </div>
     </header>
+    <div class="contenedor">
     <div class="loginback">
         <div class="login">
             <form action="crud/comprueba_login.php" method="post">
@@ -29,6 +30,7 @@
             </form>
         </div>
     </div>
+</div>
     <footer>
         <div class="wrapper2">
             <div class="logo">
@@ -46,6 +48,7 @@
             </div>
         </div>
     </footer>
+</div>
 </body>
 
 </html>

@@ -34,8 +34,8 @@ table{
 #tabla__general{
     border-spacing: 0px;
     text-align: center;
-    width: 99%;
-    height: 70%;
+    width: 95%;
+    height: 75%;
     background-color: #e7d0a4bb;
     font-size: 14px;
     top: 50%;
@@ -144,6 +144,7 @@ table{
     border-color: #000000;
     border: 1px solid black;
 }
+
 #tabla__servicios th,#tabla__articulos th{
     position: sticky;
     top: 0px;
@@ -216,7 +217,8 @@ table{
 
 textarea {
     font: 1em sans-serif;
-    width: 260px;
+    width: 50%;
+    height: 50%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid #999;
@@ -237,20 +239,23 @@ textarea {
 
 label{
     display: inline-block;
-    width: 200px; 
+    width: 30%;
+    height: 10%; 
     text-align: left;   
     font-size: 14px;
 }
 
 #enviarCorreo{
-    width: 400px;
-    font-size: 14px;
+    width: 60%;
+    height: 10%;
+    font-size: 100%;
 
 }    
 input{
     margin: 1px;
-    width: 250px;
-    font-size: 14px;
+    width: 40%;
+    height: 10%;
+    font-size: 100%;
 }
 
 .inputTabla{
@@ -322,8 +327,9 @@ input{
 
 input#Solicitante {
     margin: 1px;
-    width: 125px;
-    font-size: 14px;
+    width: 19%;
+    height: 10%;
+    font-size: 100%;
 }
 
 input[type="checkbox" i] {
@@ -332,8 +338,9 @@ input[type="checkbox" i] {
 }
 select#datosFormu{
     margin: 1px;
-    width: 258px;
-    font-size: 14px;
+    width: 42%;
+    height: 14%;
+    font-size: 100%;
 }
 .selectServicio{
     width: 350px;
@@ -341,18 +348,19 @@ select#datosFormu{
     font-size: 16px;
 }
 select#sel__solicitante{
-    width: 119px;
+    width: 20%;
+    height: 14%;
     margin: 1px;
-    font-size: 14px;
+    font-size: 100%;
 }
 
 .btn_env{
-    width: 230px;
+    width: 50%;
+    height: 20%;
     text-decoration:none;
-    font-weight: 300;
-    font-size: 14px;
+    font-size: 100%;
     color:#ffffff;
-    margin-top: 10px;
+    margin-top: 10%;
     background-color:#fa565f;
     border-color:#f74248;
     border-width: 2px;
@@ -382,17 +390,16 @@ select#sel__solicitante{
 }
 
 .btn_sel{
-    margin-left: 10px;
     text-align: center;
     text-decoration:none;
-    font-weight: 300;
-    font-size: 15px;
+    height: 6%;
+    font-size: 100%;
     color:#ffffff;
     background-color:#fc636b;
     border-color:#f74248;
     border-width: 2px;
     border-style: solid;
-    width: 75px;
+    width: 8%;
 }
 .btn_sel:hover{
     background-color:#ffffff ;

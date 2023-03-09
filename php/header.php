@@ -1,6 +1,6 @@
   <link rel="stylesheet" href="../css/hfstyle.css">
     <div class="wrapper">
-        <a class="logo"><img src="../images/logo.png" alt="logo" height="90px" width="auto"></a>
+        <a><img src="../images/logo.png" alt="logo" height="100%" width="auto"></a>
         <nav>
             <?php
                 include("../php/conexion.php"); 
