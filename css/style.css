@@ -267,6 +267,7 @@ input{
     max-width: max-content; */
     font-size: 18px;
     height: 25px;
+    width: 99%;
 }
 
 .inputTablaArt{
@@ -417,6 +418,7 @@ select#sel__solicitante{
     border-style: solid;
     position: relative;
     margin-top: 20px;
+    height: 22%;
 }
 .btn_vol:hover{
     background-color:#ffffff ;

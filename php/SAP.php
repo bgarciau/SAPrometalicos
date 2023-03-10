@@ -157,3 +157,116 @@ $responseArticulos = curl_exec($curlArticulos);
 $respuestaArticulos = json_decode($responseArticulos);
 
 curl_close($curlArticulos);
+
+//LLAMADO INDICADOR IMPUESTOS
+
+$curlIndImp = curl_init();
+
+curl_setopt_array($curlIndImp, array(
+  CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/SalesTaxCodes?$select=Code,Name,Rate&$filter=Inactive%20eq%20\'tNO\'%20and%20ValidForAP%20eq%20\'tYES\'&$orderby=Code',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Content-Type: application/json',
+    'Cookie: B1SESSION=' . $sesion . ''
+),
+CURLOPT_SSL_VERIFYHOST => false,
+CURLOPT_SSL_VERIFYPEER => false,
+));
+
+$responseIndImp = curl_exec($curlIndImp);
+
+$respuestaIndImp = json_decode($responseIndImp);
+
+curl_close($curlIndImp);
+
+//LLAMADO UEN
+
+$curlUen = curl_init();
+
+curl_setopt_array($curlUen, array(
+  CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/DistributionRules?$select=FactorCode,FactorDescription&$filter=InWhichDimension%20eq%201',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Prefer:odata.maxpagesize=80',
+    'Content-Type: application/json',
+    'Cookie: B1SESSION=' . $sesion . ''
+),
+CURLOPT_SSL_VERIFYHOST => false,
+CURLOPT_SSL_VERIFYPEER => false,
+));
+
+$responseUen = curl_exec($curlUen);
+
+$respuestaUen = json_decode($responseUen);
+
+curl_close($curlUen);
+
+//LLAMADO LINEA 
+
+$curlLinea = curl_init();
+
+$blinea=511;
+curl_setopt_array($curlLinea, array(
+  CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/DistributionRules?$select=FactorCode,FactorDescription&$filter=InWhichDimension%20eq%202%20and%20startswith(FactorCode,%20\''.$blinea.'\')',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Prefer:odata.maxpagesize=360',
+    'Content-Type: application/json',
+    'Cookie: B1SESSION=' . $sesion . ''
+),
+CURLOPT_SSL_VERIFYHOST => false,
+CURLOPT_SSL_VERIFYPEER => false,
+));
+
+$responseLinea = curl_exec($curlLinea);
+
+$respuestaLinea = json_decode($responseLinea);
+
+curl_close($curlLinea);
+
+
+//LLAMADO SUBLINEA 
+
+$curlSubLinea = curl_init();
+
+curl_setopt_array($curlSubLinea, array(
+  CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/DistributionRules?$select=FactorCode,FactorDescription&$filter=InWhichDimension%20eq%203',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Prefer:odata.maxpagesize=650',
+    'Content-Type: application/json',
+    'Cookie: B1SESSION=' . $sesion . ''
+),
+CURLOPT_SSL_VERIFYHOST => false,
+CURLOPT_SSL_VERIFYPEER => false,
+));
+
+$responseSubLinea = curl_exec($curlSubLinea);
+
+$respuestaSubLinea = json_decode($responseSubLinea);
+
+curl_close($curlSubLinea);

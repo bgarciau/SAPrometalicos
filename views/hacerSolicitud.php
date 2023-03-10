@@ -300,11 +300,20 @@
                                                     </td>
                                                     <td><input class="inputTabla" type="number" value=0 id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>" disabled>
                                                     </td>
-                                                    <td><input class="inputTabla" type="search" value="<?php if (isset($indImp[$i])) {
-                                                                                                            echo $indImp[$i];
-                                                                                                        } else {
-                                                                                                            echo "";
-                                                                                                        } ?>" id="ind_imp<?php echo $i ?>" name="ind_imp<?php echo $i ?>" disabled>
+                                                    <td><select class="selectServicio" name="ind_imp<?php echo $i ?>" id="ind_imp<?php echo $i ?>" disabled>
+                                                            <option value="-1">~</option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaIndImp->value as $item) :
+
+                                                            ?>
+                                                                <option value="<?php echo "$item->Code" . PHP_EOL; ?>"><?php echo "$item->Code | $item->Name " . PHP_EOL; ?></option>
+                                                            <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                            
+                                                        </select>
                                                     </td>
                                                     <td><input class="inputTabla" type="search" id="total_ml<?php echo $i ?>" name="total_ml<?php echo $i ?>" onclick="ftotal()" disabled readonly></td>
                                                     <script>

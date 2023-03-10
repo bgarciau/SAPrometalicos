@@ -84,11 +84,11 @@
 
     ?>
     <div class="base">
-    <header>
-        <?php
-        require_once('../php/header.php');
-        ?>
-    </header>
+        <header>
+            <?php
+            require_once('../php/header.php');
+            ?>
+        </header>
         <div class="contenedor">
             <table border="1px" id="tabla__general">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -234,14 +234,7 @@
                                                         <input name="cdes<?php echo $i ?>" id="cdes<?php echo $i ?>" hidden>
                                                     </td>
                                                     <td><select class="selectServicio" name="proveedor<?php echo $i ?>" id="proveedor<?php echo $i ?>" disabled>
-                                                            <option value="<?php if (isset($proveedor[$i])) {
-                                                                                echo $proveedor[$i];
-                                                                            } else {
-                                                                            } ?>" selected><?php if (isset($proveedor[$i])) {
-                                                                                echo $proveedor[$i];
-                                                                            } else {
-                                                                                echo "~";
-                                                                            } ?></option>
+                                                            <option value=-1 selected>~</option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaProveedor->value as $item) :
@@ -264,15 +257,59 @@
                                                                                                         } ?>" id="cant_nec<?php echo $i ?>" name="cant_nec<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search" id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" value="" disabled></td>
                                                     <td><input class="inputTabla" type="number" value=0 id="por_desc<?php echo $i ?>" name="por_desc<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTabla" type="search" id="ind_imp<?php echo $i ?>" name="ind_imp<?php echo $i ?>" value="" disabled></td>
+                                                    <td><select class="selectServicio" name="ind_imp<?php echo $i ?>" id="ind_imp<?php echo $i ?>" disabled>
+                                                            <option value="-1">~</option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaIndImp->value as $item) :
+
+                                                            ?>
+                                                                <option value="<?php echo "$item->Code" . PHP_EOL; ?>"><?php echo "$item->Code | $item->Name " . PHP_EOL; ?></option>
+                                                            <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                        </select></td>
                                                     <td><input class="inputTabla" type="search" id="total<?php echo $i ?>" name="total<?php echo $i ?>" onclick="ftotal()" disabled readonly></td>
-                                                    <td><input class="inputTabla" type="search" id="uen<?php echo $i ?>" name="uen<?php echo $i ?>" value="" disabled></td>
-                                                    <td><input class="inputTabla" type="search" value="<?php if (isset($linea[$i])) {
-                                                                                                            echo $linea[$i];
-                                                                                                        } else {
-                                                                                                            echo "";
-                                                                                                        } ?>" name="lineas<?php echo $i ?>" id="lineas<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTabla" type="search" id="sublinea<?php echo $i ?>" name="sublinea<?php echo $i ?>" value="" disabled></td>
+                                                    <td><select class="selectServicio" name="uen<?php echo $i ?>" id="uen<?php echo $i ?>" disabled>
+                                                            <option value="<?php echo (-1) ?>" selected>~</option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaUen->value as $item) :
+
+                                                            ?>
+                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?></option>
+                                                            <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                        </select></td>
+                                                    <td><select class="selectServicio" name="lineas<?php echo $i ?>" id="linea<?php echo $i ?>" disabled>
+                                                            <option value="<?php echo (-1) ?>" selected>~</option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaLinea->value as $item) :
+
+                                                            ?>
+                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?></option>
+                                                            <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                        </select></td>
+                                                    <td><select class="selectServicio" name="sublinea<?php echo $i ?>" id="sublinea<?php echo $i ?>" disabled>
+                                                            <option value="<?php echo (-1) ?>" selected>~</option>
+                                                            <?php
+                                                            $s = 0;
+                                                            foreach ($respuestaSubLinea->value as $item) :
+
+                                                            ?>
+                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?></option>
+                                                            <?php
+                                                                $s++;
+                                                            endforeach;
+                                                            ?>
+                                                        </select></td>
                                                 </tr>
                                             <?php
                                                 $i++;
@@ -305,10 +342,10 @@
             </table>
         </div>
         <footer>
-        <?php
-        require_once('../php/footer.php');
-        ?>
-    </footer>
+            <?php
+            require_once('../php/footer.php');
+            ?>
+        </footer>
     </div>
     <script>
         for (i = 0; i < 20; i++) {
@@ -343,10 +380,12 @@
                     for (i = 0; i < 20; i++) {
 
                         if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() != -1) {
+                            // $('#descripcion' + i).select2();
+                            // $('#descripcion' + i).select2('destroy');
+                            // $('#cdes' + i).prop("hidden", false).prop("readonly", true).prop("class", "inputTablaArt");
+                            // $('#cdes' + i).val(valores[$(this).val()]["ItemName"]).prop("readonly", true).prop("title", valores[$(this).val()]["ItemName"]);
+                            $('#descripcion' + i).val($(this).val());
                             $('#descripcion' + i).select2();
-                            $('#descripcion' + i).select2('destroy');
-                            $('#cdes' + i).prop("hidden", false).prop("readonly", true).prop("class", "inputTablaArt");
-                            $('#cdes' + i).val(valores[$(this).val()]["ItemName"]).prop("readonly", true).prop("title", valores[$(this).val()]["ItemName"]);
                             $('#proveedor' + i).prop("disabled", false);
                             $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
                             document.getElementById('fecha_Nec' + i).type = 'date';
@@ -356,48 +395,45 @@
                             $('#ind_imp' + i).prop("disabled", false).prop("required", true);
                             $('#total' + i).prop("disabled", false).prop("required", true);
                             $('#uen' + i).prop("disabled", false).prop("required", true);
-                            $('#lineas' + i).prop("disabled", false).prop("required", true);
-                            $('#sublinea' + i).prop("disabled", false).prop("required", true);
 
                         }
 
                         if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() == -1) {
-                            $('#cdes' + i).prop("hidden", true);
+                            // $('#cdes' + i).prop("hidden", true);
+                            // $('#descripcion' + i).select2();
+                            // $('#cdes' + i).val(-1);
+                            // $('#cdes' + i).prop("hidden", true).prop("class", null);
+                            $('#descripcion' + i).val($(this).val());
                             $('#descripcion' + i).select2();
-                            $('#cdes' + i).val(-1);
-                            $('#cdes' + i).prop("hidden", true).prop("class", null);
-                            $('#proveedor' + i).prop("disabled", true);
-                            $('#fecha_Nec' + i).prop("disabled", true).prop("required", false);
+                            $('#proveedor' + i).prop("disabled", true).val(-1);
+                            $('#proveedor' + i).select2();
+                            $('#fecha_Nec' + i).prop("disabled", true).prop("required", false).val(0);
                             document.getElementById('fecha_Nec' + i).type = 'text';
-                            $('#cant_nec' + i).prop("disabled", true).prop("required", false);
-                            $('#precio_inf' + i).prop("disabled", true);
-                            $('#por_desc' + i).prop("disabled", true).prop("required", false);
-                            $('#ind_imp' + i).prop("disabled", true).prop("required", false);
+                            $('#cant_nec' + i).prop("disabled", true).prop("required", false).val(0);
+                            $('#precio_inf' + i).prop("disabled", true).val(0);
+                            $('#por_desc' + i).prop("disabled", true).prop("required", false).val(0);
+                            $('#ind_imp' + i).prop("disabled", true).prop("required", false).val(-1);
                             $('#total' + i).prop("disabled", true).prop("required", false);
-                            $('#uen' + i).prop("disabled", true).prop("required", false);
-                            $('#lineas' + i).prop("disabled", true).prop("required", false);
-                            $('#sublinea' + i).prop("disabled", true).prop("required", false);
+                            $('#uen' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#linea' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#linea' + i).select2();
+                            $('#sublinea' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#sublinea' + i).select2();
                         }
                     }
                 })
-
-            }
-        });
-
-        $(document).ready(function() {
-
-            for (i = 0; i < 20; i++) {
 
                 $('#descripcion' + i).change(function(e) {
 
                     for (i = 0; i < 20; i++) {
 
                         if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() != -1) {
-                            $('#codigoArticulo' + i).select2();
-                            $('#codigoArticulo' + i).select2('destroy');
-                            $('#codArtt' + i).prop("hidden", false).prop("readonly", true).prop("class", "inputTablaArt");
-                            $('#codArtt' + i).val(valores[$(this).val()]["ItemCode"]).prop("readonly", true);
+                            // $('#codigoArticulo' + i).select2();
+                            // $('#codigoArticulo' + i).select2('destroy');
+                            // // $('#codArtt' + i).prop("hidden", false).prop("readonly", true).prop("class", "inputTablaArt");
+                            // // $('#codArtt' + i).val(valores[$(this).val()]["ItemCode"]).prop("readonly", true);
                             $('#codigoArticulo' + i).val($(this).val());
+                            $('#codigoArticulo' + i).select2();
                             $('#proveedor' + i).prop("disabled", false);
                             $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
                             document.getElementById('fecha_Nec' + i).type = 'date';
@@ -407,26 +443,57 @@
                             $('#ind_imp' + i).prop("disabled", false).prop("required", true);
                             $('#total' + i).prop("disabled", false).prop("required", true);
                             $('#uen' + i).prop("disabled", false).prop("required", true);
-                            $('#lineas' + i).prop("disabled", false).prop("required", true);
-                            $('#sublinea' + i).prop("disabled", false).prop("required", true);
 
                         }
                         if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() == -1) {
-                            $('#codArtt' + i).prop("hidden", true);
+                            // $('#codArtt' + i).prop("hidden", true);
+                            // $('#codigoArticulo' + i).select2();
+                            // $('#codArtt' + i).val(-1);
+                            // $('#codArtt' + i).prop("hidden", true).prop("class", null);
+                            $('#codigoArticulo' + i).val($(this).val());
                             $('#codigoArticulo' + i).select2();
-                            $('#codArtt' + i).val(-1);
-                            $('#codArtt' + i).prop("hidden", true).prop("class", null);
-                            $('#proveedor' + i).prop("disabled", true);
-                            $('#fecha_Nec' + i).prop("disabled", true).prop("required", false);
+                            $('#proveedor' + i).prop("disabled", true).val(-1);
+                            $('#proveedor' + i).select2();
+                            $('#fecha_Nec' + i).prop("disabled", true).prop("required", false).val(0);
                             document.getElementById('fecha_Nec' + i).type = 'text';
-                            $('#cant_nec' + i).prop("disabled", true).prop("required", false);
-                            $('#precio_inf' + i).prop("disabled", true);
-                            $('#por_desc' + i).prop("disabled", true).prop("required", false);
-                            $('#ind_imp' + i).prop("disabled", true).prop("required", false);
+                            $('#cant_nec' + i).prop("disabled", true).prop("required", false).val(0);
+                            $('#precio_inf' + i).prop("disabled", true).val(0);
+                            $('#por_desc' + i).prop("disabled", true).prop("required", false).val(0);
+                            $('#ind_imp' + i).prop("disabled", true).prop("required", false).val(-1);
                             $('#total' + i).prop("disabled", true).prop("required", false);
-                            $('#uen' + i).prop("disabled", true).prop("required", false);
-                            $('#lineas' + i).prop("disabled", true).prop("required", false);
-                            $('#sublinea' + i).prop("disabled", true).prop("required", false);
+                            $('#uen' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#linea' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#linea' + i).select2();
+                            $('#sublinea' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#sublinea' + i).select2();
+                        }
+                    }
+                })
+
+                $('#uen' + i).change(function(e) {
+                    for (i = 0; i < 20; i++) {
+                        if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() != -1) {
+                            $('#linea' + i).prop("disabled", false).val(-1);
+                            $('#linea' + i).select2();
+                            $('#sublinea' + i).val(-1);
+                            $('#sublinea' + i).select2();
+                        } else {
+                            $('#linea' + i).prop("disabled", true).val(-1);
+                            $('#linea' + i).select2();
+                            $('#sublinea' + i).prop("disabled", true).val(-1);
+                            $('#sublinea' + i).select2();
+                        }
+                    }
+                })
+
+                $('#linea' + i).change(function(e) {
+                    for (i = 0; i < 20; i++) {
+                        if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != -1) {
+                            $('#sublinea' + i).prop("disabled", false).val(-1);
+                            $('#sublinea' + i).select2();
+                        } else {
+                            $('#sublinea' + i).prop("disabled", true).val(-1);
+                            $('#sublinea' + i).select2();
                         }
                     }
                 })
