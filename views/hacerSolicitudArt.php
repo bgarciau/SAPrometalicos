@@ -251,12 +251,12 @@
                                                                                                                 echo $fechaNec[$i];
                                                                                                             }
                                                                                                             ?>" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTabla" type="number" value="<?php if (isset($cant_nec[$i])) {
-                                                                                                            echo $cant_nec[$i];
-                                                                                                        } else {
-                                                                                                        } ?>" id="cant_nec<?php echo $i ?>" name="cant_nec<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaCant" type="number" value="<?php if (isset($cant_nec[$i])) {
+                                                                                                                echo $cant_nec[$i];
+                                                                                                            } else {
+                                                                                                            } ?>" id="cant_nec<?php echo $i ?>" name="cant_nec<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search" id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" value="" disabled></td>
-                                                    <td><input class="inputTabla" type="number" value=0 id="por_desc<?php echo $i ?>" name="por_desc<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaCant" type="number" value=0 id="por_desc<?php echo $i ?>" name="por_desc<?php echo $i ?>" disabled></td>
                                                     <td><select class="selectServicio" name="ind_imp<?php echo $i ?>" id="ind_imp<?php echo $i ?>" disabled>
                                                             <option value="-1">~</option>
                                                             <?php
@@ -278,38 +278,15 @@
                                                             foreach ($respuestaUen->value as $item) :
 
                                                             ?>
-                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?></option>
+                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?>
+                                                                </option>
                                                             <?php
                                                                 $s++;
                                                             endforeach;
                                                             ?>
                                                         </select></td>
-                                                    <td><select class="selectServicio" name="lineas<?php echo $i ?>" id="linea<?php echo $i ?>" disabled>
-                                                            <option value="<?php echo (-1) ?>" selected>~</option>
-                                                            <?php
-                                                            $s = 0;
-                                                            foreach ($respuestaLinea->value as $item) :
-
-                                                            ?>
-                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?></option>
-                                                            <?php
-                                                                $s++;
-                                                            endforeach;
-                                                            ?>
-                                                        </select></td>
-                                                    <td><select class="selectServicio" name="sublinea<?php echo $i ?>" id="sublinea<?php echo $i ?>" disabled>
-                                                            <option value="<?php echo (-1) ?>" selected>~</option>
-                                                            <?php
-                                                            $s = 0;
-                                                            foreach ($respuestaSubLinea->value as $item) :
-
-                                                            ?>
-                                                                <option value="<?php echo $item->FactorCode ?>"><?php echo "$item->FactorCode | $item->FactorDescription" . PHP_EOL; ?></option>
-                                                            <?php
-                                                                $s++;
-                                                            endforeach;
-                                                            ?>
-                                                        </select></td>
+                                                    <td><select class="selectServicio" name="lineas<?php echo $i ?>" id="linea<?php echo $i ?>" disabled></select></td>
+                                                    <td><select class="selectServicio" name="sublinea<?php echo $i ?>" id="sublinea<?php echo $i ?>" disabled></select></td>
                                                 </tr>
                                             <?php
                                                 $i++;
@@ -353,6 +330,8 @@
             $('#descripcion' + i).select2();
             $('#proveedor' + i).select2();
             $('#proyecto' + i).select2();
+            $('#ind_imp' + i).select2();
+            $('#uen' + i).select2();
         }
         const datos = <?php echo json_encode($respuestaArticulos); ?>
         // Justo aquí estamos pasando la variable ----^
@@ -415,6 +394,7 @@
                             $('#ind_imp' + i).prop("disabled", true).prop("required", false).val(-1);
                             $('#total' + i).prop("disabled", true).prop("required", false);
                             $('#uen' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#uen' + i).select2();
                             $('#linea' + i).prop("disabled", true).prop("required", false).val(-1);
                             $('#linea' + i).select2();
                             $('#sublinea' + i).prop("disabled", true).prop("required", false).val(-1);
@@ -462,6 +442,7 @@
                             $('#ind_imp' + i).prop("disabled", true).prop("required", false).val(-1);
                             $('#total' + i).prop("disabled", true).prop("required", false);
                             $('#uen' + i).prop("disabled", true).prop("required", false).val(-1);
+                            $('#uen' + i).select2();
                             $('#linea' + i).prop("disabled", true).prop("required", false).val(-1);
                             $('#linea' + i).select2();
                             $('#sublinea' + i).prop("disabled", true).prop("required", false).val(-1);
@@ -477,21 +458,148 @@
                             $('#linea' + i).select2();
                             $('#sublinea' + i).val(-1);
                             $('#sublinea' + i).select2();
-                        } else {
+                            const datos = <?php echo json_encode($respuestaLinea); ?>
+                            // Justo aquí estamos pasando la variable ----^
+                            // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+                            const valores = datos.value;
+
+                            console.log("Los valores son: ", valores);
+
+                            const $select = document.querySelector("#linea" + i);
+
+                            const opcionCambiada = () => {
+                                console.log("cambio");
+                            };
+
+                            $select.addEventListener("change", opcionCambiada)
+                            for (let k = $select.options.length; k >= 0; k--) {
+                                $select.remove(k);
+                            }
+                            const $select2 = document.querySelector("#linea" + i);
+
+                            const opcionCambiada2 = () => {
+                                console.log("cambio");
+                            };
+
+                            $select2.addEventListener("change", opcionCambiada2)
+                            for (let k = $select2.options.length; k >= 0; k--) {
+                                $select2.remove(k);
+                            }
+                            // const option = document.createElement('option');
+                            // option.value = -1;
+                            // option.text = "~";
+                            // $select.appendChild(option);
+                            $('#uen' + i).select2();
+                            j = 0;
+                            while (j >= 0) {
+                                x = valores[j]['FactorCode'] * 10 ** (-1);
+                                x = Math.floor(x);
+                                if (x == $(this).val()) {
+                                    while (x == ($(this).val())) {
+                                        const option = document.createElement('option');
+                                        option.value = valores[j]['FactorCode'];
+                                        option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];
+                                        $select.appendChild(option);
+                                        console.log("valor de linea: ", x);
+                                        j++;
+                                        x = valores[j]['FactorCode'] * 10 ** (-1);
+                                        x = Math.floor(x);
+                                    }
+                                    j = -100;
+                                }
+                                j++;
+                            }
+                        } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == -1) {
+                            // $('#uen' + i).select2();
+                            const $select = document.querySelector("#linea" + i);
+
+                            const opcionCambiada = () => {
+                                console.log("cambio");
+                            };
+                            $select.addEventListener("change", opcionCambiada)
+                            for (let k = $select.options.length; k >= 0; k--) {
+                                $select.remove(k);
+                            }
+                            const $select2 = document.querySelector("#sublinea" + i);
+
+                            const opcionCambiada2 = () => {
+                                console.log("cambio");
+                            };
+                            $select2.addEventListener("change", opcionCambiada2)
+                            for (let k = $select2.options.length; k >= 0; k--) {
+                                $select2.remove(k);
+                            }
                             $('#linea' + i).prop("disabled", true).val(-1);
                             $('#linea' + i).select2();
                             $('#sublinea' + i).prop("disabled", true).val(-1);
                             $('#sublinea' + i).select2();
                         }
+                        // else{
+                        //     $('#uen' + i).select2();
+                        // }
                     }
                 })
 
                 $('#linea' + i).change(function(e) {
                     for (i = 0; i < 20; i++) {
                         if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != -1) {
-                            $('#sublinea' + i).prop("disabled", false).val(-1);
+                            $('#sublinea' + i).prop("disabled", false);
                             $('#sublinea' + i).select2();
-                        } else {
+
+                            const datos = <?php echo json_encode($respuestaSubLinea); ?>
+                            // Justo aquí estamos pasando la variable ----^
+                            // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+                            const valores = datos.value;
+
+                            console.log("Los valores son: ", valores);
+
+                            const $select = document.querySelector("#sublinea" + i);
+
+                            const opcionCambiada = () => {
+                                console.log("cambio");
+                            };
+
+                            $select.addEventListener("change", opcionCambiada)
+                            for (let k = $select.options.length; k >= 0; k--) {
+                                $select.remove(k);
+                            }
+                            const option = document.createElement('option');
+                            option.value = -1;
+                            option.text = "~";
+                            $select.appendChild(option);
+                            $('#linea' + i).select2('close');
+                            j = 0;
+                            while (j >= 0) {
+                                x = valores[j]['FactorCode'] * 10 ** (-1);
+                                x = Math.floor(x);
+                                if (x == $(this).val()) {
+                                    while (x == ($(this).val())) {
+                                        const option = document.createElement('option');
+                                        option.value = valores[j]['FactorCode'];
+                                        option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];
+                                        $select.appendChild(option);
+                                        console.log("valor de linea: ", x);
+                                        j++;
+                                        x = valores[j]['FactorCode'] * 10 ** (-1);
+                                        x = Math.floor(x);
+                                    }
+                                    j = -100;
+
+                                }
+                                j++;
+                            }
+
+                        } else if($(this).val() == document.getElementById('linea' + i).value && $(this).val() == -1) {
+                            // $('#linea' + i).select2('close');
+                            const $select = document.querySelector("#sublinea" + i);
+
+                            const opcionCambiada = () => {
+                                console.log("cambio");
+                            };
+                            $select.addEventListener("change", opcionCambiada)
+                            for (let k = $select.options.length; k >= 0; k--) {
+                                $select.remove(k);
+                            }
                             $('#sublinea' + i).prop("disabled", true).val(-1);
                             $('#sublinea' + i).select2();
                         }

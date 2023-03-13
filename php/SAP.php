@@ -217,9 +217,8 @@ curl_close($curlUen);
 
 $curlLinea = curl_init();
 
-$blinea=511;
 curl_setopt_array($curlLinea, array(
-  CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/DistributionRules?$select=FactorCode,FactorDescription&$filter=InWhichDimension%20eq%202%20and%20startswith(FactorCode,%20\''.$blinea.'\')',
+  CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/DistributionRules?$select=FactorCode,FactorDescription&$filter=InWhichDimension%20eq%202',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,

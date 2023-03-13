@@ -270,6 +270,18 @@ input{
     width: 99%;
 }
 
+.inputTablaCant{
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    /* width: auto;
+    max-width: max-content; */
+    font-size: 18px;
+    height: 25px;
+    width: 98%;
+}
+
 .inputTablaArt{
     display: inline-block;
     text-align: left;
