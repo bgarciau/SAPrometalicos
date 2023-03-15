@@ -12,7 +12,7 @@
 <body>
 <div class="base">
     <header>
-    <div class="wrapper">
+    <div class="wrapperL">
         <a><img src="images/logo.png" alt="logo" height="100%" width="auto"></a>
     </div>
     </header>

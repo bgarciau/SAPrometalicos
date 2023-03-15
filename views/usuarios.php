@@ -32,15 +32,15 @@
 
     ?>
     <div class="base">
-    <header>
-        <?php
-        require_once('../php/header.php');
-        ?>
-    </header>
+        <header>
+            <?php
+            require_once('../php/header.php');
+            ?>
+        </header>
         <div class="contenedor">
             <h2>USUARIOS</h2>
             <div id="div__tablaSolicitudes">
-                <div id="color_a">
+                <!-- <div id="color_a">
                     <div id="div__agregar">
                         <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
                                 value="+AGREGAR"></a>
@@ -48,10 +48,20 @@
                     <div id="div__volver">
                         <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
                     </div>
-                </div>
+                </div> -->
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">
-                        <input class="inputBuscar" type="search" name="" value="BUSCAR">
+                        <div id="div__agregar">
+                            <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
+                                    value="+AGREGAR"></a>
+                        </div>
+                        <div id="div__volver">
+                            <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                        </div>
+                        <div id="div__buscar">
+                            <input class="inputBuscar" type="search" name="" value="BUSCAR">
+                        </div>
+                        <!-- <input class="inputBuscar" type="search" name="" value="BUSCAR"> -->
                         <table border="4px" id="tabla__usuarios">
                             <thead>
                                 <th>#</th>
@@ -106,10 +116,10 @@
             </div>
         </div>
         <footer>
-        <?php
-        require_once('../php/footer.php');
-        ?>
-    </footer>
+            <?php
+            require_once('../php/footer.php');
+            ?>
+        </footer>
     </div>
 </body>
 

@@ -47,7 +47,7 @@ table{
 #div__agregarU{
     text-align: center;
     width: 98%;
-    height: 45%;
+    height: 70%;
     background-color: rgba(219, 215, 215, 0.473);
     font-size: 20px;
     top: 50%;
@@ -72,14 +72,20 @@ table{
     width: 20%;
     padding-right: 5%;
     float: right;
-    background-color: #e7d0a4bb;
+    /* background-color: #e7d0a4bb; */
 }
 #div__agregar{
     text-align: left;
     float: left;
     margin-left: 5px;
     width: 20%;
-    background-color:#e7d0a4bb;
+    /* background-color:#e7d0a4bb; */
+}
+#div__buscar{
+    text-align: left;
+    margin-left: 10%;
+    float:left;
+    /* background-color:#e7d0a4bb; */
 }
 #color_a{
     height: 7%;
@@ -128,10 +134,12 @@ table{
     box-shadow: 0px 0px 5px black;
     margin: 5px;
     /* max-width: 98%; */
-    height:100%;
+    height:99%;
+    max-height: 99%;
     width: 99%;
     background-color: rgba(228, 228, 228, 0.795);
 }
+
 
 #tabla__servicios,#tabla__articulos{
     border-collapse: separate;
@@ -207,7 +215,7 @@ table{
 }
 
 #div__tablaSolicitudes{
-    width: 135vh;
+    width: 99%;
     height: 80vh;
     background-color: #e7d0a4bb;
     margin: 5px auto;
@@ -240,6 +248,14 @@ textarea {
 label{
     display: inline-block;
     width: 30%;
+    height: 10%; 
+    text-align: left;   
+    font-size: 14px;
+}
+
+.label2{
+    display: inline-block;
+    width: 15%;
     height: 10%; 
     text-align: left;   
     font-size: 14px;
@@ -325,8 +341,8 @@ input{
 .inputA{
     margin-top: 5px;
     display: inline-block;
-    width: 250px; 
-    height: 14px;
+    width: 41%; 
+    height: 14%;
     text-align: left;
 }
 .inputc{
@@ -380,6 +396,32 @@ select#sel__solicitante{
     border-style: solid;
     text-align: center;
 }
+.btn_env2{
+    width: 50%;
+    height: 20%;
+    text-decoration:none;
+    font-size: 100%;
+    color:#ffffff;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
+
+.btn_env3{
+    width: 30%;
+    margin-top: 1%;
+    text-decoration:none;
+    font-size: 100%;
+    color:#ffffff;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
+
 .btn_env:hover{
     background-color:#ffffff ;
     color: #040404;
@@ -405,7 +447,7 @@ select#sel__solicitante{
 .btn_sel{
     text-align: center;
     text-decoration:none;
-    height: 6%;
+    height: auto;
     font-size: 100%;
     color:#ffffff;
     background-color:#fc636b;
@@ -430,7 +472,7 @@ select#sel__solicitante{
     border-style: solid;
     position: relative;
     margin-top: 20px;
-    height: 22%;
+    height: auto;
 }
 .btn_vol:hover{
     background-color:#ffffff ;
@@ -447,7 +489,6 @@ select#sel__solicitante{
     border-color:#f74248;
     border-width: 2px;
     border-style: solid;
-    border-radius: 35px;
     margin-left: 20px;
     margin-top: 20px;
 }

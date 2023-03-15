@@ -65,21 +65,21 @@
             <div id="div__agregarU">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
                     <h2>AGREGAR USUARIO</h2>
-                    <label for="CodigoUsuario">Codigo usuario:</label>
+                    <label class="label2" for="CodigoUsuario">Codigo usuario:</label>
                     <input class="inputA" type="text" id="CodigoUsuario" name="codigoUsuario" value="<?php if (isset($_POST['codigoUsuario'])) {
                         echo $_POST['codigoUsuario'];
                     } ?>"
                         required><br>
-                    <label for="RolUsuario">Rol usuario:</label>
+                    <label class="label2" for="RolUsuario">Rol usuario:</label>
                     <input class="inputA" type="text" id="RolUsuario" name="rolUsuario" value="<?php if (isset($_POST['rolUsuario'])) {
                         echo $_POST['rolUsuario'];
                     } ?>" required><br>
-                    <label for="NombreUsuario">Nombre usuario:</label>
+                    <label class="label2" for="NombreUsuario">Nombre usuario:</label>
                     <input class="inputA" type="text" id="NombreUsuario" name="nombreUsuario" value="<?php if (isset($_POST['nombreUsuario'])) {
                         echo $_POST['nombreUsuario'];
                     } ?>"
                         required><br>
-                    <label for="Departamento">Departamento:</label>
+                    <label class="label2" for="Departamento">Departamento:</label>
                     <select name="departamento" id="datosFormu" required>
                         <?php
                         if (isset($_POST['departamento'])) {
@@ -100,17 +100,17 @@
                         endforeach;
                         ?>
                     </select><br>
-                    <label for="Sucursal">Sucursal:</label>
+                    <label class="label2" for="Sucursal">Sucursal:</label>
                     <input class="inputA" type="text" id="Sucursal" name="sucursal" value="<?php if (isset($_POST['sucursal'])) {
                         echo $_POST['sucursal'];
                     } ?>" required><br>
-                    <label for="Password">Contraseña:</label>
+                    <label class="label2" for="Password">Contraseña:</label>
                     <input class="inputA" type="password" id="clave1" name="password" value="<?php if (isset($_POST['password'])) {
                         echo $_POST['password'];
                     } ?>" required><br>
-                    <label for="Password">Confirmar Contraseña:</label>
+                    <label class="label2" for="Password">Confirmar Contraseña:</label>
                     <input class="inputA" type="password" id="clave2" name="password2" required><br>
-                    <label for="TipoUsuario">Tipo usuario:</label>
+                    <label class="label2" for="TipoUsuario">Tipo usuario:</label>
                     <select name="tipoUsuario" id="datosFormu" required>
                         <?php
                         if (isset($_POST['tipoUsuario'])) {
@@ -132,7 +132,7 @@
 
                     <br>
                     <!-- <input class="inputA" type="text" id="TipoUsuario" name="tipoUsuario" value="Tipo usuario"><br> -->
-                    <a><input class="btn_env" type="submit" value="CREAR USUARIO" name="crearU"
+                    <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU"
                             onclick="comprobarClave()"></a>
                     <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
             </div>

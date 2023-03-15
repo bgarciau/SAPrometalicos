@@ -89,20 +89,14 @@
                     <input class="inputA" type="text" name="sucursal" value="<?php echo $userr->sucursal ?>"><br>
                     <label for="TipoUsuario">Tipo usuario:</label>
                     <select name="tipoUsuario" id="datosFormu">
-                        <?php
-                        $tuser = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$userr->fk_tipo_usr'")->fetchAll(PDO::FETCH_OBJ); foreach ($tuser as $tipo): ?>
-                            <option value="<?php echo $tipo->pk_t_usr ?>"><?php echo $tipo->des_usr ?></option>
-                            <?php
-                        endforeach;
-                        ?>
                         <option value=1>usuario</option>
                         <option value=2>empleado</option>
                         <option value=3>administrador</option>
                     </select>
                     <br>
-                    <a><input class="btn_env" type="submit" name="btn_actualizar" value="ACTUALIZAR"></a><br>
+                    <a><input class="btn_env3" type="submit" name="btn_actualizar" value="ACTUALIZAR"></a><br>
                 </form>
-                <button class="btn_env" type="button" id="btn_abrir_modal">Cambiar contraseña</button><br>
+                <button class="btn_env3" type="button" id="btn_abrir_modal">Cambiar contraseña</button><br>
                 <dialog id="modal">
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                         <h2>CAMBIAR CONTRASEÑA</h2>

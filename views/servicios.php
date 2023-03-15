@@ -27,9 +27,6 @@
     if ($userx != 3) {
         header("location:hacerSolicitud.php");
     }
-
-    $serv = $base->query("SELECT * FROM arse WHERE tipo_arse= 'servicio'")->fetchAll(PDO::FETCH_OBJ);
-
     ?>
     <div class="base">
     <header>

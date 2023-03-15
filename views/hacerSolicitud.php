@@ -102,12 +102,13 @@
 
                                 $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                 foreach ($user as $duser) :
-                                    $tuser = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$duser->fk_tipo_usr'")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($tuser as $tipo) : ?>
+                                    // $tuser = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$duser->fk_tipo_usr'")->fetchAll(PDO::FETCH_OBJ);
+                                    // foreach ($tuser as $tipo) : 
+                                    ?>
                                         <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                         <label for="Solicitante">Solicitante:</label>
                                         <select name="solicitante" id="sel__solicitante">
-                                            <option value="<?php echo $tipo->des_usr ?>"><?php echo $tipo->des_usr ?></option>
+                                            <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr?></option>
                                             <option value="Usuario">Usuario</option>
                                             <option value="Empleado">Empleado</option>
                                         </select>
@@ -141,7 +142,7 @@
                                         </select><br>
                                 <?php
                                     endforeach;
-                                endforeach;
+                                // endforeach;
                                 ?>
                                 <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
                                 <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego

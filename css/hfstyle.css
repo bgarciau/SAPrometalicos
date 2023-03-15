@@ -7,7 +7,7 @@ header {
 .logo {
 	float:left;
 	height: 100%;
-	width: 19%;
+	width: auto;
 }
 .wrapper {
 	width:98%; /* Establecemos que el ancho sera del 90% */
@@ -16,6 +16,15 @@ header {
     margin-left: 5px;
 	overflow:hidden;
 	height: 100%;/* Eliminamos errores de float */
+}
+.wrapperL {
+	width:98%; /* Establecemos que el ancho sera del 90% */
+	max-width:100%; /* Aqui le decimos que el ancho máximo sera de 1000px */
+	margin:auto; /* Centramos los elementos */
+    margin-left: 5px;
+	overflow:hidden;
+	height: 100%;/* Eliminamos errores de float */
+	text-align: center;
 }
 
 .wrapper2 {
