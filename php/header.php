@@ -12,7 +12,9 @@ if ($userx == 3) {
 ?>
     <link rel="stylesheet" href="../css/hfstyle.css">
     <div class="wrapper">
-        <a><img src="../images/logo.png" alt="logo" height="100%" width="auto"></a>
+        <div class="logo">
+        <img src="../images/logo.png" alt="logo" height="100%" width="100%  ">
+        </div>
         <nav>
             <a href="../views/hacerSolicitud.php">HACER SOLICITUD</a>
             <ul>

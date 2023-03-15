@@ -4,7 +4,11 @@ header {
 	background:#000000;
 	height: 10%;
 }
-
+.logo {
+	float:left;
+	height: 100%;
+	width: 19%;
+}
 .wrapper {
 	width:98%; /* Establecemos que el ancho sera del 90% */
 	max-width:100%; /* Aqui le decimos que el ancho máximo sera de 1000px */
@@ -22,24 +26,12 @@ header {
     padding-left: 100px;
 }
 
-header .logo {
-	/* font-size:100px;
-	line-height:50px;
-	float:left; */
-}
-
-header .imagen{
-    width: 25px;
-    height: 50px;
-}
-
-header .imagen:hover{
-    filter:hue-rotate(-100deg) brightness(500%);
-}
-
 header nav {
-	padding-top: 4.3%;
+	/* padding-top: 4.3%; */
+	height: 100%;
+	width: 81%;
 	float:right;
+	text-align:-webkit-right;
 }
 
 header nav a {
@@ -48,7 +40,7 @@ header nav a {
 	text-decoration:none;
 	padding:10px 5px;
 	line-height:normal;
-	font-size:100%;
+	font-size:large;
 	font-weight:bolder;
 	-webkit-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
@@ -65,7 +57,7 @@ header nav ul{
 	text-decoration:none;
 	padding:0px;
 	line-height:normal;
-	font-size:15px;
+	font-size:large;
 	font-weight:bolder;
 	-webkit-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
@@ -81,7 +73,7 @@ header nav li a{
 	text-decoration:none;
 	padding:10px 5px;
 	line-height:normal;
-	font-size:100%;
+	font-size:large;
 	font-weight:bolder;
 	-webkit-transition:all 500ms ease;
 	-o-transition:all 500ms ease;
@@ -115,23 +107,23 @@ header nav li.dropdown:hover ul{
 	line-height:100px;
 }
 
-@media screen and (max-width: 950px) {
+/* @media screen and (max-width: 950px) {
 	header .logo,
 	header nav {
-		width:70%;
-		height: 100%;
-		/* text-align:center; Centramos el menu y el logotipo */
+		height:auto;
+		width: auto;
+		text-align:center; 
 	}
 
-	.header2 {
+	.header{
 		height:auto;
 	}
 
-	.header2 .logo,
-	.header2 nav {
+	.header .logo,
+	.header nav {
 		line-height:50px;
 	}
-}
+} */
 body{
     margin: 0px;
 	width:100%;
@@ -193,7 +185,8 @@ p{
     color:#ffffff;
     background-color:#fa565f;
     border-color:#f74248;
-    border-style: solid;	
+    border-style: solid;
+	height: auto;	
 }
 .btn_sal:hover{
     background-color:#ffffff ;

@@ -254,7 +254,7 @@
                                                             ?>
                                                         </select>
                                                     </td>
-                                                    <td><input class="inputTabla" type="number" value=0 id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaCant" type="number" id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search" name="cuentaMayor<?php echo $i ?>" value="<?php if (isset($cuentaMayor[$i])) {
                                                                                                                                                 echo $cuentaMayor[$i];
                                                                                                                                             } else {
@@ -298,10 +298,10 @@
                                                             ?>
                                                         </select>
                                                     </td>
-                                                    <td><input class="inputTabla" type="number" value=0 id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>" disabled>
+                                                    <td><input class="inputTablaCant" type="number" id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>" disabled>
                                                     </td>
                                                     <td><select class="selectServicio" name="ind_imp<?php echo $i ?>" id="ind_imp<?php echo $i ?>" disabled>
-                                                            <option value="-1">~</option>
+                                                            <option value="">~</option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaIndImp->value as $item) :
@@ -340,6 +340,7 @@
                                                                 $('#codigoServicio' + i).select2();
                                                                 $('#proveedor' + i).select2();
                                                                 $('#proyecto' + i).select2();
+                                                                $('#ind_imp' + i).select2();
                                                                 $('#codigoServicio' + i).change(function(e) {
 
 

@@ -247,18 +247,12 @@
                                                             ?>
 
                                                         </select></td>
-                                                    <td><input class="inputTablaFecha" type="text" value="<?php if (isset($fechaNec[$i])) {
-                                                                                                                echo $fechaNec[$i];
-                                                                                                            }
-                                                                                                            ?>" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTablaCant" type="number" value="<?php if (isset($cant_nec[$i])) {
-                                                                                                                echo $cant_nec[$i];
-                                                                                                            } else {
-                                                                                                            } ?>" id="cant_nec<?php echo $i ?>" name="cant_nec<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaFecha" type="text" value="" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaCant" type="number" value="" id="cant_nec<?php echo $i ?>" name="cant_nec<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search" id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" value="" disabled></td>
-                                                    <td><input class="inputTablaCant" type="number" value=0 id="por_desc<?php echo $i ?>" name="por_desc<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaCant" type="number" value="" id="por_desc<?php echo $i ?>" name="por_desc<?php echo $i ?>" disabled></td>
                                                     <td><select class="selectServicio" name="ind_imp<?php echo $i ?>" id="ind_imp<?php echo $i ?>" disabled>
-                                                            <option value="-1">~</option>
+                                                            <option value="">~</option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaIndImp->value as $item) :
@@ -272,7 +266,7 @@
                                                         </select></td>
                                                     <td><input class="inputTabla" type="search" id="total<?php echo $i ?>" name="total<?php echo $i ?>" onclick="ftotal()" disabled readonly></td>
                                                     <td><select class="selectServicio" name="uen<?php echo $i ?>" id="uen<?php echo $i ?>" disabled>
-                                                            <option value="<?php echo (-1) ?>" selected>~</option>
+                                                            <option value="" selected>~</option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaUen->value as $item) :
@@ -485,10 +479,10 @@
                             for (let k = $select2.options.length; k >= 0; k--) {
                                 $select2.remove(k);
                             }
-                            // const option = document.createElement('option');
-                            // option.value = -1;
-                            // option.text = "~";
-                            // $select.appendChild(option);
+                            const option = document.createElement('option');
+                            option.value = -1;
+                            option.text = "~";
+                            $select.appendChild(option);
                             $('#uen' + i).select2();
                             j = 0;
                             while (j >= 0) {
@@ -567,10 +561,10 @@
                             option.value = -1;
                             option.text = "~";
                             $select.appendChild(option);
-                            $('#linea' + i).select2('close');
                             j = 0;
-                            while (j >= 0) {
+                            while (j >= 0 && j<358) {
                                 x = valores[j]['FactorCode'] * 10 ** (-1);
+                                console.log("codigo del factor: ", x);
                                 x = Math.floor(x);
                                 if (x == $(this).val()) {
                                     while (x == ($(this).val())) {
@@ -586,8 +580,10 @@
                                     j = -100;
 
                                 }
+                                $('#linea' + i).select2('close');
                                 j++;
                             }
+
 
                         } else if($(this).val() == document.getElementById('linea' + i).value && $(this).val() == -1) {
                             // $('#linea' + i).select2('close');

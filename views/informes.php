@@ -153,7 +153,7 @@
                                         x = Math.floor(x);
                                     }
                                     j = -100;
-                                    $('#uen' + i).select2('close');
+                                    $('#linea' + i).select2('close');
                                 }
                                 j++;
                             }
