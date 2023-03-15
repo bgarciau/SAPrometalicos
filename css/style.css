@@ -421,6 +421,20 @@ select#sel__solicitante{
     border-style: solid;
     text-align: center;
 }
+ 
+.btn_env4{
+    width: 90%;
+    height: 20%;
+    text-decoration:none;
+    font-size: 100%;
+    color:#ffffff;
+    margin-top: 10%;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
 
 .btn_env:hover{
     background-color:#ffffff ;

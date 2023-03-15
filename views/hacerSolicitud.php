@@ -171,7 +171,7 @@
                                 <label for="FechaContabilizacion">Fecha documento:</label>
                                 <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
-                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria"><br>
+                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria" min="<?= date("Y-m-d") ?>"><br>
                             </div>
                         </td>
                     </tr>
@@ -233,7 +233,7 @@
                                                     <td><input class="inputTablaFecha" type="text" value="<?php if (isset($fechaNec[$i])) {
                                                                                                                 echo $fechaNec[$i];
                                                                                                             }
-                                                                                                            ?>" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" disabled></td>
+                                                                                                            ?>" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" min="<?= date("Y-m-d") ?>" disabled></td>
                                                     <td><select class="selectServicio" name="proveedor<?php echo $i ?>" id="proveedor<?php echo $i ?>" disabled>
                                                             <option value="<?php if (isset($proveedor[$i])) {
                                                                                 echo $proveedor[$i];

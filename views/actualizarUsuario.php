@@ -98,14 +98,32 @@
                 </form>
                 <button class="btn_env3" type="button" id="btn_abrir_modal">Cambiar contraseña</button><br>
                 <dialog id="modal">
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
                         <h2>CAMBIAR CONTRASEÑA</h2>
                         <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $cod_usr ?>"><br>
-                        <label for="Password">Contraseña:</label>
-                        <input class="inputA" type="password" name="password" value=""><br>
-                        <a><input class="btn_env" type="submit" value="CAMBIAR CONTRASEÑA" name="cambiarC"></a>
-                        <button class="btn_env" type="button" id="btn_cerrar_modal">Cancelar</button>
+                        <label class="label2" for="Password">Contraseña:</label>
+                    <input class="inputA" type="password" id="clave1" name="password" value="<?php if (isset($_POST['password'])) {
+                        echo $_POST['password'];
+                    } ?>" required><br>
+                    <label class="label2" for="Password">Confirmar Contraseña:</label>
+                    <input class="inputA" type="password" id="clave2" name="password2" required><br>
+                        <a><input class="btn_env4" type="submit" value="CAMBIAR CONTRASEÑA" name="cambiarC" onclick="comprobarClave()"></a>
+                        <button class="btn_env4" type="button" id="btn_cerrar_modal">Cancelar</button>
                     </form>
+                    <script>
+        function comprobarClave() {
+            let clave1 = document.f1.clave1.value
+            let clave2 = document.f1.clave2.value
+
+            if (clave1 == clave2) {
+
+
+            } else {
+                alert("Las dos claves son distintas...\nvuelva a intentarlo")
+
+            }
+        }
+    </script>
                 </dialog>
                 <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
                 <script src="../js/java.js"></script>

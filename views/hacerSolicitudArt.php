@@ -165,7 +165,7 @@
                                 <label for="FechaContabilizacion">Fecha documento:</label>
                                 <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
-                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria"><br>
+                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria" min="<?= date("Y-m-d") ?>"><br>
                             </div>
                         </td>
                     </tr>
@@ -246,7 +246,7 @@
                                                             ?>
 
                                                         </select></td>
-                                                    <td><input class="inputTablaFecha" type="text" value="" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" disabled></td>
+                                                    <td><input class="inputTablaFecha" type="text" value="" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" min="<?= date("Y-m-d") ?>" disabled></td>
                                                     <td><input class="inputTablaCant" type="number" value="" id="cant_nec<?php echo $i ?>" name="cant_nec<?php echo $i ?>" disabled></td>
                                                     <td><input class="inputTabla" type="search" id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" value="" disabled></td>
                                                     <td><input class="inputTablaCant" type="number" value="" id="por_desc<?php echo $i ?>" name="por_desc<?php echo $i ?>" disabled></td>
