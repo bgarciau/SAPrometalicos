@@ -72,6 +72,7 @@
                                 <th>Sucursal</th>
                                 <th>OPCIONES</th>
                             </thead>
+                            <tbody>
                             <?php
                             $i = 1;
                             foreach ($usuar as $usuario): ?>
@@ -110,6 +111,7 @@
                                 $i = $i + 1;
                             endforeach;
                             ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>

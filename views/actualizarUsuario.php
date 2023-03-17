@@ -66,11 +66,11 @@
                 <form name="form1" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <h2>ACTUALIZAR DATOS USUARIO</h2>
                     <input class="inputA" type="hidden" name="codigoUsuario" value="<?php echo $userr->pk_cod_usr ?>"><br>
-                    <label for="NombreUsuario">Nombre usuario:</label>
+                    <label class="label2" for="NombreUsuario">Nombre usuario:</label>
                     <input class="inputA" type="text" name="nombreUsuario" value="<?php echo $userr->nom_usr ?>"><br>
-                    <label for="RolUsuario">Rol usuario:</label>
+                    <label class="label2" for="RolUsuario">Rol usuario:</label>
                     <input class="inputA" type="text" name="rolUsuario" value="<?php echo $userr->rol_usr ?>"><br>
-                    <label for="Departamento">Departamento:</label>
+                    <label class="label2" for="Departamento">Departamento:</label>
                     <select name="departamento" id="datosFormu">
                         <?php
                         $usrdep = $base->query("SELECT * FROM departamento WHERE pk_dep= '$userr->fk_depart'")->fetchAll(PDO::FETCH_OBJ); foreach ($usrdep as $udep): ?>
@@ -85,9 +85,9 @@
                         endforeach;
                         ?>
                     </select><br>
-                    <label for="Sucursal">Sucursal:</label>
+                    <label class="label2" for="Sucursal">Sucursal:</label>
                     <input class="inputA" type="text" name="sucursal" value="<?php echo $userr->sucursal ?>"><br>
-                    <label for="TipoUsuario">Tipo usuario:</label>
+                    <label class="label2" for="TipoUsuario">Tipo usuario:</label>
                     <select name="tipoUsuario" id="datosFormu">
                         <option value=1>usuario</option>
                         <option value=2>empleado</option>
