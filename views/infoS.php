@@ -36,8 +36,6 @@
                             foreach ($soli as $solis) :
                                 $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$solis->fk_cod_usr'")->fetchAll(PDO::FETCH_OBJ);
                                 foreach ($user as $duser) :
-                                    // $tuser = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$duser->fk_tipo_usr'")->fetchAll(PDO::FETCH_OBJ);
-                                    // foreach ($tuser as $tipo) :
                             ?>
                                         <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                         <label for="Solicitante">Solicitante:</label>
@@ -93,9 +91,7 @@
                 <tr>
                     <td colspan="12">
                         <div id="div__tablaServicios">
-                            <!-- <a href=""><input class="btn_sel" type="button" value="servicios"></a>
-                                <a href="hacerSolicitudArt.php"><input class="btn_sel" type="button" value="articulos"></a> -->
-                            <div class="outer_wrapper">
+                                 <div class="outer_wrapper">
                                 <div class="table_wrapper">
                                     <?php
                                     if ($solis->tipo == "servicio") {
@@ -203,20 +199,7 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
-                            <!-- <label for="TotalAntesDescuento">Total antes del descuento:</label>
-                            <input type="text" name="TotalAntesDescuento"
-                                placeholder="Total"><br>
-                            <label for="GastosAdicionales">Gastos adicionales:</label>
-                            <input type="text" name="GastosAdicionales"
-                                placeholder="Gastos Adicionales"><br>
-                            <label for="Impuesto">Impuesto:</label>
-                            <input type="text" name="Impuesto" placeholder="Impuesto"><br>
-                            <label for="TotalPagoVencido">Total pago vencido:</label>
-                            <input type="text" name="TotalPagoVencido"
-                                placeholder="Total pago vencido"><br> -->
                             <a href="misSolicitudes.php"><input class="btn_vol" type="button" value="VOLVER"></a>
-                            <!-- <button class="btn_env">ENVIAR SOLICITUD</button> -->
-
                         </div>
                     </td>
 

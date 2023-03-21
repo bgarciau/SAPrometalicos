@@ -12,19 +12,16 @@ h2{
     text-align: center;
 }
 
-.base {
+/* Vista de la pagina */
+.base {  
     width: 100%;
     height: 100vh;
 }
 
- 
+ /* Contenido entre el header y el footer */
 .contenedor{
     width: 100%;
     height: 90%;
-    /* top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    position:relative; */
     z-index:0;
     background-color: #e7d0a483;
 }
@@ -72,20 +69,17 @@ table{
     width: 20%;
     padding-right: 5%;
     float: right;
-    /* background-color: #e7d0a4bb; */
 }
 #div__agregar{
     text-align: left;
     float: left;
     margin-left: 5px;
     width: 20%;
-    /* background-color:#e7d0a4bb; */
 }
 #div__buscar{
     text-align: left;
     margin-left: 10%;
     float:left;
-    /* background-color:#e7d0a4bb; */
 }
 #color_a{
     height: 7%;
@@ -121,19 +115,15 @@ table{
 }
 
 .table_wrapperS{
-    /* max-height: 250px; */
     height: 90%;
     width: 99%;
     overflow-y:scroll;
     margin: 5px;
-    /* overflow-x:scroll;        */
 }
 
 .outer_wrapperS{
-    /* border:1px solid black; */
     box-shadow: 0px 0px 5px black;
     margin: 5px;
-    /* max-width: 98%; */
     height:99%;
     max-height: 99%;
     width: 99%;
@@ -164,7 +154,6 @@ table{
 }
 
 .table_wrapper{
-    /* max-height: 250px; */
     height: 97%;
     width: 99,5%;
     overflow-y: scroll;
@@ -175,7 +164,6 @@ table{
 .outer_wrapper{
     box-shadow: 0px 0px 3px black;
     margin: 2px;
-    /* max-width: 98%; */
     height: 89%;
     width: 99%;
 }
@@ -279,8 +267,6 @@ input{
     text-align: left;
     margin: 0;
     border: 0px;
-    /* width: auto;
-    max-width: max-content; */
     font-size: 18px;
     height: 25px;
     width: 99%;
@@ -291,8 +277,6 @@ input{
     text-align: left;
     margin: 0;
     border: 0px;
-    /* width: auto;
-    max-width: max-content; */
     font-size: 18px;
     height: 25px;
     width: 98%;
@@ -578,5 +562,21 @@ select#sel__solicitante{
 #arse{
     width: 250px;
     font-size: 14px;
+}
+
+.btn-eliminar-servicio{
+    font-size: 15px;
+    color:#ffffff;
+    background-color:#ff0505;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.btn-eliminar-servicio:hover{
+    font-size: 15px;
+    color:#ffffff;
+    background-color:#ff7105;
+    border: 0px;
+    border-radius: 5px;
 }
 

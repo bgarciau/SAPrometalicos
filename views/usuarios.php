@@ -4,51 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css"> <!-- llama el estilo para el contenido entre el header y el footer -->
 </head>
 
 <body>
     <?php
-    session_start();
+    session_start(); //inicia la sesion para comprobar si el usuario ya inicio sesion en el login
 
-    if (!isset($_SESSION["usuario"])) {
+    if (!isset($_SESSION["usuario"])) { // comprueba si esta logeado y si no lo esta lo manda a inciar sesion
 
-        header("location:../index.php");
+        header("location:../"); 
     }
 
-    include("../php/conexion.php");
+    include("../php/conexion.php"); //se incluye la conexion a la base de datos
 
-    $usuario = $_SESSION['usuario'];
+    $usuario = $_SESSION['usuario']; //se toma el nombre del usuario para saber que tipo de usuario es y cuales son sus permisos
 
-    $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+    $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //toma el tipo de usuario de la base de datos
     foreach ($registros as $Tusuario) {
         $userx = $Tusuario->fk_tipo_usr;
     }
-    if ($userx != 3) {
+    if ($userx != 3) {   //Con esta condicion se comprueba si el usuario es administrdor y si no lo es lo manda a hacer solicitud
         header("location:hacerSolicitud.php");
     }
 
-    $usuar = $base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
+    $usuar = $base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);    //se llaman todos los usuarios de la base de datos
 
     ?>
-    <div class="base">
+    <div class="base">   <!-- Vista de  la pagina -->
         <header>
             <?php
-            require_once('../php/header.php');
+            require_once('../php/header.php'); //
             ?>
         </header>
         <div class="contenedor">
             <h2>USUARIOS</h2>
             <div id="div__tablaSolicitudes">
-                <!-- <div id="color_a">
-                    <div id="div__agregar">
-                        <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
-                                value="+AGREGAR"></a>
-                    </div>
-                    <div id="div__volver">
-                        <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
-                    </div>
-                </div> -->
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">
                         <div id="div__agregar">
@@ -58,10 +49,6 @@
                         <div id="div__volver">
                             <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
                         </div>
-                        <div id="div__buscar">
-                            <input class="inputBuscar" type="search" name="" value="BUSCAR">
-                        </div>
-                        <!-- <input class="inputBuscar" type="search" name="" value="BUSCAR"> -->
                         <table border="4px" id="tabla__usuarios">
                             <thead>
                                 <th>#</th>

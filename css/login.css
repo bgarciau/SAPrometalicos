@@ -6,24 +6,18 @@
     width: 370px;
     height: 550px;
     border: 5px solid #ffffff;
-    /* background:url(https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjk1ZGQzYjAzYjkwOWM1NjVlOTVlOGYyYmI2YzUyZWQzNjVlNjM1NiZjdD1n/Ui46FI4nHWyD6/giphy.gif) center center no-repeat; */
-    background-size: cover;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     position: relative;
     border-radius: 20px;
-    /* filter:hue-rotate(-5deg) brightness(120%) */
   }
 
   .loginback{
     width: 100%;
     height: 100%;
     background:url(https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjk1ZGQzYjAzYjkwOWM1NjVlOTVlOGYyYmI2YzUyZWQzNjVlNjM1NiZjdD1n/Ui46FI4nHWyD6/giphy.gif) center center no-repeat;
-    /* background:url(https://media.giphy.com/media/k5zu35npVsYfgZQwwl/giphy.gif) center center no-repeat; */
-    /* background:url(https://media.giphy.com/media/E8GfFH47PKeyI/giphy.gif) center center no-repeat; */
     background-size: cover;
-    /* filter: brightness(70%); */
   }
   
   .login .form {

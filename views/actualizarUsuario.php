@@ -32,14 +32,12 @@
         $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_password" => $pass_cifrado));
 
         $cod_usr = $codigoUsuario;
-        // header("location:Usuarios.php");
     } elseif (isset($_POST["btn_actualizar"])) {
         $codigoUsuario = $_POST["codigoUsuario"];
         $nombreUsuario = $_POST["nombreUsuario"];
         $rolUsuario = $_POST["rolUsuario"];
         $departamento = $_POST["departamento"];
         $sucursal = $_POST["sucursal"];
-        // $password=$_POST["password"];
         $tipoUsuario = $_POST["tipoUsuario"];
 
         $sql = "UPDATE usuario SET nom_usr=:_nombreUsuario,rol_usr=:_rolUsuario,fk_depart=:_departamento, sucursal=:_sucursal, fk_tipo_usr=:_tipoUsuario WHERE pk_cod_usr=:_codigoUsuario";
@@ -48,7 +46,7 @@
 
         $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_nombreUsuario" => $nombreUsuario, ":_rolUsuario" => $rolUsuario, ":_departamento" => $departamento, ":_sucursal" => $sucursal, ":_tipoUsuario" => $tipoUsuario));
         $cod_usr = $codigoUsuario;
-        // header("location:usuarios.php");
+        
     } else {
         $cod_usr = $_GET["codigoUsuario"];
     }

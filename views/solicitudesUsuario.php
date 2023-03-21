@@ -17,7 +17,6 @@
     }
 
     include("../php/conexion.php");
-    // $registros = $base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
 
     ?>
     <div class="base">
@@ -45,16 +44,14 @@
                     if ($xtabla == "tservicios") { ?>
                         <!-- tabla servicios -->
                         <div class="table_wrapperS">
-                            <input class="inputBuscar" type="search" name="" value="BUSCAR">
                             <h4>Servicios</h4>
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
                                     <th>Estado</th>
                                     <th>Nombre solicitante</th>
-                                    <!-- <th>Sucursal</th> -->
                                     <th>Departamento</th>
-                                    <th>Corre electronico</th>
+                                    <th>Correo electronico</th>
                                     <th>Cantidad de sevicios</th>
                                     <th>propietario</th>
                                     <th>Comentarios</th>
@@ -96,14 +93,12 @@
                     } else { ?>
                             <!-- tabla articulos -->
                             <div class="table_wrapperS">
-                                <input class="inputBuscar" type="search" name="" value="BUSCAR">
                                 <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">
                                     <thead>
                                         <th>N° Sol</th>
                                         <th>Estado</th>
                                         <th>Nombre solicitante</th>
-                                        <!-- <th>Sucursal</th> -->
                                         <th>Departamento</th>
                                         <th>Corre electronico</th>
                                         <th>Cantidad de articulos</th>

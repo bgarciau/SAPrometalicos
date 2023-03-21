@@ -10,8 +10,6 @@
 <body>
     <?php
 
-    use function PHPSTORM_META\sql_injection_subst;
-
     session_start();
 
     if (!isset($_SESSION["usuario"])) {
@@ -131,7 +129,6 @@
                     </select>
 
                     <br>
-                    <!-- <input class="inputA" type="text" id="TipoUsuario" name="tipoUsuario" value="Tipo usuario"><br> -->
                     <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU"
                             onclick="comprobarClave()"></a>
                     <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>

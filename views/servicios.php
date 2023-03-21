@@ -42,7 +42,6 @@
                 </div>
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">
-                        <input class="inputBuscar" type="search" name="" value="BUSCAR">
                         <table border="4px" id="tabla__usuarios">
                             <thead>
                                 <th>#</th>

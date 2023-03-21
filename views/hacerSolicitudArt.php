@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
     <?php
     session_start();
 
@@ -28,12 +29,17 @@
         $tipo = "articulo";
         $cantidad = 0;
         $j = 0;
+        $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+        $num = 1;
+        foreach ($ultimo as $ultimoo) :
+            $num++;
+        endforeach;
         while ($j < 20) {
             $codArt = $_POST["codArt$j"];
             if ($codArt == -1) {
             } else {
                 $cantidad++;
-                $codSol = $_POST["numSol"];
+                $codSol = $num;
                 $codArt[$j] = $_POST["codArt$j"];
                 $code[$j] = $respuestaArticulos->value[$codArt[$j]]->ItemCode;
                 $desc[$j] = $respuestaArticulos->value[$codArt[$j]]->ItemName;
@@ -61,7 +67,7 @@
             $j++;
         }
         if ($cantidad > 0) {
-            $codSol = $_POST["numSol"];
+            $codSol = $num;
             $estado = $_POST["estado"];
             $nomSol = $_POST["nomSol"];
             $correoElectronico = $_POST["correoElectronico"];
@@ -184,7 +190,7 @@
                                                 <th>Descripcion Articulo</th>
                                                 <th>Proveedor</th>
                                                 <th>Fecha Necesaria</th>
-                                                <th>Canidad Necesaria</th>
+                                                <th>Cantidad Necesaria</th>
                                                 <th>Precio Info</th>
                                                 <th>% Descuento</th>
                                                 <th>indicador de impuestos</th>
@@ -352,10 +358,6 @@
                     for (i = 0; i < 20; i++) {
 
                         if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() != -1) {
-                            // $('#descripcion' + i).select2();
-                            // $('#descripcion' + i).select2('destroy');
-                            // $('#cdes' + i).prop("hidden", false).prop("readonly", true).prop("class", "inputTablaArt");
-                            // $('#cdes' + i).val(valores[$(this).val()]["ItemName"]).prop("readonly", true).prop("title", valores[$(this).val()]["ItemName"]);
                             $('#descripcion' + i).val($(this).val());
                             $('#descripcion' + i).select2();
                             $('#proveedor' + i).prop("disabled", false);
@@ -371,10 +373,6 @@
                         }
 
                         if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() == -1) {
-                            // $('#cdes' + i).prop("hidden", true);
-                            // $('#descripcion' + i).select2();
-                            // $('#cdes' + i).val(-1);
-                            // $('#cdes' + i).prop("hidden", true).prop("class", null);
                             $('#descripcion' + i).val($(this).val());
                             $('#descripcion' + i).select2();
                             $('#proveedor' + i).prop("disabled", true).val(-1);
@@ -401,10 +399,6 @@
                     for (i = 0; i < 20; i++) {
 
                         if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() != -1) {
-                            // $('#codigoArticulo' + i).select2();
-                            // $('#codigoArticulo' + i).select2('destroy');
-                            // // $('#codArtt' + i).prop("hidden", false).prop("readonly", true).prop("class", "inputTablaArt");
-                            // // $('#codArtt' + i).val(valores[$(this).val()]["ItemCode"]).prop("readonly", true);
                             $('#codigoArticulo' + i).val($(this).val());
                             $('#codigoArticulo' + i).select2();
                             $('#proveedor' + i).prop("disabled", false);
@@ -419,10 +413,6 @@
 
                         }
                         if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() == -1) {
-                            // $('#codArtt' + i).prop("hidden", true);
-                            // $('#codigoArticulo' + i).select2();
-                            // $('#codArtt' + i).val(-1);
-                            // $('#codArtt' + i).prop("hidden", true).prop("class", null);
                             $('#codigoArticulo' + i).val($(this).val());
                             $('#codigoArticulo' + i).select2();
                             $('#proveedor' + i).prop("disabled", true).val(-1);
@@ -479,7 +469,7 @@
                                 $select2.remove(k);
                             }
                             const option = document.createElement('option');
-                            option.value = -1;
+                            option.value = 0;
                             option.text = "~";
                             $select.appendChild(option);
                             $('#uen' + i).select2();
@@ -502,8 +492,8 @@
                                 }
                                 j++;
                             }
-                        } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == -1) {
-                            // $('#uen' + i).select2();
+                        } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == 0) {
+    
                             const $select = document.querySelector("#linea" + i);
 
                             const opcionCambiada = () => {
@@ -527,9 +517,6 @@
                             $('#sublinea' + i).prop("disabled", true).val(-1);
                             $('#sublinea' + i).select2();
                         }
-                        // else{
-                        //     $('#uen' + i).select2();
-                        // }
                     }
                 })
 
@@ -557,7 +544,7 @@
                                 $select.remove(k);
                             }
                             const option = document.createElement('option');
-                            option.value = -1;
+                            option.value = 0;
                             option.text = "~";
                             $select.appendChild(option);
                             j = 0;
@@ -584,8 +571,7 @@
                             }
 
 
-                        } else if($(this).val() == document.getElementById('linea' + i).value && $(this).val() == -1) {
-                            // $('#linea' + i).select2('close');
+                        } else if($(this).val() == document.getElementById('linea' + i).value && $(this).val() == 0) {
                             const $select = document.querySelector("#sublinea" + i);
 
                             const opcionCambiada = () => {

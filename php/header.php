@@ -30,7 +30,6 @@ foreach ($registros as $Tusuario) {
             <a href="../views/informes.php">INFORMES</a>
             <a href="../views/usuarios.php">USUARIOS</a>
             <a href="../views/servicios.php">SERVICIOS</a>
-            <!-- <a href="../views/configuracion.php">CONFIGURACION</a> -->
             <a class="salir" href="../crud/cerrar_session.php"><input class="btn_sal" type="button" value="SALIR"></a>
         <?php
     } else {

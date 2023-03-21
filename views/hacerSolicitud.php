@@ -21,7 +21,7 @@
 
         header("location:../index.php");
     }
-    //session_destroy();
+
     include("../php/conexion.php");
     include("../php/SAP.php");
 
@@ -29,11 +29,17 @@
         $tipo = "servicio";
         $cantidad = 0;
         $j = 0;
+        $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+        $num = 1;
+        foreach ($ultimo as $ultimoo) :
+            $num++;
+        endforeach;
+        
         while ($j < 20) {
             $cod_arse = $_POST["cod_arse$j"];
             if ($cod_arse == -1) {
             } else {
-                $codSol = $_POST["numSol"];
+                $codSol = $num;
                 $codArse[$j] = $_POST["cod_arse$j"];
                 $code[$j] = $respuestaServicios->value[$codArse[$j]]->Name;
                 $fechaNec[$j] = $_POST["fecha_Nec$j"];
@@ -61,7 +67,7 @@
             $j++;
         }
         if ($cantidad > 0) {
-            $codSol = $_POST["numSol"];
+            $codSol = $num;
             $estado = $_POST["estado"];
             $nomSol = $_POST["nomSol"];
             $correoElectronico = $_POST["correoElectronico"];
@@ -102,8 +108,6 @@
 
                                 $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                 foreach ($user as $duser) :
-                                    // $tuser = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$duser->fk_tipo_usr'")->fetchAll(PDO::FETCH_OBJ);
-                                    // foreach ($tuser as $tipo) : 
                                     ?>
                                         <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                         <label for="Solicitante">Solicitante:</label>
@@ -142,7 +146,6 @@
                                         </select><br>
                                 <?php
                                     endforeach;
-                                // endforeach;
                                 ?>
                                 <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
                                 <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
@@ -163,11 +166,6 @@
                                 <input type="text" name="numSol" value="<?php echo $num ?>" readonly><br>
                                 <label for="Estado">Estado:</label>
                                 <input type="text" name="estado" value="ABIERTO" readonly><br>
-                                <!-- <label for="FechaContabilizacion">Fecha contabilizacion:</label>
-                            <input type="text" name="fechaContabilizacion"
-                                placeholder="Fecha Contabilizasion"><br>
-                            <label for="ValidoHasta">Valido hasta:</label>
-                            <input type="text" name="validoHasta" placeholder="Valido hasta"><br> -->
                                 <label for="FechaContabilizacion">Fecha documento:</label>
                                 <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
@@ -185,6 +183,7 @@
                                         <!-- tabla servicios  -->
                                         <table id="tabla__servicios">
                                             <thead>
+                                                <th></th>
                                                 <th>#</th>
                                                 <th>Descripcion servicio</th>
                                                 <th>Fecha Necesaria</th>
@@ -202,9 +201,12 @@
                                             <?php
 
                                             $i = 0;
-                                            while ($i < 20) {
+                                            while ($i < 1) {
                                             ?>
                                                 <tbody>
+                                                <td>
+                                                        <button class="btn-eliminar-servicio">x</button>
+                                                    </td>
                                                     <td>
                                                         <?php echo $i + 1 ?>
                                                     </td>
