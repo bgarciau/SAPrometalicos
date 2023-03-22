@@ -21,34 +21,33 @@
 
     $depart = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
 
-    if (isset($_POST["crearU"])) {
+    if (isset($_POST["crearU"])) { //se usa cuando se manda el formulario con los datos del usuario
 
-        if ($_POST["password"] == $_POST["password2"]) {
+        if ($_POST["password"] == $_POST["password2"]) { //si las claves son iguales crea el usuario en la base de datos
             $codigoUsuario = $_POST["codigoUsuario"];
             $nombreUsuario = $_POST["nombreUsuario"];
             $rolUsuario = $_POST["rolUsuario"];
             $departamento = $_POST["departamento"];
             $sucursal = $_POST["sucursal"];
             $password = $_POST["password"];
-            $pass_cifrado = password_hash($password, PASSWORD_DEFAULT, array("cost" => 7));
+            $pass_cifrado = password_hash($password, PASSWORD_DEFAULT, array("cost" => 7)); //Encripta la clave 
             $tipoUsuario = $_POST["tipoUsuario"];
 
             $sql = "INSERT INTO usuario (pk_cod_usr,nom_usr,rol_usr,fk_depart,sucursal,pass_usr,fk_tipo_usr) 
                 VALUES(:_codigoUsuario,:_nombreUsuario,:_rolUsuario,:_departamento,:_sucursal,:_password,:_tipoUsuario)";
 
-            $resultado = $base->prepare($sql);
+            $resultado = $base->prepare($sql); //Prepara una sentencia SQL para ser ejecutada por el método execute
 
-            $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_nombreUsuario" => $nombreUsuario, ":_rolUsuario" => $rolUsuario, ":_departamento" => $departamento, ":_sucursal" => $sucursal, ":_password" => $pass_cifrado, ":_tipoUsuario" => $tipoUsuario));
+            $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_nombreUsuario" => $nombreUsuario, ":_rolUsuario" => $rolUsuario, ":_departamento" => $departamento, ":_sucursal" => $sucursal, ":_password" => $pass_cifrado, ":_tipoUsuario" => $tipoUsuario)); //se ejecuta el resultado y se definen las variables que se van a enviar a la base de datos
 
-            header("location:usuarios.php");
-        } else {
+            header("location:usuarios.php"); //lo manda a la lista de usuarios
+        } else {  //si las claves no son iguales les hace un post a las variables para volverlas a cargar e intentar nuevamente la contraseña
             $codigoUsuario = $_POST["codigoUsuario"];
             $nombreUsuario = $_POST["nombreUsuario"];
             $rolUsuario = $_POST["rolUsuario"];
             $departamento = $_POST["departamento"];
             $sucursal = $_POST["sucursal"];
             $password = $_POST["password"];
-            $pass_cifrado = password_hash($password, PASSWORD_DEFAULT, array("cost" => 7));
             $tipoUsuario = $_POST["tipoUsuario"];
         }
     }
@@ -61,10 +60,10 @@
     </header>
         <div class="contenedor">
             <div id="div__agregarU">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1"> <!-- Se usa el php_self para hacer el action del form en el mismo archivo php   -->
                     <h2>AGREGAR USUARIO</h2>
                     <label class="label2" for="CodigoUsuario">Codigo usuario:</label>
-                    <input class="inputA" type="text" id="CodigoUsuario" name="codigoUsuario" value="<?php if (isset($_POST['codigoUsuario'])) {
+                    <input class="inputA" type="text" id="CodigoUsuario" name="codigoUsuario" value="<?php if (isset($_POST['codigoUsuario'])) { //la condicion en el value se usa para saber si ya se habia hechoo un post en el formulario, si este fallo se vuelven a cargar los datos para que se vuelva a intentar el formulario
                         echo $_POST['codigoUsuario'];
                     } ?>"
                         required><br>
@@ -110,18 +109,10 @@
                     <input class="inputA" type="password" id="clave2" name="password2" required><br>
                     <label class="label2" for="TipoUsuario">Tipo usuario:</label>
                     <select name="tipoUsuario" id="datosFormu" required>
-                        <?php
-                        if (isset($_POST['tipoUsuario'])) {
-                            $tuser2 = $_POST['tipoUsuario'];
-                            $tusr = $base->query("SELECT * FROM tipo_usr WHERE pk_t_usr= '$tuser2'")->fetchAll(PDO::FETCH_OBJ);
-                            foreach ($tusr as $tuser):
-
-                                ?>
-                                <option value="<?php echo $tuser->pk_t_usr ?>"><?php echo $tuser->des_usr ?></option>
-                                <?php
-                            endforeach;
-                        }
-                        ?>
+    
+                                <option value="<?php if (isset($_POST['tipoUsuario'])) {
+                        echo $_POST['tipoUsuario'];
+                    } ?>"><?php echo $tipoUsuario ?></option>
 
                         <option value=1>Usuario</option>
                         <option value=2>Empleado</option>
@@ -129,9 +120,9 @@
                     </select>
 
                     <br>
-                    <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU"
-                            onclick="comprobarClave()"></a>
-                    <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                    <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU" 
+                            onclick="comprobarClave()"></a><!-- Este boton envia los datos del nuevo usuario y tambien verifica si las claves son iguales y si no lo son carga nuevamente los datos dejando el campo de la contraseña -->
+                    <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a> <!-- Vuelve al listado de usuarios sin guardar datos -->
             </div>
         </div>
         <footer>
@@ -142,7 +133,7 @@
     </div>
     </form>
     <script>
-        function comprobarClave() {
+        function comprobarClave() { //funcion para coomprobar si las claves son iguales
             let clave1 = document.f1.clave1.value
             let clave2 = document.f1.clave2.value
 
@@ -150,7 +141,7 @@
 
 
             } else {
-                alert("Las dos claves son distintas...\nvuelva a intentarlo")
+                alert("Las dos claves son distintas...\nvuelva a intentarlo") //si las calves son diferentes saca una alerta
 
             }
         }

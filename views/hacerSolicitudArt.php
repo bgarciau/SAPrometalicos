@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/style.css">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../css/style.css"> <!-- estilo para la pagina -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/select2/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <script src="../css/select2/select2.min.js"></script>
+    <link href="../css/select2/select2.min.css" rel="stylesheet" /> <!-- Libreria para agregar estilo al buscador en los select -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> <!-- libreria para que funcione el buscador de los select -->
+    <script src="../css/select2/select2.min.js"></script>  <!-- libreria para que funcione el buscador de los select -->
     <title>Hacer solicitud</title>
 </head>
 
@@ -23,18 +23,18 @@
     }
 
     include("../php/conexion.php");
-    include("../php/SAP.php");
+    include("../php/SAP.php"); //se usa para hacer los get al sap
 
-    if (isset($_POST["guardarA"])) {
+    if (isset($_POST["guardarA"])) { //entra a la condicion si el formulario se envio correctamente
         $tipo = "articulo";
-        $cantidad = 0;
-        $j = 0;
+        $cantidad = 0; //Esta variable se usa para saber si hay articulos, si los hay los manda a la base de datos 
+        $j = 0; 
         $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
         $num = 1;
         foreach ($ultimo as $ultimoo) :
             $num++;
         endforeach;
-        while ($j < 20) {
+        while ($j < 1) {
             $codArt = $_POST["codArt$j"];
             if ($codArt == -1) {
             } else {
@@ -84,7 +84,7 @@
             $solicitud = $base->prepare($sql);
 
             $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
-            header("location:misSolicitudes.php?xtabla=tarticulos");
+            header("location:misSolicitudes.php?xtabla=tarticulos&SolCreada=$num");
         }
     }
 
@@ -202,7 +202,7 @@
                                             <?php
 
                                             $i = 0;
-                                            while ($i < 20) {
+                                            while ($i < 1) {
                                             ?>
                                                 <tr>
                                                     <td>
@@ -324,7 +324,7 @@
         </footer>
     </div>
     <script>
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 1; i++) {
             $('#codigoArticulo' + i).select2();
             $('#descripcion' + i).select2();
             $('#proveedor' + i).select2();
@@ -341,7 +341,7 @@
 
         function ftotal() {
             i = 0;
-            while (i < 20) {
+            while (i < 1) {
                 const desc = document.getElementById('por_desc' + i).value;
                 const precio = document.getElementById('precio_inf' + i).value;
                 document.getElementById('total' + i).value = precio - (desc * precio / 100);
@@ -351,11 +351,11 @@
 
         $(document).ready(function() {
 
-            for (i = 0; i < 20; i++) {
+            for (i = 0; i < 1; i++) {
 
                 $('#codigoArticulo' + i).change(function(e) {
 
-                    for (i = 0; i < 20; i++) {
+                    for (i = 0; i < 1; i++) {
 
                         if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() != -1) {
                             $('#descripcion' + i).val($(this).val());
@@ -396,7 +396,7 @@
 
                 $('#descripcion' + i).change(function(e) {
 
-                    for (i = 0; i < 20; i++) {
+                    for (i = 0; i < 1; i++) {
 
                         if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() != -1) {
                             $('#codigoArticulo' + i).val($(this).val());
@@ -435,7 +435,7 @@
                 })
 
                 $('#uen' + i).change(function(e) {
-                    for (i = 0; i < 20; i++) {
+                    for (i = 0; i < 1; i++) {
                         if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() != -1) {
                             $('#linea' + i).prop("disabled", false).val(-1);
                             $('#linea' + i).select2();
@@ -521,7 +521,7 @@
                 })
 
                 $('#linea' + i).change(function(e) {
-                    for (i = 0; i < 20; i++) {
+                    for (i = 0; i < 1; i++) {
                         if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != -1) {
                             $('#sublinea' + i).prop("disabled", false);
                             $('#sublinea' + i).select2();

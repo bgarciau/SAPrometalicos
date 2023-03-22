@@ -18,6 +18,9 @@
 
     include("../php/conexion.php");
 
+    if(isset($_GET['SolCreada'])){
+        echo '<script language="javascript">alert("Su solicitud fue creada con el numero: '.$_GET['SolCreada'].'");</script>';
+    }
     ?>
     <div class="base">
     <header>
@@ -51,7 +54,7 @@
                                     <th>Estado</th>
                                     <th>Nombre solicitante</th>
                                     <th>Departamento</th>
-                                    <th>Corre electronico</th>
+                                    <th>Correo electronico</th>
                                     <th>Cantidad de sevicios</th>
                                     <th>propietario</th>
                                     <th>Comentarios</th>
@@ -59,8 +62,8 @@
                                 </thead>
                                 <?php
                                 $usuario = $_SESSION['usuario'];
-                                $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                foreach ($misolicitud as $misolicitudes) :
+                                $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //guarda las solicitudes de servicios hechas por el ususario de la sesion en un PDOStatement
+                                foreach ($misolicitud as $misolicitudes) : // se recorren todos las solicitudes de servicio del usuario
                                 ?>
                                     <tr>
 
@@ -118,7 +121,7 @@
                                     </thead>
                                     <?php
                                     $usuario = $_SESSION['usuario'];
-                                    $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                                    $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //guarda las solicitudes de articulos hechas por el ususario de la sesion en un PDOStatement
                                     foreach ($misolicitud as $misolicitudes) :
                                     ?>
                                         <tr>

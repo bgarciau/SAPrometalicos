@@ -34,22 +34,22 @@
     <div class="base">   <!-- Vista de  la pagina -->
         <header>
             <?php
-            require_once('../php/header.php'); //
+            require_once('../php/header.php'); // llama el header
             ?>
         </header>
-        <div class="contenedor">
+        <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
             <h2>USUARIOS</h2>
-            <div id="div__tablaSolicitudes">
-                <div class="outer_wrapperS">
+            <div id="div__tablaSolicitudes"> <!-- Este div contiene la tabla de usuarios que se maneja igual a la de solicitudes -->
+                <div class="outer_wrapperS"> <!-- el outer y el table wrappers es para mantener la tabla en el div sin importar su tamaño, si la tabla es mas grande que el div se usa un scroll -->
                     <div class="table_wrapperS">
                         <div id="div__agregar">
-                            <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"
-                                    value="+AGREGAR"></a>
+                            <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"  
+                                    value="+AGREGAR"></a> <!-- Boton para agregar usuario -->
                         </div>
                         <div id="div__volver">
-                            <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                            <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>  <!-- boton para volver a hacer solicitud -->
                         </div>
-                        <table border="4px" id="tabla__usuarios">
+                        <table border="4px" id="tabla__usuarios"> <!-- tabla de usuarios -->
                             <thead>
                                 <th>#</th>
                                 <th>Codigo de usuario</th>
@@ -61,41 +61,41 @@
                             </thead>
                             <tbody>
                             <?php
-                            $i = 1;
-                            foreach ($usuar as $usuario): ?>
+                            $i = 1; //numero de usuario
+                            foreach ($usuar as $usuario): ?> <!-- se usan los datos del usuario para llenar la tabla -->
                                 <tr>
                                     <td>
-                                        <?php echo $i ?>
+                                        <?php echo $i ?> <!-- numero de usuario en la tabla -->
                                     </td>
                                     <td>
-                                        <?php echo $usuario->pk_cod_usr ?>
+                                        <?php echo $usuario->pk_cod_usr ?> <!-- Codigo del usuario -->
                                     </td>
                                     <td>
-                                        <?php echo $usuario->nom_usr ?>
+                                        <?php echo $usuario->nom_usr ?> <!-- Nombre del usuario -->
                                     </td>
                                     <td>
-                                        <?php echo $usuario->rol_usr ?>
+                                        <?php echo $usuario->rol_usr ?> <!-- rol del usuario -->
                                     </td>
                                     <td>
                                         <?php
                                         $depart = $base->query("SELECT * FROM departamento WHERE pk_dep= '$usuario->fk_depart'")->fetchAll(PDO::FETCH_OBJ); foreach ($depart as $departt) {
                                             echo $departt->nom_dep;
                                         }
-                                        ?>
+                                        ?> <!--  Departamento del usuario -->
                                     </td>
                                     <td>
-                                        <?php echo $usuario->sucursal ?>
+                                        <?php echo $usuario->sucursal ?> <!-- Sucursal del usuario -->
                                     </td>
-                                    <td class="opcionesTabla">
+                                    <td class="opcionesTabla"> <!-- Clase para centrar los botones -->
                                         <a href="actualizarUsuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><input
-                                                class="btn_update" type="button" value="update"></a>
+                                                class="btn_update" type="button" value="update"></a> <!-- Boton para actualizar los datos del usuario, mandando su id -->
                                         <a
                                             href="../crud/eliminar_usuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><input
-                                                class="btn_delete" type="button" value="delete"></a>
+                                                class="btn_delete" type="button" value="delete"></a> <!-- Boton para eliminar usuario segun la id seleccionada -->
                                     </td>
                                 </tr>
                                 <?php
-                                $i = $i + 1;
+                                $i = $i + 1; //se suma uno popr cada usuario
                             endforeach;
                             ?>
                             </tbody>
@@ -106,7 +106,7 @@
         </div>
         <footer>
             <?php
-            require_once('../php/footer.php');
+            require_once('../php/footer.php'); //se lama el footer
             ?>
         </footer>
     </div>

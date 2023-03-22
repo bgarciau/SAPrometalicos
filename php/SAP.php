@@ -1,6 +1,5 @@
 <?php
 
-if (!isset($_SESSION['sesion'])) {
     //Conexion a Service Layer
     $curl = curl_init();
     curl_setopt_array(
@@ -29,9 +28,6 @@ if (!isset($_SESSION['sesion'])) {
     $sesion = $json['SessionId'];
     $_SESSION['sesion'] = $sesion;
     curl_close($curl);
-} else {
-    $sesion = $_SESSION['sesion'];
-}
 
 // LLAMADO PROVEEDORES  
 

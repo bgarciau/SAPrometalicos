@@ -18,7 +18,7 @@
 
     include("../php/conexion.php");
 
-    $numSol = $_GET["numSol"];
+    $numSol = $_GET["numSol"]; //se guarda la id que se manda en una variable
     ?>
     <div class="base">
     <header>
@@ -27,17 +27,17 @@
         ?>
     </header>
         <div class="contenedor">
-            <table border="1px" id="tabla__general">
+            <table border="1px" id="tabla__general">  <!-- tabla general es la tabla que contiene los datos del solicitante, las fechas necesarias, los articulos o servicios, los comentarios y la opcion de volver  -->
                 <tr>
-                    <td colspan="6">
-                        <div id="div__solicitante">
+                    <td colspan="6"> <!-- Esto se hace para que una fila de la tabla tome 6 columnas, en este caso esa es la mitad de la tabla -->
+                        <div id="div__solicitante"> <!--  Este div contiene todos los datos de la persona que va a realizar la solicitud -->
                             <?php
-                            $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ);
+                            $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
                             foreach ($soli as $solis) :
-                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$solis->fk_cod_usr'")->fetchAll(PDO::FETCH_OBJ);
+                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$solis->fk_cod_usr'")->fetchAll(PDO::FETCH_OBJ);// con un dato de la solicitud se guardan los datos del usuario en un PDOStatement
                                 foreach ($user as $duser) :
                             ?>
-                                        <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                            <!-- Se muestran los datos del usuario que hizo la solicitud pero no se pueden modificar -->
                                         <label for="Solicitante">Solicitante:</label>
                                         <select name="solicitante" id="sel__solicitante" disabled>
                                             <option value=""><?php echo $duser->fk_tipo_usr ?></option>
@@ -73,14 +73,13 @@
                                 <input type="text" name="correoElectronico" placeholder="<?php echo $solis->correo_sol ?>" disabled><br>
                         </div>
                     </td>
-                    <td colspan="6">
+                    <td colspan="6"> <!-- Este toma la otra mitad de la fila para las fechas y el estado de la solicitud -->
                         <div id="div__fechas">
-
+                                <!-- Se muestran las fechas de la solicitud y su estado  -->
                             <label for="Nsolicitud">N° solicitud de compra:</label>
                             <input type="text" name="numSol" value="<?php echo $numSol ?>" disabled><br>
                             <label for="Estado">Estado:</label>
                             <input type="text" name="estado" value="<?php echo $solis->estado_sol ?>" disabled><br>
-
                             <label for="FechaContabilizacion">Fecha documento:</label>
                             <input type="text" name="fechaDocumento" placeholder="Fecha documento" disabled><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
@@ -88,13 +87,13 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="12">
+                <tr> <!-- Abre otra fila nueva  -->
+                    <td colspan="12"> <!-- Toma todas las columnas de la tabla  -->
                         <div id="div__tablaServicios">
                                  <div class="outer_wrapper">
                                 <div class="table_wrapper">
                                     <?php
-                                    if ($solis->tipo == "servicio") {
+                                    if ($solis->tipo == "servicio") { //La condicion es para saber si la solicitud tiene articulos o servicios
                                     ?>
                                         <!-- tabla servicios  -->
                                         <h4>SERVICIOS</h4>
@@ -115,13 +114,14 @@
                                                 <th>total ml</th>
                                             </thead>
                                             <?php
-                                            $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ);
+                                            $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los servicios de la solicitud en la variable 
                                             $i = 1;
                                             foreach ($lista as $listaa) :
                                             ?>
                                                 <tr>
+                                                    <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
                                                     <td><?php echo $i ?></td>
-                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
+                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td> 
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
                                                     <td><input class="inputTablaSer" value="<?php echo $listaa->fk_prov ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>" disabled></td>
@@ -158,11 +158,12 @@
                                                     <th>sublineas</th>
                                                 </thead>
                                                 <?php
-                                                $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ);
+                                                $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los articulos de la solicitud en la variable 
                                                 $i = 1;
                                                 foreach ($lista as $listaa) :
                                                 ?>
                                                     <tr>
+                                                        <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
                                                         <td><?php echo $i ?></td>
                                                         <td><input class="inputTabla" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
                                                         <td><input class="inputTabla" value="<?php echo $listaa->nom_arse ?>" disabled></td>
@@ -192,9 +193,9 @@
                     <td colspan="6">
                         <div id="div__comentarios">
                             <label for="Propietario">Propietario:</label>
-                            <input type="text" name="propietario" placeholder="Propietario" disabled><br>
+                            <input type="text" name="propietario" value="<?php echo $solis->propietario ?>" disabled><br>
                             <label for="Comentarios">Comentarios:</label>
-                            <textarea name="comentarios" rows="4" cols="50" placeholder="comentarios" disabled></textarea>
+                            <textarea name="comentarios" rows="4" cols="50"  disabled><?php echo $solis->comentarios ?></textarea>
                         </div>
                     </td>
                     <td colspan="6">

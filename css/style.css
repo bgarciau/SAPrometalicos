@@ -1,11 +1,6 @@
+/* se usa para que la pagina no tenga margen y tampoco espacios blancos a los lados */
 *{
-    margin: 0%;
-}
-
-.volver{
-    margin-left: 25%;
-    width: 75%;
-    text-align: left;
+    margin: 0%;  
 }
 
 h2{

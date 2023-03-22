@@ -34,8 +34,9 @@
         foreach ($ultimo as $ultimoo) :
             $num++;
         endforeach;
+
         
-        while ($j < 20) {
+        while ($j < 1   ) {
             $cod_arse = $_POST["cod_arse$j"];
             if ($cod_arse == -1) {
             } else {
@@ -83,7 +84,7 @@
             $solicitud = $base->prepare($sql);
 
             $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
-            header("location:misSolicitudes.php");
+            header("location:misSolicitudes.php?SolCreada=$num");
         }
     }
 
