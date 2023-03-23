@@ -180,11 +180,13 @@
                             <div id="div__tablaServicios">
                                 <a href="hacerSolicitud.php"><input class="btn_sel" type="button" value="servicios"></a>
                                 <a href=""><input class="btn_sel" type="button" value="articulos"></a>
+                                <input class="btn-agregar-servicio" type="button" value="+">
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
                                         <!-- tabla articulos  -->
                                         <table id="tabla__articulos">
                                             <thead>
+                                                <th></th>
                                                 <th>#</th>
                                                 <th>codigo Articulo</th>
                                                 <th>Descripcion Articulo</th>
@@ -205,8 +207,11 @@
                                             while ($i < 1) {
                                             ?>
                                                 <tr>
-                                                    <td>
-                                                        <?php echo $i + 1 ?>
+                                                <td>
+                                                    <input class="btn-eliminar-servicio" type="button" value="x">
+                                                    </td>
+                                                    <td width="15px" >
+                                                        <input class="inputTablaNumero" type="text" value="<?php echo $i + 1 ?>" disabled>
                                                     </td>
                                                     <td><select class="selectServicio" name="codArt<?php echo $i ?>" id="codigoArticulo<?php echo $i ?>" hidden>
                                                             <option value="<?php echo (-1) ?>" selected>~</option>

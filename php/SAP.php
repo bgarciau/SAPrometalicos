@@ -43,7 +43,7 @@ curl_setopt_array($curlProv, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'GET',
     CURLOPT_HTTPHEADER => array(
-        'Prefer:odata.maxpagesize=2790',
+        'Prefer:odata.maxpagesize=2890',
         'Content-Type: application/json',
         'Cookie: B1SESSION=' . $sesion . ''
     ),
@@ -78,7 +78,7 @@ curl_setopt_array(
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-            'Prefer:odata.maxpagesize=500',
+            'Prefer:odata.maxpagesize=468',
             'Content-Type: application/json',
             'Cookie: B1SESSION=' . $sesion . ''
         ),

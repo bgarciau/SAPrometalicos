@@ -267,6 +267,16 @@ input{
     width: 99%;
 }
 
+.inputTablaNumero{
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    border: 0px;
+    font-size: 18px;
+    height: 24px;
+    width: 70%;
+}
+
 .inputTablaCant{
     display: inline-block;
     text-align: left;
@@ -560,18 +570,32 @@ select#sel__solicitante{
 }
 
 .btn-eliminar-servicio{
-    font-size: 15px;
+    width: 90%;
+    font-size: 100%;
+    font-weight: bolder;
     color:#ffffff;
-    background-color:#ff0505;
-    border: 0px;
-    border-radius: 5px;
+    background-color:#e33535;
+    border-color:#950909;
+    border-width: 2px;
+    border-style: solid;
 }
-
 .btn-eliminar-servicio:hover{
-    font-size: 15px;
-    color:#ffffff;
-    background-color:#ff7105;
-    border: 0px;
-    border-radius: 5px;
+    background-color:#ff000057 ;
+    color:#ff0000;
 }
 
+.btn-agregar-servicio{
+    font-size: 100%;
+    font-weight: bolder;
+    color:#ffffff;
+    background-color:#0cd63f;
+    border-color:#0a8e27;
+    border-width: 2px;
+    border-style: solid;
+    width: 2%;
+    height: auto;
+}
+.btn-agregar-servicio:hover{
+    background-color:#0cd63e3e ;
+    color: #08720a;
+}

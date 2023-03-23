@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="../css/select2/select2.min.js"></script>
     <title>Hacer solicitud</title>
 </head>
@@ -31,12 +32,12 @@
         $j = 0;
         $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
         $num = 1;
-        foreach ($ultimo as $ultimoo) :
+        foreach ($ultimo as $ultimoo):
             $num++;
         endforeach;
 
-        
-        while ($j < 1   ) {
+
+        while ($j < 1) {
             $cod_arse = $_POST["cod_arse$j"];
             if ($cod_arse == -1) {
             } else {
@@ -90,11 +91,11 @@
 
     ?>
     <div class="base">
-    <header>
-        <?php
-        require_once('../php/header.php');
-        ?>
-    </header>
+        <header>
+            <?php
+            require_once('../php/header.php');
+            ?>
+        </header>
         <div class="contenedor">
             <table border="5px" id="tabla__general">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -108,45 +109,45 @@
                                 $usuario = $_SESSION['usuario'];
 
                                 $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                foreach ($user as $duser) :
+                                foreach ($user as $duser):
                                     ?>
-                                        <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
-                                        <label for="Solicitante">Solicitante:</label>
-                                        <select name="solicitante" id="sel__solicitante">
-                                            <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr?></option>
-                                            <option value="Usuario">Usuario</option>
-                                            <option value="Empleado">Empleado</option>
-                                        </select>
-                                        <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>" required><br>
-                                        <label for="NombreSolicitante">Nombre Solicitante:</label>
-                                        <input type="text" name="nomSol" value="<?php echo $duser->nom_usr ?>" required><br>
-                                        <label for="Sucursal">Sucursal:</label>
-                                        <select name="sucursal" id="datosFormu">
-                                            <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
+                                    <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                                    <label for="Solicitante">Solicitante:</label>
+                                    <select name="solicitante" id="sel__solicitante">
+                                        <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr ?>
+                                        </option>
+                                        <option value="Usuario">Usuario</option>
+                                        <option value="Empleado">Empleado</option>
+                                    </select>
+                                    <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
+                                        required><br>
+                                    <label for="NombreSolicitante">Nombre Solicitante:</label>
+                                    <input type="text" name="nomSol" value="<?php echo $duser->nom_usr ?>" required><br>
+                                    <label for="Sucursal">Sucursal:</label>
+                                    <select name="sucursal" id="datosFormu">
+                                        <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
+                                        </option>
+                                        <option value="Principal">Principal</option>
+                                        <option value="DefinirNuervo">Definir nuevo</option>
+                                    </select><br>
+                                    <label for="Departamento">Departamento:</label>
+                                    <select name="departamento" id="datosFormu">
+                                        <?php
+                                        $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
+                                            <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
                                             </option>
-                                            <option value="Principal">Principal</option>
-                                            <option value="DefinirNuervo">Definir nuevo</option>
-                                        </select><br>
-                                        <label for="Departamento">Departamento:</label>
-                                        <select name="departamento" id="datosFormu">
                                             <?php
-                                            $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ);
-                                            foreach ($dep as $depa) : ?>
-                                                <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
-                                                </option>
+                                        endforeach;
+                                        ?>
+                                        <?php
+                                        $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ); foreach ($departamento as $departamentos): ?>
+                                            <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
                                             <?php
-                                            endforeach;
-                                            ?>
-                                            <?php
-                                            $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
-                                            foreach ($departamento as $departamentos) : ?>
-                                                <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
-                                            <?php
-                                            endforeach;
-                                            ?>
-                                        </select><br>
-                                <?php
-                                    endforeach;
+                                        endforeach;
+                                        ?>
+                                    </select><br>
+                                    <?php
+                                endforeach;
                                 ?>
                                 <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
                                 <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
@@ -159,8 +160,7 @@
                             <div id="div__fechas">
                                 <?php
                                 $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-                                $num = 1;
-                                foreach ($ultimo as $ultimoo) :
+                                $num = 1; foreach ($ultimo as $ultimoo):
                                     $num++;
                                 endforeach; ?>
                                 <label for="Nsolicitud">N° solicitud de compra:</label>
@@ -168,9 +168,11 @@
                                 <label for="Estado">Estado:</label>
                                 <input type="text" name="estado" value="ABIERTO" readonly><br>
                                 <label for="FechaContabilizacion">Fecha documento:</label>
-                                <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
+                                <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>"
+                                    readonly><br>
                                 <label for="FechaContabilizacion">Fecha necesaria:</label>
-                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria" min="<?= date("Y-m-d") ?>"><br>
+                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria"
+                                    min="<?= date("Y-m-d") ?>"><br>
                             </div>
                         </td>
                     </tr>
@@ -178,7 +180,9 @@
                         <td colspan="12">
                             <div id="div__tablaServicios">
                                 <a href=""><input class="btn_sel" type="button" value="servicios"></a>
-                                <a href="hacerSolicitudArt.php"><input class="btn_sel" type="button" value="articulos"></a>
+                                <a href="hacerSolicitudArt.php"><input class="btn_sel" type="button"
+                                        value="articulos"></a>
+                                <input class="btn-agregar-servicio" type="button" value="+" onclick="insertarFila()">
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
                                         <!-- tabla servicios  -->
@@ -200,52 +204,46 @@
                                                 <th>total ml</th>
                                             </thead>
                                             <?php
-
                                             $i = 0;
-                                            while ($i < 1) {
                                             ?>
-                                                <tbody>
+                                            <tbody id="body-servicios">
                                                 <td>
-                                                        <button class="btn-eliminar-servicio">x</button>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $i + 1 ?>
-                                                    </td>
-                                                    <td> <select class="selectServicio" name="cod_arse<?php echo $i ?>" id="codigoServicio<?php echo $i ?>">
-                                                            <option value="<?php if (isset($codArse[$i])) {
-                                                                                echo $codArse[$i];
-                                                                            } else {
-                                                                                echo (-1);
-                                                                            } ?>" selected><?php if (isset($codArse[$i]) and $codArse[$i] != -1) {
-                                                                                print_r($respuestaServicios->value[$codArse[$i]]->Name);
-                                                                            } else {
-                                                                                echo "~";
-                                                                            } ?></option>
-                                                            <?php
-                                                            $s = 0;
-                                                            foreach ($respuestaServicios->value as $item) :
+                                                    <input class="btn-eliminar-servicio" type="button" value="x">
+                                                </td>
+                                                <td width="15px">
+                                                    <input class="inputTablaNumero" type="text"
+                                                        value="<?php echo $i + 1 ?>" disabled>
+                                                </td>
+                                                <td> <select class="selectServicio" name="cod_arse<?php echo $i ?>"
+                                                        id="codigoServicio<?php echo $i ?>">
+                                                        <option value="<?php if (isset($codArse[$i])) {
+                                                            echo $codArse[$i];
+                                                        } else {
+                                                            echo (-1);
+                                                        } ?>" selected><?php if (isset($codArse[$i]) and $codArse[$i] != -1) {
+                                                             print_r($respuestaServicios->value[$codArse[$i]]->Name);
+                                                         } else {
+                                                             echo "~";
+                                                         } ?></option>
+                                                        <?php
+                                                        $s = 0;
+                                                        foreach ($respuestaServicios->value as $item):
 
                                                             ?>
-                                                                <option value="<?php echo $s ?>"><?php echo "$item->Name" . PHP_EOL; ?></option>
+                                                            <option value="<?php echo $s ?>"><?php echo "$item->Name" . PHP_EOL; ?></option>
                                                             <?php
-                                                                $s++;
-                                                            endforeach;
-                                                            ?>
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="inputTablaFecha" type="text" value="<?php if (isset($fechaNec[$i])) {
-                                                                                                                echo $fechaNec[$i];
-                                                                                                            }
-                                                                                                            ?>" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>" min="<?= date("Y-m-d") ?>" disabled></td>
-                                                    <td><select class="selectServicio" name="proveedor<?php echo $i ?>" id="proveedor<?php echo $i ?>" disabled>
-                                                            <option value="<?php if (isset($proveedor[$i])) {
-                                                                                echo $proveedor[$i];
-                                                                            } else {
-                                                                            } ?>" selected><?php if (isset($proveedor[$i])) {
-                                                                                echo $proveedor[$i];
-                                                                            } else {
-                                                                                echo "~";
-                                                                            } ?></option>
+                                                            $s++;
+                                                        endforeach;
+                                                        ?>
+                                                    </select>
+                                                </td>
+                                                <td><input class="inputTablaFecha" type="text" value="<?php if (isset($fechaNec[$i])) {
+                                                    echo $fechaNec[$i];
+                                                }
+                                                ?>" id="fecha_Nec<?php echo $i ?>" name="fecha_Nec<?php echo $i ?>"
+                                                        min="<?= date("Y-m-d") ?>" disabled></td>
+                                                        <td><select class="selectServicio" name="proveedor<?php echo $i ?>" id="proveedor<?php echo $i ?>" disabled>
+                                                            <option value=-1 selected>~</option>
                                                             <?php
                                                             $s = 0;
                                                             foreach ($respuestaProveedor->value as $item) :
@@ -256,152 +254,238 @@
                                                                 $s++;
                                                             endforeach;
                                                             ?>
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="inputTablaCant" type="number" id="precio_inf<?php echo $i ?>" name="precio_inf<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTabla" type="search" name="cuentaMayor<?php echo $i ?>" value="<?php if (isset($cuentaMayor[$i])) {
-                                                                                                                                                echo $cuentaMayor[$i];
-                                                                                                                                            } else {
-                                                                                                                                                echo "";
-                                                                                                                                            } ?>" id="cuentaMayor<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTabla" type="search" value="<?php if (isset($uen[$i])) {
-                                                                                                            echo $uen[$i];
-                                                                                                        } else {
-                                                                                                            echo "";
-                                                                                                        } ?>" id="uen<?php echo $i ?>" name="uen<?php echo $i ?>" disabled>
-                                                    </td>
-                                                    <td><input class="inputTabla" type="search" value="<?php if (isset($linea[$i])) {
-                                                                                                            echo $linea[$i];
-                                                                                                        } else {
-                                                                                                            echo "";
-                                                                                                        } ?>" id="lineas<?php echo $i ?>" name="lineas<?php echo $i ?>" disabled></td>
-                                                    <td><input class="inputTabla" type="search" value="<?php if (isset($sublinea[$i])) {
-                                                                                                            echo $sublinea[$i];
-                                                                                                        } else {
-                                                                                                            echo "";
-                                                                                                        } ?>" id="sublineas<?php echo $i ?>" name="sublineas<?php echo $i ?>" disabled></td>
-                                                    <td><select class="selectProyecto" name="proyecto<?php echo $i ?>" id="proyecto<?php echo $i ?>" disabled>
-                                                            <option value="<?php if (isset($proyecto[$i])) {
-                                                                                echo $proyecto[$i];
-                                                                            } else {
-                                                                                echo "";
-                                                                            } ?>" selected><?php if (isset($proyecto[$i])) {
-                                                                                echo $proyecto[$i];
-                                                                            } else {
-                                                                                echo "~";
-                                                                            } ?></option>
-                                                            <?php
-                                                            $s = 0;
-                                                            foreach ($respuestaProyecto->value as $item) :
+
+                                                        </select></td>
+                                                </td>
+                                                <td><input class="inputTablaCant" type="number"
+                                                        id="precio_inf<?php echo $i ?>"
+                                                        name="precio_inf<?php echo $i ?>" disabled></td>
+                                                <td><input class="inputTabla" type="search"
+                                                        name="cuentaMayor<?php echo $i ?>" value="<?php if (isset($cuentaMayor[$i])) {
+                                                               echo $cuentaMayor[$i];
+                                                           } else {
+                                                               echo "";
+                                                           } ?>" id="cuentaMayor<?php echo $i ?>" disabled></td>
+                                                <td><input class="inputTabla" type="search" value="<?php if (isset($uen[$i])) {
+                                                    echo $uen[$i];
+                                                } else {
+                                                    echo "";
+                                                } ?>" id="uen<?php echo $i ?>" name="uen<?php echo $i ?>" disabled>
+                                                </td>
+                                                <td><input class="inputTabla" type="search" value="<?php if (isset($linea[$i])) {
+                                                    echo $linea[$i];
+                                                } else {
+                                                    echo "";
+                                                } ?>" id="lineas<?php echo $i ?>" name="lineas<?php echo $i ?>"
+                                                        disabled></td>
+                                                <td><input class="inputTabla" type="search" value="<?php if (isset($sublinea[$i])) {
+                                                    echo $sublinea[$i];
+                                                } else {
+                                                    echo "";
+                                                } ?>" id="sublineas<?php echo $i ?>" name="sublineas<?php echo $i ?>"
+                                                        disabled></td>
+                                                <td><select class="selectProyecto" name="proyecto<?php echo $i ?>"
+                                                        id="proyecto<?php echo $i ?>" disabled>
+                                                        <option value="<?php if (isset($proyecto[$i])) {
+                                                            echo $proyecto[$i];
+                                                        } else {
+                                                            echo "";
+                                                        } ?>" selected><?php if (isset($proyecto[$i])) {
+                                                             echo $proyecto[$i];
+                                                         } else {
+                                                             echo "~";
+                                                         } ?></option>
+                                                        <?php
+                                                        $s = 0;
+                                                        foreach ($respuestaProyecto->value as $item):
 
                                                             ?>
-                                                                <option value="<?php echo "$item->Name" . PHP_EOL; ?>"><?php echo "$item->Name" . PHP_EOL; ?></option>
+                                                            <option value="<?php echo "$item->Name" . PHP_EOL; ?>"><?php echo "$item->Name" . PHP_EOL; ?></option>
                                                             <?php
-                                                                $s++;
-                                                            endforeach;
+                                                            $s++;
+                                                        endforeach;
+                                                        ?>
+                                                    </select>
+                                                </td>
+                                                <td><input class="inputTablaCant" type="number"
+                                                        id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>"
+                                                        disabled>
+                                                </td>
+                                                <td><select class="selectServicio" name="ind_imp<?php echo $i ?>"
+                                                        id="ind_imp<?php echo $i ?>" disabled>
+                                                        <option value="">~</option>
+                                                        <?php
+                                                        $s = 0; foreach ($respuestaIndImp->value as $item):
+
                                                             ?>
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="inputTablaCant" type="number" id="por_dec<?php echo $i ?>" name="por_dec<?php echo $i ?>" disabled>
-                                                    </td>
-                                                    <td><select class="selectServicio" name="ind_imp<?php echo $i ?>" id="ind_imp<?php echo $i ?>" disabled>
-                                                            <option value="">~</option>
+                                                            <option value="<?php echo "$item->Code" . PHP_EOL; ?>"><?php echo "$item->Code | $item->Name " . PHP_EOL; ?></option>
                                                             <?php
-                                                            $s = 0;
-                                                            foreach ($respuestaIndImp->value as $item) :
+                                                            $s++;
+                                                        endforeach;
+                                                        ?>
 
-                                                            ?>
-                                                                <option value="<?php echo "$item->Code" . PHP_EOL; ?>"><?php echo "$item->Code | $item->Name " . PHP_EOL; ?></option>
-                                                            <?php
-                                                                $s++;
-                                                            endforeach;
-                                                            ?>
-                                                            
-                                                        </select>
-                                                    </td>
-                                                    <td><input class="inputTabla" type="search" id="total_ml<?php echo $i ?>" name="total_ml<?php echo $i ?>" onclick="ftotal()" disabled readonly></td>
-                                                    <script>
-                                                        const datos = <?php echo json_encode($respuestaServicios); ?>
-                                                        // Justo aquí estamos pasando la variable ----^
-                                                        // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
-                                                        console.log("Los datos son: ", datos);
-
-                                                        const valores = datos.value;
-
-                                                        function ftotal() {
-                                                            i = 0;
-                                                            while (i < 20) {
-                                                                const desc = document.getElementById('por_dec' + i).value;
-                                                                const precio = document.getElementById('precio_inf' + i).value;
-                                                                document.getElementById('total_ml' + i).value = precio - (desc * precio / 100);
-                                                                i++;
-                                                            }
-                                                        }
-
-                                                        $(document).ready(function() {
-
-                                                            for (i = 0; i < 20; i++) {
-                                                                $('#codigoServicio' + i).select2();
-                                                                $('#proveedor' + i).select2();
-                                                                $('#proyecto' + i).select2();
-                                                                $('#ind_imp' + i).select2();
-                                                                $('#codigoServicio' + i).change(function(e) {
-
-
-                                                                    for (i = 0; i < 20; i++) {
-                                                                        if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != -1) {
-                                                                            $('#proyecto' + i).prop("required", true).prop("disabled", false);
-                                                                            $('#ind_imp' + i).prop("required", true).prop("disabled", false);
-                                                                            $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
-                                                                            $('#proveedor' + i).prop("disabled", false);
-                                                                            $('#precio_inf' + i).prop("disabled", false);
-                                                                            $('#cuentaMayor' + i).prop("disabled", false).prop("readonly", true);
-                                                                            $('#uen' + i).prop("disabled", false).prop("readonly", true);
-                                                                            $('#lineas' + i).prop("disabled", false).prop("readonly", true);
-                                                                            $('#sublineas' + i).prop("disabled", false).prop("readonly", true);
-                                                                            $('#por_dec' + i).prop("disabled", false);
-                                                                            $('#total_ml' + i).prop("disabled", false);
-                                                                            document.getElementById('fecha_Nec' + i).type = 'date';
-                                                                            $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                            $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                            $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                            $('#sublineas' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
-                                                                        }
-                                                                        if ($(this).val() == -1) {
-                                                                            $('#proyecto' + i).prop("disabled", true).prop("required", false);
-                                                                            $('#ind_imp' + i).prop("disabled", true).prop("required", false);
-                                                                            $('#fecha_Nec' + i).prop("disabled", true).prop("required", false);
-                                                                            $('#proveedor' + i).prop("disabled", true);
-                                                                            $('#precio_inf' + i).prop("disabled", true);
-                                                                            $('#cuentaMayor' + i).prop("disabled", true).prop("readonly", true);
-                                                                            $('#uen' + i).prop("disabled", true);
-                                                                            $('#lineas' + i).prop("disabled", true);
-                                                                            $('#sublineas' + i).prop("disabled", true);
-                                                                            $('#por_dec' + i).prop("disabled", true);
-                                                                            $('#total_ml' + i).prop("disabled", true);
-                                                                            document.getElementById('fecha_Nec' + i).type = 'text';
-                                                                            $('#uen' + i).val("");
-                                                                            $('#cuentaMayor' + i).val("");
-                                                                            $('#lineas' + i).val("");
-                                                                            $('#sublineas' + i).val("");
-                                                                        }
-
-                                                                    }
-                                                                })
-                                                            }
-
-                                                        });
-                                                    </script>
-                                                </tbody>
-
-                                            <?php
-                                                $i = $i + 1;
-                                            }
-
-                                            ?>
-
+                                                    </select>
+                                                </td>
+                                                <td><input class="inputTabla" type="search"
+                                                        id="total_ml<?php echo $i ?>" name="total_ml<?php echo $i ?>"
+                                                        onclick="ftotal()" disabled readonly></td>
+                                            </tbody>
                                         </table>
+                                        <script>
+                                            numeroColumna = 1;//
+                                            insertarFila()//insertar la fila predeterminada de la tabla
+                                            function insertarFila() {
+                                                let tblDatos = document.getElementById('tabla__servicios').insertRow();
+                                                let col1 = tblDatos.insertCell(0);
+                                                let col2 = tblDatos.insertCell(1);
+                                                let col3 = tblDatos.insertCell(2);
+                                                let col4 = tblDatos.insertCell(3);
+                                                let col5 = tblDatos.insertCell(4);
+                                                let col6 = tblDatos.insertCell(5);
+                                                let col7 = tblDatos.insertCell(6);
+                                                let col8 = tblDatos.insertCell(7);
+                                                let col9 = tblDatos.insertCell(8);
+                                                let col10 = tblDatos.insertCell(9);
+                                                let col11 = tblDatos.insertCell(10);
+                                                let col12 = tblDatos.insertCell(11);
+                                                let col13 = tblDatos.insertCell(12);
+                                                let col14 = tblDatos.insertCell(13);
 
+                                                col1.innerHTML = "<input class='btn-eliminar-servicio' type='button' value='x'>";
+                                                col2.innerHTML = "<input class='inputTablaNumero' type='text'\n\
+                                                                 value='"+ (numeroColumna + 1) + "' disabled>";
+                                                col3.innerHTML = "<select class='selectServicio' name='cod_arse" + numeroColumna + "'id='codigoServicio" + numeroColumna + "'></select>";
+                                                const $selectServicio = document.querySelector("#codigoServicio" + numeroColumna);
+                                                const optionServicio = document.createElement('option');
+                                                optionServicio.value = -1;
+                                                optionServicio.text = "~";
+                                                $selectServicio.appendChild(optionServicio);
+                                                $('#codigoServicio' + numeroColumna).select2();
+                                                const datosServicio = <?php echo json_encode($respuestaServicios); ?>
+                                                // Justo aquí estamos pasando la variable ----^
+                                                // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+                                                const valoresServicio = datosServicio.value;
+                                                j=0;
+                                                while (j < 468) {
+                                                            const option = document.createElement('option');
+                                                            option.value = valoresServicio[j]['Name'];
+                                                            option.text = valoresServicio[j]['Name'];
+                                                            $selectServicio.appendChild(option);
+                                                            j++;
+                                                    }
+                                                col4.innerHTML = "<input class='inputTablaFecha' type='text' value='' id='fecha_Nec"+numeroColumna+"' name='fecha_Nec"+numeroColumna+"'\n\
+                                                        min='<?= date("Y-m-d") ?>' disabled></td>";
+                                                col5.innerHTML =  "<select class='selectServicio' name='proveedor" + numeroColumna + "'id='proveedor" + numeroColumna + "'></select>";
+                                                const $selectProveedor = document.querySelector("#proveedor" + numeroColumna);
+                                                const optionProveedor = document.createElement('option');
+                                                optionProveedor.value = -1;
+                                                optionProveedor.text = "~";
+                                                $selectProveedor.appendChild(optionProveedor);
+                                                $('#proveedor' + numeroColumna).select2();
+                                                const datosProveedor = <?php echo json_encode($respuestaProveedor); ?>
+                                                // Justo aquí estamos pasando la variable ----^
+                                                // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+                                                const valoresProveedor = datosProveedor.value;
+                                                j=0;
+                                                while (j < 2890) {
+                                                            const option = document.createElement('option');
+                                                            option.value = valoresProveedor[j]['CardName'];
+                                                            option.text = valoresProveedor[j]['CardName'];
+                                                            $selectProveedor.appendChild(option);
+                                                            j++;
+                                                    }
+                                                col6.innerHTML = "<input class='inputTablaCant' type='number'\n\
+                                                        id='precio_inf"+numeroColumna+"'\n\
+                                                        name='precio_inf"+numeroColumna+"' disabled>";
+                                                col7.innerHTML ="<input class='inputTabla' type='search'\n\
+                                                        name='cuentaMayor"+numeroColumna+"' id='cuentaMayor"+numeroColumna+"' disabled>";
+                                                col8.innerHTML = "";
+                                                col9.innerHTML = "";
+                                                col10.innerHTML = "";
+                                                col11.innerHTML = "";
+                                                col12.innerHTML = "";
+                                                col13.innerHTML = "";
+                                                col14.innerHTML = "";
+
+                                                numeroColumna++;
+                                                console.log("numero columna: ", numeroColumna);
+
+                                                
+                                            }
+                                            const datos = <?php echo json_encode($respuestaServicios); ?>
+                                            // Justo aquí estamos pasando la variable ----^
+                                            // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+
+                                            const valores = datos.value;
+
+                                            function ftotal() {
+                                                i = 0;
+                                                while (i < 1) {
+                                                    const desc = document.getElementById('por_dec' + i).value;
+                                                    const precio = document.getElementById('precio_inf' + i).value;
+                                                    document.getElementById('total_ml' + i).value = precio - (desc * precio / 100);
+                                                    i++;
+                                                }
+                                            }
+                                            console.log("numero columna: ", numeroColumna);
+                                            $(document).ready(function () {
+
+                                                for (i = 0; i < 10; i++) {
+                                                    $('#codigoServicio' + i).select2();
+                                                    $('#proveedor' + i).select2();
+                                                    $('#proyecto' + i).select2();
+                                                    $('#ind_imp' + i).select2();
+                                                    $('#codigoServicio' + i).change(function (e) {
+
+
+                                                        for (i = 0; i < 10; i++) {
+                                                            if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != -1) {
+                                                                $('#proyecto' + i).prop("required", true).prop("disabled", false);
+                                                                $('#ind_imp' + i).prop("required", true).prop("disabled", false);
+                                                                $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
+                                                                $('#proveedor' + i).prop("disabled", false);
+                                                                $('#precio_inf' + i).prop("disabled", false);
+                                                                $('#cuentaMayor' + i).prop("disabled", false).prop("readonly", true);
+                                                                $('#uen' + i).prop("disabled", false).prop("readonly", true);
+                                                                $('#lineas' + i).prop("disabled", false).prop("readonly", true);
+                                                                $('#sublineas' + i).prop("disabled", false).prop("readonly", true);
+                                                                $('#por_dec' + i).prop("disabled", false);
+                                                                $('#total_ml' + i).prop("disabled", false);
+                                                                document.getElementById('fecha_Nec' + i).type = 'date';
+                                                                $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                                $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                                $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                                $('#sublineas' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
+                                                            }
+                                                            if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() == -1) {
+                                                                $('#proyecto' + i).prop("disabled", true).prop("required", false);
+                                                                $('#ind_imp' + i).prop("disabled", true).prop("required", false);
+                                                                $('#fecha_Nec' + i).prop("disabled", true).prop("required", false);
+                                                                $('#proveedor' + i).prop("disabled", true).val(-1);
+                                                                $('#proveedor' + i).select2();
+                                                                $('#precio_inf' + i).prop("disabled", true);
+                                                                $('#cuentaMayor' + i).prop("disabled", true).prop("readonly", true);
+                                                                $('#uen' + i).prop("disabled", true);
+                                                                $('#lineas' + i).prop("disabled", true);
+                                                                $('#sublineas' + i).prop("disabled", true);
+                                                                $('#por_dec' + i).prop("disabled", true);
+                                                                $('#total_ml' + i).prop("disabled", true);
+                                                                document.getElementById('fecha_Nec' + i).type = 'text';
+                                                                $('#uen' + i).val("");
+                                                                $('#cuentaMayor' + i).val("");
+                                                                $('#lineas' + i).val("");
+                                                                $('#sublineas' + i).val("");
+                                                            }
+
+                                                        }
+                                                    })
+                                                }
+
+                                            });
+                                        </script>
+                                        <?php
+                                        $i = $i + 1;
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -418,7 +502,8 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS" onclick="ftotal()"></a>
+                                <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
+                                        onclick="ftotal()"></a>
                             </div>
                         </td>
 
@@ -427,10 +512,10 @@
             </table>
         </div>
         <footer>
-        <?php
-        require_once('../php/footer.php');
-        ?>
-    </footer>
+            <?php
+            require_once('../php/footer.php');
+            ?>
+        </footer>
     </div>
 </body>
 
