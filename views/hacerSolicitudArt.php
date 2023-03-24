@@ -441,10 +441,10 @@
 
                 $('#uen' + i).change(function(e) {
                     for (i = 0; i < 1; i++) {
-                        if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() != -1) {
-                            $('#linea' + i).prop("disabled", false).val(-1);
+                        if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() != "") {
+                            $('#linea' + i).prop("disabled", false).prop("required",false);
                             $('#linea' + i).select2();
-                            $('#sublinea' + i).val(-1);
+                            $('#sublinea' + i);
                             $('#sublinea' + i).select2();
                             const datos = <?php echo json_encode($respuestaLinea); ?>
                             // Justo aquí estamos pasando la variable ----^
@@ -474,8 +474,9 @@
                                 $select2.remove(k);
                             }
                             const option = document.createElement('option');
-                            option.value = 0;
+                            option.value = "";
                             option.text = "~";
+                            option.selected;
                             $select.appendChild(option);
                             $('#uen' + i).select2();
                             j = 0;
@@ -483,6 +484,7 @@
                                 x = valores[j]['FactorCode'] * 10 ** (-1);
                                 x = Math.floor(x);
                                 if (x == $(this).val()) {
+                                    $('#linea' + i).prop("required",true);
                                     while (x == ($(this).val())) {
                                         const option = document.createElement('option');
                                         option.value = valores[j]['FactorCode'];
@@ -497,7 +499,7 @@
                                 }
                                 j++;
                             }
-                        } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == 0) {
+                        } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == "") {
     
                             const $select = document.querySelector("#linea" + i);
 
@@ -527,8 +529,8 @@
 
                 $('#linea' + i).change(function(e) {
                     for (i = 0; i < 1; i++) {
-                        if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != -1) {
-                            $('#sublinea' + i).prop("disabled", false);
+                        if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != "") {
+                            $('#sublinea' + i).prop("disabled", false).prop("required",false);
                             $('#sublinea' + i).select2();
 
                             const datos = <?php echo json_encode($respuestaSubLinea); ?>
@@ -549,8 +551,9 @@
                                 $select.remove(k);
                             }
                             const option = document.createElement('option');
-                            option.value = 0;
+                            option.value = "";
                             option.text = "~";
+                            option.selected;
                             $select.appendChild(option);
                             j = 0;
                             while (j >= 0 && j<358) {
@@ -558,12 +561,13 @@
                                 console.log("codigo del factor: ", x);
                                 x = Math.floor(x);
                                 if (x == $(this).val()) {
+                                    $('#sublinea' + i).prop("required",true);
                                     while (x == ($(this).val())) {
                                         const option = document.createElement('option');
                                         option.value = valores[j]['FactorCode'];
                                         option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];
                                         $select.appendChild(option);
-                                        console.log("valor de linea: ", x);
+                                        console.log("valor de sublinea: ", x);
                                         j++;
                                         x = valores[j]['FactorCode'] * 10 ** (-1);
                                         x = Math.floor(x);
@@ -576,7 +580,7 @@
                             }
 
 
-                        } else if($(this).val() == document.getElementById('linea' + i).value && $(this).val() == 0) {
+                        } else if($(this).val() == document.getElementById('linea' + i).value && $(this).val() == "") {
                             const $select = document.querySelector("#sublinea" + i);
 
                             const opcionCambiada = () => {
