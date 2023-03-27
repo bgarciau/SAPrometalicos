@@ -30,6 +30,7 @@
         $tipo = "servicio";
         $cantidad = 0;
         $j = 0;
+        
         $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
         $num = 1;
         foreach ($ultimo as $ultimoo):
@@ -98,7 +99,7 @@
         </header>
         <div class="contenedor">
             <table border="5px" id="tabla__general">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="formularioSolicitud">
                     <tr>
                         <td colspan="6">
                             <div id="div__solicitante">
@@ -207,7 +208,7 @@
                                             $i = 0;
                                             ?>
                                             <tbody id="body-servicios">
-                                            
+
                                             </tbody>
                                         </table>
                                         <script>
@@ -218,9 +219,10 @@
                                             const valores = datos.value;
                                             console.log("valores: ", valores);
                                             numeroFila = 0;
-                                            // insertarFila();//insertar la fila predeterminada de la tabla
+                                            insertarFila(); //insertar la fila predeterminada de la tabla
                                             function insertarFila() {
-                                                let tblDatos = document.getElementById('tabla__servicios').insertRow();
+
+                                                let tblDatos = document.getElementById('tabla__servicios').insertRow(-1);
                                                 let col1 = tblDatos.insertCell(0);
                                                 let col2 = tblDatos.insertCell(1);
                                                 let col3 = tblDatos.insertCell(2);
@@ -236,31 +238,31 @@
                                                 let col13 = tblDatos.insertCell(12);
                                                 let col14 = tblDatos.insertCell(13);
 
-                                                col1.innerHTML = "<input class='btn-eliminar-servicio' type='button' value='x'>";
+                                                col1.innerHTML = "<input class='checkbox-servicio' type='checkbox' value='si' name='enviar" + numeroFila + "' id='enviar" + numeroFila + "' checked>";
                                                 col2.innerHTML = "<input class='inputTablaNumero' type='text'\n\
-                                                                 value='"+ (numeroFila + 1) + "' disabled>";
-                                                col3.innerHTML = '<select class="selectServicio" name="cod_arse' + numeroFila +'" id="codigoServicio'+numeroFila+'" required></select>';
+                                                                 value='" + (numeroFila + 1) + "' disabled>";
+                                                col3.innerHTML = '<select class="selectServicio" name="cod_arse' + numeroFila + '" id="codigoServicio' + numeroFila + '" required></select>';
                                                 const $selectServicio = document.querySelector("#codigoServicio" + numeroFila);
                                                 const optionServicio = document.createElement('option');
                                                 optionServicio.value = "";
-                                                optionServicio.text = "nada";
+                                                optionServicio.text = "~";
                                                 $selectServicio.appendChild(optionServicio);
                                                 $('#codigoServicio' + numeroFila).select2();
                                                 const datosServicio = <?php echo json_encode($respuestaServicios); ?>
                                                 // Justo aquí estamos pasando la variable ----^
                                                 // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
                                                 const valoresServicio = datosServicio.value;
-                                                j=0;
+                                                j = 0;
                                                 while (j < 468) {
-                                                            const option = document.createElement('option');
-                                                            option.value = j;
-                                                            option.text = valoresServicio[j]['Name'];
-                                                            $selectServicio.appendChild(option);
-                                                            j++;
-                                                    }
-                                                col4.innerHTML = "<input class='inputTablaFecha' type='text' value='' id='fecha_Nec"+numeroFila+"' name='fecha_Nec"+numeroFila+"'\n\
+                                                    const option = document.createElement('option');
+                                                    option.value = j;
+                                                    option.text = valoresServicio[j]['Name'];
+                                                    $selectServicio.appendChild(option);
+                                                    j++;
+                                                }
+                                                col4.innerHTML = "<input class='inputTablaFecha' type='date' value='' id='fecha_Nec" + numeroFila + "' name='fecha_Nec" + numeroFila + "'\n\
                                                         min='<?= date("Y-m-d") ?>' required></td>";
-                                                col5.innerHTML =  "<select class='selectServicio' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "' disabled></select>";
+                                                col5.innerHTML = "<select class='selectServicio' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "'></select>";
                                                 const $selectProveedor = document.querySelector("#proveedor" + numeroFila);
                                                 const optionProveedor = document.createElement('option');
                                                 optionProveedor.value = "";
@@ -271,26 +273,26 @@
                                                 // Justo aquí estamos pasando la variable ----^
                                                 // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
                                                 const valoresProveedor = datosProveedor.value;
-                                                j=0;
+                                                j = 0;
                                                 while (j < 2890) {
-                                                            const option = document.createElement('option');
-                                                            option.value = valoresProveedor[j]['CardName'];
-                                                            option.text = valoresProveedor[j]['CardName'];
-                                                            $selectProveedor.appendChild(option);
-                                                            j++;
-                                                    }
+                                                    const option = document.createElement('option');
+                                                    option.value = valoresProveedor[j]['CardName'];
+                                                    option.text = valoresProveedor[j]['CardName'];
+                                                    $selectProveedor.appendChild(option);
+                                                    j++;
+                                                }
                                                 col6.innerHTML = "<input class='inputTablaCant' type='number'\n\
-                                                        id='precio_inf"+numeroFila+"'\n\
-                                                        name='precio_inf"+numeroFila+"' disabled>";
-                                                col7.innerHTML ="<input class='inputTabla' type='search'\n\
-                                                        name='cuentaMayor"+numeroFila+"' id='cuentaMayor"+numeroFila+"' disabled>";
-                                                col8.innerHTML = "<input class='inputTabla' type='search' value='' id='uen"+numeroFila+"' '\n\
-                                                        name='uen"+numeroFila+"' disabled> ";
-                                                col9.innerHTML = "<input class='inputTabla' type='search' value='' id='lineas"+numeroFila+"'\n\
-                                                        name='lineas"+numeroFila+"'disabled>";
-                                                col10.innerHTML = "<input class='inputTabla' type='search' value='' id='sublineas"+numeroFila+"'\n\
-                                                        name='sublineas"+numeroFila+"'disabled>";
-                                                col11.innerHTML = "<select class='selectProyecto' name='proyecto" + numeroFila + "'id='proyecto" + numeroFila + "' disabled></select>";
+                                                        id='precio_inf" + numeroFila + "'\n\
+                                                        value=0 name='precio_inf" + numeroFila + "'>";
+                                                col7.innerHTML = "<input class='inputTabla' type='search'\n\
+                                                        name='cuentaMayor" + numeroFila + "' id='cuentaMayor" + numeroFila + "' readonly>";
+                                                col8.innerHTML = "<input class='inputTabla' type='search' value='' id='uen" + numeroFila + "' '\n\
+                                                        name='uen" + numeroFila + "' readonly> ";
+                                                col9.innerHTML = "<input class='inputTabla' type='search' value='' id='linea" + numeroFila + "'\n\
+                                                        name='lineas" + numeroFila + "'readonly>";
+                                                col10.innerHTML = "<input class='inputTabla' type='search' value='' id='sublinea" + numeroFila + "'\n\
+                                                        name='sublineas" + numeroFila + "'readonly>";
+                                                col11.innerHTML = "<select class='selectServicio' name='proyecto" + numeroFila + "'id='proyecto" + numeroFila + "' readonly></select>";
                                                 const $selectProyecto = document.querySelector("#proyecto" + numeroFila);
                                                 const optionProyecto = document.createElement('option');
                                                 optionProyecto.value = "";
@@ -301,97 +303,69 @@
                                                 // Justo aquí estamos pasando la variable ----^
                                                 // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
                                                 const valoresProyecto = datosProyecto.value;
-                                                j=0;
+                                                j = 0;
                                                 while (j < 33) {
-                                                            const option = document.createElement('option');
-                                                            option.value = valoresProyecto[j]['Code'];
-                                                            option.text = valoresProyecto[j]['Name'];
-                                                            $selectProyecto.appendChild(option);
-                                                            j++;
-                                                    }
+                                                    const option = document.createElement('option');
+                                                    option.value = valoresProyecto[j]['Name'];
+                                                    option.text = valoresProyecto[j]['Name'];
+                                                    $selectProyecto.appendChild(option);
+                                                    j++;
+                                                }
                                                 col12.innerHTML = "<input class='inputTablaCant' type='number'\n\
-                                                        id='por_dec"+numeroFila+"' name='por_dec"+numeroFila+"' disabled>";
-                                                col13.innerHTML =  "<select class='selectServicio' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "' disabled></select>";
+                                                        id='por_dec" + numeroFila + "' name='por_dec" + numeroFila + "' value=0 >";
+                                                col13.innerHTML = "<select class='selectServicio' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "' readonly></select>";
                                                 const $selectIndImp = document.querySelector("#ind_imp" + numeroFila);
                                                 const optionIndImp = document.createElement('option');
                                                 optionIndImp.value = "";
                                                 optionIndImp.text = "~";
                                                 $selectIndImp.appendChild(optionIndImp);
-                                                $('#proyecto' + numeroFila).select2();
+                                                $('#ind_imp' + numeroFila).select2();
                                                 const datosIndImp = <?php echo json_encode($respuestaIndImp); ?>
                                                 // Justo aquí estamos pasando la variable ----^
                                                 // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
                                                 const valoresIndImp = datosIndImp.value;
-                                                j=0;
+                                                j = 0;
                                                 while (j < 10) {
-                                                            const option = document.createElement('option');
-                                                            option.value = valoresIndImp[j]['Code'];
-                                                            option.text = valoresIndImp[j]['Name'];
-                                                            $selectIndImp.appendChild(option);
-                                                            j++;
-                                                    }
+                                                    const option = document.createElement('option');
+                                                    option.value = valoresIndImp[j]['Name'];
+                                                    option.text = valoresIndImp[j]['Name'];
+                                                    $selectIndImp.appendChild(option);
+                                                    j++;
+                                                }
                                                 col14.innerHTML = "<input class='inputTabla' type='search'\n\
-                                                        id='total_ml"+numeroFila+"' name='total_ml"+numeroFila+"'\n\
-                                                        onclick='ftotal()' disabled readonly>";
+                                                        id='total_ml" + numeroFila + "' name='total_ml" + numeroFila + "'\n\
+                                                        onclick='ftotal()' readonly>";
 
                                                 numeroFila++;
-                    
-                                            $(document).ready(function () {
-
-                                                for (i = 0; i < numeroFila; i++) {
-                                                    $('#codigoServicio' + i).select2();
-                                                    $('#proveedor' + i).select2();
-                                                    $('#proyecto' + i).select2();
-                                                    $('#ind_imp' + i).select2();
-                                                    $('#codigoServicio' + i).change(function (e) {
 
 
-                                                        for (i = 0; i < numeroFila; i++) {
-                                                            if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != "") {
-                                                                console.log("fila: ",i);
-                                                                console.log("valor servicio: ",$(this).val());
-                                                                $('#proyecto' + i).prop("required", true).prop("disabled", false);
-                                                                $('#ind_imp' + i).prop("required", true).prop("disabled", false);
-                                                                $('#fecha_Nec' + i).prop("required", true).prop("disabled", false);
-                                                                $('#proveedor' + i).prop("disabled", false);
-                                                                $('#precio_inf' + i).prop("disabled", false);
-                                                                $('#cuentaMayor' + i).prop("disabled", false).prop("readonly", true);
-                                                                $('#uen' + i).prop("disabled", false).prop("readonly", true);
-                                                                $('#lineas' + i).prop("disabled", false).prop("readonly", true);
-                                                                $('#sublineas' + i).prop("disabled", false).prop("readonly", true);
-                                                                $('#por_dec' + i).prop("disabled", false);
-                                                                $('#total_ml' + i).prop("disabled", false);
-                                                                document.getElementById('fecha_Nec' + i).type = 'date';
-                                                                $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true);
-                                                                $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
-                                                                $('#lineas' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
-                                                                $('#sublineas' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
+                                                $(document).ready(function () {
+
+                                                    for (i = 0; i < numeroFila; i++) {
+
+                                                        $('#codigoServicio' + i).change(function (e) {
+
+
+                                                            for (i = 0; i < numeroFila; i++) {
+                                                                if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != "") {
+                                                                    $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true);
+                                                                    $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true);
+                                                                    $('#linea' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true);
+                                                                    $('#sublinea' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true);
+                                                                }
+                                                                if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() == "") {
+                                                                    $('#uen' + i).val("");
+                                                                    $('#cuentaMayor' + i).val("");
+                                                                    $('#linea' + i).val("");
+                                                                    $('#sublinea' + i).val("");
+                                                                }
+
                                                             }
-                                                            if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() == "") {
-                                                                $('#proyecto' + i).prop("disabled", true).prop("required", false);
-                                                                $('#ind_imp' + i).prop("disabled", true).prop("required", false);
-                                                                $('#fecha_Nec' + i).prop("disabled", true).prop("required", false);
-                                                                $('#proveedor' + i).prop("disabled", true).val(-1);
-                                                                $('#proveedor' + i).select2();
-                                                                $('#precio_inf' + i).prop("disabled", true);
-                                                                $('#cuentaMayor' + i).prop("disabled", true).prop("readonly", true);
-                                                                $('#uen' + i).prop("disabled", true);
-                                                                $('#lineas' + i).prop("disabled", true);
-                                                                $('#sublineas' + i).prop("disabled", true);
-                                                                $('#por_dec' + i).prop("disabled", true);
-                                                                $('#total_ml' + i).prop("disabled", true);
-                                                                document.getElementById('fecha_Nec' + i).type = 'text';
-                                                                $('#uen' + i).val("");
-                                                                $('#cuentaMayor' + i).val("");
-                                                                $('#lineas' + i).val("");
-                                                                $('#sublineas' + i).val("");
-                                                            }
-
-                                                        }
-                                                    })
-                                                }
-                                            });
+                                                        })
+                                                    }
+                                                });
                                             }
+
                                             function ftotal() {
                                                 i = 0;
                                                 while (i < numeroFila) {
@@ -401,7 +375,83 @@
                                                     i++;
                                                 }
                                             }
-                                           
+
+                                            function guardarSolicitud() {
+                                                <?php
+                                                
+                                                    $tipo = "servicio";
+                                                    $cantidad = 0;
+                                                    $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+                                                    $numSolicitud = 1;
+                                                    
+                                                    foreach ($ultimo as $ultimoo):
+                                                        $numSolicitud++;
+                                                    endforeach;
+                                                    
+                                                
+                                                ?>
+                                                 const datosServicio = <?php echo json_encode($respuestaServicios); ?>
+                                                        // Justo aquí estamos pasando la variable ----^
+                                                        // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+                                                        const valoresServicio = datosServicio.value;
+                                                console.log("numero de solicitud", <?php echo $numSolicitud ?>)
+                                                j=0;
+                                                cantidad=1;
+                                                for (i = 0; i < numeroFila; i++) {
+                                                    check = document.getElementById('enviar' + i).checked;
+                                                    if (check == true) {
+                                                        console.log("checkbox: SI");
+                                                        codArse = document.getElementById('codigoServicio' + i).value;
+                                                        codigoArse = valoresServicio[codArse]['Name'];
+                                                        fechaNec = document.getElementById('fecha_Nec' + i).value;
+                                                        proveedor = document.getElementById('proveedor' + i).value;
+                                                        precioInfo = document.getElementById('precio_inf' + i).value;
+                                                        cuentaMayor = document.getElementById('cuentaMayor' + i).value;
+                                                        uen=document.getElementById('uen' + i).value;
+                                                        linea=document.getElementById('linea' + i).value;
+                                                        sublinea=document.getElementById('sublinea' + i).value;
+                                                        proyecto=document.getElementById('proyecto' + i).value;
+                                                        porDesc=document.getElementById('por_dec' + i).value;
+                                                        indImp=document.getElementById('ind_imp' + i).value;
+                                                        total=document.getElementById('total_ml' + i).value;
+                                                        <?php
+                                                        $numServicio="j";
+                                                        $codArse[$numServicio] = "codigoArse";
+                                                        $fechaNec[$numServicio] = "fechaNec";
+                                                        $proveedor[$numServicio] = "proveedor";
+                                                        $precioInfo[$numServicio] = "precioInfo";
+                                                        $cuentaMayor[$numServicio] = "cuentaMayor";
+                                                        $uen[$numServicio] = "uen";
+                                                        $linea[$numServicio] ="linea";
+                                                        $sublinea[$numServicio] = "sublinea";
+                                                        $proyecto[$numServicio] = "proyecto";
+                                                        $porDesc[$numServicio] = "porDesc";
+                                                        $indImp[$numServicio] = "indImp";
+                                                        $total[$numServicio] = "total";
+                                                        $cantidad="cantidad";
+                                                        ?>
+                                                        console.log("fila: ", <?php echo $numServicio ?>);
+                                                        console.log("codigoArse: ", <?php echo $codArse[$numServicio] ?>);
+                                                        console.log("fechaNec: ", <?php echo $fechaNec[$numServicio] ?>);
+                                                        console.log("proveedor: ", <?php echo $proveedor[$numServicio] ?>);
+                                                        console.log("precio info: ", <?php echo $precioInfo[$numServicio] ?>);
+                                                        console.log("cuenta mayor: ", <?php echo $cuentaMayor[$numServicio] ?>);
+                                                        console.log("uen: ", <?php echo $uen[$numServicio] ?>);
+                                                        console.log("linea: ", <?php echo $linea[$numServicio] ?>);
+                                                        console.log("sublinea: ", <?php echo $sublinea[$numServicio] ?>);
+                                                        console.log("proyecto: ", <?php echo $proyecto[$numServicio] ?>);
+                                                        console.log("porcentaje descuento   : ", <?php echo $porDesc[$numServicio] ?>);
+                                                        console.log("indicador de impuesto: ", <?php echo $indImp[$numServicio] ?>);
+                                                        console.log("total ml: ", <?php echo $total[$numServicio] ?>);
+                                                        console.log("cantidad: ", <?php echo $cantidad ?>);
+                                                        j++;
+                                                        cantidad++;
+                                                    } else {
+                                                        console.log("checkbox: NO");
+                                                    }
+
+                                                }
+                                            }
                                         </script>
                                         <?php
                                         $i = $i + 1;
@@ -424,6 +474,8 @@
                             <div id="div__enviar">
                                 <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
                                         onclick="ftotal()"></a>
+                                <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
+                                        onclick="guardarSolicitud()"></a>
                             </div>
                         </td>
 

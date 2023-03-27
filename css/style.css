@@ -351,7 +351,8 @@ input#Solicitante {
 }
 
 input[type="checkbox" i] {
-    width: 10px;
+    width: 15px;
+    cursor: pointer;
     
 }
 select#datosFormu{
@@ -598,4 +599,14 @@ select#sel__solicitante{
 .btn-agregar-servicio:hover{
     background-color:#0cd63e3e ;
     color: #08720a;
+}
+
+.checkbox-servicio{
+    background-color: initial;
+    cursor: pointer;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
 }
