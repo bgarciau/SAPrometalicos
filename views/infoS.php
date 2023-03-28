@@ -121,7 +121,7 @@
                                                 <tr>
                                                     <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
                                                     <td><?php echo $i ?></td>
-                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td> 
+                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->nom_arse ?>" disabled></td> 
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
                                                     <td><input class="inputTablaSer" value="<?php echo $listaa->fk_prov ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>" disabled></td>

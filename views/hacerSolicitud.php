@@ -28,48 +28,17 @@
 
     if (isset($_POST["guardarS"])) {
         $tipo = "servicio";
-        $cantidad = 0;
-        $j = 0;
-
         $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
         $num = 1;
         foreach ($ultimo as $ultimoo):
             $num++;
         endforeach;
+        $ultimo = $base->query("SELECT * FROM list_arse WHERE fk_num_sol='$num'")->fetchAll(PDO::FETCH_OBJ);
+        $cantidad = 0;
+        foreach ($ultimo as $ultimoo):
+            $cantidad++;
+        endforeach;
 
-
-        while ($j < 1) {
-            $cod_arse = $_POST["cod_arse$j"];
-            if ($cod_arse == -1) {
-            } else {
-                $codSol = $num;
-                $codArse[$j] = $_POST["cod_arse$j"];
-                $code[$j] = $respuestaServicios->value[$codArse[$j]]->Name;
-                $fechaNec[$j] = $_POST["fecha_Nec$j"];
-                $proveedor[$j] = $_POST["proveedor$j"];
-                $precioInfo[$j] = $_POST["precio_inf$j"];
-                $cuentaMayor[$j] = $_POST["cuentaMayor$j"];
-                $uen[$j] = $_POST["uen$j"];
-                $linea[$j] = $_POST["lineas$j"];
-                $sublinea[$j] = $_POST["sublineas$j"];
-                $proyecto[$j] = $_POST["proyecto$j"];
-                $porDesc[$j] = $_POST["por_dec$j"];
-                $indImp[$j] = $_POST["ind_imp$j"];
-                $total[$j] = $_POST["total_ml$j"];
-                $cantidad++;
-
-                if ($cantidad > 0) {
-                    $sql = "INSERT INTO list_arse (fk_num_sol,fk_cod_arse,fecha_nec,fk_prov,precio_info,cuenta_mayor,uen,linea,sublinea,proyecto,por_desc,ind_imp,total_ml) 
-                        VALUES(:_numSol,:_codArse,:_fechaNec,:_proveedor,:_precioInfo,:_cuentaMayor,:_uen,:_linea,:_sublinea,:_proyecto,:_porDesc,:_indImp,:_total)";
-
-                    $serv = $base->prepare($sql);
-
-                    $serv->execute(array(":_numSol" => $codSol, ":_codArse" => $code[$j], ":_fechaNec" => $fechaNec[$j], ":_proveedor" => $proveedor[$j], ":_precioInfo" => $precioInfo[$j], ":_cuentaMayor" => $cuentaMayor[$j], ":_uen" => $uen[$j], ":_linea" => $linea[$j], ":_sublinea" => $sublinea[$j], ":_proyecto" => $proyecto[$j], ":_porDesc" => $porDesc[$j], ":_indImp" => $indImp[$j], ":_total" => $total[$j]));
-                }
-            }
-            $j++;
-        }
-        if ($cantidad > 0) {
             $codSol = $num;
             $estado = $_POST["estado"];
             $nomSol = $_POST["nomSol"];
@@ -84,10 +53,8 @@
                 VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
 
             $solicitud = $base->prepare($sql);
-
             $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
             header("location:misSolicitudes.php?SolCreada=$num");
-        }
     }
 
     ?>
@@ -204,9 +171,6 @@
                                                 <th>indicador de impuestos</th>
                                                 <th>total ml</th>
                                             </thead>
-                                            <?php
-                                            $i = 0;
-                                            ?>
                                             <tbody id="body-servicios">
 
                                             </tbody>
@@ -381,8 +345,7 @@
                                                 <?php
                                                 $tipo = "servicio";
                                                 $numSolicitud = 1;
-                                                $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); 
-                                                foreach ($ultimo as $ultimoo):
+                                                $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); foreach ($ultimo as $ultimoo):
                                                     $numSolicitud++;
                                                 endforeach;
                                                 ?>
@@ -393,90 +356,112 @@
                                                 console.log("numero de solicitud", <?php echo $numSolicitud ?>)
                                                 j = 0;
                                                 cantidad = 0;
+                                                codArse = [];
+                                                codigoArse = [];
+                                                fechaNec = [];
+                                                proveedor = [];
+                                                precioInfo = [];
+                                                cuentaMayor = [];
+                                                uen = [];
+                                                linea = [];
+                                                sublinea = [];
+                                                proyecto = [];
+                                                porDesc = [];
+                                                indImp = [];
+                                                total = [];
                                                 for (i = 0; i < numeroFila; i++) {
                                                     check = document.getElementById('enviar' + i).checked;
                                                     if (check == true) {
                                                         console.log("checkbox: SI");
-                                                        codArse = document.getElementById('codigoServicio' + i).value;
-                                                        if (codArse == "") {
+                                                        codArse[j] = document.getElementById('codigoServicio' + i).value;
+                                                        if (codArse[j] == "") {
                                                             alert('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio');
                                                             $('#codigoServicio' + i).focus();
                                                             $('#codigoServicio' + i).select2('open');
-                                                            cantidad=-100;
+                                                            cantidad = -100;
                                                             break;
                                                         }
-                                                        codigoArse = valoresServicio[codArse]['Name'];
-                                                        fechaNec = document.getElementById('fecha_Nec' + i).value;
-                                                        if (fechaNec == "") {
+                                                        codigoArse[j] = valoresServicio[codArse[j]]['Name'];
+                                                        fechaNec[j] = document.getElementById('fecha_Nec' + i).value;
+                                                        if (fechaNec[j] == "") {
                                                             alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria');
                                                             document.getElementById('fecha_Nec' + i).focus();
-                                                            cantidad=-100;
+                                                            cantidad = -100;
                                                             break;
                                                         }
-                                                        proveedor = document.getElementById('proveedor' + i).value;
-                                                        precioInfo = document.getElementById('precio_inf' + i).value;
-                                                        cuentaMayor = document.getElementById('cuentaMayor' + i).value;
-                                                        uen = document.getElementById('uen' + i).value;
-                                                        linea = document.getElementById('linea' + i).value;
-                                                        sublinea = document.getElementById('sublinea' + i).value;
-                                                        proyecto = document.getElementById('proyecto' + i).value;
-                                                        if (proyecto == "") {
+                                                        proveedor[j] = document.getElementById('proveedor' + i).value;
+                                                        precioInfo[j] = document.getElementById('precio_inf' + i).value;
+                                                        cuentaMayor[j] = document.getElementById('cuentaMayor' + i).value;
+                                                        uen[j] = document.getElementById('uen' + i).value;
+                                                        linea[j] = document.getElementById('linea' + i).value;
+                                                        sublinea[j] = document.getElementById('sublinea' + i).value;
+                                                        proyecto[j] = document.getElementById('proyecto' + i).value;
+                                                        if (proyecto[j] == "") {
                                                             alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto');
                                                             $('#proyecto' + i).focus();
                                                             $('#proyecto' + i).select2('open');
-                                                            cantidad=-100;
+                                                            cantidad = -100;
                                                             break;
                                                         }
-                                                        porDesc = document.getElementById('por_dec' + i).value;
-                                                        indImp = document.getElementById('ind_imp' + i).value;
-                                                        if (indImp == "") {
+                                                        porDesc[j] = document.getElementById('por_dec' + i).value;
+                                                        indImp[j] = document.getElementById('ind_imp' + i).value;
+                                                        if (indImp[j] == "") {
                                                             alert('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto');
                                                             $('#ind_imp' + i).focus();
                                                             $('#ind_imp' + i).select2('open');
-                                                            cantidad=-100;
+                                                            cantidad = -100;
                                                             break;
                                                         }
-                                                        total = document.getElementById('total_ml' + i).value;
+                                                        total[j] = document.getElementById('total_ml' + i).value;
                                                         cantidad++;
-                                                        <?php
-                                                        $numServicio = "j";
-                                                        $codArse[$numServicio] = "codigoArse";
-                                                        $fechaNec[$numServicio] = "fechaNec";
-                                                        $proveedor[$numServicio] = "proveedor";
-                                                        $precioInfo[$numServicio] = "precioInfo";
-                                                        $cuentaMayor[$numServicio] = "cuentaMayor";
-                                                        $uen[$numServicio] = "uen";
-                                                        $linea[$numServicio] = "linea";
-                                                        $sublinea[$numServicio] = "sublinea";
-                                                        $proyecto[$numServicio] = "proyecto";
-                                                        $porDesc[$numServicio] = "porDesc";
-                                                        $indImp[$numServicio] = "indImp";
-                                                        $total[$numServicio] = "total";
-                                                        ?>
-                                                        console.log("fila: ", <?php echo $numServicio ?>);
-                                                        console.log("codigoArse: ", <?php echo $codArse[$numServicio] ?>);
-                                                        console.log("fechaNec: ", <?php echo $fechaNec[$numServicio] ?>);
-                                                        console.log("proveedor: ", <?php echo $proveedor[$numServicio] ?>);
-                                                        console.log("precio info: ", <?php echo $precioInfo[$numServicio] ?>);
-                                                        console.log("cuenta mayor: ", <?php echo $cuentaMayor[$numServicio] ?>);
-                                                        console.log("uen: ", <?php echo $uen[$numServicio] ?>);
-                                                        console.log("linea: ", <?php echo $linea[$numServicio] ?>);
-                                                        console.log("sublinea: ", <?php echo $sublinea[$numServicio] ?>);
-                                                        console.log("proyecto: ", <?php echo $proyecto[$numServicio] ?>);
-                                                        console.log("porcentaje descuento   : ", <?php echo $porDesc[$numServicio] ?>);
-                                                        console.log("indicador de impuesto: ", <?php echo $indImp[$numServicio] ?>);
-                                                        console.log("total ml: ", <?php echo $total[$numServicio] ?>);
+
+                                                        console.log("fila: ", j);
+                                                        console.log("codigoArse: ", codigoArse[j]);
+                                                        console.log("fechaNec: ", fechaNec[j]);
+                                                        console.log("proveedor: ", proveedor[j]);
+                                                        console.log("precio info: ", precioInfo[j]);
+                                                        console.log("cuenta mayor: ", cuentaMayor[j]);
+                                                        console.log("uen: ", uen[j]);
+                                                        console.log("linea: ", linea[j]);
+                                                        console.log("sublinea: ", sublinea[j]);
+                                                        console.log("proyecto: ", proyecto[j]);
+                                                        console.log("porcentaje descuento   : ", porDesc[j]);
+                                                        console.log("indicador de impuesto: ", indImp[j]);
+                                                        console.log("total ml: ", total[j]);
                                                         console.log("cantidad: ", cantidad);
                                                         j++;
                                                     } else {
                                                         console.log("checkbox: NO");
                                                     }
                                                 }
+
+                                                if (cantidad > 0) {
+
+                                                    codigoArse = codigoArse.join('_').toString();
+                                                    fechaNec = fechaNec.join('_').toString();
+                                                    proveedor = proveedor.join('_').toString();
+                                                    precioInfo = precioInfo.join('_').toString();
+                                                    cuentaMayor = cuentaMayor.join('_').toString();
+                                                    uen = uen.join('_').toString();
+                                                    linea = linea.join('_').toString();
+                                                    sublinea = sublinea.join('_').toString();
+                                                    proyecto = proyecto.join('_').toString();
+                                                    porDesc = porDesc.join('_').toString();
+                                                    indImp = indImp.join('_').toString();
+                                                    total = total.join('_').toString();
+                                                    $.ajax(
+                                                        {
+                                                            url: 'guardarSolicitud.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
+                                                            &precioInfo='+ precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
+                                                            &proyecto='+ proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad,
+                                                            success: function (data) {
+                                                                $('#guardarS').click();
+                                                            }
+                                                        }
+                                                    )
+                                                }
                                             }
                                         </script>
-                                        <?php
-                                        $i = $i + 1;
-                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -494,7 +479,7 @@
                         <td colspan="6">
                             <div id="div__enviar">
                                 <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
-                                        onclick="ftotal()"></a>
+                                        onclick="ftotal()" id="guardarS" hidden></a>
                                 <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
                                         onclick="guardarSolicitud()"></a>
                             </div>
