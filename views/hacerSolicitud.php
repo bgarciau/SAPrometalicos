@@ -30,7 +30,7 @@
         $tipo = "servicio";
         $cantidad = 0;
         $j = 0;
-        
+
         $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
         $num = 1;
         foreach ($ultimo as $ultimoo):
@@ -377,58 +377,81 @@
                                             }
 
                                             function guardarSolicitud() {
+                                                ftotal();
                                                 <?php
-                                                
-                                                    $tipo = "servicio";
-                                                    $cantidad = 0;
-                                                    $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-                                                    $numSolicitud = 1;
-                                                    
-                                                    foreach ($ultimo as $ultimoo):
-                                                        $numSolicitud++;
-                                                    endforeach;
-                                                    
-                                                
+                                                $tipo = "servicio";
+                                                $numSolicitud = 1;
+                                                $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); 
+                                                foreach ($ultimo as $ultimoo):
+                                                    $numSolicitud++;
+                                                endforeach;
                                                 ?>
-                                                 const datosServicio = <?php echo json_encode($respuestaServicios); ?>
-                                                        // Justo aquí estamos pasando la variable ----^
-                                                        // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
-                                                        const valoresServicio = datosServicio.value;
+                                                const datosServicio = <?php echo json_encode($respuestaServicios); ?>
+                                                // Justo aquí estamos pasando la variable ----^
+                                                // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
+                                                const valoresServicio = datosServicio.value;
                                                 console.log("numero de solicitud", <?php echo $numSolicitud ?>)
-                                                j=0;
-                                                cantidad=1;
+                                                j = 0;
+                                                cantidad = 0;
                                                 for (i = 0; i < numeroFila; i++) {
                                                     check = document.getElementById('enviar' + i).checked;
                                                     if (check == true) {
                                                         console.log("checkbox: SI");
                                                         codArse = document.getElementById('codigoServicio' + i).value;
+                                                        if (codArse == "") {
+                                                            alert('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio');
+                                                            $('#codigoServicio' + i).focus();
+                                                            $('#codigoServicio' + i).select2('open');
+                                                            cantidad=-100;
+                                                            break;
+                                                        }
                                                         codigoArse = valoresServicio[codArse]['Name'];
                                                         fechaNec = document.getElementById('fecha_Nec' + i).value;
+                                                        if (fechaNec == "") {
+                                                            alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria');
+                                                            document.getElementById('fecha_Nec' + i).focus();
+                                                            cantidad=-100;
+                                                            break;
+                                                        }
                                                         proveedor = document.getElementById('proveedor' + i).value;
                                                         precioInfo = document.getElementById('precio_inf' + i).value;
                                                         cuentaMayor = document.getElementById('cuentaMayor' + i).value;
-                                                        uen=document.getElementById('uen' + i).value;
-                                                        linea=document.getElementById('linea' + i).value;
-                                                        sublinea=document.getElementById('sublinea' + i).value;
-                                                        proyecto=document.getElementById('proyecto' + i).value;
-                                                        porDesc=document.getElementById('por_dec' + i).value;
-                                                        indImp=document.getElementById('ind_imp' + i).value;
-                                                        total=document.getElementById('total_ml' + i).value;
+                                                        uen = document.getElementById('uen' + i).value;
+                                                        linea = document.getElementById('linea' + i).value;
+                                                        sublinea = document.getElementById('sublinea' + i).value;
+                                                        proyecto = document.getElementById('proyecto' + i).value;
+                                                        if (proyecto == "") {
+                                                            alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto');
+                                                            $('#proyecto' + i).focus();
+                                                            $('#proyecto' + i).select2('open');
+                                                            cantidad=-100;
+                                                            break;
+                                                        }
+                                                        porDesc = document.getElementById('por_dec' + i).value;
+                                                        indImp = document.getElementById('ind_imp' + i).value;
+                                                        if (indImp == "") {
+                                                            alert('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto');
+                                                            $('#ind_imp' + i).focus();
+                                                            $('#ind_imp' + i).select2('open');
+                                                            cantidad=-100;
+                                                            break;
+                                                        }
+                                                        total = document.getElementById('total_ml' + i).value;
+                                                        cantidad++;
                                                         <?php
-                                                        $numServicio="j";
+                                                        $numServicio = "j";
                                                         $codArse[$numServicio] = "codigoArse";
                                                         $fechaNec[$numServicio] = "fechaNec";
                                                         $proveedor[$numServicio] = "proveedor";
                                                         $precioInfo[$numServicio] = "precioInfo";
                                                         $cuentaMayor[$numServicio] = "cuentaMayor";
                                                         $uen[$numServicio] = "uen";
-                                                        $linea[$numServicio] ="linea";
+                                                        $linea[$numServicio] = "linea";
                                                         $sublinea[$numServicio] = "sublinea";
                                                         $proyecto[$numServicio] = "proyecto";
                                                         $porDesc[$numServicio] = "porDesc";
                                                         $indImp[$numServicio] = "indImp";
                                                         $total[$numServicio] = "total";
-                                                        $cantidad="cantidad";
                                                         ?>
                                                         console.log("fila: ", <?php echo $numServicio ?>);
                                                         console.log("codigoArse: ", <?php echo $codArse[$numServicio] ?>);
@@ -443,13 +466,11 @@
                                                         console.log("porcentaje descuento   : ", <?php echo $porDesc[$numServicio] ?>);
                                                         console.log("indicador de impuesto: ", <?php echo $indImp[$numServicio] ?>);
                                                         console.log("total ml: ", <?php echo $total[$numServicio] ?>);
-                                                        console.log("cantidad: ", <?php echo $cantidad ?>);
+                                                        console.log("cantidad: ", cantidad);
                                                         j++;
-                                                        cantidad++;
                                                     } else {
                                                         console.log("checkbox: NO");
                                                     }
-
                                                 }
                                             }
                                         </script>
