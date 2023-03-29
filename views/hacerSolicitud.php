@@ -302,6 +302,7 @@
 
                                                 numeroFila++;
 
+                                                
 
                                                 $(document).ready(function () {
 
@@ -451,7 +452,7 @@
                                                     total = total.join('_').toString();
                                                     $.ajax(
                                                         {
-                                                            url: 'guardarSolicitud.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
+                                                            url: 'guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
                                                             &precioInfo='+ precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &proyecto='+ proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad,
                                                             success: function (data) {
@@ -478,10 +479,10 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <a><input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
-                                        onclick="ftotal()" id="guardarS" hidden></a>
                                 <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
                                         onclick="guardarSolicitud()"></a>
+                                        <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
+                                        onclick="ftotal()" id="guardarS" hidden>
                             </div>
                         </td>
 
