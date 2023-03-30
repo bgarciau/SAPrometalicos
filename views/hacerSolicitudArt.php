@@ -30,65 +30,34 @@
     
     if (isset($_POST["guardarA"])) { //entra a la condicion si el formulario se envio correctamente
         $tipo = "articulo";
-        $cantidad = 0; //Esta variable se usa para saber si hay articulos, si los hay los manda a la base de datos 
-        $j = 0;
         $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
         $num = 1;
         foreach ($ultimo as $ultimoo):
             $num++;
         endforeach;
-        while ($j < 1) {
-            $codArt = $_POST["codArt$j"];
-            if ($codArt == -1) {
-            } else {
-                $cantidad++;
-                $codSol = $num;
-                $codArt[$j] = $_POST["codArt$j"];
-                $code[$j] = $respuestaArticulos->value[$codArt[$j]]->ItemCode;
-                $desc[$j] = $respuestaArticulos->value[$codArt[$j]]->ItemName;
-                $fechaNec[$j] = $_POST["fecha_Nec$j"];
-                $proveedor[$j] = $_POST["proveedor$j"];
-                $cant_nec[$j] = $_POST["cant_nec$j"];
-                $precioInfo[$j] = $_POST["precio_inf$j"];
-                $porDesc[$j] = $_POST["por_desc$j"];
-                $indImp[$j] = $_POST["ind_imp$j"];
-                $total[$j] = $_POST["total$j"];
-                $uen[$j] = $_POST["uen$j"];
-                $xlinea[$j] = $_POST["lineas$j"];
-                $sublinea[$j] = $_POST["sublinea$j"];
+        $ultimo = $base->query("SELECT * FROM list_arse WHERE fk_num_sol='$num'")->fetchAll(PDO::FETCH_OBJ);
+        $cantidad = 0; foreach ($ultimo as $ultimoo):
+            $cantidad++;
+        endforeach;
+
+        $codSol = $num;
+        $estado = $_POST["estado"];
+        $nomSol = $_POST["nomSol"];
+        $correoElectronico = $_POST["correoElectronico"];
+        $propietario = $_POST["propietario"];
+        $comentarios = $_POST["comentarios"];
+        $codUsr = $_POST["codUsr"];
+        $departamento = $_POST["departamento"];
+        $sucursal = $_POST["sucursal"];
 
 
-                if ($cantidad > 0) {
-                    $sql = "INSERT INTO list_arse (fk_num_sol,fk_cod_arse,nom_arse,fecha_nec,fk_prov,cant_nec,precio_info,por_desc,ind_imp,total_ml,uen,linea,sublinea) 
-                    VALUES(:_numSol,:_codArse,:_descripcion,:_fechaNec,:_proveedor,:_cant_nec,:_precioInfo,:_por_desc,:_ind_imp,:_total_ml,:_uen,:_linea,:_sublinea)";
-
-                    $serv = $base->prepare($sql);
-
-                    $serv->execute(array(":_numSol" => $codSol, ":_codArse" => $code[$j], ":_descripcion" => $desc[$j], ":_fechaNec" => $fechaNec[$j], ":_proveedor" => $proveedor[$j], ":_cant_nec" => $cant_nec[$j], ":_precioInfo" => $precioInfo[$j], ":_por_desc" => $porDesc[$j], ":_ind_imp" => $indImp[$j], ":_total_ml" => $total[$j], ":_uen" => $uen[$j], ":_linea" => $xlinea[$j], ":_sublinea" => $sublinea[$j]));
-                }
-            }
-            $j++;
-        }
-        if ($cantidad > 0) {
-            $codSol = $num;
-            $estado = $_POST["estado"];
-            $nomSol = $_POST["nomSol"];
-            $correoElectronico = $_POST["correoElectronico"];
-            $propietario = $_POST["propietario"];
-            $comentarios = $_POST["comentarios"];
-            $codUsr = $_POST["codUsr"];
-            $departamento = $_POST["departamento"];
-            $sucursal = $_POST["sucursal"];
-
-
-            $sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
+        $sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
                 VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
 
-            $solicitud = $base->prepare($sql);
+        $solicitud = $base->prepare($sql);
 
-            $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
-            header("location:misSolicitudes.php?xtabla=tarticulos&SolCreada=$num");
-        }
+        $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
+        header("location:misSolicitudes.php?xtabla=tarticulos&SolCreada=$num");
     }
 
     ?>
@@ -108,8 +77,7 @@
 
                                 $usuario = $_SESSION['usuario'];
 
-                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                foreach ($user as $duser):
+                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser):
                                     ?>
                                     <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                     <label for="Solicitante">Solicitante:</label>
@@ -224,7 +192,8 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarA" hidden>
+                                <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarA"
+                                    id="guardarA" hidden>
                                 <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
                                         onclick="guardarSolicitud()"></a>
                             </div>
@@ -277,7 +246,7 @@
             // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
             const valoresArticulos = datosArticulo.value;
             j = 0;
-            while (j < 7357) {
+            while (j < 7355) {
                 const option = document.createElement('option');
                 option.value = j;
                 option.text = valoresArticulos[j]['ItemCode'];
@@ -292,7 +261,7 @@
             $selectArticuloDes.appendChild(optionArticuloDes);
             $('#descripcion' + numeroFila).select2();
             j = 0;
-            while (j < 7357) {
+            while (j < 7355) {
                 const option = document.createElement('option');
                 option.value = j;
                 option.text = valoresArticulos[j]['ItemName'];
@@ -615,14 +584,48 @@
                 if (check == true) {
                     console.log("checkbox: SI");
                     codArse[j] = document.getElementById('codigoArticulo' + i).value;
+                    if (codArse[j] == "") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar un articulo');
+                        $('#codigoArticulo' + i).focus();
+                        $('#codigoArticulo' + i).select2('open');
+                        cantidad = -100;
+                        break;
+
+                    }
                     fechaNec[j] = document.getElementById('fecha_Nec' + i).value;
+                    if (fechaNec[j] == "") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria');
+                        document.getElementById('fecha_Nec' + i).focus();
+                        cantidad = -100;
+                        break;
+                    }
                     proveedor[j] = document.getElementById('proveedor' + i).value;
                     cant_nec[j] = document.getElementById('cant_nec' + i).value;
+                    if (cant_nec[j] == "") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la cantidad necesaria');
+                        document.getElementById('cant_nec' + i).focus();
+                        cantidad = -100;
+                        break;
+                    }
                     precioInfo[j] = document.getElementById('precio_inf' + i).value;
                     porDesc[j] = document.getElementById('por_desc' + i).value;
                     indImp[j] = document.getElementById('ind_imp' + i).value;
+                    if (indImp[j] == "") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto');
+                        $('#ind_imp' + i).focus();
+                        $('#ind_imp' + i).select2('open');
+                        cantidad = -100;
+                        break;
+                    }
                     total[j] = document.getElementById('total_ml' + i).value;
                     uen[j] = document.getElementById('uen' + i).value;
+                    if (uen[j] == "") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar el uen');
+                        $('#uen' + i).focus();
+                        $('#uen' + i).select2('open');
+                        cantidad = -100;
+                        break;
+                    }
                     linea[j] = document.getElementById('linea' + i).value;
                     sublinea[j] = document.getElementById('sublinea' + i).value;
                     cantidad++;
@@ -645,9 +648,16 @@
                     console.log("checkbox: NO");
                 }
             }
-
             if (cantidad > 0) {
 
+                $('#guardarA').click();
+                <?php
+                $numSolicitud = 1;
+                $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); foreach ($ultimo as $ultimoo):
+                    $numSolicitud++;
+                endforeach;
+                ?>
+                numSolicitud = <?php echo $numSolicitud ?>;
                 codArse = codArse.join('_').toString();
                 fechaNec = fechaNec.join('_').toString();
                 proveedor = proveedor.join('_').toString();
@@ -659,14 +669,14 @@
                 uen = uen.join('_').toString();
                 linea = linea.join('_').toString();
                 sublinea = sublinea.join('_').toString();
-
                 $.ajax(
                     {
                         url: 'guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
-                                                           &cantNec='+cant_nec+' &precioInfo='+ precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
-                                                            &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad,
+                                                           &cantNec='+ cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
+                                                            &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '&numSolicitud=' + numSolicitud,
                         success: function (data) {
-                            $('#guardarS').click();
+
+                            // $('#guardarA').click();
                         }
                     }
                 )

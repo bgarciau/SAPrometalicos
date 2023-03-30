@@ -34,27 +34,26 @@
             $num++;
         endforeach;
         $ultimo = $base->query("SELECT * FROM list_arse WHERE fk_num_sol='$num'")->fetchAll(PDO::FETCH_OBJ);
-        $cantidad = 0;
-        foreach ($ultimo as $ultimoo):
+        $cantidad = 0; foreach ($ultimo as $ultimoo):
             $cantidad++;
         endforeach;
 
-            $codSol = $num;
-            $estado = $_POST["estado"];
-            $nomSol = $_POST["nomSol"];
-            $correoElectronico = $_POST["correoElectronico"];
-            $propietario = $_POST["propietario"];
-            $comentarios = $_POST["comentarios"];
-            $codUsr = $_POST["codUsr"];
-            $departamento = $_POST["departamento"];
-            $sucursal = $_POST["sucursal"];
+        $codSol = $num;
+        $estado = $_POST["estado"];
+        $nomSol = $_POST["nomSol"];
+        $correoElectronico = $_POST["correoElectronico"];
+        $propietario = $_POST["propietario"];
+        $comentarios = $_POST["comentarios"];
+        $codUsr = $_POST["codUsr"];
+        $departamento = $_POST["departamento"];
+        $sucursal = $_POST["sucursal"];
 
-            $sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
+        $sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
                 VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
 
-            $solicitud = $base->prepare($sql);
-            $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
-            header("location:misSolicitudes.php?SolCreada=$num");
+        $solicitud = $base->prepare($sql);
+        $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
+        header("location:misSolicitudes.php?SolCreada=$num");
     }
 
     ?>
@@ -76,8 +75,7 @@
 
                                 $usuario = $_SESSION['usuario'];
 
-                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                                foreach ($user as $duser):
+                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser):
                                     ?>
                                     <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                     <label for="Solicitante">Solicitante:</label>
@@ -302,7 +300,7 @@
 
                                                 numeroFila++;
 
-                                                
+
 
                                                 $(document).ready(function () {
 
@@ -438,6 +436,15 @@
 
                                                 if (cantidad > 0) {
 
+
+                                                    $('#guardarS').click();
+                                                    <?php
+                                                    $numSolicitud=1;
+                                                    $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); foreach ($ultimo as $ultimoo):
+                                                        $numSolicitud++;
+                                                    endforeach;
+                                                    ?>
+                                                    numSolicitud = <?php echo $numSolicitud ?>;
                                                     codigoArse = codigoArse.join('_').toString();
                                                     fechaNec = fechaNec.join('_').toString();
                                                     proveedor = proveedor.join('_').toString();
@@ -454,9 +461,9 @@
                                                         {
                                                             url: 'guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
                                                             &precioInfo='+ precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
-                                                            &proyecto='+ proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad,
+                                                            &proyecto='+ proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '&numSolicitud=' + numSolicitud,
                                                             success: function (data) {
-                                                                $('#guardarS').click();
+                                                                // $('#guardarS').click();
                                                             }
                                                         }
                                                     )
@@ -481,8 +488,8 @@
                             <div id="div__enviar">
                                 <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
                                         onclick="guardarSolicitud()"></a>
-                                        <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
-                                        onclick="ftotal()" id="guardarS" hidden>
+                                <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
+                                    onclick="ftotal()" id="guardarS" hidden>
                             </div>
                         </td>
 

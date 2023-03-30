@@ -19,7 +19,7 @@
     include("../php/conexion.php");
 
     if(isset($_GET['SolCreada'])){
-        echo '<script language="javascript">alert("Su solicitud fue creada con el numero: '.$_GET['SolCreada'].'");</script>';
+        echo '<script>alert("Su solicitud fue creada con el numero: '.$_GET['SolCreada'].'");</script>';
     }
     ?>
     <div class="base">
@@ -172,5 +172,4 @@
         </footer>
         </div>
 </body>
-
 </html>

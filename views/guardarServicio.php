@@ -6,12 +6,13 @@ $tipo = "servicio";
 $cantidad = 0;
 $j = 0;
 
-$ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-$numSolicitud = 1;
-foreach ($ultimo as $ultimoo):
-    $numSolicitud++;
-endforeach;
+// $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+// $numSolicitud = 1;
+// foreach ($ultimo as $ultimoo):
+//     $numSolicitud++;
+// endforeach;
 
+$numSolicitud = $_GET['numSolicitud'];
 $codigoArse = explode("_", $_GET['codigoArse']);
 $fechaNec =explode("_", $_GET['fechaNec']);
 $proveedor =explode("_", $_GET['proveedor']);
