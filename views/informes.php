@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <link rel="stylesheet" href="../css/style.css">
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.3.js"

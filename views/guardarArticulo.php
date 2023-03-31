@@ -6,13 +6,30 @@ $tipo = "articulo";
 $cantidad = 0;
 $j = 0;
 
-// $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-// $numSolicitud = 0;
-// foreach ($ultimo as $ultimoo):
-//     $numSolicitud++;
-// endforeach;
+$ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+$numSolicitud = 1;
+foreach ($ultimo as $ultimoo):
+    $numSolicitud++;
+endforeach;
 
-    $numSolicitud = $_GET['numSolicitud'];
+echo "numero Solicitud:".$numSolicitud;
+$estado = "ABIERTO";
+$nomSol = $_GET["nomSol"];
+$correoElectronico = $_GET["correoElectronico"];
+$propietario = $_GET["propietario"];
+$comentarios = $_GET["comentarios"];
+$codUsr = $_GET["codUsr"];
+$departamento = $_GET["departamento"];
+$sucursal = $_GET["sucursal"];
+$cantidad =$_GET['cantidad'];
+
+$sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
+        VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
+
+$solicitud = $base->prepare($sql);
+$solicitud->execute(array(":_codSol" => $numSolicitud, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
+
+
     $codArt = explode("_", $_GET['codigoArse']);
     $fechaNec = explode("_", $_GET['fechaNec']);
     $proveedor =explode("_", $_GET['proveedor']);
@@ -25,11 +42,6 @@ $j = 0;
     $linea =explode("_", $_GET['linea']);
     $sublinea =explode("_", $_GET['sublinea']);
     $cantidad = $_GET['cantidad'];
-    for ($j = 0; $j < $cantidad; $j++) {  
-        $code[$j] = $respuestaArticulos->value[$codArt[$j]]->ItemCode;
-        $desc[$j] = $respuestaArticulos->value[$codArt[$j]]->ItemName;
-    }
-
 
 for ($j = 0; $j < $cantidad; $j++) {    
      //agregar descripcion y cambiar valores para enviar a la base de datos

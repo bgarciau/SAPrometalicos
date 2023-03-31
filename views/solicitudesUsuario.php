@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -32,10 +33,7 @@
                     <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a> <!-- boton para volver a hacer solicitud -->
                 </div>
                 <div class="outer_wrapperS">
-                    <form id="menu"> <!-- Con este form se actulizan los datos segun el boton -->
-                        <button class="btn_sel" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
-                        <button class="btn_sel" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
-                    </form>
+                   
                     <?php
                     $xtabla = "tservicios"; //Con esta variable se cargan los articulos o los servicios segun su valor
                     if (isset($_GET["xtabla"])) { //Aca toma el valor de la variable si se ha preisonado un boton 
@@ -43,6 +41,10 @@
                     }
                     if ($xtabla == "tservicios") { ?> <!-- Pregunta si es la tabla de servicios para cargarla -->
                         <!-- tabla servicios -->
+                        <form id="menu"> <!-- Con este form se actulizan los datos segun el boton -->
+                        <button class="btn_sel_selected" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
+                        <button class="btn_sel" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
+                    </form>
                         <div class="table_wrapperS">
                             <h4>Servicios</h4>
                             <table id="tabla__solicitudes">
@@ -90,8 +92,12 @@
                                 ?>
                             </table>
                         <?php
-                    } else { ?>
-                            <!-- tabla articulos -->
+                    } else { ?> <!-- Como no es la tabla de servicios entonces carga la de articuls -->
+                            <!-- tabla articulos --> 
+                            <form id="menu"> <!-- Con este form se actulizan los datos segun el boton -->
+                        <button class="btn_sel" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
+                        <button class="btn_sel_selected" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
+                    </form>
                             <div class="table_wrapperS">
                                 <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">

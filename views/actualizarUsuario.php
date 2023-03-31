@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/modals.css">  <!-- Se usa para el cuadro emergente del cambio de contraseña -->
 </head>
@@ -68,7 +69,7 @@
                     <label class="label2" for="RolUsuario">Rol usuario:</label>
                     <input class="inputA" type="text" name="rolUsuario" value="<?php echo $userr->rol_usr ?>"><br> <!-- Se llama el rol del usuario -->
                     <label class="label2" for="Departamento">Departamento:</label>
-                    <select name="departamento" id="datosFormu">
+                    <select name="departamento" class="datosFormu">
                         <?php
                         $usrdep = $base->query("SELECT * FROM departamento WHERE pk_dep= '$userr->fk_depart'")->fetchAll(PDO::FETCH_OBJ); foreach ($usrdep as $udep): ?>
                             <option value="<?php echo $udep->pk_dep ?>"><?php echo $udep->nom_dep ?></option> <!-- Se muestra el departamento del usuario y todas las demas opciones -->
@@ -85,7 +86,7 @@
                     <label class="label2" for="Sucursal">Sucursal:</label>
                     <input class="inputA" type="text" name="sucursal" value="<?php echo $userr->sucursal ?>"><br> <!-- Se muestra la sucursal del usuario -->
                     <label class="label2" for="TipoUsuario">Tipo usuario:</label>
-                    <select name="tipoUsuario" id="datosFormu">
+                    <select name="tipoUsuario" class="datosFormu">
                         <option value=1>usuario</option>
                         <option value=2>empleado</option>
                         <option value=3>administrador</option>

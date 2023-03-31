@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -35,16 +36,16 @@
                     <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
                 </div>
                 <div class="outer_wrapperS">
-                    <form id="menu">
-                        <button class="btn_sel" name="xtabla" value="tservicios">servicios</button>
-                        <button class="btn_sel" name="xtabla" value="tarticulos">articulos</button>
-                    </form>
                     <?php
                     $xtabla = "tservicios";
                     if (isset($_GET["xtabla"])) {
                         $xtabla = $_GET["xtabla"];
                     }
                     if ($xtabla == "tservicios") { ?>
+                         <form id="menu">
+                        <button class="btn_sel_selected" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
+                        <button class="btn_sel" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
+                    </form>
                         <!-- tabla servicios -->
                         <div class="table_wrapperS">
                             <h4>Servicios</h4>
@@ -102,9 +103,14 @@
                                 endforeach;
                                 ?>
                             </table>
+                            </div>
                         <?php
                     } else { ?>
                             <!-- tabla articulos -->
+                            <form id="menu">
+                        <button class="btn_sel" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
+                        <button class="btn_sel_selected" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
+                    </form>
                             <div class="table_wrapperS">
                                 <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">
@@ -161,8 +167,8 @@
                                         </tr>
                                 </table>
                             </div>
-                        </div>
                 </div>
+            </div>
             </div>
             <footer>
             <?php

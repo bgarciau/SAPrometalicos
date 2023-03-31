@@ -1,3 +1,4 @@
+/* En este style se encuentran los estilos del header y el footer, */
 header {
 	width:100%; /* Establecemos que el header abarque el 100% del documento */
 	overflow:hidden; /* Eliminamos errores de float */
@@ -32,9 +33,9 @@ header {
 }
 
 header nav {
-	height: 100%;
-	width: 81%;
-	float:right;
+	height: 100%;  /* Establece el alto del nav al 100%  del header*/
+	width: 81%;		/* Establece el nav con un 81% del ancho del header */
+	float:right;	/* Se cloca a la derecha del header porque a la izquierda esta el logo */
 	text-align:-webkit-right;
 }
 

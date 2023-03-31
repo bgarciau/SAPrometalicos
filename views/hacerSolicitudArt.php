@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/style.css"> <!-- estilo para la pagina -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
     <!-- Libreria para agregar estilo al buscador en los select -->
     <script src="https://code.jquery.com/jquery-3.6.3.js"
@@ -26,39 +27,7 @@
     }
 
     include("../php/conexion.php");
-    include("../php/SAP.php"); //se usa para hacer los get al sap
-    
-    if (isset($_POST["guardarA"])) { //entra a la condicion si el formulario se envio correctamente
-        $tipo = "articulo";
-        $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-        $num = 1;
-        foreach ($ultimo as $ultimoo):
-            $num++;
-        endforeach;
-        $ultimo = $base->query("SELECT * FROM list_arse WHERE fk_num_sol='$num'")->fetchAll(PDO::FETCH_OBJ);
-        $cantidad = 0; foreach ($ultimo as $ultimoo):
-            $cantidad++;
-        endforeach;
-
-        $codSol = $num;
-        $estado = $_POST["estado"];
-        $nomSol = $_POST["nomSol"];
-        $correoElectronico = $_POST["correoElectronico"];
-        $propietario = $_POST["propietario"];
-        $comentarios = $_POST["comentarios"];
-        $codUsr = $_POST["codUsr"];
-        $departamento = $_POST["departamento"];
-        $sucursal = $_POST["sucursal"];
-
-
-        $sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
-                VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
-
-        $solicitud = $base->prepare($sql);
-
-        $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
-        header("location:misSolicitudes.php?xtabla=tarticulos&SolCreada=$num");
-    }
+    include("../php/SAP.php"); //se usa para hacer los get al sap y obtener los datos que necesita la aplicacion
 
     ?>
     <div class="base">
@@ -69,7 +38,6 @@
         </header>
         <div class="contenedor">
             <table border="1px" id="tabla__general">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <tr>
                         <td colspan="6">
                             <div id="div__solicitante">
@@ -79,7 +47,7 @@
 
                                 $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser):
                                     ?>
-                                    <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                                    <input type="hidden" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                     <label for="Solicitante">Solicitante:</label>
                                     <select name="solicitante" id="sel__solicitante">
                                         <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr ?>
@@ -90,16 +58,16 @@
                                     <input type="text" id="Solicitante" name="rolSol"
                                         value="<?php echo $duser->rol_usr ?>"><br>
                                     <label for="NombreSolicitante">Nombre Solicitante:</label>
-                                    <input type="text" name="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
+                                    <input type="text" id="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
                                     <label for="Sucursal">Sucursal:</label>
-                                    <select name="sucursal" id="datosFormu">
+                                    <select id="sucursal" class="datosFormu">
                                         <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
                                         </option>
                                         <option value="Principal">Principal</option>
                                         <option value="DefinirNuervo">Definir nuevo</option>
                                     </select><br>
                                     <label for="Departamento">Departamento:</label>
-                                    <select name="departamento" id="datosFormu">
+                                    <select id="departamento" class="datosFormu">
                                         <?php
                                         $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
                                             <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
@@ -122,7 +90,7 @@
                                 <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
                                     pedido</label><br>
                                 <label for="CorreoElectronico">Direccion Correo Electronico:</label>
-                                <input type="text" name="correoElectronico" placeholder="correo@correo.com"><br>
+                                <input type="text" id="correoElectronico" placeholder="correo@correo.com"><br>
                             </div>
                         </td>
                         <td colspan="6">
@@ -150,7 +118,7 @@
                         <td colspan="12">
                             <div id="div__tablaServicios">
                                 <a href="hacerSolicitud.php"><input class="btn_sel" type="button" value="servicios"></a>
-                                <a href=""><input class="btn_sel" type="button" value="articulos"></a>
+                                <a href=""><input class="btn_sel_selected" type="button" value="articulos"></a>
                                 <input class="btn-agregar-servicio" type="button" value="+" onclick="insertarFila()">
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
@@ -185,9 +153,9 @@
                         <td colspan="6">
                             <div id="div__comentarios">
                                 <label for="Propietario">Propietario:</label>
-                                <input type="text" name="propietario" placeholder="Propietario"><br>
+                                <input type="text" id="propietario" placeholder="Propietario"><br>
                                 <label for="Comentarios">Comentarios:</label>
-                                <textarea name="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
+                                <textarea id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
                             </div>
                         </td>
                         <td colspan="6">
@@ -200,7 +168,6 @@
                         </td>
 
                     </tr>
-                </form>
             </table>
         </div>
         <footer>
@@ -424,6 +391,12 @@
                                     x = valores[j]['FactorCode'] * 10 ** (-1);
                                     x = Math.floor(x);
                                     if (x == $(this).val()) {
+                                        $select2.remove(0);
+                                        const option = document.createElement('option');
+                                        option.value = 0;
+                                        option.text = "Seleccione";
+                                        option.selected;
+                                        $select.appendChild(option);
                                         $('#linea' + i).prop("required", true);
                                         while (x == ($(this).val())) {
                                             const option = document.createElement('option');
@@ -502,6 +475,12 @@
                                     x = Math.floor(x);
                                     if (x == $(this).val()) {
                                         $('#sublinea' + i).prop("required", true);
+                                        $select.remove(0);
+                                        const option = document.createElement('option');
+                                        option.value = 0;
+                                        option.text = "Seleccione";
+                                        option.selected;
+                                        $select.appendChild(option);
                                         while (x == ($(this).val())) {
                                             const option = document.createElement('option');
                                             option.value = valores[j]['FactorCode'];
@@ -627,7 +606,21 @@
                         break;
                     }
                     linea[j] = document.getElementById('linea' + i).value;
+                    if (linea[j] == "NO") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la linea');
+                        $('#linea' + i).focus();
+                        $('#linea' + i).select2('open');
+                        cantidad = -100;
+                        break;
+                    }
                     sublinea[j] = document.getElementById('sublinea' + i).value;
+                    if (sublinea[j] == "NO") {
+                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la sublinea');
+                        $('#sublinea' + i).focus();
+                        $('#sublinea' + i).select2('open');
+                        cantidad = -100;
+                        break;
+                    }
                     cantidad++;
 
                     console.log("fila: ", j);
@@ -650,14 +643,13 @@
             }
             if (cantidad > 0) {
 
-                $('#guardarA').click();
-                <?php
-                $numSolicitud = 1;
-                $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); foreach ($ultimo as $ultimoo):
-                    $numSolicitud++;
-                endforeach;
-                ?>
-                numSolicitud = <?php echo $numSolicitud ?>;
+                nomSol = document.getElementById('nomSol').value;
+                correoElectronico = document.getElementById('correoElectronico').value;
+                propietario = document.getElementById('propietario').value;
+                comentarios = document.getElementById('comentarios').value;
+                codUsr = document.getElementById('codUsr').value;
+                departamento = document.getElementById('departamento').value;
+                sucursal = document.getElementById('sucursal').value;
                 codArse = codArse.join('_').toString();
                 fechaNec = fechaNec.join('_').toString();
                 proveedor = proveedor.join('_').toString();
@@ -673,10 +665,11 @@
                     {
                         url: 'guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
                                                            &cantNec='+ cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
-                                                            &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '&numSolicitud=' + numSolicitud,
+                                                            &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
+                                                            &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '&comentarios=' + comentarios + '&codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal,
                         success: function (data) {
-
-                            // $('#guardarA').click();
+                            alert('Su solicitud fue creada:\n"' + data + '"')
+                            window.location = "misSolicitudes.php?xtabla=tarticulos";
                         }
                     }
                 )

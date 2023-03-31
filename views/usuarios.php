@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <link rel="stylesheet" href="../css/style.css"> <!-- llama el estilo para el contenido entre el header y el footer -->
 </head>
 
@@ -34,7 +35,7 @@
     <div class="base">   <!-- Vista de  la pagina -->
         <header>
             <?php
-            require_once('../php/header.php'); // llama el header
+            require_once('../php/header.php'); // carga el header
             ?>
         </header>
         <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
@@ -95,7 +96,7 @@
                                     </td>
                                 </tr>
                                 <?php
-                                $i = $i + 1; //se suma uno popr cada usuario
+                                $i = $i + 1; //se suma uno por cada usuario
                             endforeach;
                             ?>
                             </tbody>
@@ -106,7 +107,7 @@
         </div>
         <footer>
             <?php
-            require_once('../php/footer.php'); //se lama el footer
+            require_once('../php/footer.php'); //carga el footer
             ?>
         </footer>
     </div>

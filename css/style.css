@@ -355,7 +355,7 @@ input[type="checkbox" i] {
     cursor: pointer;
     
 }
-select#datosFormu{
+.datosFormu{
     margin: 1px;
     width: 42%;
     height: 14%;
@@ -463,6 +463,19 @@ select#sel__solicitante{
 .btn_sel:hover{
     background-color:#ffffff ;
     color: #040404;
+}
+
+.btn_sel_selected{
+    text-align: center;
+    text-decoration:none;
+    height: auto;
+    font-size: 100%;
+    color:#ffffff;
+    background-color:#000000;
+    border-color:#21d61ddb;
+    border-width: 2px;
+    border-style: solid;
+    width: 8%;
 }
 
 .btn_vol{

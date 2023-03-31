@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="icon" type="image/png" href="../images/fav.png" />
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -22,7 +23,7 @@
     $depart = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
 
     if (isset($_POST["crearU"])) { //se usa cuando se manda el formulario con los datos del usuario
-
+    
         if ($_POST["password"] == $_POST["password2"]) { //si las claves son iguales crea el usuario en la base de datos
             $codigoUsuario = $_POST["codigoUsuario"];
             $nombreUsuario = $_POST["nombreUsuario"];
@@ -37,11 +38,11 @@
                 VALUES(:_codigoUsuario,:_nombreUsuario,:_rolUsuario,:_departamento,:_sucursal,:_password,:_tipoUsuario)";
 
             $resultado = $base->prepare($sql); //Prepara una sentencia SQL para ser ejecutada por el método execute
-
+    
             $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_nombreUsuario" => $nombreUsuario, ":_rolUsuario" => $rolUsuario, ":_departamento" => $departamento, ":_sucursal" => $sucursal, ":_password" => $pass_cifrado, ":_tipoUsuario" => $tipoUsuario)); //se ejecuta el resultado y se definen las variables que se van a enviar a la base de datos
-
+    
             header("location:usuarios.php"); //lo manda a la lista de usuarios
-        } else {  //si las claves no son iguales les hace un post a las variables para volverlas a cargar e intentar nuevamente la contraseña
+        } else { //si las claves no son iguales les hace un post a las variables para volverlas a cargar e intentar nuevamente la contraseña
             $codigoUsuario = $_POST["codigoUsuario"];
             $nombreUsuario = $_POST["nombreUsuario"];
             $rolUsuario = $_POST["rolUsuario"];
@@ -53,20 +54,20 @@
     }
     ?>
     <div class="base">
-    <header>
-        <?php
-        require_once('../php/header.php');
-        ?>
-    </header>
+        <header>
+            <?php
+            require_once('../php/header.php');
+            ?>
+        </header>
         <div class="contenedor">
             <div id="div__agregarU">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1"> <!-- Se usa el php_self para hacer el action del form en el mismo archivo php   -->
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
+                    <!-- Se usa el php_self para hacer el action del form en el mismo archivo php   -->
                     <h2>AGREGAR USUARIO</h2>
                     <label class="label2" for="CodigoUsuario">Codigo usuario:</label>
                     <input class="inputA" type="text" id="CodigoUsuario" name="codigoUsuario" value="<?php if (isset($_POST['codigoUsuario'])) { //la condicion en el value se usa para saber si ya se habia hechoo un post en el formulario, si este fallo se vuelven a cargar los datos para que se vuelva a intentar el formulario
-                        echo $_POST['codigoUsuario'];
-                    } ?>"
-                        required><br>
+                            echo $_POST['codigoUsuario'];
+                        } ?>" required><br>
                     <label class="label2" for="RolUsuario">Rol usuario:</label>
                     <input class="inputA" type="text" id="RolUsuario" name="rolUsuario" value="<?php if (isset($_POST['rolUsuario'])) {
                         echo $_POST['rolUsuario'];
@@ -74,10 +75,9 @@
                     <label class="label2" for="NombreUsuario">Nombre usuario:</label>
                     <input class="inputA" type="text" id="NombreUsuario" name="nombreUsuario" value="<?php if (isset($_POST['nombreUsuario'])) {
                         echo $_POST['nombreUsuario'];
-                    } ?>"
-                        required><br>
+                    } ?>" required><br>
                     <label class="label2" for="Departamento">Departamento:</label>
-                    <select name="departamento" id="datosFormu" required>
+                    <select name="departamento" class="datosFormu" required>
                         <?php
                         if (isset($_POST['departamento'])) {
                             $depart2 = $_POST['departamento'];
@@ -108,28 +108,24 @@
                     <label class="label2" for="Password">Confirmar Contraseña:</label>
                     <input class="inputA" type="password" id="clave2" name="password2" required><br>
                     <label class="label2" for="TipoUsuario">Tipo usuario:</label>
-                    <select name="tipoUsuario" id="datosFormu" required>
-    
-                                <option value="<?php if (isset($_POST['tipoUsuario'])) {
-                        echo $_POST['tipoUsuario'];
-                    } ?>"><?php echo $tipoUsuario ?></option>
-
+                    <select name="tipoUsuario" id="datosFormu" class="datosFormu" required>
                         <option value=1>Usuario</option>
                         <option value=2>Empleado</option>
                         <option value=3>Administrador</option>
                     </select>
 
                     <br>
-                    <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU" 
+                    <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU"
                             onclick="comprobarClave()"></a><!-- Este boton envia los datos del nuevo usuario y tambien verifica si las claves son iguales y si no lo son carga nuevamente los datos dejando el campo de la contraseña -->
-                    <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a> <!-- Vuelve al listado de usuarios sin guardar datos -->
+                    <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                    <!-- Vuelve al listado de usuarios sin guardar datos -->
             </div>
         </div>
         <footer>
-        <?php
-        require_once('../php/footer.php');
-        ?>
-    </footer>
+            <?php
+            require_once('../php/footer.php');
+            ?>
+        </footer>
     </div>
     </form>
     <script>

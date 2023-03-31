@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" href="../images/fav.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.3.js"
@@ -26,36 +27,6 @@
     include("../php/conexion.php");
     include("../php/SAP.php");
 
-    if (isset($_POST["guardarS"])) {
-        $tipo = "servicio";
-        $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-        $num = 1;
-        foreach ($ultimo as $ultimoo):
-            $num++;
-        endforeach;
-        $ultimo = $base->query("SELECT * FROM list_arse WHERE fk_num_sol='$num'")->fetchAll(PDO::FETCH_OBJ);
-        $cantidad = 0; foreach ($ultimo as $ultimoo):
-            $cantidad++;
-        endforeach;
-
-        $codSol = $num;
-        $estado = $_POST["estado"];
-        $nomSol = $_POST["nomSol"];
-        $correoElectronico = $_POST["correoElectronico"];
-        $propietario = $_POST["propietario"];
-        $comentarios = $_POST["comentarios"];
-        $codUsr = $_POST["codUsr"];
-        $departamento = $_POST["departamento"];
-        $sucursal = $_POST["sucursal"];
-
-        $sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
-                VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
-
-        $solicitud = $base->prepare($sql);
-        $solicitud->execute(array(":_codSol" => $codSol, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
-        header("location:misSolicitudes.php?SolCreada=$num");
-    }
-
     ?>
     <div class="base">
         <header>
@@ -65,7 +36,7 @@
         </header>
         <div class="contenedor">
             <table border="5px" id="tabla__general">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="formularioSolicitud">
+                
                     <tr>
                         <td colspan="6">
                             <div id="div__solicitante">
@@ -77,7 +48,7 @@
 
                                 $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser):
                                     ?>
-                                    <input type="hidden" name="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                                    <input type="hidden" name="codUsr" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                     <label for="Solicitante">Solicitante:</label>
                                     <select name="solicitante" id="sel__solicitante">
                                         <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr ?>
@@ -88,16 +59,16 @@
                                     <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
                                         required><br>
                                     <label for="NombreSolicitante">Nombre Solicitante:</label>
-                                    <input type="text" name="nomSol" value="<?php echo $duser->nom_usr ?>" required><br>
+                                    <input type="text" name="nomSol" id="nomSol" value="<?php echo $duser->nom_usr ?>" required><br>
                                     <label for="Sucursal">Sucursal:</label>
-                                    <select name="sucursal" id="datosFormu">
+                                    <select class="datosFormu" name="sucursal" id="sucursal" >
                                         <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
                                         </option>
                                         <option value="Principal">Principal</option>
                                         <option value="DefinirNuervo">Definir nuevo</option>
                                     </select><br>
                                     <label for="Departamento">Departamento:</label>
-                                    <select name="departamento" id="datosFormu">
+                                    <select class="datosFormu" name="departamento" id="departamento">
                                         <?php
                                         $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
                                             <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
@@ -119,7 +90,7 @@
                                 <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
                                     pedido</label><br>
                                 <label for="CorreoElectronico">Direccion Correo Electronico:</label>
-                                <input type="text" name="correoElectronico" placeholder="correo@correo.com"><br>
+                                <input type="text" name="correoElectronico" id="correoElectronico" placeholder="correo@correo.com"><br>
                             </div>
                         </td>
                         <td colspan="6">
@@ -145,9 +116,8 @@
                     <tr>
                         <td colspan="12">
                             <div id="div__tablaServicios">
-                                <a href=""><input class="btn_sel" type="button" value="servicios"></a>
-                                <a href="hacerSolicitudArt.php"><input class="btn_sel" type="button"
-                                        value="articulos"></a>
+                                <a href=""><input class="btn_sel_selected" type="button" value="servicios"></a>
+                                <a href="hacerSolicitudArt.php"><input class="btn_sel" type="button" value="articulos"></a>
                                 <input class="btn-agregar-servicio" type="button" value="+" onclick="insertarFila()">
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
@@ -243,7 +213,7 @@
                                                     $selectProveedor.appendChild(option);
                                                     j++;
                                                 }
-                                                col6.innerHTML = "<input class='inputTablaCant' type='number'\n\
+                                                col6.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
                                                         id='precio_inf" + numeroFila + "'\n\
                                                         value=0 name='precio_inf" + numeroFila + "'>";
                                                 col7.innerHTML = "<input class='inputTabla' type='search'\n\
@@ -273,7 +243,7 @@
                                                     $selectProyecto.appendChild(option);
                                                     j++;
                                                 }
-                                                col12.innerHTML = "<input class='inputTablaCant' type='number'\n\
+                                                col12.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
                                                         id='por_dec" + numeroFila + "' name='por_dec" + numeroFila + "' value=0 >";
                                                 col13.innerHTML = "<select class='selectServicio' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "' readonly></select>";
                                                 const $selectIndImp = document.querySelector("#ind_imp" + numeroFila);
@@ -436,15 +406,13 @@
 
                                                 if (cantidad > 0) {
 
-
-                                                    $('#guardarS').click();
-                                                    <?php
-                                                    $numSolicitud=1;
-                                                    $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ); foreach ($ultimo as $ultimoo):
-                                                        $numSolicitud++;
-                                                    endforeach;
-                                                    ?>
-                                                    numSolicitud = <?php echo $numSolicitud ?>;
+                                                    nomSol = document.getElementById('nomSol').value;
+                                                    correoElectronico = document.getElementById('correoElectronico').value;
+                                                    propietario = document.getElementById('propietario').value;
+                                                    comentarios = document.getElementById('comentarios').value;
+                                                    codUsr = document.getElementById('codUsr').value;
+                                                    departamento = document.getElementById('departamento').value;
+                                                    sucursal = document.getElementById('sucursal').value;
                                                     codigoArse = codigoArse.join('_').toString();
                                                     fechaNec = fechaNec.join('_').toString();
                                                     proveedor = proveedor.join('_').toString();
@@ -457,12 +425,18 @@
                                                     porDesc = porDesc.join('_').toString();
                                                     indImp = indImp.join('_').toString();
                                                     total = total.join('_').toString();
+
+                                                    console.log("enviar datos");
                                                     $.ajax(
                                                         {
                                                             url: 'guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
                                                             &precioInfo='+ precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
-                                                            &proyecto='+ proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '&numSolicitud=' + numSolicitud,
+                                                            &proyecto='+ proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad +'\n\
+                                                            &nomSol=' + nomSol+ '&correoElectronico=' + correoElectronico+ '&propietario=' + propietario+ '&comentarios=' + comentarios+ '&codUsr=' + codUsr+ '&departamento=' + departamento + '&sucursal=' + sucursal ,
                                                             success: function (data) {
+                                                                alert('Su solicitud fue creada:\n"' + data + '"')
+                                                                window.location="misSolicitudes.php";
+
                                                                 // $('#guardarS').click();
                                                             }
                                                         }
@@ -479,9 +453,9 @@
                         <td colspan="6">
                             <div id="div__comentarios">
                                 <label for="Propietario">Propietario:</label>
-                                <input type="text" name="propietario" placeholder="Propietario"><br>
+                                <input type="text" name="propietario" id="propietario" placeholder="Propietario"><br>
                                 <label for="Comentarios">Comentarios:</label>
-                                <textarea name="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
+                                <textarea name="comentarios" id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
                             </div>
                         </td>
                         <td colspan="6">
@@ -494,7 +468,6 @@
                         </td>
 
                     </tr>
-                </form>
             </table>
         </div>
         <footer>
