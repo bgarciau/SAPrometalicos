@@ -1,7 +1,6 @@
 <?php
 
 include("../php/conexion.php");
-include("../php/SAP.php");
 $tipo = "servicio";
 $cantidad = 0;
 $j = 0;

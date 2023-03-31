@@ -26,6 +26,11 @@
 
     include("../php/conexion.php");
     include("../php/SAP.php");
+    $respuestaServicios=servicios($sesion);
+    $respuestaProveedor=proveedores($sesion);
+    $respuestaIndImp=indImpuestos($sesion);
+    $respuestaProyecto=proyectos($sesion);
+
 
     ?>
     <div class="base">

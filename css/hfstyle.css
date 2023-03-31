@@ -132,6 +132,12 @@ footer .imagen{
 footer .imagen:hover{
     filter:hue-rotate(-100deg) brightness(500%);
 }
+footer .sena{
+
+    width: 45px;
+    height: 45px;
+	padding-right: 50px;
+}
 
 p{
 	margin-top: 10px;

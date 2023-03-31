@@ -20,7 +20,6 @@
 
         header("location:../index.php");
     }
-    include("../php/SAP.php");
     ?>
     <div class="base">
         <header>

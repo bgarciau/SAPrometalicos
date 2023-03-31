@@ -28,6 +28,12 @@
 
     include("../php/conexion.php");
     include("../php/SAP.php"); //se usa para hacer los get al sap y obtener los datos que necesita la aplicacion
+    $respuestaArticulos=articulos($sesion);
+    $respuestaProveedor=proveedores($sesion);
+    $respuestaIndImp=indImpuestos($sesion);
+    $respuestaUen=uen($sesion);
+    $respuestaLinea=linea($sesion);
+    $respuestaSubLinea=sublinea($sesion);
 
     ?>
     <div class="base">
@@ -261,7 +267,7 @@
             col8.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
                                                         id='precio_inf" + numeroFila + "'\n\
                                                         value=0 name='precio_inf" + numeroFila + "'>";
-            col9.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
+            col9.innerHTML = "<input class='inputTablaCant' type='number' min=0 \n\
         id='por_desc" + numeroFila + "' name='por_desc" + numeroFila + "' value=0 >";
             col10.innerHTML = "<select class='selectServicio' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "'></select>";
             const $selectIndImp = document.querySelector("#ind_imp" + numeroFila);
@@ -538,10 +544,6 @@
                 $numSolicitud++;
             endforeach;
             ?>
-            const datosServicio = <?php echo json_encode($respuestaServicios); ?>
-            // Justo aquí estamos pasando la variable ----^
-            // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
-            const valoresServicio = datosServicio.value;
             console.log("numero de solicitud", <?php echo $numSolicitud ?>)
             j = 0;
             cantidad = 0;

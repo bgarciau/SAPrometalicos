@@ -18,7 +18,7 @@
     }
     include("../php/conexion.php");
     include("../php/SAP.php"); //Se usa para poder usar los valores obtenidos del SAP
-
+    $respuestaServicios= servicios($sesion);
     $usuario = $_SESSION['usuario'];
 
     $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);

@@ -2,6 +2,7 @@
 
 include("../php/conexion.php");
 include("../php/SAP.php");
+$respuestaArticulos=articulos($sesion);
 $tipo = "articulo";
 $cantidad = 0;
 $j = 0;
