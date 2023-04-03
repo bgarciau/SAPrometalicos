@@ -20,10 +20,12 @@ h2{
     z-index:0;
     background-color: #e7d0a483;
 }
-table{
+
+table{  /* borde de la tabla */
     border: 1px solid black;
 }
-#tabla__general{
+
+#tabla__general{  /* tabla que contiene todos los datos del usuario, de la solicitud y contiene la tabla de articulos o servicios  */
     border-spacing: 0px;
     text-align: center;
     width: 95%;
@@ -36,7 +38,7 @@ table{
     position:absolute;
     float: left;
 }
-#div__agregarU{
+#div_agregar_usuario{  /* div para agregar usuario en usuarios */
     text-align: center;
     width: 98%;
     height: 70%;
@@ -47,60 +49,38 @@ table{
     transform: translateX(-50%) translateY(-50%);
     position: relative;
 }
-#div__config{
 
-    text-align: center;
-    background-color: rgba(219, 215, 215, 0.473);
-    font-size: 20px;
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    position: relative;
-}
-
-#div__volver{
+#div_boton_volver{ /* este div contiene el boton de volver */
     text-align: right;
     margin-right: 7px;
     width: 20%;
     padding-right: 5%;
     float: right;
 }
-#div__agregar{
+#div__agregar{  /* div que contiene el fomrulario para agregar usuario o para actualizarlo */
     text-align: left;
     float: left;
     margin-left: 5px;
     width: 20%;
 }
-#div__buscar{
-    text-align: left;
-    margin-left: 10%;
-    float:left;
-}
-#color_a{
-    height: 7%;
-    margin-right: 7px;
-    width: 90%;
-    padding-right: 5%;
-    background-color: #e7d0a4bb;
-}
-#tabla__usuarios{
+#tabla__usuarios{ /* tabla para mostrar los usuarios y los servicios */
     border-collapse: separate;
     border-spacing: 0px;
     min-width: 99%;
 }
 
-#tabla__solicitudes{
+#tabla__solicitudes{ /* tabla que carga las solicitudes hechas */
     border-collapse: separate;
     border-spacing: 0px;
     width: 100%;
 }
 
-#tabla__solicitudes td{
+#tabla__solicitudes td{ /* celdas de la tabla */
     padding: 0px;
     border-color: #000000;
     border: 1px solid black;
 }
-#tabla__solicitudes th{
+#tabla__solicitudes th{ /* celdas del encabezado de la tabla */
     position: sticky;
     top: 0px;
     background-color:#faf6f6;
@@ -109,14 +89,14 @@ table{
     text-align: center;
 }
 
-.table_wrapperS{
+.table_wrapperS{     /* activa el scroll para que la tabla cargue unicamente en un espacio de la pagina per que se pueda recorrer completa */
     height: 90%;
     width: 99%;
     overflow-y:scroll;
     margin: 5px;
 }
 
-.outer_wrapperS{
+.outer_wrapperS{ /* acomoda el div donde va a ir la tabla */
     box-shadow: 0px 0px 5px black;
     margin: 5px;
     height:99%;
@@ -126,19 +106,19 @@ table{
 }
 
 
-#tabla__servicios,#tabla__articulos{
+#tabla__servicios,#tabla__articulos{  /* estilos de la tabla donde se agregan los servicios y los articulos */
     border-collapse: separate;
     border-spacing: 0px;
     min-width: max-content;
 }
 
-#tabla__servicios td,#tabla__articulos td{
+#tabla__servicios td,#tabla__articulos td{  /* casillas body de la tabla */
     padding: 0px;
     border-color: #000000;
     border: 1px solid black;
 }
 
-#tabla__servicios th,#tabla__articulos th{
+#tabla__servicios th,#tabla__articulos th{  /* casillas header de la tabla */
     position: sticky;
     top: 0px;
     background-color:#ffffff;
@@ -148,15 +128,15 @@ table{
     z-index: 1;
 }
 
-.table_wrapper{
+.table_wrapper{ /* activa el scroll para que la tabla cargue unicamente en un espacio de la pagina per que se pueda recorrer completa */
     height: 97%;
-    width: 99,5%;
+    width: 99.5%;
     overflow-y: scroll;
     margin: 5px;
     overflow-x: scroll;
 }
 
-.outer_wrapper{
+.outer_wrapper{/* acomoda el div donde va a ir la tabla */
     box-shadow: 0px 0px 3px black;
     margin: 2px;
     height: 89%;
@@ -164,7 +144,7 @@ table{
 }
 
 
-#div__solicitante,#div__fechas{
+#div__solicitante,#div__fechas{ /* contenido de las casillas donde van los datos del solicitante y las fechas */
     width: 98%;
     height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
@@ -172,23 +152,23 @@ table{
     text-align: left;
 }
 #div__fechas{
-    text-align: right;
+    text-align: right; 
 }
-#div__comentarios{
+#div__comentarios{ /* div para la casilla dondeva el propietario y los comentarios */
     width: 98%;
     height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: left;
 }
-#div__enviar{
+#div__enviar{ /* div para el boton de enviar solicitud */
     width: 98%;
     height: 95%;
     background-color: rgba(228, 228, 228, 0.795);
     margin: 5px auto;
     text-align: center;
 }
-#div__tablaServicios{
+#div__tablaServicios{    /* div para la casilla de la tabla de sericios y articulos */
     width: 96vw;
     height: 40vh;
     background-color: rgba(228, 228, 228, 0.795);
@@ -197,7 +177,7 @@ table{
 
 }
 
-#div__tablaSolicitudes{
+#div_tablas{ /* este div se usa para contener las tablas en mis solicitudes, servicios, solicitudes usuarios y usuarios  */
     width: 99%;
     height: 80vh;
     background-color: #e7d0a4bb;
@@ -218,16 +198,6 @@ textarea {
     font-size: 14px;
   }
 
-  .textareaF{
-    height: 100px;
-    width: 600px;
-    font-size: 20px;
-    text-align: center;
-    background-color: #000000;
-    color: #ffffff;
-  }
-
-
 label{
     display: inline-block;
     width: 30%;
@@ -236,7 +206,7 @@ label{
     font-size: 14px;
 }
 
-.label2{
+.label_usuario{  /* label para agregar o actuliar usuario */
     display: inline-block;
     width: 15%;
     height: 10%; 
@@ -244,7 +214,7 @@ label{
     font-size: 14px;
 }
 
-#enviarCorreo{
+#enviarCorreo{   /* para ell labael al lado del checkbox */
     width: 60%;
     height: 10%;
     font-size: 100%;
@@ -256,8 +226,8 @@ input{
     height: 10%;
     font-size: 100%;
 }
-
-.inputTabla{
+/* inputs para las casillas de las tablas  */
+.inputTabla{ 
     display: inline-block;
     text-align: left;
     margin: 0;
@@ -267,7 +237,7 @@ input{
     width: 99%;
 }
 
-.inputTablaNumero{
+.inputTablaNumero{ 
     display: inline-block;
     text-align: center;
     margin: 0;
@@ -277,7 +247,7 @@ input{
     width: 70%;
 }
 
-.inputTablaCant{
+.inputTablaCantidad{
     display: inline-block;
     text-align: left;
     margin: 0;
@@ -285,16 +255,6 @@ input{
     font-size: 18px;
     height: 25px;
     width: 98%;
-}
-
-.inputTablaArt{
-    display: inline-block;
-    text-align: left;
-    margin: 0;
-    border: 0px;
-    width: 345px;
-    font-size: 15px;
-    height: 25px;
 }
 
 .inputTablaFecha{
@@ -307,7 +267,7 @@ input{
     font-size: 18px;
     height: 25px;
 }
-.inputTablaSer{
+.inputTablaServicios{
     display: inline-block;
     text-align: left;
     margin: 0;
@@ -316,30 +276,12 @@ input{
     font-size: 18px;
     height: 25px;
 }
-.inputBuscar{
-    display: inline-block;
-    text-align: left;
-    margin: 0;
-    border-color: #999;
-    height: 22px;
-    width: 300px;
-    color:#464646b7 ;
-    font-size: 14px;
-}
 
-.inputA{
+.inputUsuarios{
     margin-top: 5px;
     display: inline-block;
     width: 41%; 
     height: 14%;
-    text-align: left;
-}
-.inputc{
-    margin-top: 3px;
-    margin-left: 10px;
-    display: inline-block;
-    width: 250px; 
-    height: 14px;
     text-align: left;
 }
 
@@ -355,13 +297,13 @@ input[type="checkbox" i] {
     cursor: pointer;
     
 }
-.datosFormu{
+.select_formulario{
     margin: 1px;
     width: 41%;
     height: 14%;
     font-size: 100%;
 }
-.selectServicio{
+.select_tabla{
     width: 350px;
     height: 25px;
     font-size: 16px;
@@ -373,7 +315,7 @@ select#sel__solicitante{
     font-size: 100%;
 }
 
-.btn_env{
+.btn_guardar{
     width: 50%;
     height: 20%;
     text-decoration:none;
@@ -386,7 +328,7 @@ select#sel__solicitante{
     border-style: solid;
     text-align: center;
 }
-.btn_env2{
+.btn_crear_usuario{
     width: 50%;
     height: 20%;
     text-decoration:none;
@@ -399,7 +341,7 @@ select#sel__solicitante{
     text-align: center;
 }
 
-.btn_env3{
+.btn_cambiar_contraseña{
     width: 30%;
     margin-top: 1%;
     text-decoration:none;
@@ -412,7 +354,7 @@ select#sel__solicitante{
     text-align: center;
 }
  
-.btn_env4{
+.btn_contraseña{
     width: 90%;
     height: 20%;
     text-decoration:none;
@@ -426,29 +368,12 @@ select#sel__solicitante{
     text-align: center;
 }
 
-.btn_env:hover{
+.btn_guardar:hover{
     background-color:#ffffff ;
     color: #040404;
 }
 
-.btn_doc{
-    text-decoration:none;
-    font-weight: 300;
-    font-size: 14px;
-    color:#ffffff;
-    margin-top: 2px;
-    margin-right: 300px;
-    background-color:#fa565f;
-    border-color:#f74248;
-    border-width: 2px;
-    border-style: solid;
-}
-.btn_doc:hover{
-    background-color:#ffffff ;
-    color: #040404;
-}
-
-.btn_sel{
+.btn_opciones{
     text-align: center;
     text-decoration:none;
     height: auto;
@@ -460,12 +385,12 @@ select#sel__solicitante{
     border-style: solid;
     width: 8%;
 }
-.btn_sel:hover{
+.btn_opciones:hover{
     background-color:#ffffff ;
     color: #040404;
 }
 
-.btn_sel_selected{
+.btn_opciones_selected{
     text-align: center;
     text-decoration:none;
     height: auto;
@@ -478,7 +403,7 @@ select#sel__solicitante{
     width: 8%;
 }
 
-.btn_vol{
+.btn_volver{
     width: 120px;
     text-decoration:none;
     font-size: 14px;
@@ -491,11 +416,13 @@ select#sel__solicitante{
     margin-top: 20px;
     height: auto;
 }
-.btn_vol:hover{
+.btn_volver:hover{
     background-color:#ffffff ;
     color: #040404;
 }
+/* ------------------------------------ */
 
+/* botones para la tabla de usuarios */
 .btn_add{
     width: 150px;
     text-decoration:none;
@@ -540,14 +467,6 @@ select#sel__solicitante{
     color: #040404;
 }
 
-#lupa{
-    height: 16px;
-    width: 16px;
-}
-#lupa:hover{
-    filter:hue-rotate(200deg);
-}
-
 .btn_info{
     width: 55px;
     font-size: 12px;
@@ -560,7 +479,6 @@ select#sel__solicitante{
     background-color:#06c7e9 ;
     color: #040404;
 }
-
 .btn_aceptar{
     width: auto;
     font-size: 12px;
@@ -573,6 +491,7 @@ select#sel__solicitante{
     background-color:#55f162 ;
     color: #040404;
 }
+/* ----------------------------------------- */
 
 .opcionesTabla{
     text-align: center;
@@ -581,37 +500,6 @@ select#sel__solicitante{
 #arse{
     width: 250px;
     font-size: 14px;
-}
-
-.btn-eliminar-servicio{
-    width: 90%;
-    font-size: 100%;
-    font-weight: bolder;
-    color:#ffffff;
-    background-color:#e33535;
-    border-color:#950909;
-    border-width: 2px;
-    border-style: solid;
-}
-.btn-eliminar-servicio:hover{
-    background-color:#ff000057 ;
-    color:#ff0000;
-}
-
-.btn-agregar-servicio{
-    font-size: 100%;
-    font-weight: bolder;
-    color:#ffffff;
-    background-color:#0cd63f;
-    border-color:#0a8e27;
-    border-width: 2px;
-    border-style: solid;
-    width: 2%;
-    height: auto;
-}
-.btn-agregar-servicio:hover{
-    background-color:#0cd63e3e ;
-    color: #08720a;
 }
 
 .checkbox-servicio{

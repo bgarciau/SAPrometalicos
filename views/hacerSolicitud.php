@@ -3,60 +3,62 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css"> <!-- se llaman los estilos para el contenido de la pagina -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/png" href="../images/fav.png"/>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>  <!-- se establece el fav de la pagina -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/select2/select2.min.css" rel="stylesheet" />
+     <!-- se usan librerias para usar el select2 que permite agregar un buscador en los select -->
+    <link href="../css/select2/select2.min.css" rel="stylesheet" /> 
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="../css/select2/select2.min.js"></script>
+    <!-- ------------------------------------------------------------------------------------------------ -->
     <title>Hacer solicitud</title>
 </head>
 
 <body>
     <?php
 
-    session_start();
+    session_start();  //inica la sesion 
 
-    if (!isset($_SESSION['usuario'])) {
+    if (!isset($_SESSION['usuario'])) { //si en el inicio de sesion no se ha definido el usuario no deja entrar a este, por lo cual tiene que iniciar sesion
 
         header("location:../index.php");
     }
 
-    include("../php/conexion.php");
-    include("../php/SAP.php");
-    $respuestaServicios=servicios($sesion);
-    $respuestaProveedor=proveedores($sesion);
-    $respuestaIndImp=indImpuestos($sesion);
-    $respuestaProyecto=proyectos($sesion);
+    include("../php/conexion.php"); //incluye la conexion a la bd
+    include("../php/SAP.php"); // incluye la conexion al SAP
+    $respuestaServicios=servicios($sesion);//usamos la funcion para llamar los servicios y tomar los valores que se necesitan
+    $respuestaProveedor=proveedores($sesion);//usamos la funcion para llamar los prveedores y tomar los valores que se necesitan
+    $respuestaIndImp=indImpuestos($sesion);//usamos la funcion para llamar los indicadores de impuestos y tomar los valores que se necesitan
+    $respuestaProyecto=proyectos($sesion);//usamos la funcion para llamar los proyectos y tomar los valores que se necesitan
 
 
     ?>
     <div class="base">
         <header>
             <?php
-            require_once('../php/header.php');
+            require_once('../php/header.php'); //se llama el header
             ?>
         </header>
-        <div class="contenedor">
+        <div class="contenedor"> <!-- contenido entre el header y el footer -->
             <table border="5px" id="tabla__general">
-                
                     <tr>
-                        <td colspan="6">
-                            <div id="div__solicitante">
+                        <td colspan="6"> <!-- tomamos la mitad de laa tabla para los datos del soolicitante-->
+                            <div id="div__solicitante"> <!-- div para los datos del solicitante -->
 
                                 <?php
-                                include("../php/conexion.php");
 
-                                $usuario = $_SESSION['usuario'];
+                                $usuario = $_SESSION['usuario']; //usamos el valor guardado en la sesion para cargar los dats del usuario que inicio sesion
 
-                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser):
+                                //tomamos los datos del usuario cuyo codigo es igual al de la sesion
+                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser)://para poder usar los datos
                                     ?>
+                                    
                                     <input type="hidden" name="codUsr" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                     <label for="Solicitante">Solicitante:</label>
                                     <select name="solicitante" id="sel__solicitante">
-                                        <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr ?>
+                                        <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
                                         </option>
                                         <option value="Usuario">Usuario</option>
                                         <option value="Empleado">Empleado</option>
@@ -66,14 +68,14 @@
                                     <label for="NombreSolicitante">Nombre Solicitante:</label>
                                     <input type="text" name="nomSol" id="nomSol" value="<?php echo $duser->nom_usr ?>" required><br>
                                     <label for="Sucursal">Sucursal:</label>
-                                    <select class="datosFormu" name="sucursal" id="sucursal" >
+                                    <select class="select_formulario" name="sucursal" id="sucursal" >
                                         <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
                                         </option>
                                         <option value="Principal">Principal</option>
                                         <option value="DefinirNuervo">Definir nuevo</option>
                                     </select><br>
                                     <label for="Departamento">Departamento:</label>
-                                    <select class="datosFormu" name="departamento" id="departamento">
+                                    <select class="select_formulario" name="departamento" id="departamento">
                                         <?php
                                         $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
                                             <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
@@ -121,8 +123,8 @@
                     <tr>
                         <td colspan="12">
                             <div id="div__tablaServicios">
-                                <a href=""><input class="btn_sel_selected" type="button" value="servicios"></a>
-                                <a href="hacerSolicitudArt.php"><input class="btn_sel" type="button" value="articulos"></a>
+                                <input class="btn_opciones_selected" type="button" value="servicios">
+                                <a href="hacerSolicitudArt.php"><input class="btn_opciones" type="button" value="articulos"></a>
                                 <input class="btn-agregar-servicio" type="button" value="+" onclick="insertarFila()">
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
@@ -178,12 +180,12 @@
                                                 col1.innerHTML = "<input class='checkbox-servicio' type='checkbox' value='si' name='enviar" + numeroFila + "' id='enviar" + numeroFila + "' checked>";
                                                 col2.innerHTML = "<input class='inputTablaNumero' type='text'\n\
                                                                  value='" + (numeroFila + 1) + "' disabled>";
-                                                col3.innerHTML = '<select class="selectServicio" name="cod_arse' + numeroFila + '" id="codigoServicio' + numeroFila + '" required></select>';
-                                                const $selectServicio = document.querySelector("#codigoServicio" + numeroFila);
+                                                col3.innerHTML = '<select class="select_tabla" name="cod_arse' + numeroFila + '" id="codigoServicio' + numeroFila + '" required></select>';
+                                                const $select_tabla = document.querySelector("#codigoServicio" + numeroFila);
                                                 const optionServicio = document.createElement('option');
                                                 optionServicio.value = "";
                                                 optionServicio.text = "~";
-                                                $selectServicio.appendChild(optionServicio);
+                                                $select_tabla.appendChild(optionServicio);
                                                 $('#codigoServicio' + numeroFila).select2();
                                                 const datosServicio = <?php echo json_encode($respuestaServicios); ?>
                                                 // Justo aquí estamos pasando la variable ----^
@@ -194,12 +196,12 @@
                                                     const option = document.createElement('option');
                                                     option.value = j;
                                                     option.text = valoresServicio[j]['Name'];
-                                                    $selectServicio.appendChild(option);
+                                                    $select_tabla.appendChild(option);
                                                     j++;
                                                 }
                                                 col4.innerHTML = "<input class='inputTablaFecha' type='date' value='' id='fecha_Nec" + numeroFila + "' name='fecha_Nec" + numeroFila + "'\n\
                                                         min='<?= date("Y-m-d") ?>' required></td>";
-                                                col5.innerHTML = "<select class='selectServicio' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "'></select>";
+                                                col5.innerHTML = "<select class='select_tabla' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "'></select>";
                                                 const $selectProveedor = document.querySelector("#proveedor" + numeroFila);
                                                 const optionProveedor = document.createElement('option');
                                                 optionProveedor.value = "";
@@ -218,7 +220,7 @@
                                                     $selectProveedor.appendChild(option);
                                                     j++;
                                                 }
-                                                col6.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
+                                                col6.innerHTML = "<input class='inputTablaCantidad' type='number' min=0\n\
                                                         id='precio_inf" + numeroFila + "'\n\
                                                         value=0 name='precio_inf" + numeroFila + "'>";
                                                 col7.innerHTML = "<input class='inputTabla' type='search'\n\
@@ -229,7 +231,7 @@
                                                         name='lineas" + numeroFila + "'readonly>";
                                                 col10.innerHTML = "<input class='inputTabla' type='search' value='' id='sublinea" + numeroFila + "'\n\
                                                         name='sublineas" + numeroFila + "'readonly>";
-                                                col11.innerHTML = "<select class='selectServicio' name='proyecto" + numeroFila + "'id='proyecto" + numeroFila + "' readonly></select>";
+                                                col11.innerHTML = "<select class='select_tabla' name='proyecto" + numeroFila + "'id='proyecto" + numeroFila + "' readonly></select>";
                                                 const $selectProyecto = document.querySelector("#proyecto" + numeroFila);
                                                 const optionProyecto = document.createElement('option');
                                                 optionProyecto.value = "";
@@ -248,9 +250,9 @@
                                                     $selectProyecto.appendChild(option);
                                                     j++;
                                                 }
-                                                col12.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
+                                                col12.innerHTML = "<input class='inputTablaCantidad' type='number' min=0\n\
                                                         id='por_dec" + numeroFila + "' name='por_dec" + numeroFila + "' value=0 >";
-                                                col13.innerHTML = "<select class='selectServicio' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "' readonly></select>";
+                                                col13.innerHTML = "<select class='select_tabla' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "' readonly></select>";
                                                 const $selectIndImp = document.querySelector("#ind_imp" + numeroFila);
                                                 const optionIndImp = document.createElement('option');
                                                 optionIndImp.value = "";
@@ -465,9 +467,9 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
+                                <a><input class="btn_guardar" type="button" value="GUARDAR SOLICITUD"
                                         onclick="guardarSolicitud()"></a>
-                                <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
+                                <input class="btn_guardar" type="submit" value="GUARDAR SOLICITUD" name="guardarS"
                                     onclick="ftotal()" id="guardarS" hidden>
                             </div>
                         </td>

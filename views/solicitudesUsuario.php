@@ -28,9 +28,9 @@
     </header>
         <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
             <h2>SOLICITUDES USUARIO</h2>
-            <div id="div__tablaSolicitudes"> <!-- Contiene la tabla de solicitudes -->
-                <div id="div__volver">
-                    <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a> <!-- boton para volver a hacer solicitud -->
+            <div id="div_tablas"> <!-- Contiene la tabla de solicitudes -->
+                <div id="div_boton_volver">
+                    <a href="hacerSolicitud.php"><input class="btn_volver" type="button" value="< VOLVER"></a> <!-- boton para volver a hacer solicitud -->
                 </div>
                 <div class="outer_wrapperS">
                    
@@ -42,8 +42,8 @@
                     if ($xtabla == "tservicios") { ?> <!-- Pregunta si es la tabla de servicios para cargarla -->
                         <!-- tabla servicios -->
                         <form id="menu"> <!-- Con este form se actulizan los datos segun el boton -->
-                        <button class="btn_sel_selected" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
-                        <button class="btn_sel" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
+                        <button class="btn_opciones_selected" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
+                        <button class="btn_opciones" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
                     </form>
                         <div class="table_wrapperS">
                             <h4>Servicios</h4>
@@ -95,8 +95,8 @@
                     } else { ?> <!-- Como no es la tabla de servicios entonces carga la de articuls -->
                             <!-- tabla articulos --> 
                             <form id="menu"> <!-- Con este form se actulizan los datos segun el boton -->
-                        <button class="btn_sel" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
-                        <button class="btn_sel_selected" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
+                        <button class="btn_opciones" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
+                        <button class="btn_opciones_selected" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
                     </form>
                             <div class="table_wrapperS">
                                 <h4>Articulos</h4>

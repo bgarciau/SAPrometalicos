@@ -32,21 +32,16 @@
     </div>
 </div>
     <footer>
-        <div class="wrapper-footer-login">  <!-- footer del login -->
-            <div class="logo"> <!-- Acomoda los logos de las redes en la derecha del footer -->
-                <img class="imagen" src="images/facebook.png" alt="logo_facebok">
-                <img class="imagen" src="images/instagram.png" alt="logo_instagram">
-                <img class="imagen" src="images/youtube.png" alt="logo_youtube">
-                <img class="imagen" src="images/whatsapp.png" alt="logo_whatsapp">
-            </div>
-            <div class="texto"> 
-                <p style="color: white">Cra 21 N° 72-04 Zona Industrial Alta suiza Manizales, Colombia<br>
-                    20
-                    <?php echo date("y") ?> <br>
-                    Todos los derechos reservados
-                </p>
-            </div>
+    <div class="wrapperFooter">
+        <div class="logo">
+            <img class="sena" src="images/Sena.png" alt="logo_sena">
         </div>
+        <div class="texto">
+            <p style="color: white">Cra 21 N° 72-04 Zona Industrial Alta suiza Manizales, Colombia<br>
+            20<?php echo date("y")?> <br>
+            Todos los derechos reservados</p>
+        </div>
+    </div>
     </footer>
 </div>
 </body>

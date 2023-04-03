@@ -1,8 +1,8 @@
-* {
+* { /* estilos generales para la pagina */
     box-sizing: border-box;
     font-family: sans-serif;
   }
-  .login {
+  .login {  /* recuadro que contiene los datos necesarios para el login, este se centra y se le pone un borde blanco */
     width: 370px;
     height: 80%;
     border: 5px solid #ffffff;
@@ -13,19 +13,20 @@
     border-radius: 20px;
   }
 
-  .loginback{
+  .loginback{ /* Esto es el fondo del login, toma todo lo que hay entre el header y el footer y agrega un gif al backgrund */
     width: 100%;
     height: 100%;
     background:url(https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjk1ZGQzYjAzYjkwOWM1NjVlOTVlOGYyYmI2YzUyZWQzNjVlNjM1NiZjdD1n/Ui46FI4nHWyD6/giphy.gif) center center no-repeat;
     background-size: cover;
   }
   
-  .login .form {
+  .login .form { /* centra los datos del login en el recuadro */
     width: 100%;
     height: 100%;
     padding: 15px 25px;
   }
-  .login .form h2 {
+
+  .login .form h2 { /* letra del login */
     color: #ffffff;
     text-align: center;
     font-weight: bold;
@@ -33,7 +34,7 @@
     margin-top: 40px;
     margin-bottom: 60px;
   }
-  .login .form input {
+  .login .form input { /* inputs del logiin */
     width: 100%;
     height: 40px;
     margin-top: 20px;
@@ -44,22 +45,22 @@
     border-radius: 5px;
     font-size: 20px;
   }
-  .login .form input:focus {
-    border: 1px solid rgba(255,255,255,.8);
+  .login .form input:focus { /* al dar click en un input del formulario, a este se le agrega un borde */
+    border: 2px solid rgba(255, 255, 255, 0.8);
     outline: none;
   }
-  ::-webkit-input-placeholder {
+  ::-webkit-input-placeholder {  /* letra sobre los input */
       color: #DDD;
   }
-  .login .form input.submit {
-    background: rgba(255,255,255,.9);
+  .login .form input.submit {    /* boton de ingresar en el login */
+    background: rgb(255, 255, 255);
     color: #444;
     font-size: 20px;
     margin-top: 40px;
     font-weight: bold;
   }
 
-  .login .form input.submit:hover {
+  .login .form input.submit:hover {     /* cambiar el color del boton mientras el mouse este sobre este */
     background: rgba(250, 72, 72, 0.9);
     color: #ffffff;
     font-size: 20px;

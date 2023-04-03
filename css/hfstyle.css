@@ -39,7 +39,7 @@ header nav {
 	text-align:-webkit-right;
 }
 
-header nav a {
+header nav a { /* Se usa para la navegacion del header, aca se cambia el color y estilo de la letra */
 	display:inline-block;
 	color:#fff;
 	text-decoration:none;
@@ -51,12 +51,11 @@ header nav a {
 	-o-transition:all 500ms ease;
 	transition:all 500ms ease;
 }
-
-header nav a:hover {
+header nav a:hover { /* Se usa para cambiar el color de las opciones en el nav cuando se pasa el mouse sobre la opcion */
 	background:#f53a3a;
 }
 
-header nav ul{
+header nav ul{ /* Se usa para el menu desplegable en el nav */
 	display: inline-block;
 	color:#fff;
 	text-decoration:none;
@@ -69,10 +68,10 @@ header nav ul{
 	transition:all 500ms ease;
 }
 
-header nav li{
+header nav li{ /*  Se usa para las opciones que se despliegan*/
 	display: inline-block;
 }
-header nav li a{
+header nav li a{ /* Se le agregan los mismos estilos a las opcines desplegadas */
 	display:inline-block;
 	color:#ffffff;
 	text-decoration:none;
@@ -85,23 +84,18 @@ header nav li a{
 	transition:all 500ms ease;
 }
 
-header nav li.dropdown ul{
+header nav li.dropdown ul{ /* para desplegar las opciones cuando se ponga el mouse sobre la opcion que puede desplegar un menu */
 	background-color: #000000;
 	position:absolute;
 	padding-left: 0;
 	display: none;
-	z-index: 1;	
+	z-index: 1;	/* Se usa para que estas opciones queden sobre el resto de la pagina */
 }
-header nav li.dropdown:hover ul{
+header nav li.dropdown:hover ul{ /* no deja mover el menu mientras el mouse este sobre este */
 	display: block;
 
 }
 
-body{
-    margin: 0px;
-	width:100%;
-
-}
 footer{
     width:100%; /* Establecemos que el header abarque el 100% del documento */
 	overflow:hidden; /* Eliminamos errores de float */
@@ -110,11 +104,11 @@ footer{
 	height: 10%;
 	
 }
-footer .p{
+footer .p{ /* color del texto que se encuentra en el footer */
     color: #fff;
 }
 
-footer .logo {
+footer .logo { 
 	line-height:100px;
 	float:right;
 }
@@ -132,17 +126,17 @@ footer .imagen{
 footer .imagen:hover{
     filter:hue-rotate(-100deg) brightness(500%);
 }
-footer .sena{
+footer .sena{ /* logo del sena en el footer */
 
-    width: 45px;
-    height: 45px;
-	padding-right: 50px;
+    width: 45px;/* ancho del logo */
+    height: 45px;/* alto del logo */
+	margin-right: 50px; /* le ponemos una margen para que no quede pegado en el borde de la pagina */
 }
 
-p{
-	margin-top: 10px;
+p{ 	/* margen sobre el texto del footer */
+	margin-top: 10px;  
 }
-.salir{
+.salir{ 	/* estilo que va a contener el boton de salir */
     height: 0%;
     width: 70px;
     text-align:center;
@@ -152,14 +146,10 @@ p{
 	padding: 0%;
 }
 
-.salir:hover{
-	background-color: #ff0000;
-}
-
-.btn_sal{
+.btn_sal{ /* Estilo para el boton en el header, boton para salir de la aplicacion */
 	width: 68px;
     text-decoration:none;
-    font-weight: 300;
+    font-weight: bold;
     font-size: 15px;
     color:#ffffff;
     background-color:#fa565f;
@@ -167,7 +157,7 @@ p{
     border-style: solid;
 	height: auto;	
 }
-.btn_sal:hover{
+.btn_sal:hover{ /* Estilo para cuando se pase el mouse sobre el boton este cambie de color */
     background-color:#ffffff ;
     color: #040404;
 }

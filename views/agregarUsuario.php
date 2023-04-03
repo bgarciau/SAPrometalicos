@@ -34,7 +34,7 @@
             $pass_cifrado = password_hash($password, PASSWORD_DEFAULT, array("cost" => 7)); //Encripta la clave 
             $tipoUsuario = $_POST["tipoUsuario"];
 
-            $sql = "INSERT INTO usuario (pk_cod_usr,nom_usr,rol_usr,fk_depart,sucursal,pass_usr,fk_tipo_usr) 
+            $sql = "INSERT INTO usuario (pk_cod_usr,nom_usr,rol_usr,fk_depart,sucursal,pass_usr,tipo_usuario) 
                 VALUES(:_codigoUsuario,:_nombreUsuario,:_rolUsuario,:_departamento,:_sucursal,:_password,:_tipoUsuario)";
 
             $resultado = $base->prepare($sql); //Prepara una sentencia SQL para ser ejecutada por el método execute
@@ -60,24 +60,24 @@
             ?>
         </header>
         <div class="contenedor">
-            <div id="div__agregarU">
+            <div id="div_agregar_usuario">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
                     <!-- Se usa el php_self para hacer el action del form en el mismo archivo php   -->
                     <h2>AGREGAR USUARIO</h2>
-                    <label class="label2" for="CodigoUsuario">Codigo usuario:</label>
-                    <input class="inputA" type="text" id="CodigoUsuario" name="codigoUsuario" value="<?php if (isset($_POST['codigoUsuario'])) { //la condicion en el value se usa para saber si ya se habia hechoo un post en el formulario, si este fallo se vuelven a cargar los datos para que se vuelva a intentar el formulario
+                    <label class="label_usuario" for="CodigoUsuario">Codigo usuario:</label>
+                    <input class="inputUsuarios" type="text" id="CodigoUsuario" name="codigoUsuario" value="<?php if (isset($_POST['codigoUsuario'])) { //la condicion en el value se usa para saber si ya se habia hechoo un post en el formulario, si este fallo se vuelven a cargar los datos para que se vuelva a intentar el formulario
                             echo $_POST['codigoUsuario'];
                         } ?>" required><br>
-                    <label class="label2" for="RolUsuario">Rol usuario:</label>
-                    <input class="inputA" type="text" id="RolUsuario" name="rolUsuario" value="<?php if (isset($_POST['rolUsuario'])) {
+                    <label class="label_usuario" for="RolUsuario">Rol usuario:</label>
+                    <input class="inputUsuarios" type="text" id="RolUsuario" name="rolUsuario" value="<?php if (isset($_POST['rolUsuario'])) {
                         echo $_POST['rolUsuario'];
                     } ?>" required><br>
-                    <label class="label2" for="NombreUsuario">Nombre usuario:</label>
-                    <input class="inputA" type="text" id="NombreUsuario" name="nombreUsuario" value="<?php if (isset($_POST['nombreUsuario'])) {
+                    <label class="label_usuario" for="NombreUsuario">Nombre usuario:</label>
+                    <input class="inputUsuarios" type="text" id="NombreUsuario" name="nombreUsuario" value="<?php if (isset($_POST['nombreUsuario'])) {
                         echo $_POST['nombreUsuario'];
                     } ?>" required><br>
-                    <label class="label2" for="Departamento">Departamento:</label>
-                    <select name="departamento" class="datosFormu" required>
+                    <label class="label_usuario" for="Departamento">Departamento:</label>
+                    <select name="departamento" class="select_formulario" required>
                         <?php
                         if (isset($_POST['departamento'])) {
                             $depart2 = $_POST['departamento'];
@@ -97,27 +97,27 @@
                         endforeach;
                         ?>
                     </select><br>
-                    <label class="label2" for="Sucursal">Sucursal:</label>
-                    <input class="inputA" type="text" id="Sucursal" name="sucursal" value="<?php if (isset($_POST['sucursal'])) {
+                    <label class="label_usuario" for="Sucursal">Sucursal:</label>
+                    <input class="inputUsuarios" type="text" id="Sucursal" name="sucursal" value="<?php if (isset($_POST['sucursal'])) {
                         echo $_POST['sucursal'];
                     } ?>" required><br>
-                    <label class="label2" for="Password">Contraseña:</label>
-                    <input class="inputA" type="password" id="clave1" name="password" value="<?php if (isset($_POST['password'])) {
+                    <label class="label_usuario" for="Password">Contraseña:</label>
+                    <input class="inputUsuarios" type="password" id="clave1" name="password" value="<?php if (isset($_POST['password'])) {
                         echo $_POST['password'];
                     } ?>" required><br>
-                    <label class="label2" for="Password">Confirmar Contraseña:</label>
-                    <input class="inputA" type="password" id="clave2" name="password2" required><br>
-                    <label class="label2" for="TipoUsuario">Tipo usuario:</label>
-                    <select name="tipoUsuario" id="datosFormu" class="datosFormu" required>
+                    <label class="label_usuario" for="Password">Confirmar Contraseña:</label>
+                    <input class="inputUsuarios" type="password" id="clave2" name="password2" required><br>
+                    <label class="label_usuario" for="TipoUsuario">Tipo usuario:</label>
+                    <select name="tipoUsuario" id="select_formulario" class="select_formulario" required>
                         <option value=1>Usuario</option>
                         <option value=2>Empleado</option>
                         <option value=3>Administrador</option>
                     </select>
 
                     <br>
-                    <a><input class="btn_env2" type="submit" value="CREAR USUARIO" name="crearU"
+                    <a><input class="btn_crear_usuario" type="submit" value="CREAR USUARIO" name="crearU"
                             onclick="comprobarClave()"></a><!-- Este boton envia los datos del nuevo usuario y tambien verifica si las claves son iguales y si no lo son carga nuevamente los datos dejando el campo de la contraseña -->
-                    <a href="usuarios.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+                    <a href="usuarios.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
                     <!-- Vuelve al listado de usuarios sin guardar datos -->
             </div>
         </div>

@@ -41,7 +41,7 @@
                             <!-- Se muestran los datos del usuario que hizo la solicitud pero no se pueden modificar -->
                                         <label for="Solicitante">Solicitante:</label>
                                         <select name="solicitante" id="sel__solicitante" disabled>
-                                            <option value=""><?php echo $duser->fk_tipo_usr ?></option>
+                                            <option value=""><?php echo $duser->tipo_usuario ?></option>
                                             <option value="Usuario">Usuario</option>
                                             <option value="Empleado">Empleado</option>
                                         </select>
@@ -49,13 +49,13 @@
                                         <label for="NombreSolicitante">Nombre Solicitante:</label>
                                         <input type="text" name="nomSol" value="<?php echo $solis->nom_solicitante ?>" disabled><br>
                                         <label for="Sucursal">Sucursal:</label>
-                                        <select name="sucursal" id="datosFormu" disabled>
+                                        <select name="sucursal" id="select_formulario" disabled>
                                             <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?></option>
                                             <option value="Principal">Principal</option>
                                             <option value="DefinirNuervo">Definir nuevo</option>
                                         </select><br>
                                         <label for="Departamento">Departamento:</label>
-                                        <select name="departamento" id="datosFormu" disabled>
+                                        <select name="departamento" id="select_formulario" disabled>
                                             <?php
                                             $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$solis->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($depSol as $depSols) :
@@ -122,15 +122,15 @@
                                                 <tr>
                                                     <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
                                                     <td><?php echo $i ?></td>
-                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->nom_arse ?>" disabled></td> 
+                                                    <td><input class="inputTablaServicios" value="<?php echo $listaa->nom_arse ?>" disabled></td> 
                                                     <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
-                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->fk_prov ?>" disabled></td>
+                                                    <td><input class="inputTablaServicios" value="<?php echo $listaa->proveedor ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->cuenta_mayor ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->uen ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->linea ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->sublinea ?>" disabled></td>
-                                                    <td><input class="inputTablaSer" value="<?php echo $listaa->proyecto ?>" disabled></td>
+                                                    <td><input class="inputTablaServicios" value="<?php echo $listaa->proyecto ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->por_desc ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->ind_imp ?>" disabled></td>
                                                     <td><input class="inputTabla" value="<?php echo $listaa->total_ml ?>" disabled></td>
@@ -166,9 +166,9 @@
                                                     <tr>
                                                         <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
                                                         <td><?php echo $i ?></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->fk_cod_arse ?>" disabled></td>
+                                                        <td><input class="inputTabla" value="<?php echo $listaa->codigo_articulo ?>" disabled></td>
                                                         <td><input class="inputTabla" value="<?php echo $listaa->nom_arse ?>" disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->fk_prov ?>" disabled></td>
+                                                        <td><input class="inputTabla" value="<?php echo $listaa->proveedor ?>" disabled></td>
                                                         <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>" disabled></td>
                                                         <td><input class="inputTabla" value="<?php echo $listaa->cant_nec ?>" disabled></td>
                                                         <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>" disabled></td>
@@ -201,7 +201,7 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
-                            <a href="misSolicitudes.php"><input class="btn_vol" type="button" value="VOLVER"></a>
+                            <a href="misSolicitudes.php"><input class="btn_volver" type="button" value="VOLVER"></a>
                         </div>
                     </td>
 

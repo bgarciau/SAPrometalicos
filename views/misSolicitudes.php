@@ -31,9 +31,9 @@
     </header>
         <div class="contenedor">
             <h2>MIS SOLICITUDES</h2>
-            <div id="div__tablaSolicitudes">
-                <div id="div__volver">
-                    <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>
+            <div id="div_tablas">
+                <div id="div_boton_volver">
+                    <a href="hacerSolicitud.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
                 </div>
                 <div class="outer_wrapperS">
                     <?php
@@ -43,8 +43,8 @@
                     }
                     if ($xtabla == "tservicios") { ?>
                          <form id="menu">
-                        <button class="btn_sel_selected" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
-                        <button class="btn_sel" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
+                        <button class="btn_opciones_selected" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
+                        <button class="btn_opciones" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
                     </form>
                         <!-- tabla servicios -->
                         <div class="table_wrapperS">
@@ -88,7 +88,7 @@
                                             <?php
                                             $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($usutipo as $usutipoo) :
-                                                if ($usutipoo->fk_tipo_usr == 3) { ?>
+                                                if ($usutipoo->tipo_usuario == 3) { ?>
                                                     <a><input class="btn_aceptar" type="button" value="enviar"></a>
                                                     <a><input class="btn_delete" type="button" value="rechazar"></a>
 
@@ -108,8 +108,8 @@
                     } else { ?>
                             <!-- tabla articulos -->
                             <form id="menu">
-                        <button class="btn_sel" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
-                        <button class="btn_sel_selected" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
+                        <button class="btn_opciones" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
+                        <button class="btn_opciones_selected" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
                     </form>
                             <div class="table_wrapperS">
                                 <h4>Articulos</h4>
@@ -152,7 +152,7 @@
                                                 <?php
                                                 $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                                 foreach ($usutipo as $usutipoo) :
-                                                    if ($usutipoo->fk_tipo_usr == 3) { ?>
+                                                    if ($usutipoo->tipo_usuario == 3) { ?>
                                                         <a><input class="btn_aceptar" type="button" value="enviar"></a>
                                                         <a><input class="btn_delete" type="button" value="rechazar"></a>
 

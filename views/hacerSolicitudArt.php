@@ -56,7 +56,7 @@
                                     <input type="hidden" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
                                     <label for="Solicitante">Solicitante:</label>
                                     <select name="solicitante" id="sel__solicitante">
-                                        <option value="<?php echo $duser->fk_tipo_usr ?>"><?php echo $duser->fk_tipo_usr ?>
+                                        <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
                                         </option>
                                         <option value="Usuario">Usuario</option>
                                         <option value="Empleado">Empleado</option>
@@ -66,14 +66,14 @@
                                     <label for="NombreSolicitante">Nombre Solicitante:</label>
                                     <input type="text" id="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
                                     <label for="Sucursal">Sucursal:</label>
-                                    <select id="sucursal" class="datosFormu">
+                                    <select id="sucursal" class="select_formulario">
                                         <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
                                         </option>
                                         <option value="Principal">Principal</option>
                                         <option value="DefinirNuervo">Definir nuevo</option>
                                     </select><br>
                                     <label for="Departamento">Departamento:</label>
-                                    <select id="departamento" class="datosFormu">
+                                    <select id="departamento" class="select_formulario">
                                         <?php
                                         $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
                                             <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
@@ -123,8 +123,8 @@
                     <tr>
                         <td colspan="12">
                             <div id="div__tablaServicios">
-                                <a href="hacerSolicitud.php"><input class="btn_sel" type="button" value="servicios"></a>
-                                <a href=""><input class="btn_sel_selected" type="button" value="articulos"></a>
+                                <a href="hacerSolicitud.php"><input class="btn_opciones" type="button" value="servicios"></a>
+                                <a href=""><input class="btn_opciones_selected" type="button" value="articulos"></a>
                                 <input class="btn-agregar-servicio" type="button" value="+" onclick="insertarFila()">
                                 <div class="outer_wrapper">
                                     <div class="table_wrapper">
@@ -166,9 +166,9 @@
                         </td>
                         <td colspan="6">
                             <div id="div__enviar">
-                                <input class="btn_env" type="submit" value="GUARDAR SOLICITUD" name="guardarA"
+                                <input class="btn_guardar" type="submit" value="GUARDAR SOLICITUD" name="guardarA"
                                     id="guardarA" hidden>
-                                <a><input class="btn_env" type="button" value="GUARDAR SOLICITUD"
+                                <a><input class="btn_guardar" type="button" value="GUARDAR SOLICITUD"
                                         onclick="guardarSolicitud()"></a>
                             </div>
                         </td>
@@ -207,7 +207,7 @@
             col1.innerHTML = "<input class='checkbox-servicio' type='checkbox' value='si' name='enviar" + numeroFila + "' id='enviar" + numeroFila + "' checked>";
             col2.innerHTML = "<input class='inputTablaNumero' type='text'\n\
                  value='" + (numeroFila + 1) + "' disabled>";
-            col3.innerHTML = '<select class="selectServicio" name="codArt' + numeroFila + '" id="codigoArticulo' + numeroFila + '" required></select>';
+            col3.innerHTML = '<select class="select_tabla" name="codArt' + numeroFila + '" id="codigoArticulo' + numeroFila + '" required></select>';
             const $selectArticulo = document.querySelector("#codigoArticulo" + numeroFila);
             const optionArticulo = document.createElement('option');
             optionArticulo.value = "";
@@ -226,7 +226,7 @@
                 $selectArticulo.appendChild(option);
                 j++;
             }
-            col4.innerHTML = '<select class="selectServicio" name="descripcion' + numeroFila + '" id="descripcion' + numeroFila + '" required></select>';
+            col4.innerHTML = '<select class="select_tabla" name="descripcion' + numeroFila + '" id="descripcion' + numeroFila + '" required></select>';
             const $selectArticuloDes = document.querySelector("#descripcion" + numeroFila);
             const optionArticuloDes = document.createElement('option');
             optionArticuloDes.value = "";
@@ -241,7 +241,7 @@
                 $selectArticuloDes.appendChild(option);
                 j++;
             }
-            col5.innerHTML = "<select class='selectServicio' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "'></select>";
+            col5.innerHTML = "<select class='select_tabla' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "'></select>";
             const $selectProveedor = document.querySelector("#proveedor" + numeroFila);
             const optionProveedor = document.createElement('option');
             optionProveedor.value = "";
@@ -262,14 +262,14 @@
             }
             col6.innerHTML = "<input class='inputTablaFecha' type='date' value='' id='fecha_Nec" + numeroFila + "' name='fecha_Nec" + numeroFila + "'\n\
                             min='<?= date("Y-m-d") ?>' required></td>";
-            col7.innerHTML = "<input class='inputTablaCant'  type='number' min=1\n\
+            col7.innerHTML = "<input class='inputTablaCantidad'  type='number' min=1\n\
         id='cant_nec" + numeroFila + "' name='cant_nec" + numeroFila + "' >";
-            col8.innerHTML = "<input class='inputTablaCant' type='number' min=0\n\
+            col8.innerHTML = "<input class='inputTablaCantidad' type='number' min=0\n\
                                                         id='precio_inf" + numeroFila + "'\n\
                                                         value=0 name='precio_inf" + numeroFila + "'>";
-            col9.innerHTML = "<input class='inputTablaCant' type='number' min=0 \n\
+            col9.innerHTML = "<input class='inputTablaCantidad' type='number' min=0 \n\
         id='por_desc" + numeroFila + "' name='por_desc" + numeroFila + "' value=0 >";
-            col10.innerHTML = "<select class='selectServicio' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "'></select>";
+            col10.innerHTML = "<select class='select_tabla' name='ind_imp" + numeroFila + "'id='ind_imp" + numeroFila + "'></select>";
             const $selectIndImp = document.querySelector("#ind_imp" + numeroFila);
             const optionIndImp = document.createElement('option');
             optionIndImp.value = "";
@@ -291,7 +291,7 @@
             col11.innerHTML = "<input class='inputTabla' type='search'\n\
         id='total_ml" + numeroFila + "' name='total_ml" + numeroFila + "'\n\
         onclick='ftotal()' readonly>";
-            col12.innerHTML = "<select class='selectServicio' name='uen" + numeroFila + "'id='uen" + numeroFila + "'></select>";
+            col12.innerHTML = "<select class='select_tabla' name='uen" + numeroFila + "'id='uen" + numeroFila + "'></select>";
             const $selectUen = document.querySelector("#uen" + numeroFila);
             const optionUen = document.createElement('option');
             optionUen.value = "";
@@ -310,9 +310,9 @@
                 $selectUen.appendChild(option);
                 j++;
             }
-            col13.innerHTML = "<select class='selectServicio' name='linea" + numeroFila + "'\n\
+            col13.innerHTML = "<select class='select_tabla' name='linea" + numeroFila + "'\n\
                                                                 id='linea"+ numeroFila + "' disabled></select>";
-            col14.innerHTML = "<select class='selectServicio' name='sublinea" + numeroFila + "'\n\
+            col14.innerHTML = "<select class='select_tabla' name='sublinea" + numeroFila + "'\n\
                                                                 id='sublinea"+ numeroFila + "' disabled></select>";
 
             numeroFila++;

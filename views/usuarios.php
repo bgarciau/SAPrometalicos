@@ -23,7 +23,7 @@
 
     $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //toma el tipo de usuario de la base de datos
     foreach ($registros as $Tusuario) {
-        $userx = $Tusuario->fk_tipo_usr;
+        $userx = $Tusuario->tipo_usuario;
     }
     if ($userx != 3) {   //Con esta condicion se comprueba si el usuario es administrdor y si no lo es lo manda a hacer solicitud
         header("location:hacerSolicitud.php");
@@ -40,15 +40,15 @@
         </header>
         <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
             <h2>USUARIOS</h2>
-            <div id="div__tablaSolicitudes"> <!-- Este div contiene la tabla de usuarios que se maneja igual a la de solicitudes -->
+            <div id="div_tablas"> <!-- Este div contiene la tabla de usuarios que se maneja igual a la de solicitudes -->
                 <div class="outer_wrapperS"> <!-- el outer y el table wrappers es para mantener la tabla en el div sin importar su tamaño, si la tabla es mas grande que el div se usa un scroll -->
                     <div class="table_wrapperS">
                         <div id="div__agregar">
                             <a class="agregarUsuario" href="agregarUsuario.php"><input class="btn_add" type="button"  
                                     value="+AGREGAR"></a> <!-- Boton para agregar usuario -->
                         </div>
-                        <div id="div__volver">
-                            <a href="hacerSolicitud.php"><input class="btn_vol" type="button" value="< VOLVER"></a>  <!-- boton para volver a hacer solicitud -->
+                        <div id="div_boton_volver">
+                            <a href="hacerSolicitud.php"><input class="btn_volver" type="button" value="< VOLVER"></a>  <!-- boton para volver a hacer solicitud -->
                         </div>
                         <table border="4px" id="tabla__usuarios"> <!-- tabla de usuarios -->
                             <thead>

@@ -6,7 +6,7 @@ $usuario = $_SESSION['usuario']; //se toma el usuario de la sesion para los perm
 $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //se toma su tiipo de usuario
 
 foreach ($registros as $Tusuario) {
-    $userx = $Tusuario->fk_tipo_usr;
+    $userx = $Tusuario->tipo_usuario;
 }
 ?>
     <link rel="stylesheet" href="../css/hfstyle.css">
