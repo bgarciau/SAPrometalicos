@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>solicitud servicio</title>
-    <link rel="icon" type="image/png" href="../images/fav.png"/>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -90,7 +90,7 @@
                 </tr>
                 <tr> <!-- Abre otra fila nueva  -->
                     <td colspan="12"> <!-- Toma todas las columnas de la tabla  -->
-                        <div id="div__tablaServicios">
+                        <div id="div_tabla_AS">
                                  <div class="outer_wrapper">
                                 <div class="table_wrapper">
                                     <?php

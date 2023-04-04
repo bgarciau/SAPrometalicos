@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="icon" type="image/png" href="images/fav.png"/>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/hfstyle.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" type="image/png" href="images/fav.png"/>  <!-- imagen del fav -->
+    <link rel="stylesheet" href="css/style.css">     <!-- estilos del contenido de la pagina -->
+    <link rel="stylesheet" href="css/hfstyle.css">     <!-- estilos del header y el footer -->
+    <link rel="stylesheet" href="css/login.css">        <!-- estilos del login -->
 </head>
 
 <body>

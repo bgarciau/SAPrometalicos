@@ -168,7 +168,7 @@ table{  /* borde de la tabla */
     margin: 5px auto;
     text-align: center;
 }
-#div__tablaServicios{    /* div para la casilla de la tabla de sericios y articulos */
+#div_tabla_AS{    /* div para la casilla de la tabla de sericios y articulos */
     width: 96vw;
     height: 40vh;
     background-color: rgba(228, 228, 228, 0.795);
@@ -500,6 +500,22 @@ select#sel__solicitante{
 #arse{
     width: 250px;
     font-size: 14px;
+}
+
+.btn-agregar{
+    font-size: 100%;
+    font-weight: bolder;
+    color:#ffffff;
+    background-color:#0cd63f;
+    border-color:#0a8e27;
+    border-width: 2px;
+    border-style: solid;
+    width: 2%;
+    height: auto;
+}
+.btn-agregar:hover{
+    background-color:#0cd63e3e ;
+    color: #08720a;
 }
 
 .checkbox-servicio{

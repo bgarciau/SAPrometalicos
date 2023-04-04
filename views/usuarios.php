@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="icon" type="image/png" href="../images/fav.png"/>
+    <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css"> <!-- llama el estilo para el contenido entre el header y el footer -->
 </head>
 

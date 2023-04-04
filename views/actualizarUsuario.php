@@ -4,35 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="icon" type="image/png" href="../images/fav.png"/>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/modals.css">  <!-- Se usa para el cuadro emergente del cambio de contraseña -->
+    <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav --> 
+    <link rel="stylesheet" href="../css/style.css">   <!-- estilo para el contenido de la pagina -->
+    <link rel="stylesheet" href="../css/modals.css">  <!-- Se usa el estilo para el cuadro emergente del cambio de contraseña -->
 </head>
 <body>
 
     <?php
     session_start();
 
-    if (!isset($_SESSION["usuario"])) {
+    if (!isset($_SESSION["usuario"])) { //si el usuario no se ha registrado lo manda para el inicio de sesion
 
         header("location:../index.php");
     }
 
-    include("../php/conexion.php");
+    include("../php/conexion.php"); //incluye la conexion a la base de datos
 
     if (isset($_POST["cambiarC"])) { //Se usa para actualiazr la contraseña 
         $codigoUsuario = $_POST["codigoUsuario"];
         $password = $_POST["password"];
-        $pass_cifrado = password_hash($password, PASSWORD_DEFAULT, array("cost" => 7));
+        $pass_cifrado = password_hash($password, PASSWORD_DEFAULT, array("cost" => 7)); //cifra la nueva contraseña
 
         $sql = "UPDATE usuario SET pass_usr=:_password WHERE pk_cod_usr=:_codigoUsuario"; //secuencia para actualizar la contraseña del usuario
 
-        $resultado = $base->prepare($sql);
+        $resultado = $base->prepare($sql); //prepara la secuencia
 
-        $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_password" => $pass_cifrado));
+        $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_password" => $pass_cifrado)); //ejecuta la secuencia con los datos 
 
         $cod_usr = $codigoUsuario; //se usa para cargar los datos del usuario nuevamente luego de cambiar su contraseña
-    } elseif (isset($_POST["btn_actualizar"])) { //se usa para actualizar los datos del usuario
+    } elseif (isset($_POST["btn_actualizar"])) { //actualiza los datos del usuario
         $codigoUsuario = $_POST["codigoUsuario"];
         $nombreUsuario = $_POST["nombreUsuario"];
         $rolUsuario = $_POST["rolUsuario"];
@@ -40,10 +40,12 @@
         $sucursal = $_POST["sucursal"];
         $tipoUsuario = $_POST["tipoUsuario"];
 
-        $sql = "UPDATE usuario SET nom_usr=:_nombreUsuario,rol_usr=:_rolUsuario,fk_depart=:_departamento, sucursal=:_sucursal, tipo_usuario=:_tipoUsuario WHERE pk_cod_usr=:_codigoUsuario";
+        //secuencia para actualizar algunos datos del usuario
+        $sql = "UPDATE usuario SET nom_usr=:_nombreUsuario,rol_usr=:_rolUsuario,fk_depart=:_departamento, sucursal=:_sucursal, tipo_usuario=:_tipoUsuario WHERE pk_cod_usr=:_codigoUsuario"; 
 
-        $resultado = $base->prepare($sql);
+        $resultado = $base->prepare($sql); //prepara la secuencia
 
+        //ejecuta la secuencia con los datos requeridos
         $resultado->execute(array(":_codigoUsuario" => $codigoUsuario, ":_nombreUsuario" => $nombreUsuario, ":_rolUsuario" => $rolUsuario, ":_departamento" => $departamento, ":_sucursal" => $sucursal, ":_tipoUsuario" => $tipoUsuario));
         $cod_usr = $codigoUsuario; //se usa para cargar los nuevos datos del usuario
         
@@ -56,12 +58,12 @@
         <div class="base">
         <header>
             <?php
-            require_once('../php/header.php');
+            require_once('../php/header.php'); //carga el header de la pagina
             ?>
         </header>
         <div class="contenedor">
             <div id="div_agregar_usuario">
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">     <!-- formulario para agregar usuario -->
                     <h2>ACTUALIZAR DATOS USUARIO</h2>
                     <input class="inputUsuarios" type="hidden" name="codigoUsuario" value="<?php echo $userr->pk_cod_usr ?>"><br>   <!-- Se llaman el codigo del usuario pero se pone el hidden porque este codigo es unico y no se puede modificar -->
                     <label class="label_usuario" for="NombreUsuario">Nombre usuario:</label>
@@ -105,19 +107,21 @@
                     } ?>" required><br>
                     <label class="label_usuario" for="Password">Confirmar Contraseña:</label>
                     <input class="inputUsuarios" type="password" id="clave2" name="password2" required><br>
-                        <a><input class="btn_contraseña" type="submit" value="CAMBIAR CONTRASEÑA" name="cambiarC" onclick="comprobarClave()"></a> <!-- Este boton se manda los datos del formulario, y tambien comprueba si la contraseña es la misma -->
+                        <input class="btn_contraseña" type="button" value="CAMBIAR CONTRASEÑA" id="cambiar" onclick="comprobarClave()"> <!-- Este boton se manda los datos del formulario, y tambien comprueba si la contraseña es la misma -->
                         <button class="btn_contraseña" type="button" id="btn_cerrar_modal">Cancelar</button> <!-- botoon para cerrrar el dialog -->
+                        <input class="btn_contraseña" type="submit" value="CAMBIAR CONTRASEÑA" name="cambiarC" id="cambiarC" hidden>
                     </form>
                     <script>
-        function comprobarClave() { //funcion que compara ambas claves para verificar que sean iguales
+        function comprobarClave() { //funcion que comparar ambas claves y verificar que sean iguales
             let clave1 = document.f1.clave1.value
             let clave2 = document.f1.clave2.value
 
-            if (clave1 == clave2) {
+            if (clave1 == clave2) { //si las claves son iguales envia el formulario
+                console.log("las claves son iguales")
+                document.getElementById('cambiarC').click();
 
-
-            } else {
-                alert("Las dos claves son distintas...\nvuelva a intentarlo")
+            } else {//si las claves son diferentes muestra una alera
+                alert("Las dos claves son distintas...\nvuelva a intentarlo") 
 
             }
         }
@@ -129,7 +133,7 @@
         </div>
             <footer>
         <?php
-        require_once('../php/footer.php');
+        require_once('../php/footer.php');//carga el foooter de la pagina
         ?>
     </footer>
         </div>
