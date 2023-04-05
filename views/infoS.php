@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>solicitud servicio</title>
+    <title>solicitud</title>
     <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -82,9 +82,9 @@
                             <label for="Estado">Estado:</label>
                             <input type="text" name="estado" value="<?php echo $solis->estado_sol ?>" disabled><br>
                             <label for="FechaContabilizacion">Fecha documento:</label>
-                            <input type="text" name="fechaDocumento" placeholder="Fecha documento" disabled><br>
+                            <input type="text" name="fechaDocumento" value="<?php echo $solis->fecha_documento ?>" disabled><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
-                            <input type="text" name="fechaNecesaria" placeholder="Fecha necesaria" disabled><br>
+                            <input type="text" name="fechaNecesaria" value="<?php echo $solis->fecha_necesaria ?>" disabled><br>
                         </div>
                     </td>
                 </tr>

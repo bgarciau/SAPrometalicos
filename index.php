@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Inicio</title>
     <link rel="icon" type="image/png" href="images/fav.png"/>  <!-- imagen del fav -->
     <link rel="stylesheet" href="css/style.css">     <!-- estilos del contenido de la pagina -->
     <link rel="stylesheet" href="css/hfstyle.css">     <!-- estilos del header y el footer -->

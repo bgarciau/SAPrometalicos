@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Mis solicitudes</title>
     <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -12,28 +12,25 @@
     <?php
     session_start();
 
-    if (!isset($_SESSION["usuario"])) {
+    if (!isset($_SESSION["usuario"])) { //confirma si el usuario ya inicio sesion
 
         header("location:../index.php");
     }
 
     include("../php/conexion.php");
 
-    if(isset($_GET['SolCreada'])){
-        echo '<script>alert("Su solicitud fue creada con el numero: '.$_GET['SolCreada'].'");</script>';
-    }
     ?>
     <div class="base">
     <header>
         <?php
-        require_once('../php/header.php');
+        require_once('../php/header.php');//carga el header
         ?>
     </header>
-        <div class="contenedor">
+        <div class="contenedor"> <!-- contenido entre el header y el footer -->
             <h2>MIS SOLICITUDES</h2>
-            <div id="div_tablas">
-                <div id="div_boton_volver">
-                    <a href="hacerSolicitud.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
+            <div id="div_tablas"> <!-- div para la tabla de solicitudes -->
+                <div id="div_boton_volver"> <!-- div para el boton volver, este queda a la derecha -->
+                    <a href="javascript:history.back()"><input class="btn_volver" type="button" value="< VOLVER"></a>
                 </div>
                 <div class="outer_wrapperS">
                     <?php
@@ -42,13 +39,12 @@
                         $xtabla = $_GET["xtabla"];
                     }
                     if ($xtabla == "tservicios") { ?>
-                         <form id="menu">
-                        <button class="btn_opciones_selected" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
-                        <button class="btn_opciones" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
+                         <form> <!-- Con este form se actulizan los datos segun el boton -->
+                        <button class="btn_opciones_selected" name="xtabla" id="btn_servicios" value="tservicios">servicios</button><!-- Boton para cargar los servicios -->
+                        <button class="btn_opciones" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button><!-- Boton para cargar los articulos -->
                     </form>
                         <!-- tabla servicios -->
                         <div class="table_wrapperS">
-                            <h4>Servicios</h4>
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
@@ -62,12 +58,12 @@
                                     <th>OPCIONES</th>
                                 </thead>
                                 <?php
-                                $usuario = $_SESSION['usuario'];
+                                $usuario = $_SESSION['usuario']; //se toma el usuario de la sesion para cargar sus solicitudes
                                 $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'servicio' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //guarda las solicitudes de servicios hechas por el ususario de la sesion en un PDOStatement
                                 foreach ($misolicitud as $misolicitudes) : // se recorren todos las solicitudes de servicio del usuario
                                 ?>
                                     <tr>
-
+                                        <!-- con $misolicitudes cargamos los datos que necesitando usando el mismo nombre que tienen en la base de datos -->
                                         <td><?php echo $misolicitudes->pk_num_sol ?></td>
                                         <td><?php echo $misolicitudes->estado_sol ?></td>
                                         <td><?php echo $misolicitudes->nom_solicitante ?></td>
@@ -86,10 +82,11 @@
                                         <td class="opcionesTabla">
                                             <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
                                             <?php
+                                            //verificamos si el usuario es administrador y le agrega 2 botones para realizar acciones con las solicitudes
                                             $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($usutipo as $usutipoo) :
                                                 if ($usutipoo->tipo_usuario == 3) { ?>
-                                                    <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                    <a><input class="btn_enviar" type="button" value="enviar"></a>
                                                     <a><input class="btn_delete" type="button" value="rechazar"></a>
 
                                             <?php
@@ -107,12 +104,11 @@
                         <?php
                     } else { ?>
                             <!-- tabla articulos -->
-                            <form id="menu">
-                        <button class="btn_opciones" name="xtabla" id="btn_servicios" value="tservicios">servicios</button>
-                        <button class="btn_opciones_selected" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button>
+                            <form> <!-- Con este form se actulizan los datos segun el boton -->
+                        <button class="btn_opciones" name="xtabla" id="btn_servicios" value="tservicios">servicios</button><!-- Boton para cargar los servicios -->
+                        <button class="btn_opciones_selected" name="xtabla" id="btn_articulos" value="tarticulos">articulos</button><!-- Boton para cargar los articulos -->
                     </form>
                             <div class="table_wrapperS">
-                                <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">
                                     <thead>
                                         <th>N° Sol</th>
@@ -126,12 +122,12 @@
                                         <th>OPCIONES</th>
                                     </thead>
                                     <?php
-                                    $usuario = $_SESSION['usuario'];
+                                    $usuario = $_SESSION['usuario'];//se toma el usuario de la sesion para cargar sus solicitudes
                                     $misolicitud = $base->query("SELECT * FROM solicitud_compra WHERE tipo= 'articulo' AND fk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //guarda las solicitudes de articulos hechas por el ususario de la sesion en un PDOStatement
                                     foreach ($misolicitud as $misolicitudes) :
                                     ?>
                                         <tr>
-
+                                            <!-- con $misolicitudes cargamos los datos que necesitando usando el mismo nombre que tienen en la base de datos -->
                                             <td><?php echo $misolicitudes->pk_num_sol ?></td>
                                             <td><?php echo $misolicitudes->estado_sol ?></td>
                                             <td><?php echo $misolicitudes->nom_solicitante ?></td>
@@ -150,10 +146,11 @@
                                             <td class="opcionesTabla">
                                                 <a href="infoS.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
                                                 <?php
+                                                //verificamos si el usuario es administrador y le agrega 2 botones para realizar acciones con las solicitudes
                                                 $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                                 foreach ($usutipo as $usutipoo) :
                                                     if ($usutipoo->tipo_usuario == 3) { ?>
-                                                        <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                        <a href="../crud/enviarArticulo.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_enviar" type="button" value="enviar"></a>
                                                         <a><input class="btn_delete" type="button" value="rechazar"></a>
 
                                         <?php

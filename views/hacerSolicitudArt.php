@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/style.css"> <!-- estilo para la pagina -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
+    <link rel="icon" type="image/png" href="../images/fav.png" /> <!-- imagen del fav -->
     <!-- se usan librerias para usar el select2 que permite agregar un buscador en los select -->
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.3.js"
@@ -20,158 +20,162 @@
 
     <?php
     session_start(); //inica la sesion 
-
+    
     if (!isset($_SESSION["usuario"])) { //si en el inicio de sesion no se ha definido el usuario no deja entrar a este, por lo cual tiene que iniciar sesion
-
+    
         header("location:../index.php");
     }
 
     include("../php/conexion.php"); //incluye la conexion a la bd
     include("../php/SAP.php"); //se usa para hacer los get al sap y obtener los datos que necesita la aplicacion
-    $respuestaArticulos=articulos($sesion);//usamos la funcion para llamar los articulos y tomar los valores que se necesitan
-    $respuestaProveedor=proveedores($sesion);//usamos la funcion para llamar los proveedores y tomar los valores que se necesitan
-    $respuestaIndImp=indImpuestos($sesion);//usamos la funcion para llamar los indicadores de impuestos y tomar los valores que se necesitan
-    $respuestaUen=uen($sesion);//usamos la funcion para llamar los uen y tomar los valores que se necesitan
-    $respuestaLinea=linea($sesion);//usamos la funcion para llamar las lineas y tomar los valores que se necesitan
-    $respuestaSubLinea=sublinea($sesion);//usamos la funcion para llamar las sublineas y tomar los valores que se necesitan
-
+    $respuestaArticulos = articulos($sesion); //usamos la funcion para llamar los articulos y tomar los valores que se necesitan
+    $respuestaProveedor = proveedores($sesion); //usamos la funcion para llamar los proveedores y tomar los valores que se necesitan
+    $respuestaIndImp = indImpuestos($sesion); //usamos la funcion para llamar los indicadores de impuestos y tomar los valores que se necesitan
+    $respuestaUen = uen($sesion); //usamos la funcion para llamar los uen y tomar los valores que se necesitan
+    $respuestaLinea = linea($sesion); //usamos la funcion para llamar las lineas y tomar los valores que se necesitan
+    $respuestaSubLinea = sublinea($sesion); //usamos la funcion para llamar las sublineas y tomar los valores que se necesitan
+    
     ?>
     <div class="base">
         <header>
             <?php
-            require_once('../php/header.php');//se carga el header
+            require_once('../php/header.php'); //se carga el header
             ?>
         </header>
         <div class="contenedor"> <!-- contenido entre el header y el footer -->
             <table border="1px" id="tabla__general">
-                    <tr>
-                        <td colspan="6"> <!-- tomamos la mitad de laa tabla para los datos del soolicitante-->
-                            <div id="div__solicitante">  <!-- div para los datos del solicitante -->
-                                <?php
+                <tr>
+                    <td colspan="6"> <!-- tomamos la mitad de laa tabla para los datos del soolicitante-->
+                        <div id="div__solicitante"> <!-- div para los datos del solicitante -->
+                            <?php
 
-                                $usuario = $_SESSION['usuario']; //usamos el valor guardado en la sesion para cargar los dats del usuario que inicio sesion
-                                
-                                //tomamos los datos del usuario cuyo codigo es igual al de la sesion
-                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); foreach ($user as $duser)://para poder usar los datos
-                                    ?>
-                                    <input type="hidden" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>"> <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
-                                    <label for="Solicitante">Solicitante:</label>
-                                    <select name="solicitante" id="sel__solicitante">
-                                        <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
-                                        </option>
-                                        <option value="Usuario">Usuario</option>
-                                        <option value="Empleado">Empleado</option>
-                                    </select>
-                                    <input type="text" id="Solicitante" name="rolSol"
-                                        value="<?php echo $duser->rol_usr ?>"><br>
-                                    <label for="NombreSolicitante">Nombre Solicitante:</label>
-                                    <input type="text" id="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
-                                    <label for="Sucursal">Sucursal:</label>
-                                    <select id="sucursal" class="select_formulario">
-                                        <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
-                                        </option>
-                                        <option value="Principal">Principal</option>
-                                        <option value="DefinirNuervo">Definir nuevo</option>
-                                    </select><br>
-                                    <label for="Departamento">Departamento:</label>
-                                    <select id="departamento" class="select_formulario">
-                                        <?php
-                                        $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
-                                            <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
-                                            </option>
-                                            <?php
-                                        endforeach;
-                                        ?>
-                                        <?php
-                                        $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ); foreach ($departamento as $departamentos): ?>
-                                            <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
-                                            <?php
-                                        endforeach;
-                                        ?>
-                                    </select><br>
-                                    <?php
-                                endforeach;
-
+                            $usuario = $_SESSION['usuario']; //usamos el valor guardado en la sesion para cargar los dats del usuario que inicio sesion
+                            
+                            //tomamos los datos del usuario cuyo codigo es igual al de la sesion
+                            $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+                            foreach ($user as $duser): //para poder usar los datos
                                 ?>
-                                <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
-                                <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
-                                    pedido</label><br>
-                                <label for="CorreoElectronico">Direccion Correo Electronico:</label>
-                                <input type="text" id="correoElectronico" placeholder="correo@correo.com"><br>
-                            </div>
-                        </td>
-                        <td colspan="6">
-                            <div id="div__fechas"> <!-- div para las fechas y datos de la solicitud  -->
+                                <input type="hidden" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                                <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
+                                <label for="Solicitante">Solicitante:</label>
+                                <select name="solicitante" id="sel__solicitante">
+                                    <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
+                                    </option>
+                                    <option value="Usuario">Usuario</option>
+                                    <option value="Empleado">Empleado</option>
+                                </select>
+                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"><br>
+                                <label for="NombreSolicitante">Nombre Solicitante:</label>
+                                <input type="text" id="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
+                                <label for="Sucursal">Sucursal:</label>
+                                <select id="sucursal" class="select_formulario">
+                                    <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
+                                    </option>
+                                    <option value="Principal">Principal</option>
+                                    <option value="DefinirNuervo">Definir nuevo</option>
+                                </select><br>
+                                <label for="Departamento">Departamento:</label>
+                                <select id="departamento" class="select_formulario">
+                                    <?php
+                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
+                                        <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
+                                        </option>
+                                        <?php
+                                    endforeach;
+                                    ?>
+                                    <?php
+                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ); foreach ($departamento as $departamentos): ?>
+                                        <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
+                                        <?php
+                                    endforeach;
+                                    ?>
+                                </select><br>
                                 <?php
-                                $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-                                $num = 1; foreach ($ultimo as $ultimoo):
-                                    $num++;
-                                endforeach; ?>
-                                <label for="Nsolicitud">N° solicitud de compra:</label>
-                                <input type="text" name="numSol" value="<?php echo $num ?>" readonly><br>
-                                <label for="Estado">Estado:</label>
-                                <input type="text" name="estado" value="ABIERTO" readonly><br>
+                            endforeach;
 
-                                <label for="FechaContabilizacion">Fecha documento:</label>
-                                <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>"
-                                    readonly><br>
-                                <label for="FechaContabilizacion">Fecha necesaria:</label>
-                                <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria"
-                                    min="<?= date("Y-m-d") ?>"><br>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12">
-                            <div id="div_tabla_AS"> <!-- div para la tabla de articulos -->
-                                <a href="hacerSolicitud.php"><input class="btn_opciones" type="button" value="servicios"></a><!-- boton para la tabla de servicios  -->
-                                <a href=""><input class="btn_opciones_selected" type="button" value="articulos"></a><!-- boton para l tabla de articulos -->
-                                <input class="btn-agregar" type="button" value="+" onclick="insertarFila()"><!-- boton para agregar una fila a la tabla con los datos de los articulos -->
-                                <div class="outer_wrapper">
-                                    <div class="table_wrapper">
-                                        <!-- tabla articulos  -->
-                                        <table id="tabla__articulos">
-                                            <thead>
-                                                <th></th>
-                                                <th width="15px">#</th>
-                                                <th>codigo Articulo</th>
-                                                <th>Descripcion Articulo</th>
-                                                <th>Proveedor</th>
-                                                <th>Fecha Necesaria</th>
-                                                <th>Cantidad Necesaria</th>
-                                                <th>Precio Info</th>
-                                                <th>% Descuento</th>
-                                                <th>indicador de impuestos</th>
-                                                <th>total ml</th>
-                                                <th>UEN</th>
-                                                <th>lineas</th>
-                                                <th>sublineas</th>
-                                            </thead>
-                                            <tbody>
+                            ?>
+                            <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
+                            <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
+                                pedido</label><br>
+                            <label for="CorreoElectronico">Direccion Correo Electronico:</label>
+                            <input type="text" id="correoElectronico" placeholder="correo@correo.com"><br>
+                        </div>
+                    </td>
+                    <td colspan="6">
+                        <div id="div__fechas"> <!-- div para las fechas y datos de la solicitud  -->
+                            <?php
+                            $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+                            $num = 1; foreach ($ultimo as $ultimoo):
+                                $num++;
+                            endforeach; ?>
+                            <label for="Nsolicitud">N° solicitud de compra:</label>
+                            <input type="text" name="numSol" value="<?php echo $num ?>" readonly><br>
+                            <label for="Estado">Estado:</label>
+                            <input type="text" name="estado" value="ABIERTO" readonly><br>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <label for="FechaContabilizacion">Fecha documento:</label>
+                            <input type="text" id="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
+                            <label for="FechaContabilizacion">Fecha necesaria:</label>
+                            <input type="date" id="fechaNecesaria" placeholder="Fecha necesaria"
+                                min="<?= date("Y-m-d") ?>"><br>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <div id="div_tabla_AS"> <!-- div para la tabla de articulos -->
+                            <a href="hacerSolicitud.php"><input class="btn_opciones" type="button"
+                                    value="servicios"></a><!-- boton para la tabla de servicios  -->
+                            <a href=""><input class="btn_opciones_selected" type="button"
+                                    value="articulos"></a><!-- boton para l tabla de articulos -->
+                            <input class="btn-agregar" type="button" value="+"
+                                onclick="insertarFila()"><!-- boton para agregar una fila a la tabla con los datos de los articulos -->
+                            <div class="outer_wrapper">
+                                <div class="table_wrapper">
+                                    <!-- tabla articulos  -->
+                                    <table id="tabla__articulos">
+                                        <thead>
+                                            <th></th>
+                                            <th width="15px">#</th>
+                                            <th>codigo Articulo</th>
+                                            <th>Descripcion Articulo</th>
+                                            <th>Proveedor</th>
+                                            <th>Fecha Necesaria</th>
+                                            <th>Cantidad Necesaria</th>
+                                            <th>Precio Info</th>
+                                            <th>% Descuento</th>
+                                            <th>indicador de impuestos</th>
+                                            <th>total ml</th>
+                                            <th>UEN</th>
+                                            <th>lineas</th>
+                                            <th>sublineas</th>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6"><!-- toma la mitad de la fila -->
-                            <div id="div__comentarios"> <!-- div para el propietario y los comentarios -->
-                                <label for="Propietario">Propietario:</label>
-                                <input type="text" id="propietario" placeholder="Propietario"><br>
-                                <label for="Comentarios">Comentarios:</label>
-                                <textarea id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
-                            </div>
-                        </td>
-                        <td colspan="6">
-                            <div id="div__enviar"> <!-- div para el boton de guardar solicitud -->
-                                <a><input class="btn_guardar" type="button" value="GUARDAR SOLICITUD" onclick="guardarSolicitud()"></a>
-                            </div>
-                        </td>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6"><!-- toma la mitad de la fila -->
+                        <div id="div__comentarios"> <!-- div para el propietario y los comentarios -->
+                            <label for="Propietario">Propietario:</label>
+                            <input type="text" id="propietario" placeholder="Propietario"><br>
+                            <label for="Comentarios">Comentarios:</label>
+                            <textarea id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
+                        </div>
+                    </td>
+                    <td colspan="6">
+                        <div id="div__enviar"> <!-- div para el boton de guardar solicitud -->
+                            <a><input class="btn_guardar" type="button" value="GUARDAR SOLICITUD"
+                                    onclick="guardarSolicitud()"></a>
+                        </div>
+                    </td>
 
-                    </tr>
+                </tr>
             </table>
         </div>
         <footer>
@@ -245,7 +249,7 @@
                 $selectArticuloDes.appendChild(option);//agrega la opcion al select
                 j++;
             }
-             //columna 5 agregamos un select para los proveedores
+            //columna 5 agregamos un select para los proveedores
             col5.innerHTML = "<select class='select_tabla' name='proveedor" + numeroFila + "'id='proveedor" + numeroFila + "'></select>";
             const $selectProveedor = document.querySelector("#proveedor" + numeroFila);//toma el select que se creo
             const optionProveedor = document.createElement('option');//crea una opcion
@@ -261,7 +265,7 @@
             j = 0;
             while (j < 2890) {//cantidad de proveedores en el momento
                 const option = document.createElement('option');//crea una opcion
-                option.value = valoresProveedor[j]['CardName'];//define el valor con el nombre del proveedor
+                option.value = valoresProveedor[j]['CardCode'];//define el valor con el nombre del proveedor
                 option.text = valoresProveedor[j]['CardName'];//define el texto con el nombre del proveedor
                 $selectProveedor.appendChild(option);//agrega la opcion al select
                 j++;
@@ -295,7 +299,7 @@
             j = 0;
             while (j < 10) { //cantidad de indicadores en el momento
                 const option = document.createElement('option');//crea una opcion
-                option.value = valoresIndImp[j]['Name'];//define el valor con el nombre del indicadr de impuesto
+                option.value = valoresIndImp[j]['Code'];//define el valor con el nombre del indicadr de impuesto
                 option.text = valoresIndImp[j]['Name'];//define el texto con el nombre del indicadr de impuesto
                 $selectIndImp.appendChild(option);//agrega la opcion al select
                 j++;
@@ -393,7 +397,20 @@
                                 for (let k = $select.options.length; k >= 0; k--) {//elimina todo lo que tenga el select
                                     $select.remove(k);
                                 }
-                    
+                                
+                                //se toma la sublinea
+                                const $select2 = document.querySelector("#sublinea" + i);
+
+                                const opcionCambiada2 = () => {
+                                    console.log("cambio");
+                                };
+
+                                //se borran los valores de la sublinea
+                                $select2.addEventListener("change", opcionCambiada2)
+                                for (let k = $select2.options.length; k >= 0; k--) {
+                                    $select2.remove(k);
+                                }
+
                                 const option = document.createElement('option');//crea una opcion
                                 option.value = "";//valor por defeto
                                 option.text = "~";//texto que ve ek suaurio
@@ -407,11 +424,11 @@
                                     if (x == $(this).val()) {// si se encuentra uno igual
                                         $select.remove(0);//quita los valores por defecto
                                         const option = document.createElement('option');//crea una opcion
-                                        option.value = 0;//crea una opcion en cero para que se pueda comprobar si se eligio o no
+                                        option.value = "NO";//crea una opcion en cero para que se pueda comprobar si se eligio o no
                                         option.text = "Seleccione";//dice seleccione cuando si carga algo con el codigo del selec
                                         $select.appendChild(option);//agrega la opcion al select
                                         //preguna si el valor de x es igual al del uen mientras se encuentren iguales
-                                        while (x == ($(this).val())) { 
+                                        while (x == ($(this).val())) {
                                             const option = document.createElement('option');//crea una opcion
                                             option.value = valores[j]['FactorCode'];//le asigna como valor el codigo de la linea
                                             option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];//le asigna como texto el codigo y la descripcion de la linea
@@ -421,13 +438,14 @@
                                             x = valores[j]['FactorCode'] * 10 ** (-1);
                                             x = Math.floor(x);
                                         }
-                                        break; //sale del ciclo luego de encontrar las lineas
+                                        j = -100; //sale del ciclo luego de encontrar las lineas
                                     }
                                     j++;
                                 }
                                 //si se cambia el uen por el valor por defecto
                             } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == "") {
                                 //se toma la linea
+                                console.log("uen por defecto");
                                 const $select = document.querySelector("#linea" + i);
 
                                 const opcionCambiada = () => {
@@ -481,7 +499,7 @@
                                 const opcionCambiada = () => {
                                     console.log("cambio");
                                 };
-                                
+
                                 //elimina todo lo que tenga el select
                                 $select.addEventListener("change", opcionCambiada)
                                 for (let k = $select.options.length; k >= 0; k--) {
@@ -494,19 +512,19 @@
                                 option.selected;
                                 $select.appendChild(option);
                                 j = 0;
-                                while (j >= 0 && j < 650) {//recorre los datos de la sublinea
-                                   //tomamos los 4 primeros digitos
+                                while (j >= 0 && j < 648) {//recorre los datos de la sublinea
+                                    //tomamos los 4 primeros digitos
                                     x = valores[j]['FactorCode'] * 10 ** (-1);
                                     x = Math.floor(x);
                                     //si el vallor de x es igual al valor de la linea seleccionada psa la condicion
                                     if (x == $(this).val()) {
                                         $select.remove(0);//se quita la opcion por defecto
                                         const option = document.createElement('option');//agrega opcion para que el usuaio tenga que elegior una sublinea
-                                        option.value = 0;
+                                        option.value = "NO";
                                         option.text = "Seleccione";
                                         $select.appendChild(option);
                                         //mientras x sea igual al valor de la linea es porque la sublinea hace parte de esta 
-                                        while (x == ($(this).val())) { 
+                                        while (x == ($(this).val())) {
                                             //se agrega la linea
                                             const option = document.createElement('option');
                                             option.value = valores[j]['FactorCode'];
@@ -517,7 +535,7 @@
                                             x = valores[j]['FactorCode'] * 10 ** (-1);
                                             x = Math.floor(x);
                                         }
-                                        break;
+                                        j = -100;
 
                                     }
                                     $('#linea' + i).select2('close');
@@ -576,7 +594,7 @@
             sublinea = [];
 
             //recorre cada fila
-            for (i = 0; i < numeroFila; i++) { 
+            for (i = 0; i < numeroFila; i++) {
                 check = document.getElementById('enviar' + i).checked; //devuelve true si el check esta seleccionado
                 if (check == true) {//si esta seleccionado se guardan los datos de la fila
                     console.log("checkbox: SI");
@@ -666,6 +684,13 @@
                     console.log("checkbox: NO");
                 }
             }
+            fechaNecesaria = document.getElementById('fechaNecesaria').value;
+            if (fechaNecesaria == "") {//si no se ha seleccionado una sublinea
+                //muestra una alerta
+                alert('Error en la solicitud' + (i + 1) + ' debe seleccionar la fecha necesaria');
+                $('#fechaNecesaria').focus();//fija la pagina en la casilla de la subline
+                cantidad = -100;
+            }
             if (cantidad > 0) { //si a cantidad es mayor que cero es porque no se ttuvo ningun problema en los datos de cada fila
 
                 //datos de la solicitud
@@ -676,6 +701,7 @@
                 codUsr = document.getElementById('codUsr').value;
                 departamento = document.getElementById('departamento').value;
                 sucursal = document.getElementById('sucursal').value;
+                fechaDocumento = document.getElementById('fechaDocumento').value;
                 //-----------------------------------------------
                 //datos de los articulos
                 //los convierte en string
@@ -694,10 +720,11 @@
                 //con ajax se envian los datos por url a guardarArticulo.php 
                 $.ajax(
                     {
-                        url: 'guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
+                        url: '../crud/guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
                                                            &cantNec='+ cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
-                                                            &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '&comentarios=' + comentarios + '&codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal,
+                                                            &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '\n\
+                                                            &comentarios=' + comentarios + '&codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal + '&fechaNecesaria=' + fechaNecesaria + '&fechaDocumento=' + fechaDocumento,
                         success: function (data) { //si todoo estuvo correcto
                             //se muestra una alerta con el numero de la solicitud que se creo
                             alert('Su solicitud fue creada:\n"' + data + '"')

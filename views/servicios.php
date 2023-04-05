@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Servicios</title>
     <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -39,7 +39,7 @@
             <h2>SERVICIOS</h2>
             <div id="div_tablas">
                 <div id="div_boton_volver">
-                    <a href="hacerSolicitud.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
+                    <a href="javascript:history.back()"><input class="btn_volver" type="button" value="< VOLVER"></a>
                 </div>
                 <div class="outer_wrapperS">
                     <div class="table_wrapperS">

@@ -303,7 +303,7 @@ function sublinea($sesion)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'Prefer:odata.maxpagesize=650',
+                'Prefer:odata.maxpagesize=648',
                 'Content-Type: application/json',
                 'Cookie: B1SESSION=' . $sesion . ''
             ),

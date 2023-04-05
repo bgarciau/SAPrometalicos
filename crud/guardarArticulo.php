@@ -23,15 +23,19 @@ $codUsr = $_GET["codUsr"];
 $departamento = $_GET["departamento"];
 $sucursal = $_GET["sucursal"];
 $cantidad =$_GET['cantidad'];
+$fechaNecesaria=$_GET['fechaNecesaria'];
+$fechaDocumento=$_GET['fechaDocumento'];
 
 //se define la sentencia para insertar los valores en la base de datos y crear la solicitud de compra
-$sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad) 
-        VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad)";
+$sql = "INSERT INTO solicitud_compra (pk_num_sol,estado_sol,nom_solicitante,sucursal,correo_sol,propietario,comentarios,fk_cod_usr,depart_sol,tipo,cantidad,fecha_documento,fecha_necesaria) 
+        VALUES(:_codSol,:_estado,:_nomSol,:_sucursal,:_correoElectronico,:_propietario,:_comentarios,:_codUsr,:_departamento,:_tipo,:_cantidad,:_fechaDocumento,:_fechaNecesaria)";
 
 $solicitud = $base->prepare($sql); //se prepara la sentencia
 
 //se ejecuta la sentencia con los datos requeridos
-$solicitud->execute(array(":_codSol" => $numSolicitud, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal, ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr, ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad));
+$solicitud->execute(array(":_codSol" => $numSolicitud, ":_estado" => $estado, ":_nomSol" => $nomSol, ":_sucursal" => $sucursal,
+ ":_correoElectronico" => $correoElectronico, ":_propietario" => $propietario, ":_comentarios" => $comentarios, ":_codUsr" => $codUsr,
+  ":_departamento" => $departamento, ":_tipo" => $tipo, ":_cantidad" => $cantidad,":_fechaDocumento" => $fechaDocumento,":_fechaNecesaria" => $fechaNecesaria));
 
 //se llaman los datos enviados por ajax y se les hace un explode para convertir el string en un array
     $codArt = explode("_", $_GET['codigoArse']);

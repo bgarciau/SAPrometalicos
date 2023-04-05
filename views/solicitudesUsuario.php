@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Soliciudes usuarios</title>
     <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -19,6 +19,16 @@
 
     include("../php/conexion.php"); //se incluye la conexion a la base de datos
 
+    $usuario = $_SESSION['usuario'];
+
+    $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+    foreach ($registros as $Tusuario) {
+        $userx = $Tusuario->tipo_usuario; //Sacamos el tipo de usuario de la sesion para saber si es administrador y si no lo es lo mandamos a hacer solicitud
+    }
+    if ($userx != 3) {
+        header("location:hacerSolicitud.php");
+    }
+
     ?>
     <div class="base"> <!-- Vista de  la pagina -->
     <header>
@@ -30,7 +40,7 @@
             <h2>SOLICITUDES USUARIO</h2>
             <div id="div_tablas"> <!-- Contiene la tabla de solicitudes -->
                 <div id="div_boton_volver">
-                    <a href="hacerSolicitud.php"><input class="btn_volver" type="button" value="< VOLVER"></a> <!-- boton para volver a hacer solicitud -->
+                    <a href="javascript:history.back()"><input class="btn_volver" type="button" value="< VOLVER"></a> <!-- boton para volver a hacer solicitud -->
                 </div>
                 <div class="outer_wrapperS">
                    
@@ -41,12 +51,11 @@
                     }
                     if ($xtabla == "tservicios") { ?> <!-- Pregunta si es la tabla de servicios para cargarla -->
                         <!-- tabla servicios -->
-                        <form id="menu"> <!-- Con este form se actulizan los datos segun el boton -->
+                        <form> <!-- Con este form se actulizan los datos segun el boton -->
                         <button class="btn_opciones_selected" name="xtabla" value="tservicios">servicios</button> <!-- Boton para cargar los servicios -->
                         <button class="btn_opciones" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
                     </form>
                         <div class="table_wrapperS">
-                            <h4>Servicios</h4>
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
@@ -65,7 +74,7 @@
                                 foreach ($usolicitud as $usolicitudes) : //se usa para recorrer el PDOStatement 
                                 ?>
                                     <tr>
-
+                                        <!-- con $usolicitudes cargamos los datos que necesitando usando el mismo nombre que tienen en la base de datos -->
                                         <td><?php echo $usolicitudes->pk_num_sol ?></td> <!-- se llama el numero de solicitud con el nombre asociado a su valor, el cual es el mismo de la base de datos -->
                                         <td><?php echo $usolicitudes->estado_sol ?></td> <!-- se llama el estado de solicitud con el nombre asociado a su valor, el cual es el mismo de la base de datos -->
                                         <td><?php echo $usolicitudes->nom_solicitante ?></td> <!-- se llama el nombre del solicitante con el nombre asociado a su valor, el cual es el mismo de la base de datos -->
@@ -83,7 +92,7 @@
                                         <td><?php echo $usolicitudes->comentarios ?></td> <!-- se llaman los comentarios de la solicitud con el nombre asociado a su valor, el cual es el mismo de la base de datos -->
                                         <td class="opcionesTabla">
                                             <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a> <!-- se manda el id de la solicitud para cargar todos los datos de esta -->
-                                            <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                            <a><input class="btn_enviar" type="button" value="enviar"></a>
                                             <a><input class="btn_delete" type="button" value="rechazar"></a>
                                         </td>
                                     </tr>
@@ -99,7 +108,6 @@
                         <button class="btn_opciones_selected" name="xtabla" value="tarticulos">articulos</button> <!-- Boton para cargar los articulos -->
                     </form>
                             <div class="table_wrapperS">
-                                <h4>Articulos</h4>
                                 <table id="tabla__solicitudes">
                                     <thead>
                                         <th>N° Sol</th>
@@ -118,7 +126,7 @@
                                     foreach ($usolicitud as $usolicitudes) :
                                     ?>
                                         <tr>
-
+                                            <!-- con $usolicitudes cargamos los datos que necesitando usando el mismo nombre que tienen en la base de datos -->
                                             <td><?php echo $usolicitudes->pk_num_sol ?></td>
                                             <td><?php echo $usolicitudes->estado_sol ?></td>
                                             <td><?php echo $usolicitudes->nom_solicitante ?></td>
@@ -136,7 +144,7 @@
                                             <td><?php echo $usolicitudes->comentarios ?></td>
                                             <td class="opcionesTabla">
                                                 <a href="infoS.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_info" type="button" value="info"></a>
-                                                <a><input class="btn_aceptar" type="button" value="enviar"></a>
+                                                <a href="../crud/enviarArticulo.php?numSol=<?php echo $usolicitudes->pk_num_sol ?>"><input class="btn_enviar" type="button" value="enviar"></a>
                                                 <a><input class="btn_delete" type="button" value="rechazar"></a>
                                             </td>
                                         </tr>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Agregar usuario</title>
     <link rel="icon" type="image/png" href="../images/fav.png" />     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -19,6 +19,15 @@
     }
 
     include("../php/conexion.php");
+    $usuario = $_SESSION['usuario'];
+
+    $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
+    foreach ($registros as $Tusuario) {
+        $userx = $Tusuario->tipo_usuario; //Sacamos el tipo de usuario de la sesion para saber si es administrador y si no lo es lo mandamos a hacer solicitud
+    }
+    if ($userx != 3) {
+        header("location:hacerSolicitud.php");
+    }
 
     $depart = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
 

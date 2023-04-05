@@ -113,9 +113,9 @@
                             <label for="Estado">Estado:</label>
                             <input type="text" name="estado" value="ABIERTO" readonly><br>
                             <label for="FechaContabilizacion">Fecha documento:</label>
-                            <input type="text" name="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
+                            <input type="text" id="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
-                            <input type="date" name="fechaNecesaria" placeholder="Fecha necesaria" min="<?= date("Y-m-d") ?>"><br>
+                            <input type="date" id="fechaNecesaria" placeholder="Fecha necesaria" min="<?= date("Y-m-d") ?>"><br>
                         </div>
                     </td>
                 </tr>
@@ -470,6 +470,8 @@
                 codUsr = document.getElementById('codUsr').value;
                 departamento = document.getElementById('departamento').value;
                 sucursal = document.getElementById('sucursal').value;
+                fechaNecesaria = document.getElementById('fechaNecesaria').value;
+                fechaDocumento = document.getElementById('fechaDocumento').value;
                 //----------------------------------------------------------------
                 //datos de los servicios, se convierte el array en string y se divide con un _ cada posicion
                 codigoArse = codigoArse.join('_').toString();
@@ -490,10 +492,11 @@
                 //con ajax vamos a enviar los datos de la solicitud y los servicos a guardarServicio.php
                 $.ajax({
                     //por la url se pasan todos los datos
-                    url: 'guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
+                    url: '../crud/guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
                                                             &precioInfo=' + precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &proyecto=' + proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
-                                                            &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '&comentarios=' + comentarios + '&codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal,
+                                                            &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '&comentarios=' + comentarios + '\n\
+                                                            &codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal+ '&fechaNecesaria=' + fechaNecesaria+ '&fechaDocumento=' + fechaDocumento,
                     success: function(data) { //cuando guradarServicio.php haya terminado su proceso
                         alert('Su solicitud fue creada:\n"' + data + '"') //se muestra la alerta con el numero de solicitud que se creo
                         window.location = "misSolicitudes.php"; //manda al usuario a misSolicitudes y ahi puede ver su solicitud
