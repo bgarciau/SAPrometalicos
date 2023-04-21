@@ -11,6 +11,7 @@
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="../css/select2/select2.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- ------------------------------------------------------------------------------------------------ -->
     <title>Servicios</title>
 </head>
@@ -251,7 +252,7 @@
             j = 0;
             while (j < 2890) { //proveedores en el momento
                 const option = document.createElement('option'); //se crea una opcion por cada proveedor
-                option.value = valoresProveedor[j]['CardName']; //el valor es igual al nombre del proveedor
+                option.value = valoresProveedor[j]['CardCode']; //el valor es igual al nombre del proveedor
                 option.text = valoresProveedor[j]['CardName']; //el usuario ve el nombre del proveedor
                 $selectProveedor.appendChild(option); //agrega la opcion al select
                 j++; //se suma uno para agregar el siguiente prooveedor
@@ -312,7 +313,7 @@
             j = 0;
             while (j < 10) { // numero de indicadores de impuesto en el momento
                 const option = document.createElement('option'); //crea la opcion
-                option.value = valoresIndImp[j]['Name']; //le da el nombre del indicador al valor
+                option.value = valoresIndImp[j]['Code']; //le da el nombre del indicador al valor
                 option.text = valoresIndImp[j]['Name']; //el usuario ve el nombre del indicador
                 $selectIndImp.appendChild(option); //agrega la opcion al select
                 j++; //suma uno para agregar el siguiente 
@@ -398,7 +399,7 @@
                     codArse[j] = document.getElementById('codigoServicio' + i).value; //toma el valor del codigo del servicio
                     if (codArse[j] == "") { //verifica si se selecciono un servicio
                         //si no se selecciono ningun servicio hace lo siguiente
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio'); //manda un mensaje de alerta con el campo en el que faltan datos
+                        swal('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio'); //manda un mensaje de alerta con el campo en el que faltan datos
                         $('#codigoServicio' + i).focus(); //posiciona la pagina en el campo que falta
                         $('#codigoServicio' + i).select2('open'); //en este caso es un select y la libreria de selec2 nos deja desplegar el select
                         cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
@@ -492,8 +493,7 @@
                 //con ajax vamos a enviar los datos de la solicitud y los servicos a guardarServicio.php
                 $.ajax({
                     //por la url se pasan todos los datos
-                    url: '../crud/guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
-                                                            &precioInfo=' + precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
+                    url: '../crud/guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&precioInfo=' + precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &proyecto=' + proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
                                                             &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '&comentarios=' + comentarios + '\n\
                                                             &codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal+ '&fechaNecesaria=' + fechaNecesaria+ '&fechaDocumento=' + fechaDocumento,

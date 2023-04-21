@@ -123,10 +123,11 @@
                         <option value=3>Administrador</option>
                     </select>
 
-                    <br>
+                    <br><br>
                     <a><input class="btn_crear_usuario" type="submit" value="CREAR USUARIO" name="crearU"
                             onclick="comprobarClave()"></a><!-- Este boton envia los datos del nuevo usuario y tambien verifica si las claves son iguales y si no lo son carga nuevamente los datos dejando el campo de la contraseña -->
-                    <a href="usuarios.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
+                   <br>
+                            <a href="usuarios.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
                     <!-- Vuelve al listado de usuarios sin guardar datos -->
             </div>
         </div>

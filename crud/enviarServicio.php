@@ -43,11 +43,12 @@ curl_close($curl); //Esta función cierra una sesión CURL y libera todos sus re
 
 // ----------------------------------------------------------------------------------------------------------------------------
 //cargar datos al json
+$ENVIADO="ENVIADO";
 $numSol = $_GET["numSol"];
 $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
 foreach ($soli as $solis) {
     $solicitud = new stdClass();
-    $solicitud->DocType = "dDocument_Items";
+    $solicitud->DocType = "dDocument_Service";
     $solicitud->DocDate = "2023-04-03";
     $solicitud->RequriedDate = $solis->fecha_necesaria;
     $solicitud->Comments = $solis->comentarios;
@@ -56,24 +57,24 @@ foreach ($soli as $solis) {
     $i = 0;
     foreach ($lista as $listaa) {
 
-    $articulo = new stdClass();
-    $articulo->LineNum = $i;
-    $articulo->ItemCode=$listaa->codigo_articulo;
-    $articulo->Quantity=$listaa->cant_nec;
-    $articulo->RequiredDate=$listaa->fecha_nec;
-    $articulo->CostingCode=$listaa->uen;
-    $articulo->CostingCode2=$listaa->linea;
-    $articulo->CostingCode3=$listaa->sublinea;
-    $articulo->TaxCode=$listaa->ind_imp;
-    $articulo->Price=$listaa->total_ml;
-    $articulo->PriceAfterVAT=$listaa->total_ml;
-    $articulo->Currency= "$";
-    $articulo->DiscountPercent=$listaa->por_desc;
-    $articulo->LineVendor=$listaa->proveedor;
-    $articulos[$i] = $articulo;
+    $servicio = new stdClass();
+    $servicio->LineNum = $i;
+    $servicio->ItemCode=null;
+    $servicio->ItemDescription=$listaa->nom_arse;
+    $servicio->RequiredDate=$listaa->fecha_nec;
+    $servicio->CostingCode=$listaa->uen;
+    $servicio->CostingCode2=$listaa->linea;
+    $servicio->CostingCode3=$listaa->sublinea;
+    $servicio->TaxCode=$listaa->ind_imp;
+    $servicio->Price=$listaa->total_ml;
+    $servicio->PriceAfterVAT=$listaa->total_ml;
+    $servicio->Currency= "$";
+    $servicio->DiscountPercent=$listaa->por_desc;
+    $servicio->LineVendor=$listaa->proveedor;
+    $servicios[$i] = $servicio;
     $i++;
     }
-    $solicitud->DocumentLines = $articulos;
+    $solicitud->DocumentLines = $servicios;
 
     $JSONsolicitud = json_encode($solicitud);
 }
@@ -110,9 +111,10 @@ echo $response;
 curl_close($curlEnviar); //Esta función cierra una sesión CURL y libera todos sus recursos
 
 // -----------------------------------------------------------------------------------------------------------------------
+//----ACTUALIZAR EL ESTADO DE LA SOLICITUD-------
+
 $sql="UPDATE solicitud_compra SET estado_sol=? WHERE pk_num_sol='$numSol'"; 
 $solicitud = $base->prepare($sql); //se prepara la sentencia
 $estado_sol="ENVIADO";
 $solicitud->execute([$estado_sol]);
-
 ?>

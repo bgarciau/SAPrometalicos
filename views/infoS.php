@@ -201,7 +201,7 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
-                            <a href="misSolicitudes.php"><input class="btn_volver" type="button" value="VOLVER"></a>
+                            <a href="javascript:history.back()"><input class="btn_volver" type="button" value="VOLVER"></a>
                         </div>
                     </td>
 

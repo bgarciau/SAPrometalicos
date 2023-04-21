@@ -126,7 +126,7 @@
                         <div id="div_tabla_AS"> <!-- div para la tabla de articulos -->
                             <a href="hacerSolicitud.php"><input class="btn_opciones" type="button"
                                     value="servicios"></a><!-- boton para la tabla de servicios  -->
-                            <a href=""><input class="btn_opciones_selected" type="button"
+                            <a><input class="btn_opciones_selected" type="button"
                                     value="articulos"></a><!-- boton para l tabla de articulos -->
                             <input class="btn-agregar" type="button" value="+"
                                 onclick="insertarFila()"><!-- boton para agregar una fila a la tabla con los datos de los articulos -->
@@ -716,12 +716,11 @@
                 uen = uen.join('_').toString();
                 linea = linea.join('_').toString();
                 sublinea = sublinea.join('_').toString();
-                //-------------------------------
-                //con ajax se envian los datos por url a guardarArticulo.php 
+                // console.log("a"+proveedor+"a");
+                //-------------------------------con ajax se envian los datos por url a guardarArticulo.php 
                 $.ajax(
                     {
-                        url: '../crud/guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '\n\
-                                                           &cantNec='+ cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
+                        url: '../crud/guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&cantNec='+ cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
                                                             &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '\n\
                                                             &comentarios=' + comentarios + '&codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal + '&fechaNecesaria=' + fechaNecesaria + '&fechaDocumento=' + fechaDocumento,

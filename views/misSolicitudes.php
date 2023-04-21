@@ -86,7 +86,7 @@
                                             $usutipo = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($usutipo as $usutipoo) :
                                                 if ($usutipoo->tipo_usuario == 3) { ?>
-                                                    <a><input class="btn_enviar" type="button" value="enviar"></a>
+                                                    <a href="../crud/enviarServicio.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>"><input class="btn_enviar" type="button" value="enviar"></a>
                                                     <a><input class="btn_delete" type="button" value="rechazar"></a>
 
                                             <?php
@@ -175,4 +175,7 @@
         </footer>
         </div>
 </body>
+<script>
+    
+</script>
 </html>
