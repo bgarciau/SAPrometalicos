@@ -42,7 +42,10 @@
             require_once('../php/header.php'); //se carga el header
             ?>
         </header>
-        <div class="contenedor"> <!-- contenido entre el header y el footer -->
+        <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
             <table border="1px" id="tabla__general">
                 <tr>
                     <td colspan="6"> <!-- tomamos la mitad de laa tabla para los datos del soolicitante-->
@@ -339,7 +342,6 @@
 
             //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
             $(document).ready(function () {
-
                 for (i = 0; i < numeroFila; i++) {
 
                     $('#codigoArticulo' + i).change(function (e) { //por cada fila, cuando se seleccione un codigo de articulo, este hara cambios en otros campos
@@ -397,7 +399,7 @@
                                 for (let k = $select.options.length; k >= 0; k--) {//elimina todo lo que tenga el select
                                     $select.remove(k);
                                 }
-                                
+
                                 //se toma la sublinea
                                 const $select2 = document.querySelector("#sublinea" + i);
 
@@ -601,9 +603,13 @@
                     codArse[j] = document.getElementById('codigoArticulo' + i).value;//toma el codigo del articulo
                     if (codArse[j] == "") {//si no se selecciono ningun codigo
                         //muestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar un articulo');
-                        $('#codigoArticulo' + i).focus();//acomoda la pagina en la casilla del codigo del articulo
-                        $('#codigoArticulo' + i).select2('open');//despliega las opciones 
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un articulo').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#codigoArticulo' + i).focus();//acomoda la pagina en la casilla del codigo del articulo
+                                $('#codigoArticulo' + i).select2('open');//despliega las opciones 
+                            }
+                        })
                         cantidad = -100;
                         break;
 
@@ -611,8 +617,12 @@
                     fechaNec[j] = document.getElementById('fecha_Nec' + i).value;//toma la fecha necesaria
                     if (fechaNec[j] == "") {//si la fecha necesaria esta vacia
                         //muestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria');
-                        document.getElementById('fecha_Nec' + i).focus();//acomoda la pagina en la casilla
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('fecha_Nec' + i).focus();//acomoda la pagina en la casilla
+                            }
+                        })
                         cantidad = -100;
                         break;
                     }
@@ -620,8 +630,12 @@
                     cant_nec[j] = document.getElementById('cant_nec' + i).value;//toma la cantidad necesaria
                     if (cant_nec[j] == "") {//si la cantidad necesaria esta vacia
                         //muestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la cantidad necesaria');
-                        document.getElementById('cant_nec' + i).focus();//se fija la pagina en la casilla
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la cantidad necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('cant_nec' + i).focus();//se fija la pagina en la casilla      
+                            }
+                        })
                         cantidad = -100;
                         break;
                     }
@@ -630,9 +644,13 @@
                     indImp[j] = document.getElementById('ind_imp' + i).value;//toma el valor del indicador de impuesto
                     if (indImp[j] == "") {//si el indicadr esta vacio
                         //muestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto');
-                        $('#ind_imp' + i).focus();//fija la pagina en la casilla del indicador
-                        $('#ind_imp' + i).select2('open');//despliega las opciones del select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#ind_imp' + i).focus();//fija la pagina en la casilla del indicador
+                                $('#ind_imp' + i).select2('open');//despliega las opciones del select
+                            }
+                        })
                         cantidad = -100;
                         break;
                     }
@@ -640,27 +658,39 @@
                     uen[j] = document.getElementById('uen' + i).value;//toma el valor del uen
                     if (uen[j] == "") {//si el uen esta vacio
                         //muestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar el uen');
-                        $('#uen' + i).focus();//fija la pagina en la casilla del uen
-                        $('#uen' + i).select2('open');//despliega las opcines del select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el uen').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#uen' + i).focus();//fija la pagina en la casilla del uen
+                                $('#uen' + i).select2('open');//despliega las opcines del select
+                            }
+                        })
                         cantidad = -100;
                         break;
                     }
                     linea[j] = document.getElementById('linea' + i).value;//toma el valor de la linea
                     if (linea[j] == "NO") {//si no se ha seleccionado ninguna fila
                         //mmuestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la linea');
-                        $('#linea' + i).focus();//fija la pagina en la casila del la linea
-                        $('#linea' + i).select2('open');//despliega las opciones del select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la linea').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#linea' + i).focus();//fija la pagina en la casila del la linea
+                                $('#linea' + i).select2('open');//despliega las opciones del select
+                            }
+                        })
                         cantidad = -100;
                         break;
                     }
                     sublinea[j] = document.getElementById('sublinea' + i).value;//toma el valor de la sublinea
                     if (sublinea[j] == "NO") {//si no se ha seleccionado una sublinea
                         //muestra una alerta
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la sublinea');
-                        $('#sublinea' + i).focus();//fija la pagina en la casilla de la sublinea
-                        $('#sublinea' + i).select2('open');//despliega las opciones del select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la sublinea').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#sublinea' + i).focus();//fija la pagina en la casilla de la sublinea
+                                $('#sublinea' + i).select2('open');//despliega las opciones del select
+                            }
+                        })
                         cantidad = -100;
                         break;
                     }
@@ -687,8 +717,12 @@
             fechaNecesaria = document.getElementById('fechaNecesaria').value;
             if (fechaNecesaria == "") {//si no se ha seleccionado una sublinea
                 //muestra una alerta
-                alert('Error en la solicitud' + (i + 1) + ' debe seleccionar la fecha necesaria');
-                $('#fechaNecesaria').focus();//fija la pagina en la casilla de la subline
+                Swal.fire('Error en la solicitud' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        $('#fechaNecesaria').focus();//fija la pagina en la casilla de la subline
+                    }
+                })
                 cantidad = -100;
             }
             if (cantidad > 0) { //si a cantidad es mayor que cero es porque no se ttuvo ningun problema en los datos de cada fila
@@ -718,21 +752,45 @@
                 sublinea = sublinea.join('_').toString();
                 // console.log("a"+proveedor+"a");
                 //-------------------------------con ajax se envian los datos por url a guardarArticulo.php 
-                $.ajax(
-                    {
-                        url: '../crud/guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&cantNec='+ cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
+                Swal.fire({
+                    title: 'ENVIAR SOLICITUD',
+                    html: '<span class="letra-blanco">¿Esta seguro de que todos los datos son correctos?</span>',
+                    textColor: '#ffffff',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ff0000',
+                    // cancelButtonColor: '#',
+                    showLoaderOnConfirm: true,
+                    confirmButtonText: 'CONFIRMAR',
+                    cancelButtonText: 'CANCELAR'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#principal').fadeOut();
+                        $('#carga').prop("hidden",false);
+                        $.ajax(
+                            {
+                                url: '../crud/guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&cantNec=' + cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
                                                             &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '\n\
                                                             &comentarios=' + comentarios + '&codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal + '&fechaNecesaria=' + fechaNecesaria + '&fechaDocumento=' + fechaDocumento,
-                        success: function (data) { //si todoo estuvo correcto
-                            //se muestra una alerta con el numero de la solicitud que se creo
-                            alert('Su solicitud fue creada:\n"' + data + '"')
-                            window.location = "misSolicitudes.php?xtabla=tarticulos";//deja al usuario en mis solicitudes
-                        }
+                                success: function (data) { //si todoo estuvo correcto
+                                    //se muestra una alerta con el numero de la solicitud que se creo
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Su soliciud fue creada:',
+                                        html: '<span class="letra-blanco">numero de soliciud: ' + data + '</span>'
+                                    }).then((result) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                            window.location = "misSolicitudes.php?xtabla=tarticulos"; //manda al usuario a misSolicitudes y ahi puede ver su solicitud
+                                        }
+                                    })
+                                }
+                            })
                     }
-                )
+                })
             }
-        }
+        }        
     </script>
 </body>
 

@@ -283,3 +283,7 @@ p{ 	/* margen sobre el texto del footer */
     stroke: #ff0000;
   }
 /* ------------------------------------------------------------------------- */
+/* sweet-alert */
+.letra-blanco{
+  color: #ffffff;
+}

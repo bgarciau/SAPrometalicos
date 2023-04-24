@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- se usan librerias para usar el select2 que permite agregar un buscador en los select -->
     <link href="../css/select2/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="../css/select2/select2.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- ------------------------------------------------------------------------------------------------ -->
     <title>Servicios</title>
 </head>
@@ -20,9 +20,9 @@
     <?php
 
     session_start(); //inica la sesion 
-
+    
     if (!isset($_SESSION['usuario'])) { //si en el inicio de sesion no se ha definido el usuario no deja entrar a este, por lo cual tiene que iniciar sesion
-
+    
         header("location:../index.php");
     }
 
@@ -32,7 +32,7 @@
     $respuestaProveedor = proveedores($sesion); //usamos la funcion para llamar los prveedores y tomar los valores que se necesitan
     $respuestaIndImp = indImpuestos($sesion); //usamos la funcion para llamar los indicadores de impuestos y tomar los valores que se necesitan
     $respuestaProyecto = proyectos($sesion); //usamos la funcion para llamar los proyectos y tomar los valores que se necesitan
-
+    
 
     ?>
     <div class="base">
@@ -50,12 +50,13 @@
                             <?php
 
                             $usuario = $_SESSION['usuario']; //usamos el valor guardado en la sesion para cargar los dats del usuario que inicio sesion
-
+                            
                             //tomamos los datos del usuario cuyo codigo es igual al de la sesion
                             $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ);
-                            foreach ($user as $duser) : //para poder usar los datos
-                            ?>
-                                <input type="hidden" name="codUsr" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>"> <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
+                            foreach ($user as $duser): //para poder usar los datos
+                                ?>
+                                <input type="hidden" name="codUsr" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                                <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
                                 <label>Solicitante:</label>
                                 <select name="solicitante" id="sel__solicitante">
                                     <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
@@ -63,9 +64,11 @@
                                     <option value="Usuario">Usuario</option>
                                     <option value="Empleado">Empleado</option>
                                 </select>
-                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>" required><br>
+                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
+                                    required><br>
                                 <label for="NombreSolicitante">Nombre Solicitante:</label>
-                                <input type="text" name="nomSol" id="nomSol" value="<?php echo $duser->nom_usr ?>" required><br>
+                                <input type="text" name="nomSol" id="nomSol" value="<?php echo $duser->nom_usr ?>"
+                                    required><br>
                                 <label for="Sucursal">Sucursal:</label>
                                 <select class="select_formulario" name="sucursal" id="sucursal">
                                     <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
@@ -76,37 +79,35 @@
                                 <label for="Departamento">Departamento:</label>
                                 <select class="select_formulario" name="departamento" id="departamento">
                                     <?php
-                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($dep as $depa) : ?>
+                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
                                         <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
                                         </option>
-                                    <?php
+                                        <?php
                                     endforeach;
                                     ?>
                                     <?php
-                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
-                                    foreach ($departamento as $departamentos) : ?>
+                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ); foreach ($departamento as $departamentos): ?>
                                         <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
-                                    <?php
+                                        <?php
                                     endforeach;
                                     ?>
                                 </select><br>
-                            <?php
+                                <?php
                             endforeach;
                             ?>
                             <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
                             <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
                                 pedido</label><br>
                             <label for="CorreoElectronico">Direccion Correo Electronico:</label>
-                            <input type="text" name="correoElectronico" id="correoElectronico" placeholder="correo@correo.com"><br>
+                            <input type="text" name="correoElectronico" id="correoElectronico"
+                                placeholder="correo@correo.com"><br>
                         </div>
                     </td>
                     <td colspan="6">
                         <div id="div__fechas"><!-- div para las fechas y datos de la solicitud  -->
                             <?php
                             $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-                            $num = 1;
-                            foreach ($ultimo as $ultimoo) :
+                            $num = 1; foreach ($ultimo as $ultimoo):
                                 $num++;
                             endforeach; ?>
                             <label for="Nsolicitud">N° solicitud de compra:</label>
@@ -116,16 +117,20 @@
                             <label for="FechaContabilizacion">Fecha documento:</label>
                             <input type="text" id="fechaDocumento" value="<?php echo date("d-m-y") ?>" readonly><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
-                            <input type="date" id="fechaNecesaria" placeholder="Fecha necesaria" min="<?= date("Y-m-d") ?>"><br>
+                            <input type="date" id="fechaNecesaria" placeholder="Fecha necesaria"
+                                min="<?= date("Y-m-d") ?>"><br>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="12">
                         <div id="div_tabla_AS"> <!-- div para la tabla de servicios -->
-                            <input class="btn_opciones_selected" type="button" value="servicios"> <!-- boton para la tabla de servicios  -->
-                            <a href="hacerSolicitudArt.php"><input class="btn_opciones" type="button" value="articulos"> </a><!-- boton para l tabla de articulos -->
-                            <input class="btn-agregar" type="button" value="+" onclick="insertarFila()"> <!-- boton para agregar una fila a la tabla con los datos de los servicios -->
+                            <input class="btn_opciones_selected" type="button" value="servicios">
+                            <!-- boton para la tabla de servicios  -->
+                            <a href="hacerSolicitudArt.php"><input class="btn_opciones" type="button" value="articulos">
+                            </a><!-- boton para l tabla de articulos -->
+                            <input class="btn-agregar" type="button" value="+" onclick="insertarFila()">
+                            <!-- boton para agregar una fila a la tabla con los datos de los servicios -->
                             <div class="outer_wrapper">
                                 <div class="table_wrapper">
                                     <!-- tabla servicios  -->
@@ -162,12 +167,14 @@
                             <label for="Propietario">Propietario:</label>
                             <input type="text" name="propietario" id="propietario" placeholder="Propietario"><br>
                             <label for="Comentarios">Comentarios:</label>
-                            <textarea name="comentarios" id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
+                            <textarea name="comentarios" id="comentarios" rows="4" cols="50"
+                                placeholder="comentarios"></textarea>
                         </div>
                     </td>
                     <td colspan="6">
-                        <div id="div__enviar">  <!-- div para el boton de guardar solicitud -->
-                            <a><input class="btn_guardar" type="button" value="GUARDAR SOLICITUD" onclick="guardarSolicitud()"></a>
+                        <div id="div__enviar"> <!-- div para el boton de guardar solicitud -->
+                            <a><input class="btn_guardar" type="button" value="GUARDAR SOLICITUD"
+                                    onclick="guardarSolicitud()"></a>
                         </div>
                     </td>
 
@@ -327,11 +334,11 @@
 
 
             //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
-            $(document).ready(function() {
+            $(document).ready(function () {
 
                 for (i = 0; i < numeroFila; i++) {
 
-                    $('#codigoServicio' + i).change(function(e) { //por cada fila, cuando se seleccione un servicio, este hara cambios en otros campos
+                    $('#codigoServicio' + i).change(function (e) { //por cada fila, cuando se seleccione un servicio, este hara cambios en otros campos
 
 
                         for (i = 0; i < numeroFila; i++) {
@@ -399,17 +406,27 @@
                     codArse[j] = document.getElementById('codigoServicio' + i).value; //toma el valor del codigo del servicio
                     if (codArse[j] == "") { //verifica si se selecciono un servicio
                         //si no se selecciono ningun servicio hace lo siguiente
-                        swal('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio'); //manda un mensaje de alerta con el campo en el que faltan datos
-                        $('#codigoServicio' + i).focus(); //posiciona la pagina en el campo que falta
-                        $('#codigoServicio' + i).select2('open'); //en este caso es un select y la libreria de selec2 nos deja desplegar el select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#codigoServicio' + i).focus(); //posiciona la pagina en el campo que falta
+                                $('#codigoServicio' + i).select2('open'); //en este caso es un select y la libreria de selec2 nos deja desplegar el select
+                            }
+                        })
                         cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
                         break; //para salir del ciclo que recorre las filas
+                        // swal('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio'); //manda un mensaje de alerta con el campo en el que faltan datos
                     }
                     codigoArse[j] = valoresServicio[codArse[j]]['Name']; //cambia el valor del codigo por su nombre
                     fechaNec[j] = document.getElementById('fecha_Nec' + i).value; //toma el valor de la fecha necesaria 
                     if (fechaNec[j] == "") { //si no hay ningun valor hace lo siguiente
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria'); //muestra un mensaje de alerta
-                        document.getElementById('fecha_Nec' + i).focus(); //posiciona la pagina para que se vea la fecha necesaria
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('fecha_Nec' + i).focus(); //posiciona la pagina para que se vea la fecha necesaria
+                            }
+                        })
+                        // alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria'); //muestra un mensaje de alerta
                         cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
                         break; //para salir del ciclo que recorre las filas
                     }
@@ -421,18 +438,28 @@
                     sublinea[j] = document.getElementById('sublinea' + i).value; //toma el valor de la sublinea
                     proyecto[j] = document.getElementById('proyecto' + i).value; //toma el valor del proyecto
                     if (proyecto[j] == "") { //comprueba si el proyecto esta vacio y hace lo siguiente
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto'); //muestra una alerta
-                        $('#proyecto' + i).focus(); //posiciona la pagina para que se vea el proyectoo
-                        $('#proyecto' + i).select2('open'); //abre el select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#proyecto' + i).focus(); //posiciona la pagina para que se vea el proyectoo
+                                $('#proyecto' + i).select2('open'); //abre el select
+                            }
+                        })
+                        // alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto'); //muestra una alerta
+    
                         cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
                         break; //para salir del ciclo que recorre las filas
                     }
                     porDesc[j] = document.getElementById('por_dec' + i).value; //toma el valor del porcentaje de descuento
                     indImp[j] = document.getElementById('ind_imp' + i).value; //toma el valor del indicador de impuestos
                     if (indImp[j] == "") { //coomprueba si el indicador de impuestos esta vacio y si lo esta hace lo siguiente
-                        alert('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto'); //muestra una alerta
-                        $('#ind_imp' + i).focus(); //posiciona la pagina para que se vea el indicador deimpuestos
-                        $('#ind_imp' + i).select2('open'); //abre el select
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#ind_imp' + i).focus(); //posiciona la pagina para que se vea el indicador deimpuestos
+                                $('#ind_imp' + i).select2('open'); //abre el select
+                            }
+                        })
                         cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
                         break; //para salir del ciclo que recorre las filas
                     }
@@ -472,36 +499,72 @@
                 departamento = document.getElementById('departamento').value;
                 sucursal = document.getElementById('sucursal').value;
                 fechaNecesaria = document.getElementById('fechaNecesaria').value;
-                fechaDocumento = document.getElementById('fechaDocumento').value;
-                //----------------------------------------------------------------
-                //datos de los servicios, se convierte el array en string y se divide con un _ cada posicion
-                codigoArse = codigoArse.join('_').toString();
-                fechaNec = fechaNec.join('_').toString();
-                proveedor = proveedor.join('_').toString();
-                precioInfo = precioInfo.join('_').toString();
-                cuentaMayor = cuentaMayor.join('_').toString();
-                uen = uen.join('_').toString();
-                linea = linea.join('_').toString();
-                sublinea = sublinea.join('_').toString();
-                proyecto = proyecto.join('_').toString();
-                porDesc = porDesc.join('_').toString();
-                indImp = indImp.join('_').toString();
-                total = total.join('_').toString();
-                //---------------------------------------------------------------
+                if (fechaNecesaria == 0) { //coomprueba si el indicador de impuestos esta vacio y si lo esta hace lo siguiente
+                   //muestra una alerta
+                    Swal.fire('Error en la Fecha Necesaria, debe seleccionar la Fecha Necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('fechaNecesaria').focus();
+                            }
+                        }) 
+                }
+                else {
+                    fechaDocumento = document.getElementById('fechaDocumento').value;
+                    //----------------------------------------------------------------
+                    //datos de los servicios, se convierte el array en string y se divide con un _ cada posicion
+                    codigoArse = codigoArse.join('_').toString();
+                    fechaNec = fechaNec.join('_').toString();
+                    proveedor = proveedor.join('_').toString();
+                    precioInfo = precioInfo.join('_').toString();
+                    cuentaMayor = cuentaMayor.join('_').toString();
+                    uen = uen.join('_').toString();
+                    linea = linea.join('_').toString();
+                    sublinea = sublinea.join('_').toString();
+                    proyecto = proyecto.join('_').toString();
+                    porDesc = porDesc.join('_').toString();
+                    indImp = indImp.join('_').toString();
+                    total = total.join('_').toString();
+                    //---------------------------------------------------------------
 
-                console.log("enviar datos");
-                //con ajax vamos a enviar los datos de la solicitud y los servicos a guardarServicio.php
-                $.ajax({
-                    //por la url se pasan todos los datos
-                    url: '../crud/guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&precioInfo=' + precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
+                    console.log("enviar datos");
+                    //con ajax vamos a enviar los datos de la solicitud y los servicos a guardarServicio.php
+                    Swal.fire({
+                        title: 'ENVIAR SOLICITUD',
+                        html: '<span class="letra-blanco">¿Esta seguro de que todos los datos son correctos?</span>',
+                        textColor: '#ffffff',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ff0000',
+                        // cancelButtonColor: '#',
+                        showLoaderOnConfirm: true,
+                        confirmButtonText: 'CONFIRMAR',
+                        cancelButtonText: 'CANCELAR'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                //por la url se pasan todos los datos
+                                url: '../crud/guardarServicio.php?codigoArse=' + codigoArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&precioInfo=' + precioInfo + '&cuentaMayor=' + cuentaMayor + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
                                                             &proyecto=' + proyecto + '&porDesc=' + porDesc + '&indImp=' + indImp + '&total=' + total + '&cantidad=' + cantidad + '\n\
                                                             &nomSol=' + nomSol + '&correoElectronico=' + correoElectronico + '&propietario=' + propietario + '&comentarios=' + comentarios + '\n\
-                                                            &codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal+ '&fechaNecesaria=' + fechaNecesaria+ '&fechaDocumento=' + fechaDocumento,
-                    success: function(data) { //cuando guradarServicio.php haya terminado su proceso
-                        alert('Su solicitud fue creada:\n"' + data + '"') //se muestra la alerta con el numero de solicitud que se creo
-                        window.location = "misSolicitudes.php"; //manda al usuario a misSolicitudes y ahi puede ver su solicitud
-                    }
-                })
+                                                            &codUsr=' + codUsr + '&departamento=' + departamento + '&sucursal=' + sucursal + '&fechaNecesaria=' + fechaNecesaria + '&fechaDocumento=' + fechaDocumento,
+                                success: function (data) { //cuando guradarServicio.php haya terminado su proceso
+                                    // Swal.fire('Su solicitud fue creada:\n"' + data + '"') //se muestra la alerta con el numero de solicitud que se creo
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Su soliciud fue creada:',
+                                        html: '<span class="letra-blanco">numero de soliciud: ' + data + '</span>'
+                                    }).then((result) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                            window.location = "misSolicitudes.php"; //manda al usuario a misSolicitudes y ahi puede ver su solicitud
+                                        }
+                                    })
+                                    // window.location = "misSolicitudes.php"; //manda al usuario a misSolicitudes y ahi puede ver su solicitud
+                                }
+                            })
+                        }
+                    })
+                }
             }
         }
     </script>

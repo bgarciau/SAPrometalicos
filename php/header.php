@@ -10,6 +10,8 @@ foreach ($registros as $Tusuario) {
 }
 ?>
     <link rel="stylesheet" href="../css/hfstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <div class="wrapper">
         <div class="logo">
         <img src="../images/logo.png" alt="logo" height="100%" width="100%  ">
@@ -63,3 +65,19 @@ foreach ($registros as $Tusuario) {
         ?>
         </nav>
     </div>
+    <script>
+        function cerrar_sesion(){
+            Swal.fire({
+            title: '¿Esta seguro que quiere cerrar sesion?',
+            color: '#ffffff',
+            icon:'question',
+            iconColor: 'red',
+            showCancelButton: true,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                window.location = "../crud/cerrar_session.php";
+            }
+        })
+        }
+    </script>

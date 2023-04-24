@@ -21,6 +21,15 @@ h2{
     background-color: #e7d0a483;
 }
 
+#centrar-carga{
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+
 table{  /* borde de la tabla */
     border: 1px solid black;
 }

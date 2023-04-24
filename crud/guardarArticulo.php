@@ -12,7 +12,7 @@ foreach ($ultimo as $ultimoo):
     $numSolicitud++;
 endforeach;
 
-echo "numero Solicitud:".$numSolicitud; //para mostrar en pantalla el numero de la solicitud creada
+echo $numSolicitud; //para mostrar en pantalla el numero de la solicitud creada
 $estado = "ABIERTO"; //como apenas se crea la solicitud su estado es ABIERTO
 //se hace un get de los datos enviados mediante ajax
 $nomSol = $_GET["nomSol"];
