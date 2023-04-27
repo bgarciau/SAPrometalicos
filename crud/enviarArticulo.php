@@ -33,9 +33,8 @@ curl_setopt_array(
 );
 $response = curl_exec($curl); //Ejecuta la sesión cURL que se le pasa como parámetro. 
 
-if (curl_errno($curl)) {
-    echo 'Error en la solicitud cURL: ' . curl_error($curl);
-}
+
+
 $json = json_decode($response, true); //Convierte un string codificado en JSON a una variable de PHP.
 $sesion = $json['SessionId']; //se guarda la sessionId que viene del sap para poder llamar otros valores mas adelante
 $_SESSION['sesion'] = $sesion; //se guarda como una variavle de la sesion en la pagina

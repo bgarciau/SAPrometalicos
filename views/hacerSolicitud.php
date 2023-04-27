@@ -529,7 +529,7 @@
                     console.log("enviar datos");
                     //con ajax vamos a enviar los datos de la solicitud y los servicos a guardarServicio.php
                     Swal.fire({
-                        title: 'ENVIAR SOLICITUD',
+                        title: 'GUARDAR SOLICITUD',
                         html: '<span class="letra-blanco">¿Esta seguro de que todos los datos son correctos?</span>',
                         textColor: '#ffffff',
                         icon: 'warning',

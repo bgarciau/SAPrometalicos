@@ -753,7 +753,7 @@
                 // console.log("a"+proveedor+"a");
                 //-------------------------------con ajax se envian los datos por url a guardarArticulo.php 
                 Swal.fire({
-                    title: 'ENVIAR SOLICITUD',
+                    title: 'GUARDAR SOLICITUD',
                     html: '<span class="letra-blanco">¿Esta seguro de que todos los datos son correctos?</span>',
                     textColor: '#ffffff',
                     icon: 'warning',
