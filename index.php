@@ -32,7 +32,7 @@
                     <h2>INGRESO</h2>
                     <input type="text" placeholder="USUARIO" name="usuario">
                     <input type="password" placeholder="CONTRASEÑA" name="password">
-                    <p style="color:red" id="loginIncorrecto" hidden>*Usuario o contraseña incorrectos*</p>
+                    <p style="color:red;font-size:small" id="loginIncorrecto" hidden>*Usuario o contraseña incorrectos*</p>
                     <input type="submit" value="INGRESAR" name="Ingresar" class="submit">
                 </div>
             </form>

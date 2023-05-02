@@ -84,9 +84,29 @@
                                         <td>
                                             <?php echo $misolicitudes->numSAP ?>
                                         </td>
-                                        <td>
-                                            <?php echo $misolicitudes->estado_sol ?>
-                                        </td>
+                                        <?php 
+                                        if($misolicitudes->estado_sol=="ABIERTO"){
+                                            ?>
+                                                <td style="background-color:#69dbea;">
+                                                    <?php echo $misolicitudes->estado_sol ?>
+                                                </td>
+                                            <?php
+                                        } 
+                                        if($misolicitudes->estado_sol=="ENVIADO"){
+                                            ?>
+                                                <td style="background-color:#84da84;">
+                                                    <?php echo $misolicitudes->estado_sol ?>
+                                                </td>
+                                            <?php
+                                        } 
+                                        if($misolicitudes->estado_sol=="RECHAZADO"){
+                                            ?>
+                                                <td style="background-color:#ff2100b5;">
+                                                    <?php echo $misolicitudes->estado_sol ?>
+                                                </td>
+                                            <?php
+                                        } 
+                                        ?>
                                         <td>
                                             <?php echo $misolicitudes->fecha_necesaria ?>
                                         </td>
@@ -126,8 +146,12 @@
                                                 if ($usutipoo->tipo_usuario == 3) { 
                                                     if($misolicitudes->estado_sol=="ABIERTO"){?>
                                                     <a onclick="enviarServicio(<?php echo $misolicitudes->pk_num_sol ?>)"><input class="btn_enviar" type="button" value="enviar"></a>
-                                                    <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                                    <a href="../crud/rechazar.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>&lugar=misSolicitudes"><input class="btn_delete" type="button" value="rechazar"></a>
                                                     <?php
+                                                    }
+                                                    if ($misolicitudes->estado_sol == "RECHAZADO") { ?>
+                                                        <a href="../crud/reabrir.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>&lugar=misSolicitudes"><input class="btn_delete" type="button" value="reabrir"></a>
+                                                        <?php
                                                     }
                                                 }
                                             endforeach;
@@ -177,9 +201,29 @@
                                         <td>
                                             <?php echo $misolicitudes->numSAP ?>
                                         </td>
-                                        <td>
-                                            <?php echo $misolicitudes->estado_sol ?>
-                                        </td>
+                                        <?php 
+                                        if($misolicitudes->estado_sol=="ABIERTO"){
+                                            ?>
+                                                <td style="background-color:#69dbea;">
+                                                    <?php echo $misolicitudes->estado_sol ?>
+                                                </td>
+                                            <?php
+                                        } 
+                                        if($misolicitudes->estado_sol=="ENVIADO"){
+                                            ?>
+                                                <td style="background-color:#84da84;">
+                                                    <?php echo $misolicitudes->estado_sol ?>
+                                                </td>
+                                            <?php
+                                        } 
+                                        if($misolicitudes->estado_sol=="RECHAZADO"){
+                                            ?>
+                                                <td style="background-color:#ff2100b5;">
+                                                    <?php echo $misolicitudes->estado_sol ?>
+                                                </td>
+                                            <?php
+                                        } 
+                                        ?>
                                         <td>
                                             <?php echo $misolicitudes->fecha_necesaria ?>
                                         </td>
@@ -219,8 +263,12 @@
                                                 if ($usutipoo->tipo_usuario == 3) { 
                                                     if($misolicitudes->estado_sol=="ABIERTO"){?>
                                                     <a onclick="enviarArticulo(<?php echo $misolicitudes->pk_num_sol ?>)"><input class="btn_enviar" type="button" value="enviar"></a>
-                                                    <a><input class="btn_delete" type="button" value="rechazar"></a>
+                                                    <a href="../crud/rechazar.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>&lugar=misSolicitudes&xtabla=tarticulos"><input class="btn_delete" type="button" value="rechazar"></a>
                                                     <?php
+                                                    }
+                                                    if ($misolicitudes->estado_sol == "RECHAZADO") { ?>
+                                                        <a href="../crud/reabrir.php?numSol=<?php echo $misolicitudes->pk_num_sol ?>&lugar=misSolicitudes&xtabla=tarticulos"><input class="btn_delete" type="button" value="reabrir"></a>
+                                                        <?php
                                                     }
                                                 }
                                             endforeach;
