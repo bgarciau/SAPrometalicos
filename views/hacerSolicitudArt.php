@@ -97,9 +97,6 @@
                             endforeach;
 
                             ?>
-                            <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
-                            <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
-                                pedido</label><br>
                             <label for="CorreoElectronico">Direccion Correo Electronico:</label>
                             <input type="text" id="correoElectronico" placeholder="correo@correo.com"><br>
                         </div>
@@ -139,7 +136,7 @@
                                     <table id="tabla__articulos">
                                         <thead>
                                             <th></th>
-                                            <th width="15px">#</th>
+                                            <th width="30px">#</th>
                                             <th>codigo Articulo</th>
                                             <th>Descripcion Articulo</th>
                                             <th>Proveedor</th>

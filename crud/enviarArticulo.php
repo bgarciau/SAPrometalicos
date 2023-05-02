@@ -42,7 +42,7 @@ curl_close($curl); //Esta función cierra una sesión CURL y libera todos sus re
 
 // ----------------------------------------------------------------------------------------------------------------------------
 //cargar datos al json
-$numSol = $_GET["numSol"];
+$numSol = $_GET["numSol"]; //toma el numero de la soolicitud seleccionada
 $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
 foreach ($soli as $solis) {
     $solicitud = new stdClass();
@@ -66,7 +66,7 @@ foreach ($soli as $solis) {
     $articulo->TaxCode=$listaa->ind_imp;
     $articulo->Price=$listaa->total_ml;
     $articulo->PriceAfterVAT=$listaa->total_ml;
-    $articulo->Currency= "$";
+    $articulo->Currency= "$";//formato para que reciba el precio 
     $articulo->DiscountPercent=$listaa->por_desc;
     $articulo->LineVendor=$listaa->proveedor;
     $articulos[$i] = $articulo;
@@ -105,13 +105,23 @@ if (curl_errno($curlEnviar)) {
     echo 'Error en la solicitud cURL: ' . curl_error($curlEnviar);
 }
 
-echo $response;
+// echo $response;
 curl_close($curlEnviar); //Esta función cierra una sesión CURL y libera todos sus recursos
 
 // -----------------------------------------------------------------------------------------------------------------------
-$sql="UPDATE solicitud_compra SET estado_sol=? WHERE pk_num_sol='$numSol'"; 
-$solicitud = $base->prepare($sql); //se prepara la sentencia
-$estado_sol="ENVIADO";
-$solicitud->execute([$estado_sol]);
+//----ACTUALIZAR EL ESTADO DE LA SOLICITUD-------
+$respuesta = json_decode($response);
+if (isset($respuesta->error)) { //entra si se encuentra un error en la respuesta del sap
+    $alerta=json_encode($respuesta->error->message->value); //guarda el valor del error que nevia sap
+    header("Location: ../views/".$_GET["lugar"]."?alerta=$alerta&xtabla=tarticulos");//vuelve a la tabla de solicitudes dejando una alerta con el error
+} else {//entra si todo esta correcto al enviar al sap
+    $numSAP = json_decode($respuesta->DocNum);//guarda el numero de la solicitud que da el sap 
+    echo $numSAP;
+    $sql = "UPDATE solicitud_compra SET estado_sol=?, numSAP=? WHERE pk_num_sol='$numSol'"; //actualiza el estado de la solicitud y el numero SAP de la solicitud
+    $solicitud = $base->prepare($sql); //se prepara la sentencia
+    $estado_sol = "ENVIADO";
+    $solicitud->execute(array($estado_sol,$numSAP));
+    header("Location: ../views/".$_GET["lugar"]."?numSAP=$numSAP&xtabla=tarticulos");//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
+}
 
 ?>

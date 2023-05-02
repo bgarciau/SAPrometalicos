@@ -29,7 +29,7 @@
                 header("location:../views/hacerSolicitud.php"); //manda al usuario a hacer solicitud que es la pagina principal de la aplicacion
             }
             else{
-                header("location:../index.php");//Si no hay datos correctos manda al usuario al inicio para que lo intente nuevamente
+                header("location:../index.php?log=mal");//Si no hay datos correctos manda al usuario al inicio para que lo intente nuevamente
              }
 
             $resultado->closeCursor();//libera la conexion al servidor, es un metodo opcional que permite la maxima eficiencia

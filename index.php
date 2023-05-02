@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="css/style.css">     <!-- estilos del contenido de la pagina -->
     <link rel="stylesheet" href="css/hfstyle.css">     <!-- estilos del header y el footer -->
     <link rel="stylesheet" href="css/login.css">        <!-- estilos del login -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
-
+<?php
+    $log="normal";
+    if (isset($_GET["log"])) { //confirma si el usuario ya inicio sesion
+        $log="mal";
+    }
+?>
 <body>
 <div class="base"> <!-- Vista de  la pagina -->
     <header>
@@ -17,7 +24,7 @@
         <a><img src="images/logo.png" alt="logo" height="100%" width="auto"></a> <!-- Logo de la empresa -->
     </div>
     </header>
-    <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
+    <div class="contenedor-login"> <!-- Contenedido entre el header y el footer -->
     <div class="loginback"> <!-- le pone un gif al fondo del login -->
         <div class="login"><!-- acomoda el recuadro del login en el centro -->
             <form action="crud/comprueba_login.php" method="post"> <!-- Formulario dle login que manda la informacion recibida a comprueba login que lo que hace es comprobar los datos en la base de datos -->
@@ -25,6 +32,7 @@
                     <h2>INGRESO</h2>
                     <input type="text" placeholder="USUARIO" name="usuario">
                     <input type="password" placeholder="CONTRASEÑA" name="password">
+                    <p style="color:red" id="loginIncorrecto" hidden>*Usuario o contraseña incorrectos*</p>
                     <input type="submit" value="INGRESAR" name="Ingresar" class="submit">
                 </div>
             </form>
@@ -45,5 +53,9 @@
     </footer>
 </div>
 </body>
-
+<script>
+    if(<?php echo $log == "mal" ?>){
+        $('#loginIncorrecto').show();
+    }
+</script>
 </html>

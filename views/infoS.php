@@ -49,13 +49,13 @@
                                         <label for="NombreSolicitante">Nombre Solicitante:</label>
                                         <input type="text" name="nomSol" value="<?php echo $solis->nom_solicitante ?>" disabled><br>
                                         <label for="Sucursal">Sucursal:</label>
-                                        <select name="sucursal" id="select_formulario" disabled>
+                                        <select name="sucursal" class="select_formulario" disabled>
                                             <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?></option>
                                             <option value="Principal">Principal</option>
                                             <option value="DefinirNuervo">Definir nuevo</option>
                                         </select><br>
                                         <label for="Departamento">Departamento:</label>
-                                        <select name="departamento" id="select_formulario" disabled>
+                                        <select name="departamento" class="select_formulario" disabled>
                                             <?php
                                             $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$solis->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
                                             foreach ($depSol as $depSols) :

@@ -16,7 +16,16 @@
     
         header("location:../index.php");
     }
-
+    if(isset($_GET["alerta"])){
+        $alerta = $_GET["alerta"];
+    }
+    else{
+        $alerta = "'NO'";
+    }
+    $numSAP="NO";
+    if(isset($_GET["numSAP"])){
+        $numSAP = $_GET["numSAP"];
+    }
     include("../php/conexion.php");
 
     ?>
@@ -50,12 +59,13 @@
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
+                                    <th>Num SAP</th>
                                     <th>Estado</th>
                                     <th>Fecha necesaria</th>
                                     <th>Fehca documento</th>
                                     <th>Nombre solicitante</th>
                                     <th>Departamento</th>
-                                    <th>Correo electronico</th>
+                                    <th>Correo</th>
                                     <th># sevicios</th>
                                     <th>propietario</th>
                                     <th>Comentarios</th>
@@ -70,6 +80,9 @@
                                         <!-- con $misolicitudes cargamos los datos que necesitando usando el mismo nombre que tienen en la base de datos -->
                                         <td>
                                             <?php echo $misolicitudes->pk_num_sol ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $misolicitudes->numSAP ?>
                                         </td>
                                         <td>
                                             <?php echo $misolicitudes->estado_sol ?>
@@ -139,12 +152,13 @@
                             <table id="tabla__solicitudes">
                                 <thead>
                                     <th>N° Sol</th>
+                                    <th>Num SAP</th>
                                     <th>Estado</th>
                                     <th>Fecha necesaria</th>
                                     <th>Fehca documento</th>
                                     <th>Nombre solicitante</th>
                                     <th>Departamento</th>
-                                    <th>Correo electronico</th>
+                                    <th>Correo</th>
                                     <th># articulos</th>
                                     <th>propietario</th>
                                     <th>Comentarios</th>
@@ -159,6 +173,9 @@
                                         <!-- con $misolicitudes cargamos los datos que necesitando usando el mismo nombre que tienen en la base de datos -->
                                         <td>
                                             <?php echo $misolicitudes->pk_num_sol ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $misolicitudes->numSAP ?>
                                         </td>
                                         <td>
                                             <?php echo $misolicitudes->estado_sol ?>
@@ -234,7 +251,7 @@
             html: '<span class="letra-blanco">Al enviar la solicitud el estado de esta cambiara a ENVIADO</span>'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location = '../crud/enviarServicio.php?numSol='+numSolicitud; 
+                window.location = '../crud/enviarServicio.php?numSol='+numSolicitud+'&lugar=misSolicitudes'; 
             }
         })
     }
@@ -247,8 +264,24 @@
             html: '<span class="letra-blanco">Al enviar la solicitud el estado de esta cambiara a ENVIADO</span>'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location = '../crud/enviarArticulo.php?numSol='+numSolicitud; 
+                window.location = '../crud/enviarArticulo.php?numSol='+numSolicitud+'&lugar=misSolicitudes'; 
             }
+        })
+    }
+    alerta = <?php echo $alerta ?>;
+    if(alerta != "NO"){
+        Swal.fire({
+            title: 'ERROR AL ENVIAR LA SOLICITUD',
+            icon: "error",
+            html: "<p style='color:red'>ERROR: "+alerta+"<p><p style='color:white'>Vuelva a intentarlo y si el problema continua comuniquise con soporte<p>"
+        })
+    }
+    numSAP = <?php echo $numSAP ?>;
+    if(numSAP != "NO"){
+        Swal.fire({
+            title: 'SOLICITUD ENVIADA CON EXITO',
+            icon: "success",
+            html: "<p style='color:white'>Numero de la solicitud en SAP:"+numSAP+"<P>"
         })
     }
 </script>

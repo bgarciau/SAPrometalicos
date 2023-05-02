@@ -95,9 +95,6 @@
                                 <?php
                             endforeach;
                             ?>
-                            <input type="checkbox" value="enviarCorreo" name="enviarCorreo">
-                            <label id="enviarCorreo" for="EnviarCorreo">Enviar Correo Electronico si se agrego
-                                pedido</label><br>
                             <label for="CorreoElectronico">Direccion Correo Electronico:</label>
                             <input type="text" name="correoElectronico" id="correoElectronico"
                                 placeholder="correo@correo.com"><br>
@@ -137,7 +134,7 @@
                                     <table id="tabla__servicios">
                                         <thead>
                                             <th></th>
-                                            <th width="15px">#</th>
+                                            <th width="30px">#</th>
                                             <th>Descripcion servicio</th>
                                             <th>Fecha Necesaria</th>
                                             <th>Proveedor</th>
@@ -296,7 +293,7 @@
             j = 0;
             while (j < 33) { //cantidad de proyectos en el momento
                 const option = document.createElement('option'); //creamos una opcion
-                option.value = valoresProyecto[j]['Name']; //le asignos el nombre del proyecto como valor
+                option.value = valoresProyecto[j]['Code']; //le asignos el nombre del proyecto como valor
                 option.text = valoresProyecto[j]['Name']; //el usuario vera el nombre del proyecto
                 $selectProyecto.appendChild(option); //agrega la opcion al select
                 j++; //suma uno para agregar el siguiente proyecto

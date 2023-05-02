@@ -86,7 +86,7 @@
                         echo $_POST['nombreUsuario'];
                     } ?>" required><br>
                     <label class="label_usuario" for="Departamento">Departamento:</label>
-                    <select name="departamento" class="select_formulario" required>
+                    <select name="departamento" class="select_formulario2" required>
                         <?php
                         if (isset($_POST['departamento'])) {
                             $depart2 = $_POST['departamento'];
@@ -117,7 +117,7 @@
                     <label class="label_usuario" for="Password">Confirmar Contraseña:</label>
                     <input class="inputUsuarios" type="password" id="clave2" name="password2" required><br>
                     <label class="label_usuario" for="TipoUsuario">Tipo usuario:</label>
-                    <select name="tipoUsuario" id="select_formulario" class="select_formulario" required>
+                    <select name="tipoUsuario" id="select_formulario" class="select_formulario2" required>
                         <option value=1>Usuario</option>
                         <option value=2>Empleado</option>
                         <option value=3>Administrador</option>

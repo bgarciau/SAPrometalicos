@@ -1,6 +1,9 @@
 /* se usa para que la pagina no tenga margen y tampoco espacios blancos a los lados */
 *{
-    margin: 0%;  
+    margin: 0%;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
 }
 
 h2{
@@ -19,6 +22,12 @@ h2{
     height: 90%;
     z-index:0;
     background-color: #e7d0a483;
+}
+
+.contenedor-login{
+    width: 100%;
+    height: 90%;
+    z-index:0;
 }
 
 #centrar-carga{
@@ -209,7 +218,7 @@ textarea {
 
 label{
     display: inline-block;
-    width: 30%;
+    width: 25%;
     height: 10%; 
     text-align: left;   
     font-size: 14px;
@@ -312,6 +321,12 @@ input[type="checkbox" i] {
     height: 14%;
     font-size: 100%;
 }
+.select_formulario2{
+    margin: 1px;
+    width: 41%;
+    height: 14%;
+    font-size: 100%;
+}
 .select_tabla{
     width: 350px;
     height: 25px;
@@ -326,7 +341,6 @@ select#sel__solicitante{
 
 .btn_guardar{
     width: 50%;
-    height: 20%;
     text-decoration:none;
     font-size: 100%;
     color:#ffffff;

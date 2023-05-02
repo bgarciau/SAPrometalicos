@@ -28,7 +28,8 @@ curl_setopt_array(
         //Un array de campos a configurar para el header HTTP
         CURLOPT_SSL_VERIFYHOST => false,
         //Se usa para no verificar el certificado del curl
-        CURLOPT_SSL_VERIFYPEER => false, //Se usa para no verificar el certificado del curl
+        CURLOPT_SSL_VERIFYPEER => false,
+        //Se usa para no verificar el certificado del curl
     )
 );
 $response = curl_exec($curl); //Ejecuta la sesión cURL que se le pasa como parámetro. 
@@ -43,8 +44,8 @@ curl_close($curl); //Esta función cierra una sesión CURL y libera todos sus re
 
 // ----------------------------------------------------------------------------------------------------------------------------
 //cargar datos al json
-$ENVIADO="ENVIADO";
-$numSol = $_GET["numSol"];
+$ENVIADO = "ENVIADO";
+$numSol = $_GET["numSol"];//toma el numero de la solicitud seleccionada
 $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
 foreach ($soli as $solis) {
     $solicitud = new stdClass();
@@ -57,22 +58,24 @@ foreach ($soli as $solis) {
     $i = 0;
     foreach ($lista as $listaa) {
 
-    $servicio = new stdClass();
-    $servicio->LineNum = $i;
-    $servicio->ItemCode=null;
-    $servicio->ItemDescription=$listaa->nom_arse;
-    $servicio->RequiredDate=$listaa->fecha_nec;
-    $servicio->CostingCode=$listaa->uen;
-    $servicio->CostingCode2=$listaa->linea;
-    $servicio->CostingCode3=$listaa->sublinea;
-    $servicio->TaxCode=$listaa->ind_imp;
-    $servicio->Price=$listaa->total_ml;
-    $servicio->PriceAfterVAT=$listaa->total_ml;
-    $servicio->Currency= "$";
-    $servicio->DiscountPercent=$listaa->por_desc;
-    $servicio->LineVendor=$listaa->proveedor;
-    $servicios[$i] = $servicio;
-    $i++;
+        $servicio = new stdClass();
+        $servicio->LineNum = $i;
+        $servicio->ItemCode = null;
+        $servicio->ItemDescription = $listaa->nom_arse;
+        $servicio->RequiredDate = $listaa->fecha_nec;
+        $servicio->AccountCode = $listaa->cuenta_mayor;
+        $servicio->CostingCode = $listaa->uen;
+        $servicio->CostingCode2 = $listaa->linea;
+        $servicio->CostingCode3 = $listaa->sublinea;
+        $servicio->ProjectCode = $listaa->proyecto;
+        $servicio->TaxCode = $listaa->ind_imp;
+        $servicio->Price = $listaa->total_ml;
+        $servicio->PriceAfterVAT = $listaa->total_ml;
+        $servicio->Currency = "$";
+        $servicio->DiscountPercent = $listaa->por_desc;
+        $servicio->LineVendor = $listaa->proveedor;
+        $servicios[$i] = $servicio;
+        $i++;
     }
     $solicitud->DocumentLines = $servicios;
 
@@ -84,37 +87,55 @@ echo $JSONsolicitud;
 echo "\n envia la solicitud \n";
 //enviar solicitud
 $curlEnviar = curl_init(); //inicia sesion curlEnviar
-curl_setopt_array( // Configura múltiples opciones para una transferencia cURL
+curl_setopt_array(
+    // Configura múltiples opciones para una transferencia cURL
     $curlEnviar,
     array(
-        CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/PurchaseRequests', //Dirección URL a capturar.
-        CURLOPT_RETURNTRANSFER => true, //true para devolver el resultado de la transferencia como string del valor de curl_exec() en lugar de mostrarlo directamente.
-        CURLOPT_ENCODING => '', //se enviarán todos los tipos de condificación soportados.
-        CURLOPT_MAXREDIRS => 10, //Número máximo de redirecciones HTTP a seguir
-        CURLOPT_TIMEOUT => 0, //Número máximo de segundos permitido para ejectuar funciones cURL.
-        CURLOPT_FOLLOWLOCATION => true, //true para seguir cualquier encabezado "Location: " que el servidor envíe como parte del encabezado HTTP (observe la recursividad, PHP seguirá tantos header "Location: " como se envíen, a no ser que la opción CURLOPT_MAXREDIRS esté establecida).
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, //fuerza HTTP/1.1
+        CURLOPT_URL => 'https://192.168.1.229:50000/b1s/v1/PurchaseRequests',
+        //Dirección URL a capturar.
+        CURLOPT_RETURNTRANSFER => true,
+        //true para devolver el resultado de la transferencia como string del valor de curl_exec() en lugar de mostrarlo directamente.
+        CURLOPT_ENCODING => '',
+        //se enviarán todos los tipos de condificación soportados.
+        CURLOPT_MAXREDIRS => 10,
+        //Número máximo de redirecciones HTTP a seguir
+        CURLOPT_TIMEOUT => 0,
+        //Número máximo de segundos permitido para ejectuar funciones cURL.
+        CURLOPT_FOLLOWLOCATION => true,
+        //true para seguir cualquier encabezado "Location: " que el servidor envíe como parte del encabezado HTTP (observe la recursividad, PHP seguirá tantos header "Location: " como se envíen, a no ser que la opción CURLOPT_MAXREDIRS esté establecida).
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //fuerza HTTP/1.1
         CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $JSONsolicitud, //datos que se envian para crear la solicitud
-        CURLOPT_HTTPHEADER => array('Content-Type: application/x-www-form-urlencoded','Cookie: B1SESSION=' . $sesion . ''), //Un array de campos a configurar para el header HTTP
-        CURLOPT_SSL_VERIFYHOST => false, //Se usa para no verificar el certificado del curlEnviar
-        CURLOPT_SSL_VERIFYPEER => false,//Se usa para no verificar el certificado del curlEnviar
+        CURLOPT_POSTFIELDS => $JSONsolicitud,
+        //datos que se envian para crear la solicitud
+        CURLOPT_HTTPHEADER => array('Content-Type: application/x-www-form-urlencoded', 'Cookie: B1SESSION=' . $sesion . ''),
+        //Un array de campos a configurar para el header HTTP
+        CURLOPT_SSL_VERIFYHOST => false,
+        //Se usa para no verificar el certificado del curlEnviar
+        CURLOPT_SSL_VERIFYPEER => false, //Se usa para no verificar el certificado del curlEnviar
     )
 );
-$response = curl_exec($curlEnviar);  //Ejecuta la sesión cURL que se le pasa como parámetro. 
+$response = curl_exec($curlEnviar); //Ejecuta la sesión cURL que se le pasa como parámetro. 
 
 if (curl_errno($curlEnviar)) {
     echo 'Error en la solicitud cURL: ' . curl_error($curlEnviar);
 }
 
-echo $response;
+// echo $response;
 curl_close($curlEnviar); //Esta función cierra una sesión CURL y libera todos sus recursos
 
 // -----------------------------------------------------------------------------------------------------------------------
 //----ACTUALIZAR EL ESTADO DE LA SOLICITUD-------
-
-$sql="UPDATE solicitud_compra SET estado_sol=? WHERE pk_num_sol='$numSol'"; 
-$solicitud = $base->prepare($sql); //se prepara la sentencia
-$estado_sol="ENVIADO";
-$solicitud->execute([$estado_sol]);
+$respuesta = json_decode($response);
+if (isset($respuesta->error)) {//entra si se encontro algun error al enviar la solicitud al SAP
+    $alerta=json_encode($respuesta->error->message->value);//se guarda el valor del error enviado por el SAP
+    header("Location: ../views/".$_GET["lugar"]."?alerta=$alerta");//manda al usuario a la tabla de solicitudes con la alerta que se guardoo anteriormente
+} else {//entra si todo salio correcto en el envio al SAP
+    $numSAP = json_decode($respuesta->DocNum);//guarda el numero de soicitud que se creo en el SAP
+    $sql = "UPDATE solicitud_compra SET estado_sol=?, numSAP=? WHERE pk_num_sol='$numSol'";//ACTUALIZA el estado de la solicitud y el numero SAP
+    $solicitud = $base->prepare($sql); //se prepara la sentencia
+    $estado_sol = "ENVIADO";
+    $solicitud->execute(array($estado_sol,$numSAP));
+    header("Location: ../views/".$_GET["lugar"]."?numSAP=$numSAP");//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
+}
 ?>
