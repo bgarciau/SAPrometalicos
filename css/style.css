@@ -1,0 +1,550 @@
+/* se usa para que la pagina no tenga margen y tampoco espacios blancos a los lados */
+*{
+    margin: 0%;
+    font-size: large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+}
+
+h2{
+    text-align: center;
+}
+
+/* Vista de la pagina */
+.base {  
+    width: 100%;
+    height: 100vh;
+}
+
+ /* Contenido entre el header y el footer */
+.contenedor{
+    width: 100%;
+    height: 90%;
+    z-index:0;
+    background-color: #e7d0a483;
+}
+
+.contenedor-login{
+    width: 100%;
+    height: 90%;
+    z-index:0;
+}
+
+#centrar-carga{
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+
+table{  /* borde de la tabla */
+    border: 1px solid black;
+}
+
+#tabla__general{  /* tabla que contiene todos los datos del usuario, de la solicitud y contiene la tabla de articulos o servicios  */
+    border-spacing: 0px;
+    text-align: center;
+    width: 95%;
+    height: 75%;
+    background-color: #e7d0a4bb;
+    font-size: 14px;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position:absolute;
+    float: left;
+}
+#div_agregar_usuario{  /* div para agregar usuario en usuarios */
+    text-align: center;
+    width: 98%;
+    height: 70%;
+    background-color: rgba(219, 215, 215, 0.473);
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+
+#div_boton_volver{ /* este div contiene el boton de volver */
+    text-align: right;
+    margin-right: 7px;
+    width: 20%;
+    padding-right: 5%;
+    float: right;
+}
+#div__agregar{  /* div que contiene el fomrulario para agregar usuario o para actualizarlo */
+    text-align: left;
+    float: left;
+    margin-left: 5px;
+    width: 20%;
+}
+#tabla__usuarios{ /* tabla para mostrar los usuarios y los servicios */
+    border-collapse: separate;
+    border-spacing: 0px;
+    min-width: 99%;
+}
+
+#tabla__solicitudes{ /* tabla que carga las solicitudes hechas */
+    border-collapse: separate;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+#tabla__solicitudes td{ /* celdas de la tabla */
+    padding: 0px;
+    border-color: #000000;
+    border: 1px solid black;
+}
+#tabla__solicitudes th{ /* celdas del encabezado de la tabla */
+    position: sticky;
+    top: 0px;
+    background-color:#faf6f6;
+    border: 4px solid rgb(255, 0, 0);
+    color: rgb(7, 7, 7);
+    text-align: center;
+}
+
+.table_wrapperS{     /* activa el scroll para que la tabla cargue unicamente en un espacio de la pagina per que se pueda recorrer completa */
+    height: 90%;
+    width: 99%;
+    overflow-y:scroll;
+    margin: 5px;
+}
+
+.outer_wrapperS{ /* acomoda el div donde va a ir la tabla */
+    box-shadow: 0px 0px 5px black;
+    margin: 5px;
+    height:99%;
+    max-height: 99%;
+    width: 99%;
+    background-color: rgba(228, 228, 228, 0.795);
+}
+
+
+#tabla__servicios,#tabla__articulos{  /* estilos de la tabla donde se agregan los servicios y los articulos */
+    border-collapse: separate;
+    border-spacing: 0px;
+    min-width: max-content;
+}
+
+#tabla__servicios td,#tabla__articulos td{  /* casillas body de la tabla */
+    padding: 0px;
+    border-color: #000000;
+    border: 1px solid black;
+}
+
+#tabla__servicios th,#tabla__articulos th{  /* casillas header de la tabla */
+    position: sticky;
+    top: 0px;
+    background-color:#ffffff;
+    border: 4px solid rgb(255, 0, 0);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    z-index: 1;
+}
+
+.table_wrapper{ /* activa el scroll para que la tabla cargue unicamente en un espacio de la pagina per que se pueda recorrer completa */
+    height: 97%;
+    width: 99.5%;
+    overflow-y: scroll;
+    margin: 5px;
+    overflow-x: scroll;
+}
+
+.outer_wrapper{/* acomoda el div donde va a ir la tabla */
+    box-shadow: 0px 0px 3px black;
+    margin: 2px;
+    height: 89%;
+    width: 99%;
+}
+
+
+#div__solicitante,#div__fechas{ /* contenido de las casillas donde van los datos del solicitante y las fechas */
+    width: 98%;
+    height: 95%;
+    background-color: rgba(228, 228, 228, 0.795);
+    margin: 5px auto;
+    text-align: left;
+}
+#div__fechas{
+    text-align: right; 
+}
+#div__comentarios{ /* div para la casilla dondeva el propietario y los comentarios */
+    width: 98%;
+    height: 95%;
+    background-color: rgba(228, 228, 228, 0.795);
+    margin: 5px auto;
+    text-align: left;
+}
+#div__enviar{ /* div para el boton de enviar solicitud */
+    width: 98%;
+    height: 95%;
+    background-color: rgba(228, 228, 228, 0.795);
+    margin: 5px auto;
+    text-align: center;
+}
+#div_tabla_AS{    /* div para la casilla de la tabla de sericios y articulos */
+    width: 96vw;
+    height: 40vh;
+    background-color: rgba(228, 228, 228, 0.795);
+    margin: 5px auto;
+    text-align: left;
+
+}
+
+#div_tablas{ /* este div se usa para contener las tablas en mis solicitudes, servicios, solicitudes usuarios y usuarios  */
+    width: 99%;
+    height: 80vh;
+    background-color: #e7d0a4bb;
+    margin: 5px auto;
+    text-align: left;
+
+}
+
+textarea {
+    font: 1em sans-serif;
+    width: 50%;
+    height: 50%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    resize: none;
+    margin: 1px;
+    font-size: 14px;
+  }
+
+label{
+    display: inline-block;
+    width: 25%;
+    height: 10%; 
+    text-align: left;   
+    font-size: 14px;
+}
+
+.label_usuario{  /* label para agregar o actuliar usuario */
+    display: inline-block;
+    width: 15%;
+    height: 10%; 
+    text-align: left;   
+    font-size: 14px;
+}
+
+#enviarCorreo{   /* para ell labael al lado del checkbox */
+    width: 60%;
+    height: 10%;
+    font-size: 100%;
+
+}    
+input{
+    margin: 1px;
+    width: 40%;
+    /* height: 10%;
+    font-size: 100%; */
+}
+/* inputs para las casillas de las tablas  */
+.inputTabla{ 
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    font-size: 18px;
+    height: 25px;
+    width: 99%;
+}
+
+.inputTablaNumero{ 
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    border: 0px;
+    font-size: 18px;
+    height: 24px;
+    width: 100%;
+}
+
+.inputTablaCantidad{
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    font-size: 18px;
+    height: 25px;
+    width: 98%;
+}
+
+.inputTablaFecha{
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    width: 147px;
+    max-width: max-content;
+    font-size: 18px;
+    height: 25px;
+}
+.inputTablaServicios{
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    border: 0px;
+    width: 500px;
+    font-size: 18px;
+    height: 25px;
+}
+
+.inputUsuarios{
+    margin: 5px;
+    display: inline-block;
+    width: 41%; 
+    font-size: large;
+    text-align: left;
+}
+
+input#Solicitante {
+    margin: 1px;
+    width: 19%;
+    height: 10%;
+    font-size: 100%;
+}
+
+input[type="checkbox" i] {
+    width: 15px;
+    cursor: pointer;
+    
+}
+.select_formulario{
+    margin: 1px;
+    width: 40%;
+    height: 14%;
+    font-size: 100%;
+}
+.select_formulario2{
+    margin: 1px;
+    width: 41%;
+    height: 14%;
+    font-size: 100%;
+}
+.select_tabla{
+    width: 350px;
+    height: 25px;
+    font-size: 16px;
+}
+select#sel__solicitante{
+    width: 20%;
+    height: 14%;
+    margin: 1px;
+    font-size: 100%;
+}
+
+.btn_guardar{
+    width: 50%;
+    text-decoration:none;
+    font-size: 100%;
+    color:#ffffff;
+    margin-top: 10%;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
+.btn_crear_usuario{
+    text-decoration:none;
+    font-size: large;
+    color:#ffffff;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
+
+.btn_cambiar_contraseña{
+    width: 30%;
+    margin-top: 1%;
+    text-decoration:none;
+    font-size: 100%;
+    color:#ffffff;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
+ 
+.btn_contraseña{
+    width: 90%;
+    height: 20%;
+    text-decoration:none;
+    font-size: 100%;
+    color:#ffffff;
+    margin-top: 10%;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+}
+
+.btn_guardar:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
+
+.btn_opciones{
+    text-align: center;
+    text-decoration:none;
+    height: auto;
+    font-size: 100%;
+    color:#ffffff;
+    background-color:#fc636b;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    width: 8%;
+}
+.btn_opciones:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
+
+.btn_opciones_selected{
+    text-align: center;
+    text-decoration:none;
+    height: auto;
+    font-size: 100%;
+    color:#ffffff;
+    background-color:#000000;
+    border-color:#21d61ddb;
+    border-width: 2px;
+    border-style: solid;
+    width: 8%;
+}
+
+.btn_volver{
+    width: 120px;
+    text-decoration:none;
+    font-size: 14px;
+    color:#ffffff;
+    background-color:#000000;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    position: relative;
+    margin-top: 20px;
+    height: auto;
+}
+.btn_volver:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
+/* ------------------------------------ */
+
+/* botones para la tabla de usuarios */
+.btn_add{
+    width: 150px;
+    text-decoration:none;
+    font-weight: 200;
+    font-size: 14px;
+    color:#ffffff;
+    background-color:#000000;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.btn_add:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
+
+.btn_delete{
+    width: auto;
+    font-size: 12px;
+    color:#ffffff;
+    background-color:#ff0505;
+    border: 0px;
+    border-radius: 5px;
+}
+.btn_delete:hover{
+    background-color:#f59f00 ;
+    color: #040404;
+}
+
+.btn_update{
+    width: auto;
+    font-size: 12px;
+    color:#000000;
+    background-color:#e6ff05da;
+    border:0px;
+    border-radius: 5px;
+}
+.btn_update:hover{
+    background-color:#8cf513 ;
+    color: #040404;
+}
+
+.btn_info{
+    width: 55px;
+    font-size: 12px;
+    color:#ffffff;
+    background-color:#0586f0ce;
+    border: 0px;
+    border-radius: 5px;
+}
+.btn_info:hover{
+    background-color:#06c7e9 ;
+    color: #040404;
+}
+.btn_enviar{
+    width: auto;
+    font-size: 12px;
+    color:#ffffff;
+    background-color:#059105;
+    border: 0px;
+    border-radius: 5px;
+}
+.btn_enviar:hover{
+    background-color:#55f162 ;
+    color: #040404;
+}
+/* ----------------------------------------- */
+
+.opcionesTabla{
+    text-align: center;
+}
+
+#arse{
+    width: 250px;
+    font-size: 14px;
+}
+
+.btn-agregar{
+    font-size: 100%;
+    font-weight: bolder;
+    color:#ffffff;
+    background-color:#0cd63f;
+    border-color:#0a8e27;
+    border-width: 2px;
+    border-style: solid;
+    width: 2%;
+    height: auto;
+}
+.btn-agregar:hover{
+    background-color:#0cd63e3e ;
+    color: #08720a;
+}
+
+.checkbox-servicio{
+    background-color: initial;
+    cursor: pointer;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+}
