@@ -87,6 +87,15 @@ table{  /* borde de la tabla */
     min-width: 99%;
 }
 
+#tabla__usuarios th{ /* tabla para mostrar los usuarios y los servicios */
+    position: sticky;
+    top: 0px;
+    background-color:#faf6f6;
+    border: 4px solid rgb(255, 0, 0);
+    color: rgb(7, 7, 7);
+    text-align: center;
+}
+
 #tabla__solicitudes{ /* tabla que carga las solicitudes hechas */
     border-collapse: separate;
     border-spacing: 0px;
@@ -204,7 +213,7 @@ table{  /* borde de la tabla */
 
 }
 
-textarea {
+.textarea-comentarios {
     font: 1em sans-serif;
     width: 50%;
     height: 50%;
@@ -512,6 +521,26 @@ select#sel__solicitante{
     background-color:#55f162 ;
     color: #040404;
 }
+
+.btn_informes{
+    width: 6rem;
+    color:#ffffff;
+    margin-top: 1rem;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+
+.btn_informes:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
 /* ----------------------------------------- */
 
 .opcionesTabla{
@@ -547,4 +576,64 @@ select#sel__solicitante{
     margin: 3px 3px 3px 4px;
     padding: initial;
     border: initial;
+}
+
+/* informes */
+#div_informes{ /* este div se usa para contener las tablas en mis solicitudes, servicios, solicitudes usuarios y usuarios  */
+    width: 99%;
+    min-height: 32rem;
+    background-color: #e7d0a4bb;
+    margin: 5px auto;
+    text-align: left;
+    font-weight: normal;
+}
+
+#informes-filtro{
+    padding: 0.5rem 4rem;
+    float: left;
+}
+
+#informes-boton{
+    padding: 0.5rem 2rem;
+    float:left;
+    height: 12rem;
+}
+
+#informes-observaciones{
+    padding: 0.5rem 2rem;
+    float:left;
+}
+
+#informes-tabla{
+    float: left;
+    width: 100%;
+}
+
+#div_tablas_informes{ /* este div se usa para contener las tablas en mis solicitudes, servicios, solicitudes usuarios y usuarios  */
+    width: 99%;
+    height: 12rem;
+    background-color: #e7d0a4bb;
+    margin: 5px auto;
+    text-align: left;
+}
+#tabla__informes{ /* tabla para mostrar los usuarios y los servicios */
+    border-collapse: separate;
+    border-spacing: 0px;
+    min-width: 99%;
+    text-align: center;
+}
+
+#tabla__informes th{ /* tabla para mostrar los usuarios y los servicios */
+    position: sticky;
+    top: 0px;
+    background-color:#faf6f6;
+    border: 4px solid rgb(255, 0, 0);
+    color: rgb(7, 7, 7);
+}
+
+.contenedor-informes{
+    width: 100%;
+    min-height: 35rem;
+    z-index:0;
+    background-color: #e7d0a483;
 }

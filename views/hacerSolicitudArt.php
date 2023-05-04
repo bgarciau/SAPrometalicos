@@ -62,20 +62,34 @@
                                 <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
                                 <label for="Solicitante">Solicitante:</label>
                                 <select name="solicitante" id="sel__solicitante">
-                                    <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
-                                    </option>
-                                    <option value="Usuario">Usuario</option>
-                                    <option value="Empleado">Empleado</option>
+                                    <?php 
+                                        if($duser->tipo_usuario==3){
+                                            ?> 
+                                            <option value="Administrador">Administrador</option>
+                                            <?php
+                                        }
+                                        else if($duser->tipo_usuario==2){
+                                            ?> 
+                                            <option value="Empleado">Empleado</option>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                            <option value="Usuario">Usuario</option>
+                                            <?php
+                                        }
+
+                                    ?>        
                                 </select>
-                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"><br>
+                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>" readonly><br>
                                 <label for="NombreSolicitante">Nombre Solicitante:</label>
                                 <input type="text" id="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
                                 <label for="Sucursal">Sucursal:</label>
                                 <select id="sucursal" class="select_formulario">
-                                    <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
-                                    </option>
+                                    <!-- <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
+                                    </option> -->
                                     <option value="Principal">Principal</option>
-                                    <option value="DefinirNuervo">Definir nuevo</option>
+                                    <!-- <option value="DefinirNuervo">Definir nuevo</option> -->
                                 </select><br>
                                 <label for="Departamento">Departamento:</label>
                                 <select id="departamento" class="select_formulario">
@@ -124,7 +138,7 @@
                 <tr>
                     <td colspan="12">
                         <div id="div_tabla_AS"> <!-- div para la tabla de articulos -->
-                            <a href="hacerSolicitud.php"><input class="btn_opciones" type="button"
+                            <a href="hacerSolicitud"><input class="btn_opciones" type="button"
                                     value="servicios"></a><!-- boton para la tabla de servicios  -->
                             <a><input class="btn_opciones_selected" type="button"
                                     value="articulos"></a><!-- boton para l tabla de articulos -->
@@ -165,7 +179,7 @@
                             <label for="Propietario">Propietario:</label>
                             <input type="text" id="propietario" placeholder="Propietario"><br>
                             <label for="Comentarios">Comentarios:</label>
-                            <textarea id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
+                            <textarea class="textarea-comentarios" id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
                         </div>
                     </td>
                     <td colspan="6">

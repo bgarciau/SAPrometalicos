@@ -20,18 +20,18 @@ foreach ($registros as $Tusuario) {
             <?php
             if ($userx == 3) { //este es el tipo de usuario administrador
             ?>
-            <a class="btn from-center" href="../views/hacerSolicitud.php">HACER SOLICITUD</a>
+            <a class="btn from-center" href="../views/hacerSolicitud">HACER SOLICITUD</a>
             <ul>
                 <li class="dropdown">
-                    <a class="btn from-center" href="../views/misSolicitudes.php">MIS SOLICITUDES</a>
+                    <a class="btn from-center" href="../views/misSolicitudes">MIS SOLICITUDES</a>
                     <ul>
-                        <li><a class="btn from-center" href="../views/solicitudesUsuario.php">SOLICITUDES USUARIOS</a></li>
+                        <li><a class="btn from-center" href="../views/solicitudesUsuario">SOLICITUDES USUARIOS</a></li>
                     </ul>
                 </li>
             </ul>
-            <a class="btn from-center" href="../views/informes.php">INFORMES</a>
-            <a class="btn from-center" href="../views/usuarios.php">USUARIOS</a>
-            <a class="btn from-center" href="../views/servicios.php">SERVICIOS</a>
+            <a class="btn from-center" href="../views/informes">INFORMES</a>
+            <a class="btn from-center" href="../views/usuarios">USUARIOS</a>
+            <a class="btn from-center" href="../views/servicios">SERVICIOS</a>
             <!-- <a class="salir" href="../crud/cerrar_session.php"><input class="btn_sal" type="button" value="SALIR"></a> -->
             <div class="div-boton-salir">
         <div class="svg-wrapper-salir">

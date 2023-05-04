@@ -59,22 +59,36 @@
                                 <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
                                 <label>Solicitante:</label>
                                 <select name="solicitante" id="sel__solicitante">
-                                    <option value="<?php echo $duser->tipo_usuario ?>"><?php echo $duser->tipo_usuario ?>
-                                    </option>
-                                    <option value="Usuario">Usuario</option>
-                                    <option value="Empleado">Empleado</option>
+                                    <?php 
+                                        if($duser->tipo_usuario==3){
+                                            ?> 
+                                            <option value="Administrador">Administrador</option>
+                                            <?php
+                                        }
+                                        else if($duser->tipo_usuario==2){
+                                            ?> 
+                                            <option value="Empleado">Empleado</option>
+                                            <?php
+                                        }
+                                        else{
+                                            ?>
+                                            <option value="Usuario">Usuario</option>
+                                            <?php
+                                        }
+
+                                    ?>                                    
                                 </select>
                                 <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
-                                    required><br>
+                                    readonly><br>
                                 <label for="NombreSolicitante">Nombre Solicitante:</label>
                                 <input type="text" name="nomSol" id="nomSol" value="<?php echo $duser->nom_usr ?>"
                                     required><br>
                                 <label for="Sucursal">Sucursal:</label>
                                 <select class="select_formulario" name="sucursal" id="sucursal">
-                                    <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
-                                    </option>
+                                    <!-- <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?>
+                                    </option> -->
                                     <option value="Principal">Principal</option>
-                                    <option value="DefinirNuervo">Definir nuevo</option>
+                                    <!-- <option value="DefinirNuervo">Definir nuevo</option> -->
                                 </select><br>
                                 <label for="Departamento">Departamento:</label>
                                 <select class="select_formulario" name="departamento" id="departamento">
@@ -122,10 +136,11 @@
                 <tr>
                     <td colspan="12">
                         <div id="div_tabla_AS"> <!-- div para la tabla de servicios -->
-                            <input class="btn_opciones_selected" type="button" value="servicios">
-                            <!-- boton para la tabla de servicios  -->
-                            <a href="hacerSolicitudArt.php"><input class="btn_opciones" type="button" value="articulos">
-                            </a><!-- boton para l tabla de articulos -->
+                            <a><input class="btn_opciones_selected" type="button"
+                                    value="servicios"></a><!-- boton para la tabla de servicios  -->
+                            <a href="hacerSolicitudArt"><input class="btn_opciones" type="button"
+                                    value="articulos"></a><!-- boton para l tabla de articulos -->
+        
                             <input class="btn-agregar" type="button" value="+" onclick="insertarFila()">
                             <!-- boton para agregar una fila a la tabla con los datos de los servicios -->
                             <div class="outer_wrapper">
@@ -164,7 +179,7 @@
                             <label for="Propietario">Propietario:</label>
                             <input type="text" name="propietario" id="propietario" placeholder="Propietario"><br>
                             <label for="Comentarios">Comentarios:</label>
-                            <textarea name="comentarios" id="comentarios" rows="4" cols="50"
+                            <textarea class="textarea-comentarios" name="comentarios" id="comentarios" rows="4" cols="50"
                                 placeholder="comentarios"></textarea>
                         </div>
                     </td>

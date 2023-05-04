@@ -1,9 +1,10 @@
 * { /* estilos generales para la pagina */
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
   }
   .login {  /* recuadro que contiene los datos necesarios para el login, este se centra y se le pone un borde blanco */
-    width:25%;
+    width:15rem;
     border: 0px solid #000000;
     background-color: rgb(255, 255, 255);
     top: 50%;
@@ -41,8 +42,8 @@
   }
   .login .form input { /* inputs del logiin */
     width: 100%;
-    height: 40px;
-    margin-top: 20px;
+    height: 2rem;
+    margin-top: 1rem;
     background: rgba(190, 190, 190, 0.863);
     border: 1px solid rgba(255,255,255,.1);
     padding: 0 15px;
@@ -60,16 +61,14 @@
   .login .form input.submit {    /* boton de ingresar en el login */
     background: rgb(255, 0, 0);
     color: #ffffff;
-    font-size: 20px;
-    margin-top: 40px;
-    font-weight: bold;
+    font-size: large;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 
   .login .form input.submit:hover {     /* cambiar el color del boton mientras el mouse este sobre este */
     background: rgba(250, 72, 72, 0.9);
     color: #ffffff;
     border: 2px solid rgba(255, 0, 0, 0.8);
-    font-size: 20px;
-    margin-top: 40px;
     font-weight: bold;
   }
