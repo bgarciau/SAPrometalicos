@@ -1,0 +1,289 @@
+/* En este style se encuentran los estilos del header y el footer, */
+header {
+	width:100%; /* Establecemos que el header abarque el 100% del documento */
+	overflow:hidden; /* Eliminamos errores de float */
+	background:#000000;
+	height: 10%;/* Establecemos que el header abarque el 10% del largo */
+}
+.logo { /* Logo de la empresa a la izquierda con el alto del header */
+	float:left; /* posiciona el logo a la izquierda */
+	height: 100%;/* pone el alto del logo segun el header */
+	width: auto;
+}
+.wrapper {
+	width:98%; /* Establecemos que el ancho sera del 98% */
+	margin:auto; /* Centramos los elementos */
+    margin-left: 5px;
+	overflow:hidden;
+	height: 100%;/* Eliminamos errores de float */
+}
+.wrapper-login {   /* Logo centrado en el header para el login */
+	width:98%; /* Establecemos que el ancho sera del 98% */
+	margin:auto; /* Centramos los elementos */
+    margin-left: 5px;
+	height: 100%;/* Eliminamos errores de float */
+	text-align: center;
+}
+
+.wrapper-footer-login {
+	width:80%; /* Establecemos que el ancho sera del 90% */
+	margin:auto; /* Centramos los elementos */
+	overflow:hidden; /* Eliminamos errores de float */
+    padding-left: 100px;
+}
+
+header nav {
+	height: 100%;  /* Establece el alto del nav al 100%  del header*/
+	width: 81%;		/* Establece el nav con un 81% del ancho del header */
+	float:right;	/* Se cloca a la derecha del header porque a la izquierda esta el logo */
+	padding: 10px;
+	text-align:-webkit-right;
+}
+
+header nav a { /* Se usa para la navegacion del header, aca se cambia el color y estilo de la letra */
+	display:inline-block;
+	color:#fff;
+	text-decoration:none;
+	padding:10px 5px;
+	line-height:normal;
+	font-size:large;
+	font-weight:bolder;
+	transition: 2s;
+}
+
+
+
+header nav ul{ /* Se usa para el menu desplegable en el nav */
+	display: inline-block;
+	color:#fff;
+	text-decoration:none;
+	padding:0px;
+	line-height:normal;
+	font-size:large;
+	font-weight:bolder;
+	-webkit-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+	transition:all 500ms ease;
+}
+
+header nav li{ /*  Se usa para las opciones que se despliegan*/
+	display: inline-block;
+}
+header nav li a{ /* Se le agregan los mismos estilos a las opcines desplegadas */
+	display:inline-block;
+	color:#ffffff;
+	text-decoration:none;
+	padding:10px 5px;
+	line-height:normal;
+	font-size:large;
+	font-weight:bolder;
+}
+/* ~~~~~~~ ESTILO PARA EL BOTON DEL NAV ~~~~~~~ */
+
+.btn {		
+	position: relative;	
+	padding: 0.8rem -0.2rem;
+	font-size:large;
+	color: white;
+	transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);	
+	cursor: pointer;
+    z-index: 0;
+}
+
+.btn:before, .btn:after {
+	content: '';
+	position: absolute;		
+	transition: inherit;
+	z-index: -1;
+}
+
+.btn:hover {
+	color: white;
+	-webkit-transition-delay: .5s;
+	        transition-delay: .5s;
+}
+
+.btn:hover:before {
+	-webkit-transition-delay: 0s;
+	        transition-delay: 0s;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+/* From center */
+
+.from-center:before {
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 0;
+    border: 3px solid rgb(255, 0, 0);
+    border-left: 0;
+    border-right: 0;
+  }
+  
+  .from-center:after {
+    bottom: 0;
+    left: 0;
+  }
+  
+  .from-center:hover:before {
+    left: 0;
+    width: 100%;
+  }
+  
+  .from-center:hover:after {
+    top: 0;
+    height: 100%;
+  }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+header nav li.dropdown ul{ /* para desplegar las opciones cuando se ponga el mouse sobre la opcion que puede desplegar un menu */
+	background-color: #000000;
+	position:absolute;
+	padding-left: 0;
+	display: none;
+	z-index: 1;	/* Se usa para que estas opciones queden sobre el resto de la pagina */
+}
+header nav li.dropdown:hover ul{ /* no deja mover el menu mientras el mouse este sobre este */
+	display: block;
+
+}
+
+footer{
+    width:100%; /* Establecemos que el header abarque el 100% del documento */
+	overflow:hidden; /* Eliminamos errores de float */
+	background:#000000;
+    text-align: center;
+	height: 10%;
+	
+}
+footer .p{ /* color del texto que se encuentra en el footer */
+    color: #fff;
+}
+
+footer .logo { 
+	line-height:100px;
+	float:right;
+}
+
+footer .texto{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+footer .imagen{
+    width: 25px;
+    height: 25px;
+}
+
+footer .imagen:hover{
+    filter:hue-rotate(-100deg) brightness(500%);
+}
+footer .sena{ /* logo del sena en el footer */
+
+    width: 45px;/* ancho del logo */
+    height: 45px;/* alto del logo */
+	margin-right: 50px; /* le ponemos una margen para que no quede pegado en el borde de la pagina */
+}
+
+p{ 	/* margen sobre el texto del footer */
+	margin-top: 10px;  
+}
+
+/* boton con movimiento salir------------------------------------------------------------------------------*/
+
+.salir{ 	/* estilo que va a contener el boton de salir */
+    height: 0%;
+    width: 100px;
+    text-align:center;
+	font-weight: 300;
+    font-size: 15px;
+	margin-top: 2px;
+	padding: 0%;
+}
+
+.div-boton-salir{
+    float: right;
+    margin-top: 2px;
+}
+/*   
+    spotVerde is the span on the inside of the href that
+    fills the parent and makes the hover and link work
+    for the entire div
+*/
+.spot-salir {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  /*
+      This is the outer svg wrapper that the SVG itself will 
+      fill. Multiple svg-wrapper-verde classes can be put side by side.
+  */
+  
+  .svg-wrapper-salir {
+    background-color:black ;
+    margin-top: 0;
+    position: relative;
+    width: auto;
+    /*make sure to use same height/width as in the html*/
+    height: 35px;
+    display: inline-block;
+    border-radius: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  /*
+    This is where we define the fill, color, thickness,
+    and stroke pattern of the SVG when there is no hover.
+    The dasharray and offset together define the line position
+    under the words. Here's also where the transition speed is set.
+  */
+  
+  #shape-salir {
+    stroke-width: 6px;
+    fill: transparent;
+    stroke: rgb(250, 249, 249);
+    stroke-dasharray: 0 400;
+    stroke-dashoffset: -487;
+    transition: 1s;
+  }
+  /* 
+      Pushing the text up into the SVG. Without this the
+      text would be below the div's.
+  */
+  
+  #text-salir {
+    margin-top: -44px;
+    text-align: center;
+  }
+  
+  #text-salir a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  /* 
+      Changing the shapeVerde on hover. I change the color of the stroke,
+  make it thinner, then set it to again wrap around the entire parent element.
+  */
+  
+  .svg-wrapper-salir:hover #shape-salir {
+    stroke-dasharray: 50 0;
+    stroke-width: 6px;
+    stroke-dashoffset: 0;
+    stroke: #ff0000;
+  }
+/* ------------------------------------------------------------------------- */
+/* sweet-alert */
+.letra-blanco{
+  color: #ffffff;
+}
