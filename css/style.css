@@ -522,25 +522,7 @@ select#sel__solicitante{
     color: #040404;
 }
 
-.btn_informes{
-    width: 6rem;
-    color:#ffffff;
-    margin-top: 1rem;
-    background-color:#fa565f;
-    border-color:#f74248;
-    border-width: 2px;
-    border-style: solid;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    position: relative;
-}
 
-.btn_informes:hover{
-    background-color:#ffffff ;
-    color: #040404;
-}
 /* ----------------------------------------- */
 
 .opcionesTabla{
@@ -597,6 +579,46 @@ select#sel__solicitante{
     padding: 0.5rem 2rem;
     float:left;
     height: 12rem;
+}
+
+.btn_informes{
+    width: 6rem;
+    color:#ffffff;
+    margin-top: 1rem;
+    background-color:#fa565f;
+    border-color:#f74248;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    top: 50%;
+    left: 25%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+
+.btn_informes:hover{
+    background-color:#ffffff ;
+    color: #040404;
+}
+
+.btn_descargar{
+    width: 6rem;
+    color:#000000;
+    margin-top: 1rem;
+    background-color:#04c71ed7;
+    border-color:#02530d;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    top: 50%;
+    left: 25%;
+    transform: translateX(-50%) translateY(-50%);
+    position: relative;
+}
+
+.btn_descargar:hover{
+    background-color:#ffffff ;
+    color: #040404;
 }
 
 #informes-observaciones{

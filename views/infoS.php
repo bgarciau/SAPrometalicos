@@ -149,7 +149,7 @@
                                                     <th>Descripcion</th>
                                                     <th>Proveedor</th>
                                                     <th>Fecha Necesaria</th>
-                                                    <th>Canidad Necesaria</th>
+                                                    <th>Cantidad Necesaria</th>
                                                     <th>Precio Info</th>
                                                     <th>% Descuento</th>
                                                     <th>indicador de impuestos</th>
