@@ -45,7 +45,10 @@ curl_close($curl); //Esta función cierra una sesión CURL y libera todos sus re
 $numSol = $_GET["numSol"]; //toma el numero de la soolicitud seleccionada
 $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
 foreach ($soli as $solis) {
-    $solicitud = new stdClass();
+    // stdClass es una clase básica predefinida que se utiliza para crear objetos genéricos 
+    // sin una estructura de clase definida previamente. Es una clase vacía que puede contener 
+    // propiedades y métodos dinámicamente asignados en tiempo de ejecución
+    $solicitud = new stdClass(); 
     $solicitud->DocType = "dDocument_Items";
     $solicitud->DocDate = "2023-04-03";
     $solicitud->RequriedDate = $solis->fecha_necesaria;

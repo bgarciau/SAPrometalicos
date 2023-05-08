@@ -98,6 +98,7 @@
                     <input class="inputUsuarios" type="text" name="sucursal" value="<?php echo $userr->sucursal ?>"><br> <!-- Se muestra la sucursal del usuario -->
                     <label class="label_usuario" for="TipoUsuario">Tipo usuario:</label>
                     <select name="tipoUsuario" class="select_formulario2">
+                        <!-- Opcion segun el usuario seleccionado -->
                         <?php 
                             if($userr->tipo_usuario==1){
                         ?>
@@ -116,6 +117,7 @@
                         <?php
                             }
                         ?>
+                        <!-- ---------------------------------- -->
                         <option value=1>usuario</option>
                         <option value=2>empleado</option>
                         <option value=3>administrador</option>
