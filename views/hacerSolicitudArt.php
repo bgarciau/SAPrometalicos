@@ -313,7 +313,7 @@
             j = 0;
             while (j < 10) { //cantidad de indicadores en el momento
                 const option = document.createElement('option');//crea una opcion
-                option.value = valoresIndImp[j]['Code'];//define el valor con el nombre del indicadr de impuesto
+                option.value = valoresIndImp[j]['Code']+"~"+valoresIndImp[j]['Rate'];//define el valor con el nombre del indicadr de impuesto
                 option.text = valoresIndImp[j]['Name'];//define el texto con el nombre del indicadr de impuesto
                 $selectIndImp.appendChild(option);//agrega la opcion al select
                 j++;
@@ -581,10 +581,18 @@
         //funcion para calcular el total en cada fila
         function ftotal() {
             i = 0;
-            while (i < numeroFila) {
-                const desc = document.getElementById('por_desc' + i).value; //toma el porcentaje de descuento
-                const precio = document.getElementById('precio_inf' + i).value;//toma el precio de informacion
-                document.getElementById('total_ml' + i).value = precio - (desc * precio / 100);//calcula el total restandole el descuento al precio
+            while (i < numeroFila) { //para cargar el total en cada una de las filas
+                const desc = document.getElementById('por_desc' + i).value; //toma el valor del porcenaje de descuento
+                const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
+                const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
+                const cantidad = document.getElementById('cant_nec' + i).value; //toma el valor del precio info
+                var impuestoPor = impuesto.split('~');
+                console.log(impuestoPor[1]);
+                totalml=precio - (desc * precio / 100);
+                console.log(totalml);
+                totalml=totalml+(impuestoPor[1]*totalml/100)
+                console.log(totalml);
+                document.getElementById('total_ml' + i).value = totalml* cantidad ; //le asigna al total el precio menos el porcentaje de descuento
                 i++;
             }
         }

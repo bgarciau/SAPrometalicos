@@ -68,9 +68,11 @@ foreach ($soli as $solis) {
         $servicio->CostingCode2 = $listaa->linea;
         $servicio->CostingCode3 = $listaa->sublinea;
         $servicio->ProjectCode = $listaa->proyecto;
-        $servicio->TaxCode = $listaa->ind_imp;
-        $servicio->Price = $listaa->total_ml;
-        $servicio->PriceAfterVAT = $listaa->total_ml;
+        $indImp =explode("~", $listaa->ind_imp);
+        $servicio->TaxCode = $indImp[0];
+        $precioDesc=$listaa->precio_info- ($listaa->por_desc * $listaa->precio_info / 100);
+        $servicio->Price = $precioDesc;
+        $servicio->PriceAfterVAT = $precioDesc;
         $servicio->Currency = "$";
         $servicio->DiscountPercent = $listaa->por_desc;
         $servicio->LineVendor = $listaa->proveedor;

@@ -23,7 +23,9 @@
     }
     date_default_timezone_set('America/Bogota');
     include("../php/conexion.php"); //incluye la conexion a la bd
-    
+    if(isset($_SESSION["tipo"])){
+        $tipo=$_SESSION["tipo"];
+    }
     // se define el NO para qeu cuando se cargue la pagina por primera vez no se apiquen filtros
     $filtro = "NO";
     if (isset($_GET["usuarioo"]) && $_GET["usuarioo"] != "") { //si se mando un valor del filtro o guarda en la viariable correspondiente 
@@ -86,6 +88,7 @@
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
     // -------------------------------------------------
     $informe = "no";//se define en NO para que sea el usuario el que genere el informe
+    $linkInforme = "";
     if (isset($_GET["generarInforme"]) && $_GET["generarInforme"] == 'si') { //genera el informe
         $informe = "si";
         $spreadsheet = new Spreadsheet();
@@ -345,7 +348,7 @@
                 <div id="informes-observaciones">
                     <h4>Observaciones:</h4>
                     <!-- TEXT AREA PARA LAS OBSERVACIONES -->
-                    <textarea name="observaciones" id="observaciones" cols="45" rows="7"><?php if (isset($_GET["observaciones"])) {
+                    <textarea style="resize: none;" name="observaciones" id="observaciones" cols="45" rows="7"><?php if (isset($_GET["observaciones"])) {
                         echo $_GET["observaciones"];
                     } ?></textarea>
                 </div>
@@ -479,6 +482,10 @@
     //SI SE ACTIVA LA OPCION DEL INFORME SE ACTIVA EL BOTON DE DESCARGAR
     if ('<?php echo $informe ?>' == 'si') {
         $('#btn_descargar').prop("hidden", false)
+    }
+    if ('<?php echo $tipo ?>' != '3') {
+        console.log("<?php echo $tipo ?>")
+        $('#usuario').prop("disabled", true)
     }
 </script>
 

@@ -330,9 +330,9 @@
             // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
             const valoresIndImp = datosIndImp.value;
             j = 0;
-            while (j < 10) { // numero de indicadores de impuesto en el momento
+            while (j < 10) { // numero de indicadores de impuesto en el momento 
                 const option = document.createElement('option'); //crea la opcion
-                option.value = valoresIndImp[j]['Code']; //le da el nombre del indicador al valor
+                option.value = valoresIndImp[j]['Code']+"~"+valoresIndImp[j]['Rate']; //le da el nombre del indicador al valor
                 option.text = valoresIndImp[j]['Name']; //el usuario ve el nombre del indicador
                 $selectIndImp.appendChild(option); //agrega la opcion al select
                 j++; //suma uno para agregar el siguiente 
@@ -381,7 +381,14 @@
             while (i < numeroFila) { //para cargar el total en cada una de las filas
                 const desc = document.getElementById('por_dec' + i).value; //toma el valor del porcenaje de descuento
                 const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
-                document.getElementById('total_ml' + i).value = precio - (desc * precio / 100); //le asigna al total el precio menos el porcentaje de descuento
+                const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
+                var impuestoPor = impuesto.split('~');
+                console.log(impuestoPor[1]);
+                totalml=precio - (desc * precio / 100);
+                console.log(totalml);
+                totalml=totalml+(impuestoPor[1]*totalml/100)
+                console.log(totalml);
+                document.getElementById('total_ml' + i).value = totalml ; //le asigna al total el precio menos el porcentaje de descuento
                 i++;
             }
         }

@@ -46,9 +46,9 @@ foreach ($registros as $Tusuario) {
         <?php
     } else { //otro tipo de usuario que no sea administrador
         ?>
-            <a href="../views/hacerSolicitud.php">HACER SOLICITUD</a>
-            <a href="../views/misSolicitudes.php">MIS SOLICITUDES</a>
-            <a href="../views/informes.php">INFORMES</a>
+            <a class="btn from-center" href="../views/hacerSolicitud">HACER SOLICITUD</a>
+            <a class="btn from-center" href="../views/misSolicitudes">MIS SOLICITUDES</a>
+            <a class="btn from-center" href="../views/informes?usuarioo=<?php echo $usuario ?>">INFORMES</a>
             <!-- <a class="salir" href="../crud/cerrar_session.php"><input class="btn_sal" type="button" value="SALIR"></a> -->
             <div class="div-boton-salir">
         <div class="svg-wrapper-salir">

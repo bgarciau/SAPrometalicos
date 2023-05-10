@@ -201,6 +201,8 @@
                     </td>
                     <td colspan="6">
                         <div id="div__enviar">
+                            <a target="_blank" href="pdf.php?numSol=<?php echo $numSol ?>"><input class="btn_guardar" type="button" value="GENERAR PDF"></a>
+                            <br>
                             <a href="javascript:history.back()"><input class="btn_volver" type="button" value="VOLVER"></a>
                         </div>
                     </td>

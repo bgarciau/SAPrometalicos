@@ -19,11 +19,13 @@
                     if (password_verify($password, $registro['pass_usr'])) {//se comprueba si la contraseña es igual a la que se ingreso en el formulario, lo que hace el password_verify es desifrar la contraseña
                         $contador++;//si la clave es correcta se suma uno al contador
                     }
+                    $tipo=$registro['tipo_usuario'];
                 }
 
             if($contador>0){//si el contador es mayor que cero es porque el usuario y la contraseña son correctos
                 session_start();   //como es correcto el inicio se inicia la sesion para que el usuario pueda entrar a los modulos
-
+                
+                $_SESSION["tipo"]=$tipo;
                 $_SESSION["usuario"]=$_POST["usuario"];     //se hace un post a la sesion del usuario para verificar que permisos tiene el usuario en cada modulo
 
                 header("location:../views/hacerSolicitud.php"); //manda al usuario a hacer solicitud que es la pagina principal de la aplicacion
