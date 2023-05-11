@@ -286,7 +286,10 @@
             $i = 1;
             ?>
         </header>
-        <div class="contenedor-informes"> <!-- contenido entre el header y el footer -->
+        <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor-informes" id="principal"> <!-- contenido entre el header y el footer -->
             <h2>INFORMES</h2>
             <div id="div_informes">
                 <div id="informes-filtro">
@@ -453,6 +456,10 @@
     </div>
 </body>
 <script>
+    function pantallaCarga(){
+        $('#principal').fadeOut();
+        $('#carga').prop("hidden",false);
+    }
     // LE DA ESTIO A LOS SELECT Y LES AGREGA EL BUSCADOR
     $('#usuario').select2();
     $('#estado').select2();

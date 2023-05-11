@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar usuario</title>
-    <link rel="icon" type="image/png" href="../images/fav.png" />     <!-- imagen del fav -->
+    <link rel="icon" type="image/png" href="../images/fav.png" /> <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -68,7 +70,10 @@
             require_once('../php/header.php');
             ?>
         </header>
-        <div class="contenedor">
+        <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
             <div id="div_agregar_usuario">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="f1">
                     <!-- Se usa el php_self para hacer el action del form en el mismo archivo php   -->
@@ -126,8 +131,8 @@
                     <br><br>
                     <a><input class="btn_crear_usuario" type="submit" value="CREAR USUARIO" name="crearU"
                             onclick="comprobarClave()"></a><!-- Este boton envia los datos del nuevo usuario y tambien verifica si las claves son iguales y si no lo son carga nuevamente los datos dejando el campo de la contraseña -->
-                   <br>
-                            <a href="usuarios.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
+                    <br>
+                    <a href="usuarios.php"><input class="btn_volver" type="button" value="< VOLVER"></a>
                     <!-- Vuelve al listado de usuarios sin guardar datos -->
             </div>
         </div>
@@ -139,6 +144,10 @@
     </div>
     </form>
     <script>
+        function pantallaCarga() {
+            $('#principal').fadeOut();
+            $('#carga').prop("hidden", false);
+        }
         function comprobarClave() { //funcion para coomprobar si las claves son iguales
             let clave1 = document.f1.clave1.value
             let clave2 = document.f1.clave2.value

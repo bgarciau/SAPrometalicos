@@ -20,18 +20,18 @@ foreach ($registros as $Tusuario) {
             <?php
             if ($userx == 3) { //este es el tipo de usuario administrador
             ?>
-            <a class="btn from-center" href="../views/hacerSolicitud">HACER SOLICITUD</a>
+            <a class="btn from-center" href="../views/hacerSolicitud" onclick="pantallaCarga()">HACER SOLICITUD</a>
             <ul>
                 <li class="dropdown">
-                    <a class="btn from-center" href="../views/misSolicitudes">MIS SOLICITUDES</a>
+                    <a class="btn from-center" href="../views/misSolicitudes" onclick="pantallaCarga()">MIS SOLICITUDES</a>
                     <ul>
-                        <li><a class="btn from-center" href="../views/solicitudesUsuario">SOLICITUDES USUARIOS</a></li>
+                        <li><a class="btn from-center" href="../views/solicitudesUsuario" onclick="pantallaCarga()">SOLICITUDES USUARIOS</a></li>
                     </ul>
                 </li>
             </ul>
-            <a class="btn from-center" href="../views/informes">INFORMES</a>
-            <a class="btn from-center" href="../views/usuarios">USUARIOS</a>
-            <a class="btn from-center" href="../views/servicios">SERVICIOS</a>
+            <a class="btn from-center" href="../views/informes" onclick="pantallaCarga()">INFORMES</a>
+            <a class="btn from-center" href="../views/usuarios" onclick="pantallaCarga()">USUARIOS</a>
+            <a class="btn from-center" href="../views/servicios" onclick="pantallaCarga()">SERVICIOS</a>
             <!-- <a class="salir" href="../crud/cerrar_session.php"><input class="btn_sal" type="button" value="SALIR"></a> -->
             <div class="div-boton-salir">
         <div class="svg-wrapper-salir">
@@ -46,9 +46,9 @@ foreach ($registros as $Tusuario) {
         <?php
     } else { //otro tipo de usuario que no sea administrador
         ?>
-            <a class="btn from-center" href="../views/hacerSolicitud">HACER SOLICITUD</a>
-            <a class="btn from-center" href="../views/misSolicitudes">MIS SOLICITUDES</a>
-            <a class="btn from-center" href="../views/informes?usuarioo=<?php echo $usuario ?>">INFORMES</a>
+            <a class="btn from-center" href="../views/hacerSolicitud" onclick="pantallaCarga()">HACER SOLICITUD</a>
+            <a class="btn from-center" href="../views/misSolicitudes" onclick="pantallaCarga()">MIS SOLICITUDES</a>
+            <a class="btn from-center" href="../views/informes?usuarioo=<?php echo $usuario ?>" onclick="pantallaCarga()">INFORMES</a>
             <!-- <a class="salir" href="../crud/cerrar_session.php"><input class="btn_sal" type="button" value="SALIR"></a> -->
             <div class="div-boton-salir">
         <div class="svg-wrapper-salir">
@@ -80,4 +80,8 @@ foreach ($registros as $Tusuario) {
             }
         })
         }
+    function pantallaCarga(){
+        $('#principal').fadeOut();
+        $('#carga').prop("hidden",false);
+    }
     </script>

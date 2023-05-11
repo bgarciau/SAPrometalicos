@@ -94,9 +94,9 @@ $pdf->Cell(20, 10, 'Codigo', 0, 0, 'C', 1);
 $pdf->Cell(80, 10, 'Descripcion', 0, 0, 'C', 1);
 $pdf->Cell(20, 10, 'Fecha Nec', 0, 0, 'C', 1);
 $pdf->Cell(16, 10, 'Proyecto', 0, 0, 'C', 1);
-$pdf->Cell(16, 10, 'Precio', 0, 0, 'C', 1);
-$pdf->Cell(16, 10, 'Cantidad', 0, 0, 'C', 1);
-$pdf->Cell(16, 10, 'Total', 0, 0, 'C', 1);
+$pdf->Cell(20, 10, 'Precio', 0, 0, 'R', 1);
+$pdf->Cell(15, 10, 'Cantidad', 0, 0, 'C', 1);
+$pdf->Cell(16, 10, 'Total', 0, 0, 'R', 1);
 $pdf->Ln(5);
 if (isset($_GET["numSol"])) {
     $numSol = $_GET["numSol"];
@@ -135,8 +135,8 @@ foreach ($lista as $listaa) {
     $pdf->Cell(20, 10, $listaa->fecha_nec, 0, 0, 'C', false);
     $pdf->Cell(16, 10, $listaa->proyecto , 0, 0, 'L', false);
     $precio=$listaa->precio_info -( $listaa->por_desc * $listaa->precio_info / 100);
-    $pdf->Cell(16, 10, number_format($precio,2,",","."), 0, 0, 'R', false);
-    $pdf->Cell(16, 10, $listaa->cant_nec, 0, 0, 'C', false);
+    $pdf->Cell(20, 10, number_format($precio,2,",","."), 0, 0, 'R', false);
+    $pdf->Cell(15, 10, $listaa->cant_nec, 0, 0, 'C', false);
     if($listaa->cant_nec==""){
         $cantidad=1;
     }
@@ -146,11 +146,12 @@ foreach ($lista as $listaa) {
     $pdf->Cell(16, 10, number_format($precio*$cantidad,2,",","."), 00, 0, 'R', false);
     $subtotal=$subtotal+($precio*$cantidad);
     $total=$total+$listaa->total_ml;
+    $i++;
 }
 $pdf->Ln(10);
 $pdf->Cell(156, 10, '', 0, 0, false);
 $pdf->Cell(18, 10, 'Sub Total', 0, 0, 'L', false);
-$pdf->Cell(18, 10, number_format($subtotal*$cantidad,2,",","."), 00, 0, 'R', false);
+$pdf->Cell(18, 10, number_format($subtotal,2,",","."), 00, 0, 'R', false);
 $pdf->Ln(5);
 $pdf->Cell(156, 10, '', 0, 0, false);
 $pdf->Cell(18, 10, 'impuestos', 0, 0, 'L', false);

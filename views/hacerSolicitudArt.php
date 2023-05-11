@@ -62,26 +62,25 @@
                                 <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
                                 <label for="Solicitante">Solicitante:</label>
                                 <select name="solicitante" id="sel__solicitante">
-                                    <?php 
-                                        if($duser->tipo_usuario==3){
-                                            ?> 
-                                            <option value="Administrador">Administrador</option>
-                                            <?php
-                                        }
-                                        else if($duser->tipo_usuario==2){
-                                            ?> 
+                                    <?php
+                                    if ($duser->tipo_usuario == 3) {
+                                        ?>
+                                        <option value="Administrador">Administrador</option>
+                                        <?php
+                                    } else if ($duser->tipo_usuario == 2) {
+                                        ?>
                                             <option value="Empleado">Empleado</option>
-                                            <?php
-                                        }
-                                        else{
-                                            ?>
+                                        <?php
+                                    } else {
+                                        ?>
                                             <option value="Usuario">Usuario</option>
-                                            <?php
-                                        }
+                                        <?php
+                                    }
 
-                                    ?>        
+                                    ?>
                                 </select>
-                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>" readonly><br>
+                                <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
+                                    readonly><br>
                                 <label for="NombreSolicitante">Nombre Solicitante:</label>
                                 <input type="text" id="nomSol" value="<?php echo $duser->nom_usr ?>"><br>
                                 <label for="Sucursal">Sucursal:</label>
@@ -94,14 +93,16 @@
                                 <label for="Departamento">Departamento:</label>
                                 <select id="departamento" class="select_formulario">
                                     <?php
-                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
+                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ);
+                                    foreach ($dep as $depa): ?>
                                         <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
                                         </option>
                                         <?php
                                     endforeach;
                                     ?>
                                     <?php
-                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ); foreach ($departamento as $departamentos): ?>
+                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
+                                    foreach ($departamento as $departamentos): ?>
                                         <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
                                         <?php
                                     endforeach;
@@ -119,7 +120,8 @@
                         <div id="div__fechas"> <!-- div para las fechas y datos de la solicitud  -->
                             <?php
                             $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-                            $num = 1; foreach ($ultimo as $ultimoo):
+                            $num = 1;
+                            foreach ($ultimo as $ultimoo):
                                 $num++;
                             endforeach; ?>
                             <label for="Nsolicitud">N° solicitud de compra:</label>
@@ -128,7 +130,7 @@
                             <input type="text" name="estado" value="ABIERTO" readonly><br>
 
                             <label for="FechaContabilizacion">Fecha documento:</label>
-                            <input type="text" id="fechaDocumento" value="<?php echo date("Y-m-d");?>" readonly><br>
+                            <input type="text" id="fechaDocumento" value="<?php echo date("Y-m-d"); ?>" readonly><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
                             <input type="date" id="fechaNecesaria" placeholder="Fecha necesaria"
                                 min="<?= date("Y-m-d") ?>"><br>
@@ -138,7 +140,7 @@
                 <tr>
                     <td colspan="12">
                         <div id="div_tabla_AS"> <!-- div para la tabla de articulos -->
-                            <a href="hacerSolicitud"><input class="btn_opciones" type="button"
+                            <a href="hacerSolicitud" onclick="pantallaCarga()"><input class="btn_opciones" type="button"
                                     value="servicios"></a><!-- boton para la tabla de servicios  -->
                             <a><input class="btn_opciones_selected" type="button"
                                     value="articulos"></a><!-- boton para l tabla de articulos -->
@@ -179,7 +181,8 @@
                             <label for="Propietario">Propietario:</label>
                             <input type="text" id="propietario" placeholder="Propietario"><br>
                             <label for="Comentarios">Comentarios:</label>
-                            <textarea class="textarea-comentarios" id="comentarios" rows="4" cols="50" placeholder="comentarios"></textarea>
+                            <textarea class="textarea-comentarios" id="comentarios" rows="4" cols="50"
+                                placeholder="comentarios"></textarea>
                         </div>
                     </td>
                     <td colspan="6">
@@ -199,6 +202,10 @@
         </footer>
     </div>
     <script>
+        function pantallaCarga() {
+            $('#principal').fadeOut();
+            $('#carga').prop("hidden", false);
+        }
         numeroFila = 0;
         insertarFila(); //insertar la fila predeterminada de la tabla
 
@@ -313,7 +320,7 @@
             j = 0;
             while (j < 10) { //cantidad de indicadores en el momento
                 const option = document.createElement('option');//crea una opcion
-                option.value = valoresIndImp[j]['Code']+"~"+valoresIndImp[j]['Rate'];//define el valor con el nombre del indicadr de impuesto
+                option.value = valoresIndImp[j]['Code'] + "~" + valoresIndImp[j]['Rate'];//define el valor con el nombre del indicadr de impuesto
                 option.text = valoresIndImp[j]['Name'];//define el texto con el nombre del indicadr de impuesto
                 $selectIndImp.appendChild(option);//agrega la opcion al select
                 j++;
@@ -588,11 +595,11 @@
                 const cantidad = document.getElementById('cant_nec' + i).value; //toma el valor del precio info
                 var impuestoPor = impuesto.split('~');
                 console.log(impuestoPor[1]);
-                totalml=precio - (desc * precio / 100);
+                totalml = precio - (desc * precio / 100);
                 console.log(totalml);
-                totalml=totalml+(impuestoPor[1]*totalml/100)
+                totalml = totalml + (impuestoPor[1] * totalml / 100)
                 console.log(totalml);
-                document.getElementById('total_ml' + i).value = totalml* cantidad ; //le asigna al total el precio menos el porcentaje de descuento
+                document.getElementById('total_ml' + i).value = totalml * cantidad; //le asigna al total el precio menos el porcentaje de descuento
                 i++;
             }
         }
@@ -785,7 +792,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $('#principal').fadeOut();
-                        $('#carga').prop("hidden",false);
+                        $('#carga').prop("hidden", false);
                         $.ajax(
                             {
                                 url: '../crud/guardarArticulo.php?codigoArse=' + codArse + '&fechaNec=' + fechaNec + '&proveedor=' + proveedor + '&cantNec=' + cant_nec + ' &precioInfo=' + precioInfo + '&uen=' + uen + '&linea=' + linea + '&sublinea=' + sublinea + '\n\
