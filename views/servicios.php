@@ -6,6 +6,8 @@
     <title>Servicios</title>
     <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -35,7 +37,10 @@
         require_once('../php/header.php');
         ?>
     </header>
-        <div class="contenedor">
+    <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
             <h2>SERVICIOS</h2>
             <div id="div_tablas">
                 <div id="div_boton_volver">
@@ -109,5 +114,10 @@
     </footer>
     </div>
 </body>
-
+<script>
+    function pantallaCarga(){
+        $('#principal').fadeOut();
+        $('#carga').prop("hidden",false);
+    }
+</script>
 </html>

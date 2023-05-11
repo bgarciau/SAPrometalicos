@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="../css/select2/select2.min.js"></script>
+
     <!-- ------------------------------------------------------------------------------------------------ -->
     <title>Servicios</title>
 </head>
@@ -41,7 +42,10 @@
             require_once('../php/header.php'); //se llama el header
             ?>
         </header>
-        <div class="contenedor"> <!-- contenido entre el header y el footer -->
+        <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
             <table border="1px" id="tabla__general">
                 <tr>
                     <td colspan="6"> <!-- tomamos la mitad de laa tabla para los datos del soolicitante-->
@@ -59,24 +63,22 @@
                                 <!-- carga el codigo del usuario pero se esconde prque no es necesario tenerlo a la vista  -->
                                 <label>Solicitante:</label>
                                 <select name="solicitante" id="sel__solicitante">
-                                    <?php 
-                                        if($duser->tipo_usuario==3){
-                                            ?> 
-                                            <option value="Administrador">Administrador</option>
-                                            <?php
-                                        }
-                                        else if($duser->tipo_usuario==2){
-                                            ?> 
+                                    <?php
+                                    if ($duser->tipo_usuario == 3) {
+                                        ?>
+                                        <option value="Administrador">Administrador</option>
+                                        <?php
+                                    } else if ($duser->tipo_usuario == 2) {
+                                        ?>
                                             <option value="Empleado">Empleado</option>
-                                            <?php
-                                        }
-                                        else{
-                                            ?>
+                                        <?php
+                                    } else {
+                                        ?>
                                             <option value="Usuario">Usuario</option>
-                                            <?php
-                                        }
+                                        <?php
+                                    }
 
-                                    ?>                                    
+                                    ?>
                                 </select>
                                 <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
                                     readonly><br>
@@ -93,14 +95,16 @@
                                 <label for="Departamento">Departamento:</label>
                                 <select class="select_formulario" name="departamento" id="departamento">
                                     <?php
-                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ); foreach ($dep as $depa): ?>
+                                    $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ);
+                                    foreach ($dep as $depa): ?>
                                         <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
                                         </option>
                                         <?php
                                     endforeach;
                                     ?>
                                     <?php
-                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ); foreach ($departamento as $departamentos): ?>
+                                    $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
+                                    foreach ($departamento as $departamentos): ?>
                                         <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
                                         <?php
                                     endforeach;
@@ -118,7 +122,8 @@
                         <div id="div__fechas"><!-- div para las fechas y datos de la solicitud  -->
                             <?php
                             $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
-                            $num = 1; foreach ($ultimo as $ultimoo):
+                            $num = 1;
+                            foreach ($ultimo as $ultimoo):
                                 $num++;
                             endforeach; ?>
                             <label for="Nsolicitud">N° solicitud de compra:</label>
@@ -126,7 +131,7 @@
                             <label for="Estado">Estado:</label>
                             <input type="text" name="estado" value="ABIERTO" readonly><br>
                             <label for="FechaContabilizacion">Fecha documento:</label>
-                            <input type="date" id="fechaDocumento" value="<?php echo date("Y-m-d");?>" readonly><br>
+                            <input type="date" id="fechaDocumento" value="<?php echo date("Y-m-d"); ?>" readonly><br>
                             <label for="FechaContabilizacion">Fecha necesaria:</label>
                             <input type="date" id="fechaNecesaria" placeholder="Fecha necesaria"
                                 min="<?= date("Y-m-d") ?>"><br>
@@ -138,9 +143,9 @@
                         <div id="div_tabla_AS"> <!-- div para la tabla de servicios -->
                             <a><input class="btn_opciones_selected" type="button"
                                     value="servicios"></a><!-- boton para la tabla de servicios  -->
-                            <a href="hacerSolicitudArt"><input class="btn_opciones" type="button"
+                            <a href="hacerSolicitudArt" onclick="pantallaCarga()"><input class="btn_opciones" type="button"
                                     value="articulos"></a><!-- boton para l tabla de articulos -->
-        
+
                             <input class="btn-agregar" type="button" value="+" onclick="insertarFila()">
                             <!-- boton para agregar una fila a la tabla con los datos de los servicios -->
                             <div class="outer_wrapper">
@@ -179,8 +184,8 @@
                             <label for="Propietario">Propietario:</label>
                             <input type="text" name="propietario" id="propietario" placeholder="Propietario"><br>
                             <label for="Comentarios">Comentarios:</label>
-                            <textarea class="textarea-comentarios" name="comentarios" id="comentarios" rows="4" cols="50"
-                                placeholder="comentarios"></textarea>
+                            <textarea class="textarea-comentarios" name="comentarios" id="comentarios" rows="4"
+                                cols="50" placeholder="comentarios"></textarea>
                         </div>
                     </td>
                     <td colspan="6">
@@ -200,6 +205,10 @@
         </footer>
     </div>
     <script>
+        function pantallaCarga() {
+            $('#principal').fadeOut();
+            $('#carga').prop("hidden", false);
+        }
         const datos = <?php echo json_encode($respuestaServicios); ?>
         // Justo aquí estamos pasando la variable ----^
         // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
@@ -277,7 +286,7 @@
                 j++; //se suma uno para agregar el siguiente prooveedor
             }
             //columna 6 agregamos un input para la informacion del precio con un minimo de 0
-            col6.innerHTML = "<input class='inputTablaCantidad' type='number' min=0\n\
+            col6.innerHTML = "<input class='inputTablaCantidad' type='text' min=0\n\
                                                         id='precio_inf" + numeroFila + "'\n\
                                                         value=0 name='precio_inf" + numeroFila + "'>";
             //columna 7 se crea un input de solo lectura para la cuenta mayor, ya que el valor de este se carga cuando seleccionamos un servicio
@@ -330,9 +339,9 @@
             // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
             const valoresIndImp = datosIndImp.value;
             j = 0;
-            while (j < 10) { // numero de indicadores de impuesto en el momento
+            while (j < 10) { // numero de indicadores de impuesto en el momento 
                 const option = document.createElement('option'); //crea la opcion
-                option.value = valoresIndImp[j]['Code']; //le da el nombre del indicador al valor
+                option.value = valoresIndImp[j]['Code'] + "~" + valoresIndImp[j]['Rate']; //le da el nombre del indicador al valor
                 option.text = valoresIndImp[j]['Name']; //el usuario ve el nombre del indicador
                 $selectIndImp.appendChild(option); //agrega la opcion al select
                 j++; //suma uno para agregar el siguiente 
@@ -347,7 +356,6 @@
 
             //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
             $(document).ready(function () {
-
                 for (i = 0; i < numeroFila; i++) {
 
                     $('#codigoServicio' + i).change(function (e) { //por cada fila, cuando se seleccione un servicio, este hara cambios en otros campos
@@ -381,7 +389,14 @@
             while (i < numeroFila) { //para cargar el total en cada una de las filas
                 const desc = document.getElementById('por_dec' + i).value; //toma el valor del porcenaje de descuento
                 const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
-                document.getElementById('total_ml' + i).value = precio - (desc * precio / 100); //le asigna al total el precio menos el porcentaje de descuento
+                const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
+                var impuestoPor = impuesto.split('~');
+                console.log(impuestoPor[1]);
+                totalml = precio - (desc * precio / 100);
+                console.log(totalml);
+                totalml = totalml + (impuestoPor[1] * totalml / 100)
+                console.log(totalml);
+                document.getElementById('total_ml' + i).value = totalml; //le asigna al total el precio menos el porcentaje de descuento
                 i++;
             }
         }
@@ -458,7 +473,7 @@
                             }
                         })
                         // alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto'); //muestra una alerta
-    
+
                         cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
                         break; //para salir del ciclo que recorre las filas
                     }
@@ -512,13 +527,13 @@
                 sucursal = document.getElementById('sucursal').value;
                 fechaNecesaria = document.getElementById('fechaNecesaria').value;
                 if (fechaNecesaria == 0) { //coomprueba si el indicador de impuestos esta vacio y si lo esta hace lo siguiente
-                   //muestra una alerta
+                    //muestra una alerta
                     Swal.fire('Error en la Fecha Necesaria, debe seleccionar la Fecha Necesaria').then((result) => {
-                            /* Read more about isConfirmed, isDenied below */
-                            if (result.isConfirmed) {
-                                document.getElementById('fechaNecesaria').focus();
-                            }
-                        }) 
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            document.getElementById('fechaNecesaria').focus();
+                        }
+                    })
                 }
                 else {
                     fechaDocumento = document.getElementById('fechaDocumento').value;

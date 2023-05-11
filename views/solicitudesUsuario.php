@@ -6,6 +6,8 @@
     <title>Soliciudes usuarios</title>
     <link rel="icon" type="image/png" href="../images/fav.png" /> <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -45,7 +47,10 @@
             require_once('../php/header.php'); //llama el header
             ?>
         </header>
-        <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
+        <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
             <h2>SOLICITUDES USUARIO</h2>
             <div id="div_tablas"> <!-- Contiene la tabla de solicitudes -->
                 <div id="div_boton_volver">
@@ -302,6 +307,10 @@
         </div>
 </body>
 <Script>
+    function pantallaCarga(){
+        $('#principal').fadeOut();
+        $('#carga').prop("hidden",false);
+    }
     function enviarServicio(numSolicitud) {
         Swal.fire({
             icon: 'question',

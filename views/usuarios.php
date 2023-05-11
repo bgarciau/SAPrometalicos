@@ -6,6 +6,8 @@
     <title>Usuarios</title>
     <link rel="icon" type="image/png" href="../images/fav.png"/>     <!-- imagen del fav -->
     <link rel="stylesheet" href="../css/style.css"> <!-- llama el estilo para el contenido entre el header y el footer -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -38,7 +40,10 @@
             require_once('../php/header.php'); // carga el header
             ?>
         </header>
-        <div class="contenedor"> <!-- Contenedido entre el header y el footer -->
+        <div class="contenedor" id="carga" hidden>
+            <img id="centrar-carga" src="../images/carga10.gif">
+        </div>
+        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
             <h2>USUARIOS</h2>
             <div id="div_tablas"> <!-- Este div contiene la tabla de usuarios que se maneja igual a la de solicitudes -->
                 <div class="outer_wrapperS"> <!-- el outer y el table wrappers es para mantener la tabla en el div sin importar su tamaño, si la tabla es mas grande que el div se usa un scroll -->
@@ -112,5 +117,10 @@
         </footer>
     </div>
 </body>
-
+<script>
+    function pantallaCarga(){
+        $('#principal').fadeOut();
+        $('#carga').prop("hidden",false);
+    }
+</script>
 </html>

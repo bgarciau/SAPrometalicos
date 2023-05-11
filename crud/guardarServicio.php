@@ -52,7 +52,6 @@ $total =explode("_", $_GET['total']);
 
 
 for ($j = 0; $j < $cantidad; $j++) { //for para recorrer cada item de los array 
-
      //se define la sentencia para insertar los valores en la base de datos y crear cada articulo solicitado
     $sql = "INSERT INTO list_arse (fk_num_sol,nom_arse,fecha_nec,proveedor,precio_info,cuenta_mayor,uen,linea,sublinea,proyecto,por_desc,ind_imp,total_ml) 
                         VALUES(:_numSol,:_nomArse,:_fechaNec,:_proveedor,:_precioInfo,:_cuentaMayor,:_uen,:_linea,:_sublinea,:_proyecto,:_porDesc,:_indImp,:_total)";
