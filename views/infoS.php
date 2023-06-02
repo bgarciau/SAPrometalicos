@@ -2,12 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>solicitud</title>
-    <link rel="icon" type="image/png" href="../images/fav.png" /> <!-- imagen del fav -->
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <?php
+    require('head.php')
+        ?>
 </head>
 
 <body>
@@ -20,256 +17,347 @@
     }
 
     include("../php/conexion.php");
+    require('header.php');
 
     $numSol = $_GET["numSol"]; //se guarda la id que se manda en una variable
     ?>
-    <div class="base">
-        <header>
-            <?php
-            require_once('../php/header.php');
-            ?>
-        </header>
-        <div class="contenedor" id="carga" hidden>
-            <img id="centrar-carga" src="../images/carga10.gif">
+    <div class="contenedor-carga" id="carga" hidden>
+        <img id="centrar-carga" src="../images/carga.gif">
+    </div>
+    <div class="container py-2" style="min-height: 80vh;" id="principal">
+        <div class="text-center">
+            <h3>INFORMACION DE LA SOLICITUD</h3>
         </div>
-        <div class="contenedor" id="principal"> <!-- contenido entre el header y el footer -->
-            <table border="1px" id="tabla__general">
-                <!-- tabla general es la tabla que contiene los datos del solicitante, las fechas necesarias, los articulos o servicios, los comentarios y la opcion de volver  -->
-                <tr>
-                    <td colspan="6">
-                        <!-- Esto se hace para que una fila de la tabla tome 6 columnas, en este caso esa es la mitad de la tabla -->
-                        <div id="div__solicitante">
-                            <!--  Este div contiene todos los datos de la persona que va a realizar la solicitud -->
-                            <?php
-                            $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
-                            foreach ($soli as $solis):
-                                $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$solis->fk_cod_usr'")->fetchAll(PDO::FETCH_OBJ); // con un dato de la solicitud se guardan los datos del usuario en un PDOStatement
-                                foreach ($user as $duser):
-                                    ?>
-                                    <!-- Se muestran los datos del usuario que hizo la solicitud pero no se pueden modificar -->
-                                    <label for="Solicitante">Solicitante:</label>
-                                    <select name="solicitante" id="sel__solicitante" disabled>
-                                        <option value="">
-                                            <?php echo $duser->tipo_usuario ?>
-                                        </option>
-                                        <option value="Usuario">Usuario</option>
-                                        <option value="Empleado">Empleado</option>
-                                    </select>
-                                    <input type="text" id="Solicitante" name="rolSol" value="<?php echo $duser->rol_usr ?>"
-                                        disabled><br>
-                                    <label for="NombreSolicitante">Nombre Solicitante:</label>
-                                    <input type="text" name="nomSol" value="<?php echo $solis->nom_solicitante ?>" disabled><br>
-                                    <label for="Sucursal">Sucursal:</label>
-                                    <select name="sucursal" class="select_formulario" disabled>
-                                        <option value="<?php echo $duser->sucursal ?>"><?php echo $duser->sucursal ?></option>
-                                        <option value="Principal">Principal</option>
-                                        <option value="DefinirNuervo">Definir nuevo</option>
-                                    </select><br>
-                                    <label for="Departamento">Departamento:</label>
-                                    <select name="departamento" class="select_formulario" disabled>
+        <?php
+        $soli = $base->query("SELECT * FROM solicitud_compra WHERE pk_num_sol='$numSol'")->fetchAll(PDO::FETCH_OBJ); // se guardan los datos de la solicitud de compra en un PDOStatement
+        foreach ($soli as $solis):
+            $user = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$solis->fk_cod_usr'")->fetchAll(PDO::FETCH_OBJ); // con un dato de la solicitud se guardan los datos del usuario en un PDOStatement
+            foreach ($user as $duser):
+                ?>
+                <div class="row">
+                    <div class="col bloques py-2">
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="solicitante">SOLICITANTE:</label>
+                                    <input type="hidden" id="codUsr" value="<?php echo $duser->pk_cod_usr ?>">
+                                    <select class="form-select" aria-label="Default select example" id="sel__solicitante">
                                         <?php
-                                        $depSol = $base->query("SELECT * FROM departamento WHERE pk_dep= '$solis->depart_sol'")->fetchAll(PDO::FETCH_OBJ);
-                                        foreach ($depSol as $depSols):
+                                        if ($duser->tipo_usuario == 3) {
                                             ?>
-                                            <option value="<?php echo $solis->nom_solicitante ?>"><?php echo $depSols->nom_dep ?>
-                                            </option>
+                                            <option value="Administrador">Administrador</option>
                                             <?php
-                                        endforeach
-                                        ?>
-                                    </select><br>
-                                    <?php
-                                endforeach;
-                            endforeach;
-                            ?>
-
-                            <label for="CorreoElectronico">Direccion Correo Electronico:</label>
-                            <input type="text" name="correoElectronico" placeholder="<?php echo $solis->correo_sol ?>"
-                                disabled><br>
-                        </div>
-                    </td>
-                    <td colspan="6">
-                        <!-- Este toma la otra mitad de la fila para las fechas y el estado de la solicitud -->
-                        <div id="div__fechas">
-                            <!-- Se muestran las fechas de la solicitud y su estado  -->
-                            <label for="Nsolicitud">N° solicitud de compra:</label>
-                            <input type="text" name="numSol" value="<?php echo $numSol ?>" disabled><br>
-                            <label for="Estado">Estado:</label>
-                            <input type="text" name="estado" value="<?php echo $solis->estado_sol ?>" disabled><br>
-                            <label for="FechaContabilizacion">Fecha documento:</label>
-                            <input type="text" name="fechaDocumento" value="<?php echo $solis->fecha_documento ?>"
-                                disabled><br>
-                            <label for="FechaContabilizacion">Fecha necesaria:</label>
-                            <input type="text" name="fechaNecesaria" value="<?php echo $solis->fecha_necesaria ?>"
-                                disabled><br>
-                        </div>
-                    </td>
-                </tr>
-                <tr> <!-- Abre otra fila nueva  -->
-                    <td colspan="12"> <!-- Toma todas las columnas de la tabla  -->
-                        <div id="div_tabla_AS">
-                            <div class="outer_wrapper">
-                                <div class="table_wrapper">
-                                    <?php
-                                    if ($solis->tipo == "servicio") { //La condicion es para saber si la solicitud tiene articulos o servicios
-                                        ?>
-                                        <!-- tabla servicios  -->
-                                        <h4>SERVICIOS</h4>
-                                        <table id="tabla__servicios">
-                                            <thead>
-                                                <th>#</th>
-                                                <th>Descripcion servicio</th>
-                                                <th>Fecha Necesaria</th>
-                                                <th>Proveedor</th>
-                                                <th>Precio Info</th>
-                                                <th>Cuenta de Mayor</th>
-                                                <th>UEN</th>
-                                                <th>lineas</th>
-                                                <th>sublineas</th>
-                                                <th>proyecto</th>
-                                                <th>% Descuento</th>
-                                                <th>indicador de impuestos</th>
-                                                <th>total ml</th>
-                                            </thead>
+                                        } else if ($duser->tipo_usuario == 2) {
+                                            ?>
+                                                <option value="Empleado">Empleado</option>
                                             <?php
-                                            $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los servicios de la solicitud en la variable 
-                                            $i = 1;
-                                            foreach ($lista as $listaa):
-                                                ?>
-                                                <tr>
-                                                    <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
-                                                    <td>
-                                                        <?php echo $i ?>
-                                                    </td>
-                                                    <td><input class="inputTablaServicios"
-                                                            value="<?php echo $listaa->nom_arse ?>" disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>"
-                                                            disabled></td>
-                                                    <td><input class="inputTablaServicios"
-                                                            value="<?php echo $listaa->proveedor ?>" disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>"
-                                                            disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->cuenta_mayor ?>"
-                                                            disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->uen ?>" disabled>
-                                                    </td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->linea ?>" disabled>
-                                                    </td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->sublinea ?>"
-                                                            disabled></td>
-                                                    <td><input class="inputTablaServicios"
-                                                            value="<?php echo $listaa->proyecto ?>" disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->por_desc ?>"
-                                                            disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->ind_imp ?>"
-                                                            disabled></td>
-                                                    <td><input class="inputTabla" value="<?php echo $listaa->total_ml ?>"
-                                                            disabled></td>
-                                                </tr>
-                                                <?php
-                                                $i++;
-                                            endforeach;
-                                    } else {
+                                        } else {
+                                            ?>
+                                                <option value="Usuario">Usuario</option>
+                                            <?php
+                                        }
                                         ?>
-                                            <h4>ARTICULOS</h4>
-                                            <!-- tabla articulos  -->
-                                            <table id="tabla__servicios">
-                                                <thead>
-                                                    <th>#</th>
-                                                    <th>codigo</th>
-                                                    <th>Descripcion</th>
-                                                    <th>Proveedor</th>
-                                                    <th>Fecha Necesaria</th>
-                                                    <th>Cantidad Necesaria</th>
-                                                    <th>Precio Info</th>
-                                                    <th>% Descuento</th>
-                                                    <th>indicador de impuestos</th>
-                                                    <th>total ml</th>
-                                                    <th>UEN</th>
-                                                    <th>lineas</th>
-                                                    <th>sublineas</th>
-                                                </thead>
-                                                <?php
-                                                $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los articulos de la solicitud en la variable 
-                                                $i = 1;
-                                                foreach ($lista as $listaa):
-                                                    ?>
-                                                    <tr>
-                                                        <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
-                                                        <td>
-                                                            <?php echo $i ?>
-                                                        </td>
-                                                        <td><input class="inputTabla"
-                                                                value="<?php echo $listaa->codigo_articulo ?>" disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->nom_arse ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->proveedor ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->fecha_nec ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->cant_nec ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->precio_info ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->por_desc ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->ind_imp ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->total_ml ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->uen ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->linea ?>"
-                                                                disabled></td>
-                                                        <td><input class="inputTabla" value="<?php echo $listaa->sublinea ?>"
-                                                                disabled></td>
-                                                    </tr>
-                                                    <?php
-                                                    $i++;
-                                                endforeach;
-                                    }
-                                    ?>
-                                        </table>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="tipo">ROL SOLICITANTE:</label>
+                                    <input type="text" class="form-control" id="Solicitante"
+                                        value="<?php echo $duser->rol_usr ?>">
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6">
-                        <div id="div__comentarios">
-                            <label for="Propietario">Propietario:</label>
-                            <input type="text" name="propietario" value="<?php echo $solis->propietario ?>"
-                                disabled><br>
-                            <label for="Comentarios">Comentarios:</label>
-                            <textarea name="comentarios" rows="4" cols="50"
-                                disabled><?php echo $solis->comentarios ?></textarea>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="nombres">NOMBRE SOLICITANTE:</label>
+                                    <input type="text" class="form-control" id="nomSol" value="<?php echo $duser->nom_usr ?>">
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                    <td colspan="6">
-                        <div id="div__enviar">
-                            <a target="_blank" href="pdf.php?numSol=<?php echo $numSol ?>"><input class="btn_guardar"
-                                    type="button" value="GENERAR PDF"></a>
-                            <br>
-                            <a href="javascript:history.back()"><input class="btn_volver" type="button"
-                                    value="VOLVER"></a>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="sucursal">SUCURSAL:</label>
+                                    <input type="text" class="form-control" id="sucursal" value="PRINCIPAL">
+                                </div>
+                            </div>
                         </div>
-                    </td>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="departamento">DEPARTAMENTO:</label>
+                                    <select class="form-select" aria-label="Default select example" id="departamento">
+                                        <?php
+                                        $dep = $base->query("SELECT * FROM departamento WHERE pk_dep= '<?php $duser->fk_depart ?>'")->fetchAll(PDO::FETCH_OBJ);
+                                        foreach ($dep as $depa): ?>
+                                            <option value="<?php echo $duser->fk_depart ?>"><?php echo $depa->nom_dep ?>
+                                            </option>
+                                            <?php
+                                        endforeach;
+                                        ?>
+                                        <?php
+                                        $departamento = $base->query("SELECT * FROM departamento")->fetchAll(PDO::FETCH_OBJ);
+                                        foreach ($departamento as $departamentos): ?>
+                                            <option value="<?php echo $departamentos->pk_dep ?>"><?php echo $departamentos->nom_dep ?></option>
+                                            <?php
+                                        endforeach;
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="correo">DIRECCION CORREO ELECTRONICO:</label>
+                                    <input type="email" class="form-control" id="correoElectronico"
+                                        value="<?php echo $solis->correo_sol ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col bloques py-2">
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <?php
+                                    $ultimo = $base->query('SELECT * FROM solicitud_compra')->fetchAll(PDO::FETCH_OBJ);
+                                    $num = 1;
+                                    foreach ($ultimo as $ultimoo):
+                                        $num++;
+                                    endforeach; ?>
+                                    <label for="sucursal">N° SOLICITUD DE COMPRA:</label>
+                                    <input type="text" class="form-control" value="<?php echo $numSol ?>" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="sucursal">ESTADO:</label>
+                                    <input type="text" class="form-control" value="<?php echo $solis->estado_sol ?>" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="sucursal">FECHA DOCUMENTO:</label>
+                                    <input type="date" class="form-control" id="fechaDocumento"
+                                        value="<?php echo $solis->fecha_documento ?>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col form-group">
+                                    <label for="sucursal">FECHA NECESARIA:</label>
+                                    <input type="date" class="form-control" id="fechaNecesaria"
+                                        value="<?php echo $solis->fecha_necesaria ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col bloques py-2">
+                        <?php
+                        if ($solis->tipo == "servicio") { //La condicion es para saber si la solicitud tiene articulos o servicios
+                            ?>
+                            <div class="py-2">
+                                <button type="button" class="btn btn-danger">SERVICIOS</button>
+                            </div>
+                            <div class="overflow-x-scroll">
+                                <table class="table table-bordered table-striped table-hover" id="tablaServicios">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Descripcion servicio</th>
+                                            <th>Fecha Necesaria</th>
+                                            <th>Proveedor</th>
+                                            <th>Precio Info</th>
+                                            <th>Cuenta de Mayor</th>
+                                            <th>UEN</th>
+                                            <th>lineas</th>
+                                            <th>sublineas</th>
+                                            <th>proyecto</th>
+                                            <th>% Descuento</th>
+                                            <th>indicador de impuestos</th>
+                                            <th>total ml</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los servicios de la solicitud en la variable 
+                                        $i = 1;
+                                        foreach ($lista as $listaa):
+                                            ?>
+                                            <tr>
+                                                <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
+                                                <td>
+                                                    <?php echo $i ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->nom_arse ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->fecha_nec ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->proveedor ?>
 
-                </tr>
-            </table>
-        </div>
-        <footer>
-            <?php
-            require_once('../php/footer.php');
-            ?>
-        </footer>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->precio_info ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->cuenta_mayor ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->uen ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->linea ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->sublinea ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->proyecto ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->por_desc ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->ind_imp ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->total_ml ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            $i++;
+                                        endforeach;
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php
+                        } else {
+                            ?>
+                            <div class="py-2">
+                                <a class="btn btn-danger">ARTICULOS</a>
+                            </div>
+                            <div class="overflow-x-scroll">
+                                <table class="table table-bordered table-striped table-hover" id="tablaArticulos">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>codigo Articulo</th>
+                                            <th>Descripcion Articulo</th>
+                                            <th>Proveedor</th>
+                                            <th>Fecha Necesaria</th>
+                                            <th>Cantidad Necesaria</th>
+                                            <th>Precio Info</th>
+                                            <th>% Descuento</th>
+                                            <th>indicador de impuestos</th>
+                                            <th>total ml</th>
+                                            <th>UEN</th>
+                                            <th>lineas</th>
+                                            <th>sublineas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solis->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los articulos de la solicitud en la variable 
+                                        $i = 1;
+                                        foreach ($lista as $listaa):
+                                            ?>
+                                            <tr>
+                                                <!-- Se llama cada uno de los campos con el nombre que tienen en la base de datos -->
+                                                <td>
+                                                    <?php echo $i ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->codigo_articulo ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->nom_arse ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->proveedor ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->fecha_nec ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->cant_nec ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->precio_info ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->por_desc ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->ind_imp ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->total_ml ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->uen ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->linea ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $listaa->sublinea ?>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            $i++;
+                                        endforeach;
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col bloques py-2">
+                        <div class="mb-3">
+                            <label class="form-label">PROPIETARIO</label>
+                            <input type="email" class="form-control" id="propietario" value="<?php echo $solis->propietario ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">COMENTARIOS</label>
+                            <textarea class="form-control" id="comentarios"
+                                rows="3"><?php echo $solis->comentarios ?></textarea>
+                        </div>
+                    </div>
+                    <div class="col text-center bloques py-2">
+                        <br>
+                        <a target="_blank" href="pdf.php?numSol=<?php echo $numSol ?>" class="btn btn-danger"><i
+                                class="bi bi-file-earmark-pdf">GENERAR PDF </i></a>
+                        <br><br>
+                        <a href="javascript:history.back()" class="btn btn-danger"><i class="bi bi-arrow-bar-left">VOLVER
+                            </i></a>
+                    </div>
+                </div>
+                <?php
+            endforeach;
+        endforeach;
+        ?>
     </div>
+    <?php
+    require('footer.php')
+        ?>
 </body>
-<script>
-    function pantallaCarga() {
-        $('#principal').fadeOut();
-        $('#carga').prop("hidden", false);
-    }
-</script>
 
 </html>

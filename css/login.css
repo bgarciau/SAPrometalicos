@@ -3,6 +3,12 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: large;
   }
+
+  .contenedor-login{
+    width: 100%;
+    height: 100vh;
+}
+
   .login {  /* recuadro que contiene los datos necesarios para el login, este se centra y se le pone un borde blanco */
     width:15rem;
     border: 0px solid #000000;

@@ -138,7 +138,7 @@ if (isset($respuesta->error)) { //entra si se encuentra un error en la respuesta
     $solicitud = $base->prepare($sql); //se prepara la sentencia
     $estado_sol = "ENVIADO";
     $solicitud->execute(array($estado_sol, $numSAP));
-    header("Location: ../views/" . $_GET["lugar"] . "?numSAP=$numSAP&xtabla=tarticulos"); //manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
+    header("Location: ../views/" . $_GET["lugar"] . "?xtabla=tarticulos&numSAP=$numSAP"); //manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
 }
 
 ?>

@@ -2,15 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>INFORMES</title>
-    <link rel="icon" type="image/png" href="../images/fav.png" /> <!-- imagen del fav -->
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- se usan librerias para usar el select2 que permite agregar un buscador en los select -->
-    <link href="../css/select2/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <script src="../css/select2/select2.min.js"></script>
+    <?php
+    require('head.php')
+        ?>
 </head>
 
 <body>
@@ -23,60 +17,63 @@
     }
     date_default_timezone_set('America/Bogota');
     include("../php/conexion.php"); //incluye la conexion a la bd
-    if(isset($_SESSION["tipo"])){
-        $tipo=$_SESSION["tipo"];
+    
+    if (isset($_SESSION["tipo"])) {
+        $tipo = $_SESSION["tipo"];
     }
+
+    require("header.php");
     // se define el NO para qeu cuando se cargue la pagina por primera vez no se apiquen filtros
     $filtro = "NO";
     if (isset($_GET["usuarioo"]) && $_GET["usuarioo"] != "") { //si se mando un valor del filtro o guarda en la viariable correspondiente 
         $usuarioo = $_GET["usuarioo"];
         $filtro = "SI";
     }
-    if (isset($_GET["estado"]) && $_GET["estado"] != "") {//si se mando un valor del filtro o guarda en la viariable correspondiente 
+    if (isset($_GET["estado"]) && $_GET["estado"] != "") { //si se mando un valor del filtro o guarda en la viariable correspondiente 
         $estado = $_GET["estado"];
         $filtro = "SI";
     }
-    if (isset($_GET["tipo"]) && $_GET["tipo"] != "") {//si se mando un valor del filtro o guarda en la viariable correspondiente 
+    if (isset($_GET["tipo"]) && $_GET["tipo"] != "") { //si se mando un valor del filtro o guarda en la viariable correspondiente 
         $tipo = $_GET["tipo"];
         $filtro = "SI";
     }
     $desde = 0; //se define en 0 para que se carguen todas las solicitudes que se han cread
-    $hasta = date("Y-m-d");//se toma la fecha actual para cargar las solicitudes hasta el dia de hoy 
-    if (isset($_GET["desde"])) {//si se mando un valor del filtro o guarda en la viariable correspondiente 
+    $hasta = date("Y-m-d"); //se toma la fecha actual para cargar las solicitudes hasta el dia de hoy 
+    if (isset($_GET["desde"])) { //si se mando un valor del filtro o guarda en la viariable correspondiente 
         $desde = $_GET["desde"];
     }
-    if (isset($_GET["hasta"])) {//si se mando un valor del filtro o guarda en la viariable correspondiente 
+    if (isset($_GET["hasta"])) { //si se mando un valor del filtro o guarda en la viariable correspondiente 
         $hasta = $_GET["hasta"];
     }
     if ($filtro == 'NO') { //si no hay valores en el filtro se cargan todas las soolicitudes que se han hecho
-        $filtros = "SELECT * FROM solicitud_compra";//sentencia sin filtros
+        $filtros = "SELECT * FROM solicitud_compra"; //sentencia sin filtros
     } else { //si hay valores en el filtro se crea una nueva sentencia
-        $filtros = "SELECT * FROM solicitud_compra WHERE ";//sentencia con filtros
+        $filtros = "SELECT * FROM solicitud_compra WHERE "; //sentencia con filtros
         $i = 0;
         if (isset($_GET["usuarioo"]) && $_GET["usuarioo"] != "") {
             if ($i == 0) { //si es el primer filtro 
-                $filtros = $filtros . "fk_cod_usr='$usuarioo'";//como es el primero no se agrega el AND 
+                $filtros = $filtros . "fk_cod_usr='$usuarioo'"; //como es el primero no se agrega el AND 
                 $i++;
             } else { //si ya se agrego un filtro
-                $filtros = $filtros . "and fk_cod_usr='$usuarioo'";//como ya esta el primero se tiene que agregar un AND
+                $filtros = $filtros . "and fk_cod_usr='$usuarioo'"; //como ya esta el primero se tiene que agregar un AND
                 $i++;
             }
         }
         if (isset($_GET["estado"]) && $_GET["estado"] != "") {
-            if ($i == 0) {//si es el primer filtro 
-                $filtros = $filtros . "estado_sol='$estado'";//como es el primero no se agrega el AND 
+            if ($i == 0) { //si es el primer filtro 
+                $filtros = $filtros . "estado_sol='$estado'"; //como es el primero no se agrega el AND 
                 $i++;
-            } else {//si ya se agrego un filtro
-                $filtros = $filtros . "and estado_sol='$estado'";//como ya esta el primero se tiene que agregar un AND
+            } else { //si ya se agrego un filtro
+                $filtros = $filtros . "and estado_sol='$estado'"; //como ya esta el primero se tiene que agregar un AND
                 $i++;
             }
         }
         if (isset($_GET["tipo"]) && $_GET["tipo"] != "") {
-            if ($i == 0) {//si es el primer filtro 
-                $filtros = $filtros . "tipo='$tipo'";//como es el primero no se agrega el AND 
+            if ($i == 0) { //si es el primer filtro 
+                $filtros = $filtros . "tipo='$tipo'"; //como es el primero no se agrega el AND 
                 $i++;
-            } else {//si ya se agrego un filtro
-                $filtros = $filtros . "and tipo='$tipo'";//como ya esta el primero se tiene que agregar un AND
+            } else { //si ya se agrego un filtro
+                $filtros = $filtros . "and tipo='$tipo'"; //como ya esta el primero se tiene que agregar un AND
                 $i++;
             }
         }
@@ -87,7 +84,7 @@
     use PhpOffice\PhpSpreadsheet\Spreadsheet;
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
     // -------------------------------------------------
-    $informe = "no";//se define en NO para que sea el usuario el que genere el informe
+    $informe = "no"; //se define en NO para que sea el usuario el que genere el informe
     $linkInforme = "";
     if (isset($_GET["generarInforme"]) && $_GET["generarInforme"] == 'si') { //genera el informe
         $informe = "si";
@@ -203,7 +200,7 @@
                     $activeWorksheet->setCellValue('M' . $i, 'total');
                     $i++;
                     $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solicitudes->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los servicios de la solicitud
-                    $j=1;
+                    $j = 1;
                     foreach ($lista as $listaa) {
                         //se llama cada uno de los valores de la base de datos
                         $activeWorksheet->setCellValue('A' . $i, $j);
@@ -223,7 +220,7 @@
                         $j++;
                     }
                     $i++;
-                } else {//si la soolicitud es de articulos
+                } else { //si la soolicitud es de articulos
                     //le agrega un color verde al header de la tabla
                     $spreadsheet->getActiveSheet()->getStyle('C' . $i - 1)
                         ->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
@@ -250,24 +247,24 @@
                     $activeWorksheet->setCellValue('M' . $i, 'sublineas');
                     $i++;
                     $lista = $base->query("SELECT * FROM list_arse WHERE fk_num_sol= '$solicitudes->pk_num_sol'")->fetchAll(PDO::FETCH_OBJ); //se guardan los articulos de la solicitud              
-                    $j=1;
+                    $j = 1;
                     foreach ($lista as $listaa) {
-                    //se llama cada uno de los valores de la base de datos
-                    $activeWorksheet->setCellValue('A' . $i, $j );
-                    $activeWorksheet->setCellValue('B' . $i, $listaa->codigo_articulo );
-                    $activeWorksheet->setCellValue('C' . $i, $listaa->nom_arse );
-                    $activeWorksheet->setCellValue('D' . $i, $listaa->proveedor );
-                    $activeWorksheet->setCellValue('E' . $i, $listaa->fecha_nec );
-                    $activeWorksheet->setCellValue('F' . $i, $listaa->cant_nec);
-                    $activeWorksheet->setCellValue('G' . $i, $listaa->precio_info);
-                    $activeWorksheet->setCellValue('H' . $i, $listaa->por_desc);
-                    $activeWorksheet->setCellValue('I' . $i, $listaa->ind_imp);
-                    $activeWorksheet->setCellValue('J' . $i, $listaa->total_ml);
-                    $activeWorksheet->setCellValue('K' . $i, $listaa->uen);
-                    $activeWorksheet->setCellValue('L' . $i, $listaa->linea);
-                    $activeWorksheet->setCellValue('M' . $i, $listaa->sublinea);
-                    $i++;
-                    $j++;
+                        //se llama cada uno de los valores de la base de datos
+                        $activeWorksheet->setCellValue('A' . $i, $j);
+                        $activeWorksheet->setCellValue('B' . $i, $listaa->codigo_articulo);
+                        $activeWorksheet->setCellValue('C' . $i, $listaa->nom_arse);
+                        $activeWorksheet->setCellValue('D' . $i, $listaa->proveedor);
+                        $activeWorksheet->setCellValue('E' . $i, $listaa->fecha_nec);
+                        $activeWorksheet->setCellValue('F' . $i, $listaa->cant_nec);
+                        $activeWorksheet->setCellValue('G' . $i, $listaa->precio_info);
+                        $activeWorksheet->setCellValue('H' . $i, $listaa->por_desc);
+                        $activeWorksheet->setCellValue('I' . $i, $listaa->ind_imp);
+                        $activeWorksheet->setCellValue('J' . $i, $listaa->total_ml);
+                        $activeWorksheet->setCellValue('K' . $i, $listaa->uen);
+                        $activeWorksheet->setCellValue('L' . $i, $listaa->linea);
+                        $activeWorksheet->setCellValue('M' . $i, $listaa->sublinea);
+                        $i++;
+                        $j++;
                     }
                     $i++;
                 }
@@ -275,117 +272,120 @@
         }
 
         $writer = new Xlsx($spreadsheet); //se crear el archivo excel coon los datoos creados anteriormente
-        $linkInforme='../informes/informe-'.date("Y-m-d H-i-s").'.xlsx'; //se define el lugar donde se va a guardar con el nombre
-        $writer->save($linkInforme);//se guarda el archivo en el link
+        $linkInforme = '../informes/informe-' . date("Y-m-d H-i-s") . '.xlsx'; //se define el lugar donde se va a guardar con el nombre
+        $writer->save($linkInforme); //se guarda el archivo en el link
     }
     ?>
-    <div class="base">
-        <header>
-            <?php
-            require_once('../php/header.php'); //carga el header
-            $i = 1;
-            ?>
-        </header>
-        <div class="contenedor" id="carga" hidden>
-            <img id="centrar-carga" src="../images/carga10.gif">
+    <div class="contenedor-carga" id="carga" hidden>
+        <img id="centrar-carga" src="../images/carga.gif">
+    </div>
+    <div class="container py-2" style="min-height: 80vh;" id="principal">
+        <div class="text-center">
+            <h3>INFORMES</h3>
         </div>
-        <div class="contenedor-informes" id="principal"> <!-- contenido entre el header y el footer -->
-            <h2>INFORMES</h2>
-            <div id="div_informes">
-                <div id="informes-filtro">
-                    <!-- OPCIONES PARA EL FILTRO DEL INFORME -->
-                    <h3>Seleccione los datos a mostrar en el informe</h3>
-                    <h4>Solicitante:</h4>
-                    <!-- SELECT PARA EL USUARIO -->
-                    <Select id="usuario" style="width: 18rem">
-                        <?php if (isset($_GET["usuarioo"]) && $_GET["usuarioo"] != "") { ?>
-                            <option value="<?php echo $usuarioo; ?>"><?php echo $usuarioo; ?></option>
-                        <?php } ?>
-                        <option value="">todos</option>
-                        <?php
-                        $user = $base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
-                        foreach ($user as $duser) {
-                            ?>
-                            <option value="<?php echo $duser->pk_cod_usr ?>"><?php echo $duser->pk_cod_usr ?></option>
+        <div class="container" style="min-height: 80vh;">
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <h4>Seleccione los datos a mostrar en el informe:</h4>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">SOLICITANTE: </label>
+                        <select class="form-select" aria-label="Default select example" id="usuario">
+                            <?php if (isset($_GET["usuarioo"]) && $_GET["usuarioo"] != "") { ?>
+                                <option value="<?php echo $usuarioo; ?>"><?php echo $usuarioo; ?></option>
+                            <?php } ?>
+                            <option value="">todos</option>
                             <?php
-                        }
-                        ?>
-                    </Select>
-                    <h4>Estado solicitud:</h4>
-                    <!-- SELECT PARA EL ESTADO DE LA SOLICITUD -->
-                    <Select id="estado" style="width: 18rem">
-                        <?php if (isset($_GET["estado"]) && $_GET["estado"] != "") { ?>
-                            <option value="<?php echo $estado; ?>"><?php echo $estado; ?></option>
-                        <?php } ?>
-                        <option value="">todos</option>
-                        <option value="ENVIADO">ENVIADO</option>
-                        <option value="RECHAZADO">RECHAZADO</option>
-                        <option value="ABIERTO">ABIERTO</option>
-                    </Select>
-                    <h4>Tipo solicitud:</h4>
-                    <!-- SELECT PARA EL TIPO DE SOLICITUD -->
-                    <Select id="tipo" style="width: 18rem">
-                        <?php if (isset($_GET["tipo"]) && $_GET["tipo"] != "") { ?>
-                            <option value="<?php echo $tipo; ?>"><?php echo $tipo; ?></option>
-                        <?php } ?>
-                        <option value="">todos</option>
-                        <option value="servicio">servicio</option>
-                        <option value="articulo">articulo</option>
-                    </Select>
-                    <h4>Fecha Documento:(Desde - Hasta)</h4>
-                    <!-- INPUT PARA SELECCIONAR LA FECHA DESDE DONDE SE QUIERE HACER EL INFORME -->
-                    <input type="date" id="desde" value="<?php if (isset($_GET["desde"]) && $_GET["desde"] != "") {
-                        echo $desde;
-                    } ?>" max="<?= date("Y-m-d") ?>">~
-                    <!-- INPUT PARA SELECCIONAR LA FECHA HASTA DONDE SE QUIERE HACER EL INFORME -->
-                    <input type="date" id="hasta" value="<?php if (isset($_GET["hasta"]) && $_GET["hasta"] != "") {
-                        echo $hasta;
-                    } else {
-                        echo date("Y-m-d");
-                    } ?>" max="<?= date("Y-m-d") ?>">
-                    <br>
-                    <!-- BOTONES PARA APLICAR FILTROS O QUITAR -->
-                    <button class="btn_informes" type="button" onclick="aplicarFiltro() ">APLICAR</button>
-                    <a href="informes.php"><button class="btn_informes" type="button">QUITAR</button></a>
+                            $user = $base->query("SELECT * FROM usuario")->fetchAll(PDO::FETCH_OBJ);
+                            foreach ($user as $duser) {
+                                ?>
+                                <option value="<?php echo $duser->pk_cod_usr ?>"><?php echo $duser->pk_cod_usr ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">ESTADO SOLICITUD: </label>
+                        <select class="form-select" aria-label="Default select example" id="estado">
+                            <?php if (isset($_GET["estado"]) && $_GET["estado"] != "") { ?>
+                                <option value="<?php echo $estado; ?>"><?php echo $estado; ?></option>
+                            <?php } ?>
+                            <option value="">todos</option>
+                            <option value="ENVIADO">ENVIADO</option>
+                            <option value="RECHAZADO">RECHAZADO</option>
+                            <option value="ABIERTO">ABIERTO</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">TIPO SOLICITUD: </label>
+                        <select class="form-select" aria-label="Default select example" id="tipo">
+                            <?php if (isset($_GET["tipo"]) && $_GET["tipo"] != "") { ?>
+                                <option value="<?php echo $tipo; ?>"><?php echo $tipo; ?></option>
+                            <?php } ?>
+                            <option value="">todos</option>
+                            <option value="servicio">servicio</option>
+                            <option value="articulo">articulo</option>
+                        </select>
+                    </div>
+                    <h6>Fecha Documento:</h6>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label">DESDE: </label>
+                                <input type="date" class="form-control" id="desde" max="<?= date("Y-m-d") ?>">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label">HASTA: </label>
+                                <input type="date" class="form-control" id="hasta" max="<?= date("Y-m-d") ?>" value="<?= date("Y-m-d") ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <button class="btn btn-danger btn-sm mb-3" onclick="aplicarFiltro()">APLICAR</button>
+                            <a href="informes.php" class="btn btn-danger btn-sm mb-3">QUITAR</a>
+                        </div>
+                    </div>
                 </div>
-                <div id="informes-observaciones">
-                    <h4>Observaciones:</h4>
-                    <!-- TEXT AREA PARA LAS OBSERVACIONES -->
-                    <textarea style="resize: none;" name="observaciones" id="observaciones" cols="45" rows="7"><?php if (isset($_GET["observaciones"])) {
-                        echo $_GET["observaciones"];
-                    } ?></textarea>
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label">OBSERVACIONES</label>
+                        <textarea class="form-control" id="observaciones" rows="8"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-success btn-sm mb-3"><i class="bi bi-file-earmark-excel" onclick="generarInforme()">
+                                GENERAR EXCEL</i></button>
+                        <br>
+                        <a id="btn_descargar" class="btn btn-success btn-sm mb-3" href="<?php echo $linkInforme ?>" download hidden><i class="bi bi-file-earmark-excel">
+                            DESCARGAR</i></a>
+                    </div>
                 </div>
-                <div id="informes-boton">
-                    <!-- BOTON PARA GENERAR EXCEL -->
-                    <button class="btn_informes" type="button" onclick="generarInforme()">Generar Excel del
-                        informe</button>
-                        <!-- CUANDO SE GENERA EL EXCEL SE ACTIVA EL BOTON PARA DESCARGAR -->
-                    <a href="<?php echo $linkInforme ?>" download><button class="btn_descargar" type="button"
-                            id="btn_descargar" hidden>DESCARGAR</button></a>
-                </div>
-                <!-- TABLA PARA VISUALIZAR LAS SOLICITUDES -->
-                <div id="informes-tabla">
-                    <div id="div_tablas_informes">
-                        <div class="outer_wrapperS">
-                            <div class="table_wrapperS">
-                                <table border="4px" id="tabla__informes">
-                                    <thead>
-                                        <th>N° Sol</th>
-                                        <th>Num SAP</th>
-                                        <th>Tipo</th>
-                                        <th>Estado</th>
-                                        <th>Fecha necesaria</th>
-                                        <th>Fehca documento</th>
-                                        <th>Solicitante</th>
-                                        <th>Departamento</th>
-                                        <th>Correo</th>
-                                        <th># sevicios /articulos</th>
-                                        <th>propietario</th>
-                                        <th>Comentarios</th>
-
-                                    </thead>
-                                    <tbody>
-                                        <?php
+            </div>
+            <div class="row">
+                <div class="overflow-x-scroll" id="tArticulos">
+                    <table class="table table-bordered table-striped table-hover" id="tablaServicios">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>N° Sol</th>
+                                <th>Num SAP</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Fecha necesaria</th>
+                                <th>Fehca documento</th>
+                                <th>Solicitante</th>
+                                <th>Departamento</th>
+                                <th>Correo</th>
+                                <th># sevicios /articulos</th>
+                                <th>propietario</th>
+                                <th>Comentarios</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
                                         // SE CARGAN LAS SOLICITUDES SEGUN LOS FILTROS
                                         $solicitud = $base->query($filtros)->fetchAll(PDO::FETCH_OBJ); //guarda las solicitudes de servicios hechas por el ususario de la sesion en un PDOStatement
                                         foreach ($solicitud as $solicitudes) {
@@ -440,31 +440,22 @@
                                             }
                                         }
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <footer>
-            <?php
-            require_once('../php/footer.php'); //carga el footer
-            ?>
-        </footer>
     </div>
+    <?php
+    require('footer.php')
+        ?>
 </body>
 <script>
-    function pantallaCarga(){
-        $('#principal').fadeOut();
-        $('#carga').prop("hidden",false);
-    }
-    // LE DA ESTIO A LOS SELECT Y LES AGREGA EL BUSCADOR
-    $('#usuario').select2();
-    $('#estado').select2();
-    $('#tipo').select2();
-                            
+    $('#tablaServicios').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        }
+    });
     //FUNCION PARA APLICAR LOS FILTROS SELECCIONADOS POR EL USUARIO
     function aplicarFiltro() {
         console.log("USUARIO: " + $('#usuario').val());
