@@ -137,7 +137,7 @@
                 </div>
             </form>
             <!-- DIALOG PARA AGREGAR USUARIO -->
-    <dialog id="dialogActualizarContraseña" style="width: 50%;">
+    <dialog id="dialogActualizarContraseña" style="min-width: 50%;">
         <div class="card">
             <div class="card-header">
                 INGRESAR LA NUEVA CONTRASEÑA:

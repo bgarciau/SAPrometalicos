@@ -378,6 +378,18 @@
 
         //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
         $(document).ready(function () {
+            numero = 1;
+            for (i = 0; i < numeroFila; i++) {
+                if (document.getElementById('numeroF' + i)) {
+                    console.log("si numero");
+                    //si se selecciono un codigo de articulo
+                    $('#numeroF' + i).val(numero);
+                    numero++;
+                }
+                else {
+                    console.log("no");
+                }
+            }
             for (i = 0; i < numeroFila; i++) {
                 $('#codigoServicio' + i).change(function (e) { //por cada fila, cuando se seleccione un servicio, este hara cambios en otros campos
 

@@ -132,7 +132,7 @@
         </div>
     </div>
     <!-- DIALOG PARA AGREGAR USUARIO -->
-    <dialog id="dialogAgregarUsuario" style="width: 50%;">
+    <dialog id="dialogAgregarUsuario" style="min-width: 50%;">
         <div class="card">
             <div class="card-header">
                 INGRESAR USUARIO:

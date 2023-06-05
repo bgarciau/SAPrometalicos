@@ -255,7 +255,7 @@
         // columna 1 se crea un checkbox para confirmar si el usuario desea enviar o no el articulo
         col1.innerHTML = "<input class='checkbox-servicio' type='checkbox' value='si' name='enviar" + numeroFila + "' id='enviar" + numeroFila + "' checked>";
         // clumna 2 se crea un input deshabilitado para mostrar el numero del articulo en la fila
-        col2.innerHTML = "<input id='numeroF" + numeroFila + "' value='"+(numeroFila+1)+"' style='width:25px;' disabled>";
+        col2.innerHTML = "<input id='numeroF" + numeroFila + "' value='" + (numeroFila + 1) + "' style='width:25px;' disabled>";
         //columna 3 se crea un select que carga el codigo de los articulos
         col3.innerHTML = '<select class="select_tabla" name="codArt' + numeroFila + '" id="codigoArticulo' + numeroFila + '" required></select>';
         const $selectArticulo = document.querySelector("#codigoArticulo" + numeroFila);//toma el select que se creo
@@ -384,6 +384,18 @@
 
         //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
         $(document).ready(function () {
+            numero = 1;
+            for (i = 0; i < numeroFila; i++) {
+                if (document.getElementById('numeroF' + i)) {
+                    console.log("si numero");
+                    //si se selecciono un codigo de articulo
+                    $('#numeroF' + i).val(numero);
+                    numero++;
+                }
+                else {
+                    console.log("no");
+                }
+            }
             for (i = 0; i < numeroFila; i++) {
 
                 $('#codigoArticulo' + i).change(function (e) { //por cada fila, cuando se seleccione un codigo de articulo, este hara cambios en otros campos
