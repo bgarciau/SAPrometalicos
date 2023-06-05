@@ -171,6 +171,7 @@
         ?>
 </body>
 <script>
+    // MUESTRA O ESCONDE EL DIALOG PARA ACTUAIZAR LA CONTRASEÑA
     const btnActualizarContraseña = document.getElementById('btnActualizarContraseña');
     const btnCerrarContraseña = document.getElementById('btnCerrarContraseña');
     const dialogActualizarContraseña = document.getElementById('dialogActualizarContraseña');

@@ -285,6 +285,7 @@
 </body>
 <script>
     <?php
+    // MUESTRA LA TABLA SEGUN LA ELECICON DEL USUARIO
     if ($xtabla == "tservicios") {
         ?>
          $('#tServicios').prop("hidden",false);
@@ -311,6 +312,7 @@
     <?php
     }
     ?>
+    //MANDA EL NUMERO DE SOLICITUD PARA QUE ESTA SEA PROCESADA
     function enviarServicio(numSolicitud) {
         Swal.fire({
             icon: 'question',
@@ -336,6 +338,7 @@
             }
         })
     }
+    // ALERTA LUEGO DE ENVIAR LA SOLICITUD Y RECIBIR LA RESPUESTA DE SAP
     alerta = <?php echo $alerta ?>;
     if (alerta != "NO") {
         Swal.fire({

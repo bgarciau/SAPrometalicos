@@ -205,6 +205,7 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         }
     });
+    // DIALOG PARA AGREGAR USUARIOS
     const btnAgregarUsuario = document.getElementById('btnAgregarUsuario');
     const btnCerrarUsuario = document.getElementById('btnCerrarUsuario');
     const dialogAgregarUsuario = document.getElementById('dialogAgregarUsuario');
@@ -216,6 +217,7 @@
         dialogAgregarUsuario.close();
     });
 
+    // COMPRUEBA CLAVE
     function comprobarClave() { //funcion para coomprobar si las claves son iguales
         let clave1 = document.f1.clave1.value
         let clave2 = document.f1.clave2.value
