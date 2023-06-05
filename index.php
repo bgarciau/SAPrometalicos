@@ -23,21 +23,31 @@
     <div class="contenedor-carga" id="carga" hidden>
         <img id="centrar-carga" src="images/carga.gif">
     </div>
-    <div class="contenedor-login" style="min-height: 80vh;" id="principal"> <!-- Contenedido entre el header y el footer -->
-        <div class="loginback"> <!-- le pone un gif al fondo del login -->
-            <div class="login"><!-- acomoda el recuadro del login en el centro -->
-                <form action="crud/comprueba_login.php" method="post">
-                    <!-- Formulario dle login que manda la informacion recibida a comprueba login que lo que hace es comprobar los datos en la base de datos -->
-                    <div class="form">
-                        <h2>INGRESO</h2>
-                        <input type="text" placeholder="USUARIO" name="usuario">
-                        <input type="password" placeholder="CONTRASEÑA" name="password">
-                        <p style="color:red;font-size:small" id="loginIncorrecto" hidden>*Usuario o contraseña
-                            incorrectos*</p>
-                        <input onclick="ingresar()" type="button" value="INGRESAR" name="Ingresar" class="submit">
-                        <input type="submit" value="INGRESAR" id="Ingresar" class="submit" hidden>
+    <div style="min-height: 80vh;" id="principal" class="loginback">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-4">
+                    <div class="card mt-5">
+                        <div class="card-header bg-dark text-white text-center">
+                            <h4>INGRESO</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="crud/comprueba_login.php">
+                                <div class="form-group">
+                                    <label for="usuario">
+                                        <i class="bi bi-person-fill"></i>USUARIO:</label>
+                                    <input type="text" class="form-control" id="usuario" name="usuario" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"><i class="bi bi-key-fill"></i>Contraseña:</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <h6 style="color:red;font-size:small" id="loginIncorrecto" hidden>*Usuario o contraseña incorrectos*</h6>
+                                </div>
+                                <button type="submit" class="btn btn-danger btn-block mt-4" onclick="ingresar()" value="INGRESAR" name="Ingresar">Iniciar sesión</button>
+                            </form>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -63,7 +73,7 @@
 </body>
 <script>
     if ('<?php echo $log ?>' == "mal") {
-        $('#loginIncorrecto').show();
+        $('#loginIncorrecto').prop("hidden",false);
     }
     function ingresar() {
         $('#principal').fadeOut();

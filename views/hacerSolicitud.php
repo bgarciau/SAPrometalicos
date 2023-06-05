@@ -189,6 +189,7 @@
                                     <th>% Descuento</th>
                                     <th>indicador de impuestos</th>
                                     <th>total ml</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="tabla__servicios">
@@ -210,7 +211,8 @@
                     </div>
                 </div>
                 <div class="col text-center bloques py-2">
-                    <button type="button" class="btn btn-success" onclick="guardarSolicitud()"><i class="bi bi-save"> GUARDAR SOLICITUD </i></button>
+                    <button type="button" class="btn btn-success" onclick="guardarSolicitud()"><i class="bi bi-save">
+                            GUARDAR SOLICITUD </i></button>
                 </div>
             </div>
             <?php
@@ -234,6 +236,7 @@
     const valores = datos.value;
     numeroFila = 0;
     insertarFila(); //insertar la fila predeterminada de la tabla
+
     function insertarFila() { //funcion para insertar fila con los datos de los servicios
 
         let tblDatos = document.getElementById('tabla__servicios').insertRow(-1); //inserta la fila en la ultima posicion de la tabla
@@ -252,13 +255,14 @@
         let col12 = tblDatos.insertCell(11);
         let col13 = tblDatos.insertCell(12);
         let col14 = tblDatos.insertCell(13);
+        let col15 = tblDatos.insertCell(14);
 
         // columna 1 se crea un checkbox para confirmar si el usuario desea enviar o no el servicio
         col1.innerHTML = "<input type='checkbox' value='si' name='enviar" + numeroFila + "' id='enviar" + numeroFila + "' checked>";
         // clumna 2 se crea un input deshabilitado para mostrar el numero del servicio en la fila
-        col2.innerHTML = numeroFila + 1;
+        col2.innerHTML = "<input id='numeroF" + numeroFila + "' value='" + (numeroFila + 1) + "' style='width:25px;' disabled>";
         //columna 3 se crea un select que carga la descripcion de los servicios
-        col3.innerHTML = '<select class="select_tabla" name="cod_arse' + numeroFila + '" id="codigoServicio' + numeroFila + '" required></select>';
+        col3.innerHTML = '<select class="select_tabla" name="cod_arse' + numeroFila + '" id="codigoServicio' + numeroFila + '" onclick="cargarDatos(' + numeroFila + ')" required></select>';
         const $select_tabla = document.querySelector("#codigoServicio" + numeroFila); //se toma el select que se creo
         const optionServicio = document.createElement('option'); //se crea la opcion por defecto del select
         optionServicio.value = ""; //se deja vacio para poder restringir el envio de la solicitud
@@ -367,6 +371,7 @@
         col14.innerHTML = "<input class='inputTabla' type='search'\n\
                                                         id='total_ml" + numeroFila + "' name='total_ml" + numeroFila + "'\n\
                                                         onclick='ftotal()' readonly>";
+        col15.innerHTML = "<td><input type='button' class='borrar' style='background-color:red; color:white' value='x' /></td>";
 
         numeroFila++;
 
@@ -374,46 +379,69 @@
         //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
         $(document).ready(function () {
             for (i = 0; i < numeroFila; i++) {
-
                 $('#codigoServicio' + i).change(function (e) { //por cada fila, cuando se seleccione un servicio, este hara cambios en otros campos
 
 
                     for (i = 0; i < numeroFila; i++) {
-                        //comprueba cual fue la fila que selecciono el servicio para no cambiar las demas, y si su valor no es el vacio
-                        if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != "") {
-                            $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true); //carga el uen del servicio
-                            $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true); //carga la cuenta mayor del servicio
-                            $('#linea' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true); //carga la linea del servicio
-                            $('#sublinea' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true); //carga la sublinea del servicio
+                        console.log(i);
+                        if (document.getElementById('codigoServicio' + i)) {
+                            console.log("si");
+                            //comprueba cual fue la fila que selecciono el servicio para no cambiar las demas, y si su valor no es el vacio
+                            if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() != "") {
+                                $('#uen' + i).val(valores[$(this).val()]["U_UEN"]).prop("readonly", true); //carga el uen del servicio
+                                $('#cuentaMayor' + i).val(valores[$(this).val()]["U_CuentaCosto"]).prop("readonly", true); //carga la cuenta mayor del servicio
+                                $('#linea' + i).val(valores[$(this).val()]["U_Linea"]).prop("readonly", true); //carga la linea del servicio
+                                $('#sublinea' + i).val(valores[$(this).val()]["U_SubLinea"]).prop("readonly", true); //carga la sublinea del servicio
+                            }
+                            //comprueba si el valor es vacio, el valor por defecto para vaciar los demas campos
+                            if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() == "") {
+                                $('#uen' + i).val(""); //deja el uen vacio
+                                $('#cuentaMayor' + i).val(""); //deja la cuenta mayor vacia
+                                $('#linea' + i).val(""); //deja la linea vacia
+                                $('#sublinea' + i).val(""); //deja la sublinea vacia
+                            }
                         }
-                        //comprueba si el valor es vacio, el valor por defecto para vaciar los demas campos
-                        if ($(this).val() == document.getElementById('codigoServicio' + i).value && $(this).val() == "") {
-                            $('#uen' + i).val(""); //deja el uen vacio
-                            $('#cuentaMayor' + i).val(""); //deja la cuenta mayor vacia
-                            $('#linea' + i).val(""); //deja la linea vacia
-                            $('#sublinea' + i).val(""); //deja la sublinea vacia
+                        else {
+                            console.log("no");
                         }
-
                     }
                 })
             }
         });
     }
+    $(document).on('click', '.borrar', function (event) {
+        event.preventDefault();
+        $(this).closest('tr').remove();
+        numero = 1;
+        for (i = 0; i < numeroFila; i++) {
+            if (document.getElementById('numeroF' + i)) {
+                console.log("si numero");
+                //si se selecciono un codigo de articulo
+                $('#numeroF' + i).val(numero);
+                numero++;
+            }
+            else {
+                console.log("no");
+            }
+        }
+    });
 
     //funcion para cargar el total
     function ftotal() {
         i = 0;
         while (i < numeroFila) { //para cargar el total en cada una de las filas
-            const desc = document.getElementById('por_dec' + i).value; //toma el valor del porcenaje de descuento
-            const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
-            const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
-            var impuestoPor = impuesto.split('~');
-            console.log(impuestoPor[1]);
-            totalml = precio - (desc * precio / 100);
-            console.log(totalml);
-            totalml = totalml + (impuestoPor[1] * totalml / 100)
-            console.log(totalml);
-            document.getElementById('total_ml' + i).value = totalml; //le asigna al total el precio menos el porcentaje de descuento
+            if (document.getElementById('codigoServicio' + i)) {
+                const desc = document.getElementById('por_dec' + i).value; //toma el valor del porcenaje de descuento
+                const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
+                const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
+                var impuestoPor = impuesto.split('~');
+                console.log(impuestoPor[1]);
+                totalml = precio - (desc * precio / 100);
+                console.log(totalml);
+                totalml = totalml + (impuestoPor[1] * totalml / 100)
+                console.log(totalml);
+                document.getElementById('total_ml' + i).value = totalml; //le asigna al total el precio menos el porcentaje de descuento
+            }
             i++;
         }
     }
@@ -444,90 +472,92 @@
         total = [];
         // ----------------------------------------------------------------------------------
         for (i = 0; i < numeroFila; i++) { //for para recorrer cada fila
-            check = document.getElementById('enviar' + i).checked; //si el chekbox esta selecionado devuelve true 
-            if (check == true) { //como esta seleccionado si guarda el servicio
-                console.log("checkbox: SI");
-                codArse[j] = document.getElementById('codigoServicio' + i).value; //toma el valor del codigo del servicio
-                if (codArse[j] == "") { //verifica si se selecciono un servicio
-                    //si no se selecciono ningun servicio hace lo siguiente
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#codigoServicio' + i).focus(); //posiciona la pagina en el campo que falta
-                            $('#codigoServicio' + i).select2('open'); //en este caso es un select y la libreria de selec2 nos deja desplegar el select
-                        }
-                    })
-                    cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
-                    break; //para salir del ciclo que recorre las filas
-                    // swal('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio'); //manda un mensaje de alerta con el campo en el que faltan datos
-                }
-                codigoArse[j] = valoresServicio[codArse[j]]['Name']; //cambia el valor del codigo por su nombre
-                fechaNec[j] = document.getElementById('fecha_Nec' + i).value; //toma el valor de la fecha necesaria 
-                if (fechaNec[j] == "") { //si no hay ningun valor hace lo siguiente
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            document.getElementById('fecha_Nec' + i).focus(); //posiciona la pagina para que se vea la fecha necesaria
-                        }
-                    })
-                    // alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria'); //muestra un mensaje de alerta
-                    cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
-                    break; //para salir del ciclo que recorre las filas
-                }
-                proveedor[j] = document.getElementById('proveedor' + i).value; //toma el valor del proveedor
-                precioInfo[j] = document.getElementById('precio_inf' + i).value; //toma el precio info
-                cuentaMayor[j] = document.getElementById('cuentaMayor' + i).value; //toma el valor de la cuenta mayor
-                uen[j] = document.getElementById('uen' + i).value; //toma el valor del uen
-                linea[j] = document.getElementById('linea' + i).value; //toma el valor de la linea
-                sublinea[j] = document.getElementById('sublinea' + i).value; //toma el valor de la sublinea
-                proyecto[j] = document.getElementById('proyecto' + i).value; //toma el valor del proyecto
-                if (proyecto[j] == "") { //comprueba si el proyecto esta vacio y hace lo siguiente
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#proyecto' + i).focus(); //posiciona la pagina para que se vea el proyectoo
-                            $('#proyecto' + i).select2('open'); //abre el select
-                        }
-                    })
-                    // alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto'); //muestra una alerta
+            if (document.getElementById('codigoServicio' + i)) {
+                check = document.getElementById('enviar' + i).checked; //si el chekbox esta selecionado devuelve true 
+                if (check == true) { //como esta seleccionado si guarda el servicio
+                    console.log("checkbox: SI");
+                    codArse[j] = document.getElementById('codigoServicio' + i).value; //toma el valor del codigo del servicio
+                    if (codArse[j] == "") { //verifica si se selecciono un servicio
+                        //si no se selecciono ningun servicio hace lo siguiente
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#codigoServicio' + i).focus(); //posiciona la pagina en el campo que falta
+                                $('#codigoServicio' + i).select2('open'); //en este caso es un select y la libreria de selec2 nos deja desplegar el select
+                            }
+                        })
+                        cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
+                        break; //para salir del ciclo que recorre las filas
+                        // swal('Error en la fila ' + (i + 1) + ' debe seleccionar un servicio'); //manda un mensaje de alerta con el campo en el que faltan datos
+                    }
+                    codigoArse[j] = valoresServicio[codArse[j]]['Name']; //cambia el valor del codigo por su nombre
+                    fechaNec[j] = document.getElementById('fecha_Nec' + i).value; //toma el valor de la fecha necesaria 
+                    if (fechaNec[j] == "") { //si no hay ningun valor hace lo siguiente
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('fecha_Nec' + i).focus(); //posiciona la pagina para que se vea la fecha necesaria
+                            }
+                        })
+                        // alert('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria'); //muestra un mensaje de alerta
+                        cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
+                        break; //para salir del ciclo que recorre las filas
+                    }
+                    proveedor[j] = document.getElementById('proveedor' + i).value; //toma el valor del proveedor
+                    precioInfo[j] = document.getElementById('precio_inf' + i).value; //toma el precio info
+                    cuentaMayor[j] = document.getElementById('cuentaMayor' + i).value; //toma el valor de la cuenta mayor
+                    uen[j] = document.getElementById('uen' + i).value; //toma el valor del uen
+                    linea[j] = document.getElementById('linea' + i).value; //toma el valor de la linea
+                    sublinea[j] = document.getElementById('sublinea' + i).value; //toma el valor de la sublinea
+                    proyecto[j] = document.getElementById('proyecto' + i).value; //toma el valor del proyecto
+                    if (proyecto[j] == "") { //comprueba si el proyecto esta vacio y hace lo siguiente
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#proyecto' + i).focus(); //posiciona la pagina para que se vea el proyectoo
+                                $('#proyecto' + i).select2('open'); //abre el select
+                            }
+                        })
+                        // alert('Error en la fila ' + (i + 1) + ' debe seleccionar un proyecto'); //muestra una alerta
 
-                    cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
-                    break; //para salir del ciclo que recorre las filas
-                }
-                porDesc[j] = document.getElementById('por_dec' + i).value; //toma el valor del porcentaje de descuento
-                indImp[j] = document.getElementById('ind_imp' + i).value; //toma el valor del indicador de impuestos
-                if (indImp[j] == "") { //coomprueba si el indicador de impuestos esta vacio y si lo esta hace lo siguiente
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#ind_imp' + i).focus(); //posiciona la pagina para que se vea el indicador deimpuestos
-                            $('#ind_imp' + i).select2('open'); //abre el select
-                        }
-                    })
-                    cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
-                    break; //para salir del ciclo que recorre las filas
-                }
-                total[j] = document.getElementById('total_ml' + i).value; //toma el valor del total
-                cantidad++; //suma uno a la cantidad para identificar que lleva una fila
+                        cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
+                        break; //para salir del ciclo que recorre las filas
+                    }
+                    porDesc[j] = document.getElementById('por_dec' + i).value; //toma el valor del porcentaje de descuento
+                    indImp[j] = document.getElementById('ind_imp' + i).value; //toma el valor del indicador de impuestos
+                    if (indImp[j] == "") { //coomprueba si el indicador de impuestos esta vacio y si lo esta hace lo siguiente
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#ind_imp' + i).focus(); //posiciona la pagina para que se vea el indicador deimpuestos
+                                $('#ind_imp' + i).select2('open'); //abre el select
+                            }
+                        })
+                        cantidad = -100; //ponemos la cantidad en -100 para que no pase los demas condicionales
+                        break; //para salir del ciclo que recorre las filas
+                    }
+                    total[j] = document.getElementById('total_ml' + i).value; //toma el valor del total
+                    cantidad++; //suma uno a la cantidad para identificar que lleva una fila
 
-                //muestra los datos en la consola
-                console.log("fila: ", j);
-                console.log("codigoArse: ", codigoArse[j]);
-                console.log("fechaNec: ", fechaNec[j]);
-                console.log("proveedor: ", proveedor[j]);
-                console.log("precio info: ", precioInfo[j]);
-                console.log("cuenta mayor: ", cuentaMayor[j]);
-                console.log("uen: ", uen[j]);
-                console.log("linea: ", linea[j]);
-                console.log("sublinea: ", sublinea[j]);
-                console.log("proyecto: ", proyecto[j]);
-                console.log("porcentaje descuento   : ", porDesc[j]);
-                console.log("indicador de impuesto: ", indImp[j]);
-                console.log("total ml: ", total[j]);
-                console.log("cantidad: ", cantidad);
-                j++; //suma uno para seguir con la siguiente fila
-            } else { // si el checkbox no esta seleccionado no hace nada con esa fila
-                console.log("checkbox: NO");
+                    //muestra los datos en la consola
+                    console.log("fila: ", j);
+                    console.log("codigoArse: ", codigoArse[j]);
+                    console.log("fechaNec: ", fechaNec[j]);
+                    console.log("proveedor: ", proveedor[j]);
+                    console.log("precio info: ", precioInfo[j]);
+                    console.log("cuenta mayor: ", cuentaMayor[j]);
+                    console.log("uen: ", uen[j]);
+                    console.log("linea: ", linea[j]);
+                    console.log("sublinea: ", sublinea[j]);
+                    console.log("proyecto: ", proyecto[j]);
+                    console.log("porcentaje descuento   : ", porDesc[j]);
+                    console.log("indicador de impuesto: ", indImp[j]);
+                    console.log("total ml: ", total[j]);
+                    console.log("cantidad: ", cantidad);
+                    j++; //suma uno para seguir con la siguiente fila
+                } else { // si el checkbox no esta seleccionado no hace nada con esa fila
+                    console.log("checkbox: NO");
+                }
             }
         }
 

@@ -166,7 +166,7 @@
             <div class="row">
                 <div class="col bloques py-2">
                     <div class="py-2">
-                    <a href="hacerSolicitud" class="btn btn-danger" onclick="pantallaCarga()">SERVICIOS</a>
+                        <a href="hacerSolicitud" class="btn btn-danger" onclick="pantallaCarga()">SERVICIOS</a>
                         <button type="button" class="btn btn-danger">ARTICULOS</button>
                         <button type="button" class="btn btn-success" onclick="insertarFila()"><i class="bi bi-plus-circle">
                                 AGREGAR</i></button>
@@ -189,6 +189,7 @@
                                     <th>UEN</th>
                                     <th>lineas</th>
                                     <th>sublineas</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="tabla__articulos">
@@ -249,12 +250,12 @@
         let col12 = tblDatos.insertCell(11);
         let col13 = tblDatos.insertCell(12);
         let col14 = tblDatos.insertCell(13);
+        let col15 = tblDatos.insertCell(14);
 
         // columna 1 se crea un checkbox para confirmar si el usuario desea enviar o no el articulo
         col1.innerHTML = "<input class='checkbox-servicio' type='checkbox' value='si' name='enviar" + numeroFila + "' id='enviar" + numeroFila + "' checked>";
         // clumna 2 se crea un input deshabilitado para mostrar el numero del articulo en la fila
-        col2.innerHTML = "<input class='inputTablaNumero' type='text'\n\
-                 value='" + (numeroFila + 1) + "' disabled>";
+        col2.innerHTML = "<input id='numeroF" + numeroFila + "' value='"+(numeroFila+1)+"' style='width:25px;' disabled>";
         //columna 3 se crea un select que carga el codigo de los articulos
         col3.innerHTML = '<select class="select_tabla" name="codArt' + numeroFila + '" id="codigoArticulo' + numeroFila + '" required></select>';
         const $selectArticulo = document.querySelector("#codigoArticulo" + numeroFila);//toma el select que se creo
@@ -378,6 +379,7 @@
         col14.innerHTML = "<select class='select_tabla' name='sublinea" + numeroFila + "'\n\
                                                                 id='sublinea"+ numeroFila + "' disabled></select>";
 
+        col15.innerHTML = "<td><input type='button' class='borrar' style='background-color:red; color:white' value='x' /></td>";
         numeroFila++;
 
         //carga cuando el documento esta listo o luego de agregar una fila para que esta pueda hacer lo siguiente:
@@ -387,219 +389,233 @@
                 $('#codigoArticulo' + i).change(function (e) { //por cada fila, cuando se seleccione un codigo de articulo, este hara cambios en otros campos
 
                     for (i = 0; i < numeroFila; i++) {
-
-                        //si se selecciono un codigo de articulo
-                        if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() != "") {
-                            $('#descripcion' + i).val($(this).val()); //se carga su descripicion
-                            $('#descripcion' + i).select2();
+                        if (document.getElementById('codigoArticulo' + i)) {
+                            console.log("si");
+                            //si se selecciono un codigo de articulo
+                            if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() != "") {
+                                $('#descripcion' + i).val($(this).val()); //se carga su descripicion
+                                $('#descripcion' + i).select2();
+                            }
+                            //si se elige la opcion por defecto
+                            if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() == "") {
+                                $('#descripcion' + i).val($(this).val());//carga la opcion por defecto de la descripcion
+                                $('#descripcion' + i).select2();
+                            }
                         }
-                        //si se elige la opcion por defecto
-                        if ($(this).val() == document.getElementById('codigoArticulo' + i).value && $(this).val() == "") {
-                            $('#descripcion' + i).val($(this).val());//carga la opcion por defecto de la descripcion
-                            $('#descripcion' + i).select2();
+                        else {
+                            console.log("no");
                         }
                     }
                 })
 
+
                 $('#descripcion' + i).change(function (e) { //por cada fila, cuando se seleccione una descripcion del articulo, este hara cambios en otros campos
 
                     for (i = 0; i < numeroFila; i++) {
-
-                        //si se selecciona una descripcion
-                        if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() != "") {
-                            $('#codigoArticulo' + i).val($(this).val());//carga el codigo del aticulo
-                            $('#codigoArticulo' + i).select2();
-                        }
-                        //si se selecciona la opcion por defecto
-                        if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() == "") {
-                            $('#codigoArticulo' + i).val($(this).val());//se carga el valor por defecto
-                            $('#codigoArticulo' + i).select2();
+                        if (document.getElementById('descripcion' + i)) {
+                            console.log("si");
+                            //si se selecciona una descripcion
+                            if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() != "") {
+                                $('#codigoArticulo' + i).val($(this).val());//carga el codigo del aticulo
+                                $('#codigoArticulo' + i).select2();
+                            }
+                            //si se selecciona la opcion por defecto
+                            if ($(this).val() == document.getElementById('descripcion' + i).value && $(this).val() == "") {
+                                $('#codigoArticulo' + i).val($(this).val());//se carga el valor por defecto
+                                $('#codigoArticulo' + i).select2();
+                            }
                         }
                     }
                 })
 
                 $('#uen' + i).change(function (e) { //por cada fila, cuando se seleccione un uen, este hara cambios en otros campos
                     for (i = 0; i < numeroFila; i++) {
-                        //al selecionar un uen
-                        if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() != "") {
-                            $('#linea' + i).prop("disabled", false).prop("required", false);//activa la columna de la linea
-                            $('#linea' + i).select2();//carga el buscaodr y el estilo del select2
-                            const datos = <?php echo json_encode($respuestaLinea); ?>
+                        if (document.getElementById('uen' + i)) {
+                            console.log("si");
+                            //al selecionar un uen
+                            if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() != "") {
+                                $('#linea' + i).prop("disabled", false).prop("required", false);//activa la columna de la linea
+                                $('#linea' + i).select2();//carga el buscaodr y el estilo del select2
+                                const datos = <?php echo json_encode($respuestaLinea); ?>
                                 // Justo aquí estamos pasando la variable ----^
                                 // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
                                 const valores = datos.value;
 
-                            const $select = document.querySelector("#linea" + i);//se toma el selector de la linea de la misma fila que el uen
+                                const $select = document.querySelector("#linea" + i);//se toma el selector de la linea de la misma fila que el uen
 
-                            const opcionCambiada = () => {
-                                console.log("cambio");
-                            };
+                                const opcionCambiada = () => {
+                                    console.log("cambio");
+                                };
 
-                            $select.addEventListener("change", opcionCambiada)
-                            for (let k = $select.options.length; k >= 0; k--) {//elimina todo lo que tenga el select
-                                $select.remove(k);
-                            }
-
-                            //se toma la sublinea
-                            const $select2 = document.querySelector("#sublinea" + i);
-
-                            const opcionCambiada2 = () => {
-                                console.log("cambio");
-                            };
-
-                            //se borran los valores de la sublinea
-                            $select2.addEventListener("change", opcionCambiada2)
-                            for (let k = $select2.options.length; k >= 0; k--) {
-                                $select2.remove(k);
-                            }
-
-                            const option = document.createElement('option');//crea una opcion
-                            option.value = "";//valor por defeto
-                            option.text = "~";//texto que ve ek suaurio
-                            $select.appendChild(option);//se agrega la opcion al select
-                            $('#uen' + i).select2();//carga el buscador y lo estilos del select2
-                            j = 0;
-                            while (j >= 0 && j < 360) {//se bucan datos segun el uen para aplicar el filtro segun el codigo
-                                x = valores[j]['FactorCode'] * 10 ** (-1);//deja los primeros 3 dijitos del codigo de la linea 
-                                x = Math.floor(x);//redondea el valor de x por abajo 
-                                //compara el valr de la linea con el del uen
-                                if (x == $(this).val()) {// si se encuentra uno igual
-                                    $select.remove(0);//quita los valores por defecto
-                                    const option = document.createElement('option');//crea una opcion
-                                    option.value = "NO";//crea una opcion en cero para que se pueda comprobar si se eligio o no
-                                    option.text = "Seleccione";//dice seleccione cuando si carga algo con el codigo del selec
-                                    $select.appendChild(option);//agrega la opcion al select
-                                    //preguna si el valor de x es igual al del uen mientras se encuentren iguales
-                                    while (x == ($(this).val())) {
-                                        const option = document.createElement('option');//crea una opcion
-                                        option.value = valores[j]['FactorCode'];//le asigna como valor el codigo de la linea
-                                        option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];//le asigna como texto el codigo y la descripcion de la linea
-                                        $select.appendChild(option);//agrega la opcion en el select de la linea
-                                        j++;
-                                        //se toman los 3 primeros numeros de la siguiente linea
-                                        x = valores[j]['FactorCode'] * 10 ** (-1);
-                                        x = Math.floor(x);
-                                    }
-                                    j = -100; //sale del ciclo luego de encontrar las lineas
+                                $select.addEventListener("change", opcionCambiada)
+                                for (let k = $select.options.length; k >= 0; k--) {//elimina todo lo que tenga el select
+                                    $select.remove(k);
                                 }
-                                j++;
+
+                                //se toma la sublinea
+                                const $select2 = document.querySelector("#sublinea" + i);
+
+                                const opcionCambiada2 = () => {
+                                    console.log("cambio");
+                                };
+
+                                //se borran los valores de la sublinea
+                                $select2.addEventListener("change", opcionCambiada2)
+                                for (let k = $select2.options.length; k >= 0; k--) {
+                                    $select2.remove(k);
+                                }
+
+                                const option = document.createElement('option');//crea una opcion
+                                option.value = "";//valor por defeto
+                                option.text = "~";//texto que ve ek suaurio
+                                $select.appendChild(option);//se agrega la opcion al select
+                                $('#uen' + i).select2();//carga el buscador y lo estilos del select2
+                                j = 0;
+                                while (j >= 0 && j < 360) {//se bucan datos segun el uen para aplicar el filtro segun el codigo
+                                    x = valores[j]['FactorCode'] * 10 ** (-1);//deja los primeros 3 dijitos del codigo de la linea 
+                                    x = Math.floor(x);//redondea el valor de x por abajo 
+                                    //compara el valr de la linea con el del uen
+                                    if (x == $(this).val()) {// si se encuentra uno igual
+                                        $select.remove(0);//quita los valores por defecto
+                                        const option = document.createElement('option');//crea una opcion
+                                        option.value = "NO";//crea una opcion en cero para que se pueda comprobar si se eligio o no
+                                        option.text = "Seleccione";//dice seleccione cuando si carga algo con el codigo del selec
+                                        $select.appendChild(option);//agrega la opcion al select
+                                        //preguna si el valor de x es igual al del uen mientras se encuentren iguales
+                                        while (x == ($(this).val())) {
+                                            const option = document.createElement('option');//crea una opcion
+                                            option.value = valores[j]['FactorCode'];//le asigna como valor el codigo de la linea
+                                            option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];//le asigna como texto el codigo y la descripcion de la linea
+                                            $select.appendChild(option);//agrega la opcion en el select de la linea
+                                            j++;
+                                            //se toman los 3 primeros numeros de la siguiente linea
+                                            x = valores[j]['FactorCode'] * 10 ** (-1);
+                                            x = Math.floor(x);
+                                        }
+                                        j = -100; //sale del ciclo luego de encontrar las lineas
+                                    }
+                                    j++;
+                                }
+                                //si se cambia el uen por el valor por defecto
+                            } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == "") {
+                                //se toma la linea
+                                console.log("uen por defecto");
+                                const $select = document.querySelector("#linea" + i);
+
+                                const opcionCambiada = () => {
+                                    console.log("cambio");
+                                };
+
+                                //se borran los valores de la linea
+                                $select.addEventListener("change", opcionCambiada)
+                                for (let k = $select.options.length; k >= 0; k--) {
+                                    $select.remove(k);
+                                }
+
+                                //se toma la sublinea
+                                const $select2 = document.querySelector("#sublinea" + i);
+
+                                const opcionCambiada2 = () => {
+                                    console.log("cambio");
+                                };
+
+                                //se borran los valores de la sublinea
+                                $select2.addEventListener("change", opcionCambiada2)
+                                for (let k = $select2.options.length; k >= 0; k--) {
+                                    $select2.remove(k);
+                                }
+                                //se ocultan las opciones para que el usuario escoga el uen
+                                $('#linea' + i).prop("disabled", true).val(-1);
+                                $('#linea' + i).select2();
+                                $('#sublinea' + i).prop("disabled", true).val(-1);
+                                $('#sublinea' + i).select2();
                             }
-                            //si se cambia el uen por el valor por defecto
-                        } else if ($(this).val() == document.getElementById('uen' + i).value && $(this).val() == "") {
-                            //se toma la linea
-                            console.log("uen por defecto");
-                            const $select = document.querySelector("#linea" + i);
-
-                            const opcionCambiada = () => {
-                                console.log("cambio");
-                            };
-
-                            //se borran los valores de la linea
-                            $select.addEventListener("change", opcionCambiada)
-                            for (let k = $select.options.length; k >= 0; k--) {
-                                $select.remove(k);
-                            }
-
-                            //se toma la sublinea
-                            const $select2 = document.querySelector("#sublinea" + i);
-
-                            const opcionCambiada2 = () => {
-                                console.log("cambio");
-                            };
-
-                            //se borran los valores de la sublinea
-                            $select2.addEventListener("change", opcionCambiada2)
-                            for (let k = $select2.options.length; k >= 0; k--) {
-                                $select2.remove(k);
-                            }
-                            //se ocultan las opciones para que el usuario escoga el uen
-                            $('#linea' + i).prop("disabled", true).val(-1);
-                            $('#linea' + i).select2();
-                            $('#sublinea' + i).prop("disabled", true).val(-1);
-                            $('#sublinea' + i).select2();
                         }
                     }
                 })
 
                 $('#linea' + i).change(function (e) { //por cada fila, cuando se seleccione una linea, este hara cambios en otros campos
                     for (i = 0; i < numeroFila; i++) {
-                        //si se selecciona una linea y no es la por defecto
-                        if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != "") {
-                            //se habilita la sublinea
-                            $('#sublinea' + i).prop("disabled", false).prop("required", false);
-                            $('#sublinea' + i).select2();
+                        if (document.getElementById('linea' + i)) {
+                            console.log("si");
+                            //si se selecciona una linea y no es la por defecto
+                            if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() != "") {
+                                //se habilita la sublinea
+                                $('#sublinea' + i).prop("disabled", false).prop("required", false);
+                                $('#sublinea' + i).select2();
 
-                            //usa la variable que se definio en php para la sublinea
-                            const datos = <?php echo json_encode($respuestaSubLinea); ?>
+                                //usa la variable que se definio en php para la sublinea
+                                const datos = <?php echo json_encode($respuestaSubLinea); ?>
                                 // Justo aquí estamos pasando la variable ----^
                                 // Y ya la tenemos desde JavaScript. Podemos hacer cualquier cosa con ella
                                 const valores = datos.value;
 
-                            //toma el select de la sublinea
-                            const $select = document.querySelector("#sublinea" + i);
+                                //toma el select de la sublinea
+                                const $select = document.querySelector("#sublinea" + i);
 
-                            const opcionCambiada = () => {
-                                console.log("cambio");
-                            };
+                                const opcionCambiada = () => {
+                                    console.log("cambio");
+                                };
 
-                            //elimina todo lo que tenga el select
-                            $select.addEventListener("change", opcionCambiada)
-                            for (let k = $select.options.length; k >= 0; k--) {
-                                $select.remove(k);
-                            }
-                            //se crea la opcion por defecto
-                            const option = document.createElement('option');
-                            option.value = "";
-                            option.text = "~";
-                            option.selected;
-                            $select.appendChild(option);
-                            j = 0;
-                            while (j >= 0 && j < 648) {//recorre los datos de la sublinea
-                                //tomamos los 4 primeros digitos
-                                x = valores[j]['FactorCode'] * 10 ** (-1);
-                                x = Math.floor(x);
-                                //si el vallor de x es igual al valor de la linea seleccionada psa la condicion
-                                if (x == $(this).val()) {
-                                    $select.remove(0);//se quita la opcion por defecto
-                                    const option = document.createElement('option');//agrega opcion para que el usuaio tenga que elegior una sublinea
-                                    option.value = "NO";
-                                    option.text = "Seleccione";
-                                    $select.appendChild(option);
-                                    //mientras x sea igual al valor de la linea es porque la sublinea hace parte de esta 
-                                    while (x == ($(this).val())) {
-                                        //se agrega la linea
-                                        const option = document.createElement('option');
-                                        option.value = valores[j]['FactorCode'];
-                                        option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];
-                                        $select.appendChild(option);
-                                        //se calcula el siguiente valor
-                                        j++;
-                                        x = valores[j]['FactorCode'] * 10 ** (-1);
-                                        x = Math.floor(x);
-                                    }
-                                    j = -100;
-
+                                //elimina todo lo que tenga el select
+                                $select.addEventListener("change", opcionCambiada)
+                                for (let k = $select.options.length; k >= 0; k--) {
+                                    $select.remove(k);
                                 }
-                                $('#linea' + i).select2('close');
-                                j++;
-                            }
+                                //se crea la opcion por defecto
+                                const option = document.createElement('option');
+                                option.value = "";
+                                option.text = "~";
+                                option.selected;
+                                $select.appendChild(option);
+                                j = 0;
+                                while (j >= 0 && j < 648) {//recorre los datos de la sublinea
+                                    //tomamos los 4 primeros digitos
+                                    x = valores[j]['FactorCode'] * 10 ** (-1);
+                                    x = Math.floor(x);
+                                    //si el vallor de x es igual al valor de la linea seleccionada psa la condicion
+                                    if (x == $(this).val()) {
+                                        $select.remove(0);//se quita la opcion por defecto
+                                        const option = document.createElement('option');//agrega opcion para que el usuaio tenga que elegior una sublinea
+                                        option.value = "NO";
+                                        option.text = "Seleccione";
+                                        $select.appendChild(option);
+                                        //mientras x sea igual al valor de la linea es porque la sublinea hace parte de esta 
+                                        while (x == ($(this).val())) {
+                                            //se agrega la linea
+                                            const option = document.createElement('option');
+                                            option.value = valores[j]['FactorCode'];
+                                            option.text = valores[j]['FactorCode'] + " | " + valores[j]['FactorDescription'];
+                                            $select.appendChild(option);
+                                            //se calcula el siguiente valor
+                                            j++;
+                                            x = valores[j]['FactorCode'] * 10 ** (-1);
+                                            x = Math.floor(x);
+                                        }
+                                        j = -100;
 
-                            //si la linea esta con el valor por defecto
-                        } else if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() == "") {
-                            //toma la sublinea
-                            const $select = document.querySelector("#sublinea" + i);
+                                    }
+                                    $('#linea' + i).select2('close');
+                                    j++;
+                                }
 
-                            const opcionCambiada = () => {
-                                console.log("cambio");
-                            };
-                            //elimina todas las opciones de la sublinea
-                            $select.addEventListener("change", opcionCambiada)
-                            for (let k = $select.options.length; k >= 0; k--) {
-                                $select.remove(k);
+                                //si la linea esta con el valor por defecto
+                            } else if ($(this).val() == document.getElementById('linea' + i).value && $(this).val() == "") {
+                                //toma la sublinea
+                                const $select = document.querySelector("#sublinea" + i);
+
+                                const opcionCambiada = () => {
+                                    console.log("cambio");
+                                };
+                                //elimina todas las opciones de la sublinea
+                                $select.addEventListener("change", opcionCambiada)
+                                for (let k = $select.options.length; k >= 0; k--) {
+                                    $select.remove(k);
+                                }
+                                //deshabilita la sublinea
+                                $('#sublinea' + i).prop("disabled", true).val(-1);
+                                $('#sublinea' + i).select2();
                             }
-                            //deshabilita la sublinea
-                            $('#sublinea' + i).prop("disabled", true).val(-1);
-                            $('#sublinea' + i).select2();
                         }
                     }
                 })
@@ -607,21 +623,40 @@
             }
         });
     }
+    $(document).on('click', '.borrar', function (event) {
+        event.preventDefault();
+        $(this).closest('tr').remove();
+        numero = 1;
+        for (i = 0; i < numeroFila; i++) {
+            if (document.getElementById('numeroF' + i)) {
+                console.log("si numero");
+                //si se selecciono un codigo de articulo
+                $('#numeroF' + i).val(numero);
+                numero++;
+            }
+            else {
+                console.log("no");
+            }
+        }
+    });
     //funcion para calcular el total en cada fila
     function ftotal() {
         i = 0;
         while (i < numeroFila) { //para cargar el total en cada una de las filas
-            const desc = document.getElementById('por_desc' + i).value; //toma el valor del porcenaje de descuento
-            const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
-            const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
-            const cantidad = document.getElementById('cant_nec' + i).value; //toma el valor del precio info
-            var impuestoPor = impuesto.split('~');
-            console.log(impuestoPor[1]);
-            totalml = precio - (desc * precio / 100);
-            console.log(totalml);
-            totalml = totalml + (impuestoPor[1] * totalml / 100)
-            console.log(totalml);
-            document.getElementById('total_ml' + i).value = totalml * cantidad; //le asigna al total el precio menos el porcentaje de descuento
+            if (document.getElementById('codigoArticulo' + i)) {
+                console.log("si");
+                const desc = document.getElementById('por_desc' + i).value; //toma el valor del porcenaje de descuento
+                const precio = document.getElementById('precio_inf' + i).value; //toma el valor del precio info
+                const impuesto = document.getElementById('ind_imp' + i).value; //toma el valor del precio info
+                const cantidad = document.getElementById('cant_nec' + i).value; //toma el valor del precio info
+                var impuestoPor = impuesto.split('~');
+                console.log(impuestoPor[1]);
+                totalml = precio - (desc * precio / 100);
+                console.log(totalml);
+                totalml = totalml + (impuestoPor[1] * totalml / 100)
+                console.log(totalml);
+                document.getElementById('total_ml' + i).value = totalml * cantidad; //le asigna al total el precio menos el porcentaje de descuento
+            }
             i++;
         }
     }
@@ -645,121 +680,124 @@
 
         //recorre cada fila
         for (i = 0; i < numeroFila; i++) {
-            check = document.getElementById('enviar' + i).checked; //devuelve true si el check esta seleccionado
-            if (check == true) {//si esta seleccionado se guardan los datos de la fila
-                console.log("checkbox: SI");
-                codArse[j] = document.getElementById('codigoArticulo' + i).value;//toma el codigo del articulo
-                if (codArse[j] == "") {//si no se selecciono ningun codigo
-                    //muestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un articulo').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#codigoArticulo' + i).focus();//acomoda la pagina en la casilla del codigo del articulo
-                            $('#codigoArticulo' + i).select2('open');//despliega las opciones 
-                        }
-                    })
-                    cantidad = -100;
-                    break;
+            if (document.getElementById('codigoArticulo' + i)) {
+                console.log("enviar");
+                check = document.getElementById('enviar' + i).checked; //devuelve true si el check esta seleccionado
+                if (check == true) {//si esta seleccionado se guardan los datos de la fila
+                    console.log("checkbox: SI");
+                    codArse[j] = document.getElementById('codigoArticulo' + i).value;//toma el codigo del articulo
+                    if (codArse[j] == "") {//si no se selecciono ningun codigo
+                        //muestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar un articulo').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#codigoArticulo' + i).focus();//acomoda la pagina en la casilla del codigo del articulo
+                                $('#codigoArticulo' + i).select2('open');//despliega las opciones 
+                            }
+                        })
+                        cantidad = -100;
+                        break;
 
+                    }
+                    fechaNec[j] = document.getElementById('fecha_Nec' + i).value;//toma la fecha necesaria
+                    if (fechaNec[j] == "") {//si la fecha necesaria esta vacia
+                        //muestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('fecha_Nec' + i).focus();//acomoda la pagina en la casilla
+                            }
+                        })
+                        cantidad = -100;
+                        break;
+                    }
+                    proveedor[j] = document.getElementById('proveedor' + i).value;//toma el proveedor
+                    cant_nec[j] = document.getElementById('cant_nec' + i).value;//toma la cantidad necesaria
+                    if (cant_nec[j] == "") {//si la cantidad necesaria esta vacia
+                        //muestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la cantidad necesaria').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                document.getElementById('cant_nec' + i).focus();//se fija la pagina en la casilla      
+                            }
+                        })
+                        cantidad = -100;
+                        break;
+                    }
+                    precioInfo[j] = document.getElementById('precio_inf' + i).value;//toma el valor del precio info
+                    porDesc[j] = document.getElementById('por_desc' + i).value;//toma el valor del porcentaje de descuento
+                    indImp[j] = document.getElementById('ind_imp' + i).value;//toma el valor del indicador de impuesto
+                    if (indImp[j] == "") {//si el indicadr esta vacio
+                        //muestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#ind_imp' + i).focus();//fija la pagina en la casilla del indicador
+                                $('#ind_imp' + i).select2('open');//despliega las opciones del select
+                            }
+                        })
+                        cantidad = -100;
+                        break;
+                    }
+                    total[j] = document.getElementById('total_ml' + i).value;//toma el valor del total
+                    uen[j] = document.getElementById('uen' + i).value;//toma el valor del uen
+                    if (uen[j] == "") {//si el uen esta vacio
+                        //muestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el uen').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#uen' + i).focus();//fija la pagina en la casilla del uen
+                                $('#uen' + i).select2('open');//despliega las opcines del select
+                            }
+                        })
+                        cantidad = -100;
+                        break;
+                    }
+                    linea[j] = document.getElementById('linea' + i).value;//toma el valor de la linea
+                    if (linea[j] == "NO") {//si no se ha seleccionado ninguna fila
+                        //mmuestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la linea').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#linea' + i).focus();//fija la pagina en la casila del la linea
+                                $('#linea' + i).select2('open');//despliega las opciones del select
+                            }
+                        })
+                        cantidad = -100;
+                        break;
+                    }
+                    sublinea[j] = document.getElementById('sublinea' + i).value;//toma el valor de la sublinea
+                    if (sublinea[j] == "NO") {//si no se ha seleccionado una sublinea
+                        //muestra una alerta
+                        Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la sublinea').then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                $('#sublinea' + i).focus();//fija la pagina en la casilla de la sublinea
+                                $('#sublinea' + i).select2('open');//despliega las opciones del select
+                            }
+                        })
+                        cantidad = -100;
+                        break;
+                    }
+                    cantidad++;
+                    //imprime los valores en la consola
+                    console.log("fila: ", j);
+                    console.log("codigoArse: ", codArse[j]);
+                    console.log("fechaNec: ", fechaNec[j]);
+                    console.log("proveedor: ", proveedor[j]);
+                    console.log("cantidad necesaria: ", cant_nec[j]);
+                    console.log("precio info: ", precioInfo[j]);
+                    console.log("porcentaje descuento   : ", porDesc[j]);
+                    console.log("indicador de impuesto: ", indImp[j]);
+                    console.log("total ml: ", total[j]);
+                    console.log("uen: ", uen[j]);
+                    console.log("linea: ", linea[j]);
+                    console.log("sublinea: ", sublinea[j]);
+                    console.log("cantidad: ", cantidad);
+                    j++;
+                } else {
+                    console.log("checkbox: NO");
                 }
-                fechaNec[j] = document.getElementById('fecha_Nec' + i).value;//toma la fecha necesaria
-                if (fechaNec[j] == "") {//si la fecha necesaria esta vacia
-                    //muestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la fecha necesaria').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            document.getElementById('fecha_Nec' + i).focus();//acomoda la pagina en la casilla
-                        }
-                    })
-                    cantidad = -100;
-                    break;
-                }
-                proveedor[j] = document.getElementById('proveedor' + i).value;//toma el proveedor
-                cant_nec[j] = document.getElementById('cant_nec' + i).value;//toma la cantidad necesaria
-                if (cant_nec[j] == "") {//si la cantidad necesaria esta vacia
-                    //muestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la cantidad necesaria').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            document.getElementById('cant_nec' + i).focus();//se fija la pagina en la casilla      
-                        }
-                    })
-                    cantidad = -100;
-                    break;
-                }
-                precioInfo[j] = document.getElementById('precio_inf' + i).value;//toma el valor del precio info
-                porDesc[j] = document.getElementById('por_desc' + i).value;//toma el valor del porcentaje de descuento
-                indImp[j] = document.getElementById('ind_imp' + i).value;//toma el valor del indicador de impuesto
-                if (indImp[j] == "") {//si el indicadr esta vacio
-                    //muestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el indicador de impuesto').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#ind_imp' + i).focus();//fija la pagina en la casilla del indicador
-                            $('#ind_imp' + i).select2('open');//despliega las opciones del select
-                        }
-                    })
-                    cantidad = -100;
-                    break;
-                }
-                total[j] = document.getElementById('total_ml' + i).value;//toma el valor del total
-                uen[j] = document.getElementById('uen' + i).value;//toma el valor del uen
-                if (uen[j] == "") {//si el uen esta vacio
-                    //muestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar el uen').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#uen' + i).focus();//fija la pagina en la casilla del uen
-                            $('#uen' + i).select2('open');//despliega las opcines del select
-                        }
-                    })
-                    cantidad = -100;
-                    break;
-                }
-                linea[j] = document.getElementById('linea' + i).value;//toma el valor de la linea
-                if (linea[j] == "NO") {//si no se ha seleccionado ninguna fila
-                    //mmuestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la linea').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#linea' + i).focus();//fija la pagina en la casila del la linea
-                            $('#linea' + i).select2('open');//despliega las opciones del select
-                        }
-                    })
-                    cantidad = -100;
-                    break;
-                }
-                sublinea[j] = document.getElementById('sublinea' + i).value;//toma el valor de la sublinea
-                if (sublinea[j] == "NO") {//si no se ha seleccionado una sublinea
-                    //muestra una alerta
-                    Swal.fire('Error en la fila ' + (i + 1) + ' debe seleccionar la sublinea').then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            $('#sublinea' + i).focus();//fija la pagina en la casilla de la sublinea
-                            $('#sublinea' + i).select2('open');//despliega las opciones del select
-                        }
-                    })
-                    cantidad = -100;
-                    break;
-                }
-                cantidad++;
-                //imprime los valores en la consola
-                console.log("fila: ", j);
-                console.log("codigoArse: ", codArse[j]);
-                console.log("fechaNec: ", fechaNec[j]);
-                console.log("proveedor: ", proveedor[j]);
-                console.log("cantidad necesaria: ", cant_nec[j]);
-                console.log("precio info: ", precioInfo[j]);
-                console.log("porcentaje descuento   : ", porDesc[j]);
-                console.log("indicador de impuesto: ", indImp[j]);
-                console.log("total ml: ", total[j]);
-                console.log("uen: ", uen[j]);
-                console.log("linea: ", linea[j]);
-                console.log("sublinea: ", sublinea[j]);
-                console.log("cantidad: ", cantidad);
-                j++;
-            } else {
-                console.log("checkbox: NO");
             }
         }
         fechaNecesaria = document.getElementById('fechaNecesaria').value;
