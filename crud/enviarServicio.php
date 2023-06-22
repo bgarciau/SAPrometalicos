@@ -134,10 +134,11 @@ if (isset($respuesta->error)) {//entra si se encontro algun error al enviar la s
     header("Location: ../views/".$_GET["lugar"]."?alerta=$alerta");//manda al usuario a la tabla de solicitudes con la alerta que se guardoo anteriormente
 } else {//entra si todo salio correcto en el envio al SAP
     $numSAP = json_decode($respuesta->DocNum);//guarda el numero de soicitud que se creo en el SAP
-    $sql = "UPDATE solicitud_compra SET estado_sol=?, numSAP=? WHERE pk_num_sol='$numSol'";//ACTUALIZA el estado de la solicitud y el numero SAP
+    $docEntry = json_decode($respuesta->DocEntry); 
+    $sql = "UPDATE solicitud_compra SET estado_sol=?, numSAP=?, docEntry=? WHERE pk_num_sol='$numSol'";//ACTUALIZA el estado de la solicitud y el numero SAP
     $solicitud = $base->prepare($sql); //se prepara la sentencia
     $estado_sol = "ENVIADO";
-    $solicitud->execute(array($estado_sol,$numSAP));
-    header("Location: ../views/".$_GET["lugar"]."?numSAP=$numSAP");//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
+    $solicitud->execute(array($estado_sol,$numSAP,$docEntry));
+    header("Location: ../views/".$_GET["lugar"]."?numSAP=$numSAP&estado=".$_GET["estado"]);//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
 }
 ?>

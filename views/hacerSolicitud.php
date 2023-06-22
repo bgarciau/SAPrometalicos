@@ -213,6 +213,9 @@
                 <div class="col text-center bloques py-2">
                     <button type="button" class="btn btn-success" onclick="guardarSolicitud()"><i class="bi bi-save">
                             GUARDAR SOLICITUD </i></button>
+                            <br><br>
+                            <a href="javascript:history.back()" class="btn btn-danger" onclick="pantallaCarga()"><i class="bi bi-arrow-bar-left">VOLVER
+                            </i></a>
                 </div>
             </div>
             <?php

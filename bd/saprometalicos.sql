@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 05-06-2023 a las 16:18:44
+-- Tiempo de generación: 06-06-2023 a las 21:19:43
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.2.0
 
@@ -89,6 +89,7 @@ DROP TABLE IF EXISTS `solicitud_compra`;
 CREATE TABLE IF NOT EXISTS `solicitud_compra` (
   `pk_num_sol` int NOT NULL,
   `numSAP` varchar(20) DEFAULT NULL,
+  `docEntry` int DEFAULT NULL,
   `estado_sol` varchar(40) NOT NULL,
   `nom_solicitante` varchar(40) NOT NULL,
   `sucursal` varchar(40) NOT NULL,

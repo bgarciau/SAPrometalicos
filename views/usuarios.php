@@ -113,11 +113,11 @@
                                 <?php echo $usuario->sucursal ?> <!-- Sucursal del usuario -->
                             </td>
                             <td class="opcionesTabla"> <!-- Clase para centrar los botones -->
-                                <a class="text-warning"
+                                <a class="btn btn-warning btn-sm"
                                     href="actualizarUsuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><i
                                         class="bi bi-pencil-square">EDITAR</i></a>
                                 <!-- Boton para actualizar los datos del usuario, mandando su id -->
-                                <a onclick="return confirm('Estas seguro de eliminar?');" class="text-danger"
+                                <a onclick="return confirm('Estas seguro de eliminar?');" class="btn btn-danger btn-sm"
                                     href="../crud/eliminar_usuario.php?codigoUsuario=<?php echo $usuario->pk_cod_usr ?>"><i
                                         class="bi bi-trash-fill">BORRAR</i></a>
                                 <!-- Boton para eliminar usuario segun la id seleccionada -->
@@ -130,6 +130,8 @@
                 </tbody>
             </table>
         </div>
+        <a href="javascript:history.back()" class="btn btn-danger" onclick="pantallaCarga()"><i class="bi bi-arrow-bar-left">VOLVER
+                            </i></a>
     </div>
     <!-- DIALOG PARA AGREGAR USUARIO -->
     <dialog id="dialogAgregarUsuario" style="min-width: 50%;">

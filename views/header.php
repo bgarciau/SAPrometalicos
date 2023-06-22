@@ -1,8 +1,11 @@
 <?php
 include("../php/conexion.php");
-
+if(isset($_SESSION['usuario'])){
 $usuario = $_SESSION['usuario']; //se toma el usuario de la sesion para los permisos
-
+}
+else{
+  header("location:../index.php");
+}
 $registros = $base->query("SELECT * FROM usuario WHERE pk_cod_usr= '$usuario'")->fetchAll(PDO::FETCH_OBJ); //se toma su tiipo de usuario
 
 foreach ($registros as $Tusuario) {
@@ -18,6 +21,9 @@ foreach ($registros as $Tusuario) {
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+          <a class="nav-link" href="home.php" onclick="pantallaCarga()"><i class="bi bi-house-door"></i>HOME</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             HACER SOLICITUD

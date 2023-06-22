@@ -3,7 +3,8 @@
 
 <head>
     <?php
-    require('head.php')
+    require('head.php');
+    include("../crud/procesados.php");
         ?>
 </head>
 
@@ -106,6 +107,13 @@
                             if ($misolicitudes->estado_sol == "RECHAZADO") {
                                 ?>
                                 <td style="background-color:#ff2100b5;">
+                                    <?php echo $misolicitudes->estado_sol ?>
+                                </td>
+                                <?php
+                            }
+                            if ($misolicitudes->estado_sol == "PROCESADO") {
+                                ?>
+                                <td style="background-color:#EAEDED;">
                                     <?php echo $misolicitudes->estado_sol ?>
                                 </td>
                                 <?php
@@ -227,6 +235,13 @@
                                 </td>
                                 <?php
                             }
+                            if ($misolicitudes->estado_sol == "PROCESADO") {
+                                ?>
+                                <td style="background-color:#EAEDED;">
+                                    <?php echo $misolicitudes->estado_sol ?>
+                                </td>
+                                <?php
+                            }
                             ?>
                             <td>
                                 <?php echo $misolicitudes->fecha_necesaria ?>
@@ -289,6 +304,8 @@
                 </tbody>
             </table>
         </div>
+        <a href="javascript:history.back()" class="btn btn-danger" onclick="pantallaCarga()"><i class="bi bi-arrow-bar-left">VOLVER
+                            </i></a>
     </div>
     <?php
     require('footer.php')

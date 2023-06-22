@@ -55,6 +55,15 @@
     padding: 1px;
 }
 
+#tablaSolicitudes{
+    min-width: max-content;
+    border-color: black;
+}
+
+#tablaSolicitudes td{
+    min-width: max-content;
+    padding: 1px;
+}
 .container{
     min-width: 95%;
 }

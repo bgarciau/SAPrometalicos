@@ -6,9 +6,9 @@
      $estado_sol = "RECHAZADO";
      $solicitud->execute(array($estado_sol));
      if(isset($_GET["xtabla"])){
-        header("Location: ../views/".$_GET["lugar"]."?xtabla=tarticulos");//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
+        header("Location: ../views/".$_GET["lugar"]."?xtabla=tarticulos&estado=".$_GET["estado"]);//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
      }
      else{
-        header("Location: ../views/".$_GET["lugar"]);//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
+        header("Location: ../views/".$_GET["lugar"]."?&estado=".$_GET["estado"]);//manda al usuario a la tabla de solicitudes con una alerta que tiene el numero SAP
      }
 ?>

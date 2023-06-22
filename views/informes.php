@@ -444,6 +444,8 @@
                     </table>
                 </div>
             </div>
+            <a href="javascript:history.back()" class="btn btn-danger" onclick="pantallaCarga()"><i class="bi bi-arrow-bar-left">VOLVER
+                            </i></a>
         </div>
     </div>
     <?php

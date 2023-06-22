@@ -28,7 +28,7 @@
                 $_SESSION["tipo"]=$tipo;
                 $_SESSION["usuario"]=$_POST["usuario"];     //se hace un post a la sesion del usuario para verificar que permisos tiene el usuario en cada modulo
 
-                header("location:../views/hacerSolicitud.php"); //manda al usuario a hacer solicitud que es la pagina principal de la aplicacion
+                header("location:../views/home.php"); //manda al usuario a hacer solicitud que es la pagina principal de la aplicacion
             }
             else{
                 header("location:../index.php?log=mal");//Si no hay datos correctos manda al usuario al inicio para que lo intente nuevamente

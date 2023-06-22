@@ -346,7 +346,7 @@
                         <a target="_blank" href="pdf.php?numSol=<?php echo $numSol ?>" class="btn btn-danger"><i
                                 class="bi bi-file-earmark-pdf">GENERAR PDF </i></a>
                         <br><br>
-                        <a href="javascript:history.back()" class="btn btn-danger"><i class="bi bi-arrow-bar-left">VOLVER
+                        <a href="javascript:history.back()" class="btn btn-danger" onclick="pantallaCarga()"><i class="bi bi-arrow-bar-left">VOLVER
                             </i></a>
                     </div>
                 </div>
